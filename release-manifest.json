@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-07-15T08:22:12.482Z",
+  "releases": [
+    {
+      "version": "0.3.9",
+      "releasedAt": "2026-07-15T08:22:11.881Z",
+      "vsix": {
+        "name": "nxl-builder-0.3.9.vsix",
+        "path": "/releases/0.3.9/nxl-builder-0.3.9.vsix",
+        "bytes": 10297756,
+        "sha256": "d96b71f8143a6b40420d8d3e6edb9b916c49d87796f768e71e9a3f40387787eb",
+        "modifiedAt": "2026-07-15T08:22:11.881Z"
+      },
+      "files": [
+        {
+          "name": "nxl-builder-0.3.9.vsix",
+          "path": "/releases/0.3.9/nxl-builder-0.3.9.vsix",
+          "bytes": 10297756,
+          "sha256": "d96b71f8143a6b40420d8d3e6edb9b916c49d87796f768e71e9a3f40387787eb",
+          "modifiedAt": "2026-07-15T08:22:11.881Z"
+        }
+      ]
+    }
+  ],
+  "docs": [
+    {
+      "title": "NEXTLAB Builder & Studio 소개 (웹)",
+      "kind": "html",
+      "path": "/docs/builder-studio-intro-v1.4.html",
+      "bytes": 153440,
+      "modifiedAt": "2026-07-15T00:37:43.065Z"
+    },
+    {
+      "title": "NEXTLAB Builder & Studio 소개 (PDF)",
+      "kind": "pdf",
+      "path": "/docs/builder-studio-intro-v1.4.pdf",
+      "bytes": 10926642,
+      "modifiedAt": "2026-07-15T00:38:09.746Z"
+    }
+  ]
+}
