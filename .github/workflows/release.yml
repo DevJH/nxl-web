@@ -1,0 +1,68 @@
+name: Publish VSIX Release
+
+# NEXTLAB Builder VSIX 를 GitHub Release 로 자동 배포한다.
+# 트리거: v* 태그 푸시 (예: v0.3.3). 태그의 버전과 같은 releases/<버전>/*.vsix 를
+# 찾아 GitHub Release 를 만들고 VSIX 를 첨부한다.
+# (이 저장소는 Vercel 배포 채널이자 VSIX 호스팅소 — 릴리스 자산을 한곳에 모은다.)
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write # 릴리스 생성 + 자산 업로드에 필요
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 체크아웃
+        uses: actions/checkout@v4
+
+      - name: 버전·VSIX 경로 확인
+        id: vsix
+        run: |
+          set -euo pipefail
+          # 태그 v0.3.3 → 버전 0.3.3
+          VERSION="${GITHUB_REF_NAME#v}"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          VSIX_PATH="$(ls releases/"$VERSION"/*.vsix 2>/dev/null | head -1 || true)"
+          if [ -z "$VSIX_PATH" ]; then
+            echo "::error::releases/$VERSION/ 에 VSIX 가 없습니다. publish-channel 로 먼저 커밋했는지 확인하세요."
+            exit 1
+          fi
+          echo "path=$VSIX_PATH" >> "$GITHUB_OUTPUT"
+          echo "찾은 VSIX: $VSIX_PATH"
+
+      - name: 릴리스 노트 준비
+        id: notes
+        run: |
+          set -euo pipefail
+          # release-manifest.json 의 최신 릴리스 메타(버전·해시·크기)를 노트로 요약.
+          NOTES_FILE="$RUNNER_TEMP/notes.md"
+          {
+            echo "## NEXTLAB Builder v${{ steps.vsix.outputs.version }}"
+            echo ""
+            echo "VSCode / Cursor 확장 VSIX 배포."
+            echo ""
+            echo "### 설치"
+            echo '```'
+            echo "code --install-extension nxl-builder-${{ steps.vsix.outputs.version }}.vsix"
+            echo '```'
+            echo ""
+            if [ -f release-manifest.json ]; then
+              SHA="$(node -p "(JSON.parse(require('fs').readFileSync('release-manifest.json','utf8')).releases[0].vsix.sha256)||''" 2>/dev/null || true)"
+              if [ -n "$SHA" ]; then
+                echo "SHA256: \`$SHA\`"
+              fi
+            fi
+          } > "$NOTES_FILE"
+          echo "file=$NOTES_FILE" >> "$GITHUB_OUTPUT"
+
+      - name: GitHub Release 생성 + VSIX 첨부
+        uses: softprops/action-gh-release@v2
+        with:
+          name: NEXTLAB Builder v${{ steps.vsix.outputs.version }}
+          body_path: ${{ steps.notes.outputs.file }}
+          files: ${{ steps.vsix.outputs.path }}
+          fail_on_unmatched_files: true
