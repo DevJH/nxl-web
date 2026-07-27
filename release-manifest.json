@@ -1,72 +1,72 @@
 {
-  "generatedAt": "2026-07-24T08:13:31.170Z",
+  "generatedAt": "2026-07-27T01:17:58.126Z",
   "releases": [
     {
-      "version": "0.3.5",
-      "releasedAt": "2026-07-24T08:12:54.674Z",
+      "version": "0.3.8",
+      "releasedAt": "2026-07-27T01:14:45.414Z",
       "vsix": {
-        "name": "nxl-builder-0.3.5.vsix",
-        "path": "/releases/0.3.5/nxl-builder-0.3.5.vsix",
-        "bytes": 11054999,
-        "sha256": "3480ef64756d46cfcbed6142da574dd21297644190470a73822ff67f715035f1",
-        "modifiedAt": "2026-07-24T08:12:54.674Z"
+        "name": "nxl-builder-0.3.8.vsix",
+        "path": "/releases/0.3.8/nxl-builder-0.3.8.vsix",
+        "bytes": 11285007,
+        "sha256": "f5ccf1d3296a35cc4b3620e16ef0694e395ea2680920db8b955e406142b17616",
+        "modifiedAt": "2026-07-27T01:14:45.414Z"
       },
       "files": [
         {
           "name": "CHANGELOG.md",
-          "path": "/releases/0.3.5/CHANGELOG.md",
-          "bytes": 97433,
-          "modifiedAt": "2026-07-24T08:12:55.368Z"
+          "path": "/releases/0.3.8/CHANGELOG.md",
+          "bytes": 101151,
+          "modifiedAt": "2026-07-27T01:14:46.033Z"
         },
         {
           "name": "CUSTOM-COMPONENTS-GUIDE.md",
-          "path": "/releases/0.3.5/CUSTOM-COMPONENTS-GUIDE.md",
+          "path": "/releases/0.3.8/CUSTOM-COMPONENTS-GUIDE.md",
           "bytes": 8565,
-          "modifiedAt": "2026-07-24T08:12:55.385Z"
+          "modifiedAt": "2026-07-27T01:14:46.050Z"
         },
         {
           "name": "INSTALL.md",
-          "path": "/releases/0.3.5/INSTALL.md",
+          "path": "/releases/0.3.8/INSTALL.md",
           "bytes": 3502,
-          "modifiedAt": "2026-07-24T08:12:55.373Z"
+          "modifiedAt": "2026-07-27T01:14:46.038Z"
         },
         {
           "name": "RELEASE-NOTES.md",
-          "path": "/releases/0.3.5/RELEASE-NOTES.md",
-          "bytes": 1225,
-          "modifiedAt": "2026-07-24T08:12:55.363Z"
+          "path": "/releases/0.3.8/RELEASE-NOTES.md",
+          "bytes": 1507,
+          "modifiedAt": "2026-07-27T01:14:46.029Z"
         },
         {
           "name": "SHA256SUMS.txt",
-          "path": "/releases/0.3.5/SHA256SUMS.txt",
+          "path": "/releases/0.3.8/SHA256SUMS.txt",
           "bytes": 89,
-          "modifiedAt": "2026-07-24T08:12:55.502Z"
+          "modifiedAt": "2026-07-27T01:14:46.198Z"
         },
         {
           "name": "USER-GUIDE.md",
-          "path": "/releases/0.3.5/USER-GUIDE.md",
+          "path": "/releases/0.3.8/USER-GUIDE.md",
           "bytes": 25666,
-          "modifiedAt": "2026-07-24T08:12:55.378Z"
+          "modifiedAt": "2026-07-27T01:14:46.044Z"
         },
         {
           "name": "figma-mapping_example.md",
-          "path": "/releases/0.3.5/figma-mapping_example.md",
+          "path": "/releases/0.3.8/figma-mapping_example.md",
           "bytes": 6891,
-          "modifiedAt": "2026-07-24T08:12:55.390Z"
+          "modifiedAt": "2026-07-27T01:14:46.055Z"
         },
         {
-          "name": "nxl-builder-0.3.5.vsix",
-          "path": "/releases/0.3.5/nxl-builder-0.3.5.vsix",
-          "bytes": 11054999,
-          "sha256": "3480ef64756d46cfcbed6142da574dd21297644190470a73822ff67f715035f1",
-          "modifiedAt": "2026-07-24T08:12:55.319Z"
+          "name": "nxl-builder-0.3.8.vsix",
+          "path": "/releases/0.3.8/nxl-builder-0.3.8.vsix",
+          "bytes": 11285007,
+          "sha256": "f5ccf1d3296a35cc4b3620e16ef0694e395ea2680920db8b955e406142b17616",
+          "modifiedAt": "2026-07-27T01:14:46.022Z"
         },
         {
-          "name": "nxl-builder-0.3.5.vsix",
-          "path": "/releases/0.3.5/nxl-builder-0.3.5.vsix",
-          "bytes": 11054999,
-          "sha256": "3480ef64756d46cfcbed6142da574dd21297644190470a73822ff67f715035f1",
-          "modifiedAt": "2026-07-24T08:12:54.674Z"
+          "name": "nxl-builder-0.3.8.vsix",
+          "path": "/releases/0.3.8/nxl-builder-0.3.8.vsix",
+          "bytes": 11285007,
+          "sha256": "f5ccf1d3296a35cc4b3620e16ef0694e395ea2680920db8b955e406142b17616",
+          "modifiedAt": "2026-07-27T01:14:45.414Z"
         }
       ]
     }
