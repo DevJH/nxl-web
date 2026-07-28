@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>NEXTLAB Builder 사용자 메뉴얼 v1.0</title>
+<meta name="description" content="Figma → Code 를 중심으로 한 NEXTLAB Builder 사용 설명서. MCP 연결부터 산출물 적용, 옵션·설정까지.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111111'/%3E%3Cpath d='M9 24V8h3.4l7.2 10.4V8H23v16h-3.4L12.4 13.6V24H9z' fill='%23EA5504'/%3E%3C/svg%3E">
+
+<style>
+:root{
+  --paper:#FFFFFF;
+  --panel:#F5F6F8;
+  --panel-2:#EEF0F4;
+  --ink:#16181D;
+  --ink-2:#3D434E;
+  --ink-3:#6B7280;
+  --ink-4:#9AA1AC;
+  --line:#E3E6EB;
+  --line-2:#CFD4DC;
+  --brand:#EA5504;
+  --brand-deep:#C64803;
+  --brand-tint:#FFF4EC;
+  --brand-line:#FFD9BE;
+  --info:#2C5FD1;
+  --info-tint:#EEF3FE;
+  --info-line:#C6D6F7;
+  --stop:#C62828;
+  --stop-tint:#FDF0EF;
+  --stop-line:#F3C9C6;
+  --ok:#0F7A4F;
+  --code-bg:#15181E;
+  --code-fg:#DFE3EA;
+  --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  --sans:Pretendard Variable,Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --nav-w:264px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.78;
+  -webkit-font-smoothing:antialiased;
+  word-break:keep-all;overflow-wrap:break-word;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--brand-deep)}
+h1,h2,h3,h4{margin:0;line-height:1.3;letter-spacing:-.022em;text-wrap:balance}
+p{margin:0}
+ul,ol{margin:0;padding:0;list-style:none}
+:focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:3px}
+
+/* ── 레이아웃 ───────────────────────────────────────────────── */
+.shell{display:grid;grid-template-columns:var(--nav-w) minmax(0,1fr);gap:0;max-width:1360px;margin:0 auto}
+
+.toc{
+  position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--line);padding:26px 20px 40px;background:var(--paper);
+}
+.toc-brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink);margin-bottom:6px}
+.toc-brand svg{width:24px;height:24px;flex:none}
+.toc-brand b{font-size:.94rem;letter-spacing:-.02em}
+.toc-ver{font-family:var(--mono);font-size:.68rem;color:var(--ink-4);letter-spacing:.06em;margin-bottom:22px}
+.toc nav{display:grid;gap:2px}
+.toc-sec{
+  font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-4);margin:18px 0 6px;padding-left:10px;
+}
+.toc a{
+  display:block;text-decoration:none;color:var(--ink-2);font-size:.855rem;line-height:1.45;
+  padding:6px 10px;border-radius:6px;border-left:2px solid transparent;
+}
+.toc a:hover{background:var(--panel);color:var(--ink)}
+.toc a.sub{padding-left:22px;font-size:.82rem;color:var(--ink-3)}
+.toc a.is-active{background:var(--brand-tint);color:var(--brand-deep);border-left-color:var(--brand);font-weight:600}
+
+.doc{padding:0 56px 120px;min-width:0}
+.doc-in{max-width:780px}
+
+/* ── 표지 ───────────────────────────────────────────────────── */
+.cover{padding:76px 0 42px;border-bottom:1px solid var(--line);margin-bottom:44px}
+.cover-tag{
+  display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.7rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--brand-deep);
+  background:var(--brand-tint);border:1px solid var(--brand-line);border-radius:999px;padding:5px 12px;
+}
+.cover h1{font-size:clamp(2rem,4vw,2.9rem);font-weight:800;margin:22px 0 16px}
+.cover p{color:var(--ink-2);font-size:1.05rem;max-width:60ch}
+.cover-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+
+/* ── 섹션 ───────────────────────────────────────────────────── */
+.chap{padding-top:34px;margin-top:52px;border-top:2px solid var(--ink);scroll-margin-top:20px}
+.chap:first-of-type{margin-top:0}
+.chap-n{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;color:var(--brand);font-weight:600}
+.chap h2{font-size:clamp(1.5rem,2.8vw,2rem);font-weight:800;margin:10px 0 14px}
+.chap>p.intro{color:var(--ink-2);font-size:1rem}
+
+h3.head{font-size:1.22rem;font-weight:700;margin:44px 0 14px;scroll-margin-top:20px}
+h3.head .num{font-family:var(--mono);font-size:.86rem;color:var(--brand);margin-right:9px;font-weight:600}
+h4.sub{font-size:1rem;font-weight:700;margin:26px 0 10px}
+
+.doc p+p{margin-top:14px}
+.doc h3.head+p,.doc h4.sub+p{margin-top:0}
+
+/* ── 본문 요소 ──────────────────────────────────────────────── */
+.list{display:grid;gap:9px;margin:14px 0}
+.list li{padding-left:17px;position:relative;color:var(--ink-2)}
+.list li::before{content:"";position:absolute;left:2px;top:.68em;width:5px;height:5px;border-radius:50%;background:var(--brand)}
+.list li b,.list li strong{color:var(--ink)}
+
+ol.steps{display:grid;gap:11px;margin:14px 0;counter-reset:s}
+ol.steps li{
+  list-style:none;padding-left:34px;position:relative;color:var(--ink-2);counter-increment:s;
+}
+ol.steps li::before{
+  content:counter(s);position:absolute;left:0;top:.16em;
+  width:22px;height:22px;border-radius:6px;background:var(--panel-2);color:var(--ink-2);
+  font-family:var(--mono);font-size:.72rem;display:grid;place-items:center;font-weight:600;
+}
+ol.steps li b{color:var(--ink)}
+
+code{
+  font-family:var(--mono);font-size:.855em;background:var(--panel-2);
+  padding:2px 6px;border-radius:5px;color:var(--ink);word-break:break-all;
+}
+kbd{
+  font-family:var(--mono);font-size:.78em;background:var(--paper);border:1px solid var(--line-2);
+  border-bottom-width:2px;border-radius:6px;padding:2px 7px;color:var(--ink);white-space:nowrap;
+}
+pre{
+  margin:16px 0;background:var(--code-bg);color:var(--code-fg);border-radius:10px;
+  padding:16px 18px;overflow-x:auto;font-family:var(--mono);font-size:.82rem;line-height:1.72;
+}
+pre .c{color:#7C8798}
+pre .k{color:#FFA35C}
+pre .s{color:#8FD3A6}
+
+/* 콜아웃 */
+.note{
+  display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;
+  margin:18px 0;padding:15px 18px;border-radius:10px;font-size:.92rem;
+  background:var(--info-tint);border:1px solid var(--info-line);color:var(--ink-2);
+}
+.note b{color:var(--ink)}
+/* 첫 b 만 제목으로 블록 처리 — 문장 중간 강조는 인라인 유지 */
+.note>div>b:first-child{display:block;margin-bottom:3px}
+.note .tag{
+  font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--info);padding-top:4px;white-space:nowrap;
+}
+.note--warn{background:var(--brand-tint);border-color:var(--brand-line)}
+.note--warn .tag{color:var(--brand-deep)}
+.note--stop{background:var(--stop-tint);border-color:var(--stop-line)}
+.note--stop .tag{color:var(--stop)}
+
+/* 캡쳐 */
+figure{margin:20px 0}
+figure img{border:1px solid var(--line);border-radius:10px}
+/* 아래가 빈 세로형 캡쳐는 의미 있는 상단만 잘라 쓴다 */
+figure.crop img{width:100%;height:470px;object-fit:cover;object-position:top center}
+figcaption{margin-top:9px;font-size:.79rem;color:var(--ink-3);font-family:var(--mono);letter-spacing:.02em}
+
+/* 표 */
+.tablewrap{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px}
+table{width:100%;border-collapse:collapse;min-width:520px;font-size:.875rem}
+th,td{text-align:left;padding:11px 15px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{
+  background:var(--panel);font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3);font-weight:600;white-space:nowrap;
+}
+tbody tr:last-child td{border-bottom:0}
+td.m,th.m{font-family:var(--mono);font-size:.8rem;white-space:nowrap}
+td.rid{font-family:var(--mono);font-weight:600;color:var(--brand-deep);white-space:nowrap}
+td .d{display:block;color:var(--ink-3);font-size:.82rem;margin-top:2px}
+
+/* 단계 카드 (Figma → Code) */
+.stage{
+  margin:26px 0;padding:24px 26px;border:1px solid var(--line);border-radius:12px;background:var(--paper);
+  box-shadow:0 1px 2px rgba(20,24,32,.04);
+}
+.stage-h{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.stage-h .n{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;color:#fff;background:var(--brand);
+  border-radius:5px;padding:3px 8px;white-space:nowrap;
+}
+.stage-h h4{font-size:1.1rem;font-weight:700}
+.stage-lead{color:var(--ink-3);font-size:.88rem;margin-bottom:14px}
+
+/* 흐름 요약 */
+.pipe{display:grid;gap:8px;margin:22px 0;padding:20px;background:var(--panel);border-radius:12px}
+.pipe-row{display:grid;grid-template-columns:88px 1fr;gap:14px;align-items:baseline;font-size:.88rem}
+.pipe-row .s{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--brand-deep);font-weight:600}
+.pipe-row .t{color:var(--ink-2)}
+.pipe-row .t b{color:var(--ink)}
+
+/* 체크리스트 */
+.check{display:grid;gap:8px;margin:16px 0}
+.check li{list-style:none;padding-left:28px;position:relative;color:var(--ink-2);font-size:.92rem}
+.check li::before{
+  content:"";position:absolute;left:0;top:.34em;width:16px;height:16px;border-radius:4px;
+  border:1.5px solid var(--line-2);background:var(--paper);
+}
+
+.chips{display:flex;flex-wrap:wrap;align-items:flex-start;gap:7px;margin:14px 0}
+.chip{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;padding:4px 10px;border-radius:999px;
+  border:1px solid var(--line-2);color:var(--ink-2);background:var(--paper);white-space:nowrap;
+}
+.chip--brand{border-color:var(--brand-line);background:var(--brand-tint);color:var(--brand-deep)}
+
+.foot{margin-top:80px;padding-top:26px;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:.72rem;color:var(--ink-4);letter-spacing:.06em;
+  display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+
+/* ── 반응형 ─────────────────────────────────────────────────── */
+@media (max-width:1080px){
+  .shell{grid-template-columns:1fr}
+  .toc{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:20px 24px 24px}
+  .toc nav{grid-template-columns:repeat(auto-fill,minmax(210px,1fr));display:grid}
+  .toc a.sub{display:none}
+  .doc{padding:0 24px 80px}
+}
+@media (max-width:640px){
+  body{font-size:15.5px}
+  .doc{padding:0 18px 64px}
+  .stage{padding:18px 16px}
+  .pipe-row{grid-template-columns:1fr;gap:2px}
+}
+@media print{
+  .toc{display:none}
+  .shell{display:block}
+  .doc{padding:0}
+  body{font-size:10.5pt}
+  pre,figure,.stage,.tablewrap{break-inside:avoid}
+  .chap{break-before:page}
+  a{color:var(--ink);text-decoration:none}
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+<!-- ══ 목차 ══════════════════════════════════════════════════ -->
+<aside class="toc">
+  <a class="toc-brand" href="#top">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#15171C"/><path d="M9 24V8h3.4l7.2 10.4V8H23v16h-3.4L12.4 13.6V24H9z" fill="#EA5504"/></svg>
+    <b>NEXTLAB Builder</b>
+  </a>
+  <p class="toc-ver">사용자 메뉴얼 v1.0 · 확장 v0.3.5</p>
+
+  <nav id="toc">
+    <p class="toc-sec">시작</p>
+    <a href="#ch1">1. 설치와 첫 실행</a>
+    <a class="sub" href="#s1-1">1.1 설치</a>
+    <a class="sub" href="#s1-2">1.2 AI 계정 연동</a>
+    <a class="sub" href="#s1-3">1.3 패널 열기</a>
+
+    <p class="toc-sec">주 기능</p>
+    <a href="#ch2">2. Figma → Code</a>
+    <a class="sub" href="#s2-0">2.0 전체 흐름</a>
+    <a class="sub" href="#s2-1">2.1 MCP 연결 (최초 1회)</a>
+    <a class="sub" href="#s2-2">2.2 Figma 링크 복사</a>
+    <a class="sub" href="#s2-3">2.3 입력</a>
+    <a class="sub" href="#s2-4">2.4 실행</a>
+    <a class="sub" href="#s2-5">2.5 검증</a>
+    <a class="sub" href="#s2-6">2.6 결과 확인</a>
+    <a class="sub" href="#s2-7">2.7 리터치</a>
+    <a class="sub" href="#s2-8">2.8 산출물 적용</a>
+    <a href="#ch3">3. AI 채팅 · 인라인 편집</a>
+    <a href="#ch4">4. 코드 리뷰 · 커밋</a>
+    <a href="#ch5">5. 표준 · 보안</a>
+
+    <p class="toc-sec">옵션</p>
+    <a href="#ch6">6. 옵션과 설정</a>
+    <a class="sub" href="#s6-1">6.1 패널 옵션</a>
+    <a class="sub" href="#s6-2">6.2 설정 전체</a>
+    <a class="sub" href="#s6-3">6.3 단축키</a>
+    <a class="sub" href="#s6-4">6.4 명령 · 슬래시</a>
+    <a href="#ch7">7. 문제 해결</a>
+  </nav>
+</aside>
+
+<!-- ══ 본문 ══════════════════════════════════════════════════ -->
+<main class="doc" id="top">
+<div class="doc-in">
+
+<header class="cover">
+  <span class="cover-tag">User Manual · v1.0</span>
+  <h1>NEXTLAB Builder<br>사용자 메뉴얼</h1>
+  <p>
+    Figma 디자인을 한화 DS 코드로 바꾸고, 표준과 보안을 자동으로 지키는 VSCode 확장의 사용 설명서입니다.
+    <b>2장 Figma → Code</b> 가 이 도구의 주 기능이며, 이 문서의 절반을 차지합니다.
+    설정과 옵션은 6장에 모아 두었습니다 — 처음에는 읽지 않아도 됩니다.
+  </p>
+  <div class="cover-meta">
+    <span class="chip chip--brand">확장 v0.3.5</span>
+    <span class="chip">VSCode · Cursor · Antigravity</span>
+    <span class="chip">Claude · CodeX</span>
+    <span class="chip">MUI · DS2 · DS3</span>
+  </div>
+</header>
+
+<div class="note">
+  <span class="tag">표기</span>
+  <div>
+    <b>이 문서의 표기 규칙</b>
+    <kbd>Cmd</kbd> 는 macOS 기준이며 Windows·Linux 에서는 <kbd>Ctrl</kbd> 로 읽습니다.
+    <code>이런 글자</code> 는 화면에 그대로 보이는 값·경로·명령입니다.
+    <b>[필수]</b> 표시가 붙은 단계는 건너뛰면 기능이 동작하지 않습니다.
+  </div>
+</div>
+
+<!-- ═══════════ 1장 ═══════════ -->
+<section class="chap" id="ch1">
+  <p class="chap-n">CHAPTER 01</p>
+  <h2>설치와 첫 실행</h2>
+  <p class="intro">
+    설치는 파일 하나로 끝납니다. 생성 엔진 · 디자인시스템 3종 · 개발표준 문서 · 아이콘 415종이
+    VSIX 안에 전부 들어 있어 별도 서버나 인프라가 필요 없습니다.
+  </p>
+
+  <h3 class="head" id="s1-1"><span class="num">1.1</span>설치</h3>
+  <ol class="steps">
+    <li>VSCode 확장 패널(<kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd>) 우측 상단 <b>…</b> → <b>Install from VSIX…</b> → 배포받은 <code>.vsix</code> 파일 선택</li>
+    <li><b>에디터를 완전히 종료했다 다시 엽니다.</b> 창만 새로고침하면 확장이 절반만 로드될 수 있습니다 (<kbd>Cmd</kbd>+<kbd>Q</kbd> 후 재실행)</li>
+    <li>좌측 활동 표시줄 또는 우측 상단에 주황색 <b>N</b> 아이콘이 보이면 설치 완료</li>
+  </ol>
+
+  <figure>
+    <img src="images/intro.png" alt="설치 직후 VSCode 첫 화면에 등록된 NEXTLAB Builder 시작하기 워크스루" loading="lazy" decoding="async">
+    <figcaption>설치 직후 — VSCode 첫 화면(Welcome)의 Walkthroughs 에 "NEXTLAB Builder 시작하기" 가 자동 등록됩니다</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="tag">사전 조건</span>
+    <div>
+      <b>AI CLI 가 PC 에 설치되어 있어야 합니다.</b>
+      Claude 를 쓰려면 <code>claude</code>, CodeX 를 쓰려면 <code>codex</code> 명령이 필요합니다.
+      Claude 미설치 시 <code>npm install -g @anthropic-ai/claude-code</code> 로 설치합니다.
+      확장이 CLI 를 못 찾으면 6.2 의 <code>nxlCode.claude.path</code> 에 절대경로를 지정할 수 있습니다.
+    </div>
+  </div>
+
+  <h3 class="head" id="s1-2"><span class="num">1.2</span>AI 계정 연동 <span class="chip chip--brand">필수</span></h3>
+  <p>
+    Builder 는 <b>각자의 AI 계정</b>으로 실행됩니다. 공용 API 키를 쓰지 않으므로 최초 1회 로그인이 필요합니다.
+  </p>
+  <ol class="steps">
+    <li>패널을 엽니다 (<kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd>)</li>
+    <li>패널 상단의 연동 배지를 확인합니다 — <code>claude ✓</code> 는 연동됨, <code>codex !</code> 는 미연동입니다</li>
+    <li><b>미연동 배지를 클릭</b>하면 터미널이 열리며 로그인 절차가 시작됩니다
+      (Claude 는 <code>claude /login</code>, CodeX 는 <code>codex login</code>)</li>
+    <li>로그인을 마치고 패널로 돌아오면 배지가 <code>✓</code> 로 바뀝니다</li>
+  </ol>
+  <p>
+    명령 팔레트에서 <code>NEXTLAB Builder: 계정 연동</code> 으로도 같은 절차를 실행할 수 있습니다.
+    두 Provider 를 모두 연동해 두면 작업 성격에 따라 클릭으로 전환할 수 있습니다.
+  </p>
+
+  <h3 class="head" id="s1-3"><span class="num">1.3</span>패널 열기 — 세 가지 경로</h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>경로</th><th>방법</th><th class="m">비고</th></tr></thead>
+      <tbody>
+        <tr><td><b>단축키</b></td><td><kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd></td><td class="m">가장 빠름</td></tr>
+        <tr><td><b>N 버튼</b></td><td>에디터 우측 상단의 주황색 N 아이콘 클릭</td><td class="m">어느 화면에서든</td></tr>
+        <tr><td><b>명령 팔레트</b></td><td><kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> → <code>NEXTLAB</code> 입력</td><td class="m">전체 기능 목록</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <figure>
+    <img src="images/01-commands.png" alt="명령 팔레트에 NEXTLAB Builder 를 입력한 전체 명령 목록과 우측 패널" loading="lazy" decoding="async">
+    <figcaption>명령 팔레트에 "NEXTLAB" 만 입력하면 모든 기능이 나열됩니다 — 우측이 상시 패널</figcaption>
+  </figure>
+
+  <h4 class="sub">패널 각부</h4>
+  <ul class="list">
+    <li><b>상단 배지</b> — Provider 별 연동 상태. 클릭하면 로그인 안내로 이어집니다</li>
+    <li><b>작업 선택</b> — 무엇을 시킬지 먼저 고릅니다. 선택에 따라 아래 입력 영역이 바뀝니다</li>
+    <li><b>옵션 줄</b> — Provider · 강도 · 권한 · 모델 · 검증 루프 (6.1 참조)</li>
+    <li><b>상태줄</b> — <code>하네스 21개 (내장 21 · Next 트랙)</code> 처럼 지금 대화에 주입되는 표준의 개수와 판별된 트랙을 표시합니다</li>
+    <li><b>입력창</b> — <code>@</code> 로 파일 첨부, <code>/</code> 로 명령 팔레트, <kbd>Enter</kbd> 전송, <kbd>Shift</kbd>+<kbd>Enter</kbd> 줄바꿈</li>
+  </ul>
+</section>
+
+<!-- ═══════════ 2장 ═══════════ -->
+<section class="chap" id="ch2">
+  <p class="chap-n">CHAPTER 02 · 주 기능</p>
+  <h2>Figma → Code</h2>
+  <p class="intro">
+    Figma 디자인 링크 하나로 한화 DS 스타일 React 코드를 생성합니다.
+    스크린샷을 보고 추측하는 방식이 아니라, <b>Figma Dev Mode MCP 로 실제 색·간격·구조·변수를 읽어</b> 변환합니다.
+    그래서 최초 1회 <b>MCP 연결</b>이 필요하고, 매번 <b>node-id 가 포함된 링크</b>가 필요합니다.
+  </p>
+
+  <h3 class="head" id="s2-0"><span class="num">2.0</span>전체 흐름 한눈에</h3>
+  <div class="pipe">
+    <div class="pipe-row"><span class="s">최초 1회</span><span class="t"><b>MCP 연결</b> — Figma 데스크톱 앱에서 Dev Mode MCP 서버를 켜고, 확장의 환경 셋업을 실행 (2.1)</span></div>
+    <div class="pipe-row"><span class="s">STEP 1</span><span class="t"><b>링크 복사</b> — Figma 에서 프레임 우클릭 → Copy link to selection (2.2)</span></div>
+    <div class="pipe-row"><span class="s">STEP 2</span><span class="t"><b>입력</b> — 컴포넌트명 · UI 킷 · 링크 · 요구사항 (2.3)</span></div>
+    <div class="pipe-row"><span class="s">STEP 3</span><span class="t"><b>실행</b> — 진행 로그를 보며 대기, 언제든 중지 가능 (2.4)</span></div>
+    <div class="pipe-row"><span class="s">STEP 4</span><span class="t"><b>검증</b> — 빌드 검증 → 자동 수정 → (선택) 검증 루프 채점 (2.5)</span></div>
+    <div class="pipe-row"><span class="s">STEP 5</span><span class="t"><b>확인</b> — 렌더 미리보기 · Storybook 미리보기 (2.6)</span></div>
+    <div class="pipe-row"><span class="s">STEP 6</span><span class="t"><b>보정</b> — 리터치로 자연어 수정 (2.7)</span></div>
+    <div class="pipe-row"><span class="s">STEP 7</span><span class="t"><b>적용</b> — 산출물을 프로젝트로 복사 (2.8)</span></div>
+  </div>
+
+  <!-- 2.1 MCP -->
+  <h3 class="head" id="s2-1"><span class="num">2.1</span>MCP 연결 — 최초 1회 <span class="chip chip--brand">필수</span></h3>
+  <p>
+    Builder 가 Figma 를 읽으려면 두 가지가 연결되어야 합니다.
+    <b>(A) Figma 데스크톱 앱의 MCP 서버</b>를 켜는 일은 사람이 해야 하고,
+    <b>(B) AI CLI 에 그 서버를 등록</b>하는 일은 확장이 자동으로 합니다.
+  </p>
+
+  <div class="stage">
+    <div class="stage-h"><span class="n">A</span><h4>Figma 데스크톱 앱에서 MCP 서버 켜기</h4></div>
+    <p class="stage-lead">자동화가 불가능한 유일한 단계입니다. Figma 쪽에서 직접 켜야 합니다.</p>
+    <ol class="steps">
+      <li><b>Figma 데스크톱 앱</b>에서 대상 디자인 파일을 엽니다 — <b>브라우저에서는 동작하지 않습니다</b></li>
+      <li>캔버스에서 <b>아무것도 선택하지 않은 상태</b>로 <kbd>Shift</kbd>+<kbd>D</kbd> 를 눌러 Dev Mode 로 전환합니다</li>
+      <li>우측 패널의 <b>MCP server</b> 섹션에서 <b>Enable desktop MCP server</b> 를 클릭합니다</li>
+      <li>서버가 <code>http://127.0.0.1:3845/mcp</code> 에서 대기 상태가 됩니다</li>
+    </ol>
+    <div class="note note--warn">
+      <span class="tag">주의</span>
+      <div>
+        <b>토글이 보이지 않으면</b> Figma 유료 플랜의 Dev 또는 Full 시트가 필요합니다.<br>
+        <b>Figma 앱을 끄면 MCP 서버도 함께 꺼집니다.</b> 코드 생성 작업 중에는 Figma 앱을 켜 두세요.
+      </div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="stage-h"><span class="n">B</span><h4>확장에서 환경 셋업 실행 (자동)</h4></div>
+    <p class="stage-lead">명령 팔레트 → <code>NEXTLAB Builder: Figma → Code 환경 셋업 (자동)</code></p>
+    <p>실행하면 다음을 순서대로 점검하고, 가능한 항목은 스스로 고칩니다.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>점검 항목</th><th>내용</th><th class="m">자동</th></tr></thead>
+        <tbody>
+          <tr><td class="m">claude CLI</td><td>설치 여부와 버전 확인</td><td class="m">확인만</td></tr>
+          <tr><td class="m">Figma MCP 서버</td><td><code>127.0.0.1:3845</code> 생존 확인 — 꺼져 있으면 켜는 방법을 안내하고 재확인</td><td class="m">사람이 켬</td></tr>
+          <tr><td class="m">figma MCP 등록</td><td><code>claude mcp add --transport http --scope user figma …</code> 로 등록</td><td class="m">자동</td></tr>
+          <tr><td class="m">storybook-mcp 등록</td><td>디자인시스템 사용법 조회용 — 실패해도 생성은 가능</td><td class="m">자동</td></tr>
+          <tr><td class="m">codex MCP 등록</td><td>codex 가 설치되어 있으면 같은 MCP 를 codex 설정에도 등록</td><td class="m">자동</td></tr>
+          <tr><td class="m">생성 엔진 CLI</td><td>확장에 동봉된 엔진 탐색</td><td class="m">확인만</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      점검이 끝나면 <b>"Figma → Code 사용 준비 완료!"</b> 알림이 뜹니다.
+      <b>점검 결과 보기</b> 를 누르면 항목별 <code>✓ / ✗</code> 를 확인할 수 있습니다.
+    </p>
+    <div class="note">
+      <span class="tag">참고</span>
+      <div>
+        <b>Provider 를 CodeX 로 바꿔 쓸 계획이라면 셋업을 한 번 더 확인하세요.</b>
+        figma MCP 는 Provider 별로 따로 등록됩니다. 셋업은 codex 가 설치되어 있을 때만 codex 쪽 등록을 시도합니다.
+      </div>
+    </div>
+  </div>
+
+  <p>
+    셋업은 최초 1회면 되지만, <b>Figma 앱을 껐다 켠 뒤</b>에는 (A) 의 MCP 서버가 다시 꺼져 있을 수 있습니다.
+    Figma → Code 실행 직전에 확장이 서버 생존을 빠르게 다시 확인하고, 꺼져 있으면 알려 줍니다.
+  </p>
+
+  <!-- 2.2 링크 -->
+  <h3 class="head" id="s2-2"><span class="num">2.2</span>Figma 링크 복사 — node-id 가 핵심</h3>
+  <p>
+    Builder 는 링크에 담긴 <b>node-id</b> 로 "어느 프레임을 그릴지" 를 판단합니다.
+    파일 주소만 있고 node-id 가 없으면 <b>엉뚱한 화면이 생성되거나 생성이 중단</b>됩니다.
+  </p>
+  <ol class="steps">
+    <li>Figma 에서 코드로 만들 <b>프레임(화면 단위)을 선택</b>합니다</li>
+    <li><b>우클릭 → Copy link to selection</b> 을 선택합니다 <span style="color:var(--ink-3)">(상단 Share 버튼의 링크 복사와 다릅니다 — 그쪽은 node-id 가 없을 수 있습니다)</span></li>
+    <li>복사된 주소에 <code>?node-id=…</code> 가 포함되어 있는지 눈으로 확인합니다</li>
+  </ol>
+
+<pre><span class="c"># 올바른 링크 — node-id 포함</span>
+https://www.figma.com/design/&lt;fileKey&gt;/파일이름<span class="k">?node-id=684-16571</span>&amp;m=dev
+
+<span class="c"># 잘못된 링크 — 파일만 가리킴 (어떤 프레임인지 알 수 없음)</span>
+https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
+
+  <div class="note">
+    <span class="tag">동작</span>
+    <div>
+      <b>node-id 의 하이픈은 콜론으로 정규화됩니다.</b> 링크의 <code>684-16571</code> 은 내부적으로 <code>684:16571</code> 로 바뀌어
+      MCP 호출에 쓰입니다. Figma MCP 가 안내하는 <code>Implement this design from Figma. @https://…</code> 형태의 문구를
+      통째로 붙여넣어도 첫 번째 figma.com 주소를 스스로 찾아냅니다.
+    </div>
+  </div>
+  <div class="note note--stop">
+    <span class="tag">막힘</span>
+    <div>
+      <b>"node-id 추출 실패" 가 보이면 생성을 진행하지 마세요.</b>
+      추측으로 다른 프레임을 그리지 않도록 설계되어 있어, 그대로 두면 결과가 비거나 응답에 링크 보완 요청이 돌아옵니다.
+      프레임을 다시 선택해 링크를 복사하세요.
+    </div>
+  </div>
+
+  <!-- 2.3 입력 -->
+  <h3 class="head" id="s2-3"><span class="num">2.3</span>입력 — 네 칸</h3>
+  <p>
+    패널 상단 <b>작업 선택</b>에서 <code>Figma to Code</code> 를 고르면 전용 입력 영역이 나타납니다.
+    단축키 <kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>F</kbd> 또는 입력창에 <code>/figma</code> 로도 전환됩니다.
+  </p>
+
+  <figure>
+    <img src="images/03-input.png" alt="Figma to Code 입력 화면 — 컴포넌트명, UI 킷, Figma URL, 요구사항" loading="lazy" decoding="async">
+    <figcaption>Figma → Code 입력 화면 (UI 킷 드롭다운 펼침 상태)</figcaption>
+  </figure>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>칸</th><th>무엇을 넣나</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="m">컴포넌트명</td>
+          <td>산출물 파일·폴더 이름이 됩니다. 예: <code>DownloadManager</code></td>
+          <td>PascalCase 권장</td>
+        </tr>
+        <tr>
+          <td class="m">UI 킷</td>
+          <td>
+            <b>MUI</b> — 관리자 화면<br>
+            <b>DS2</b> — 운영·모바일 웹 (사내 DS 2.0)<br>
+            <b>DS3</b> — 영업지원 (sales-frontend)
+          </td>
+          <td>화면 성격에 맞춰 선택</td>
+        </tr>
+        <tr>
+          <td class="m">Figma URL</td>
+          <td>2.2 에서 복사한 node-id 포함 링크. 최근 링크는 <code>▾</code> 로 재선택</td>
+          <td>필수</td>
+        </tr>
+        <tr>
+          <td class="m">요구사항</td>
+          <td>자연어 추가 지시. 예: <code>왼쪽메뉴를 제외하고 본문 내용만 그려줘</code></td>
+          <td>선택</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    입력을 마치고 <b>코드 생성</b>을 누르면 나머지는 도구가 이어갑니다.
+    생성에는 한화 개발표준 + 선택한 킷의 매핑 규칙 + 동봉 아이콘 415종 + 한화 폰트·테마가 자동으로 얹힙니다.
+  </p>
+  <div class="note">
+    <span class="tag">팁</span>
+    <div>
+      <b>UI 킷을 매번 고르기 번거롭다면</b> 6.2 의 <code>nxlCode.genHtml.uiKit</code> 를 고정할 수 있습니다.
+      기본값 <code>ask</code> 는 워크스페이스 의존성을 보고 추천합니다
+      (<code>@hanwhalife/design-system</code> 이면 DS2, <code>@mui</code> 면 MUI).
+    </div>
+  </div>
+
+  <!-- 2.4 실행 -->
+  <h3 class="head" id="s2-4"><span class="num">2.4</span>실행 — 진행 상황 읽기</h3>
+  <figure>
+    <img src="images/04-running.png" alt="실행 중 화면 — 요청 요약 카드와 실시간 진행 로그" loading="lazy" decoding="async">
+    <figcaption>실행 중 — 요청 요약 카드 + 도구 호출 단위의 실시간 진행 로그</figcaption>
+  </figure>
+  <ul class="list">
+    <li><b>요청 요약 카드</b> — 컴포넌트명 · UI 킷 · Figma node · 출력 폴더까지, 무엇이 실행되는지 먼저 보여줍니다</li>
+    <li><b>진행 로그</b> — 선택한 모델과 도구 호출 단위 진행 상황, 경과 시간이 그대로 보입니다</li>
+    <li><b>중지</b> — <kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd> 또는 중지 버튼으로 언제든 멈출 수 있습니다</li>
+  </ul>
+  <p>
+    입력부터 검증 통과까지 보통 <b>5~10분</b>입니다. 화면이 복잡해져도 생성 시간은 크게 늘지 않습니다.
+    출력이 멈춘 채 일정 시간(기본 3분)이 지나면 무응답으로 보고 자동 중지합니다 —
+    긴 생성은 출력이 계속되므로 영향받지 않습니다.
+  </p>
+
+  <!-- 2.5 검증 -->
+  <h3 class="head" id="s2-5"><span class="num">2.5</span>검증 — 기준을 넘은 것만 도착</h3>
+  <p>생성 직후 세 겹의 검증이 순서대로 동작합니다. 앞의 둘은 기본으로 켜져 있습니다.</p>
+
+  <div class="stage">
+    <div class="stage-h"><span class="n">1</span><h4>빌드 검증 · 자동 수정</h4></div>
+    <p class="stage-lead">기본 켜짐 — <code>nxlCode.autoFixBuild</code></p>
+    <p>생성 코드가 빌드에 실패하면 에러를 분석해 <b>1회 자동 수정</b>을 시도합니다. 끄면 실패를 보고만 합니다.</p>
+  </div>
+
+  <div class="stage">
+    <div class="stage-h"><span class="n">2</span><h4>시각 보정 · 정밀도 경고</h4></div>
+    <p class="stage-lead">기본 켜짐 — <code>nxlCode.visualFix</code> · <code>nxlCode.precisionGate</code></p>
+    <p>
+      빌드는 통과했지만 간격·색 정밀도가 의심되면 <b>원본 Figma 스크린샷을 다시 조회해 1:1 대조</b>하고
+      마진·간격·색을 1회 자동 보정합니다. 또한 산출물에 하드코딩 색이 과다하고 theme 토큰을 거의 쓰지 않으면
+      "정밀도 낮을 수 있음" 을 경고합니다.
+    </p>
+  </div>
+
+  <div class="stage">
+    <div class="stage-h"><span class="n">3</span><h4>검증 루프 (선택)</h4></div>
+    <p class="stage-lead">기본 꺼짐 — 패널 옵션에서 <b>켜기</b> 로 전환</p>
+    <p>
+      정밀도를 끝까지 밀어붙일 때 켭니다. 매 반복마다 <b>Playwright 실제 렌더 · 디자인 규칙 · 시각 대조</b> 3종으로
+      채점하고, 모든 검증 항목이 통과하고 시각 점수가 게이트에 도달할 때까지 보정을 반복합니다.
+      최고점 산출물이 최종본이 됩니다.
+    </p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>기준</th><th class="m">기본값</th><th>의미</th></tr></thead>
+        <tbody>
+          <tr><td class="m">최대 반복</td><td class="m">3회</td><td>게이트 미달이어도 이 횟수에서 멈추고 최고점 산출물 복원</td></tr>
+          <tr><td class="m">시각 게이트</td><td class="m">90점</td><td>이 점수 이상이면 통과 (룰 점수는 진단용, 게이트에서 제외)</td></tr>
+          <tr><td class="m">시간 예산</td><td class="m">15분</td><td>루프 전체 누적 기준. <code>0</code> 이면 반복 횟수로만 제한</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <figure>
+      <img src="images/05-loop.png" alt="AI 설정의 검증 루프 옵션 드롭다운" loading="lazy" decoding="async">
+      <figcaption>패널 옵션의 검증 루프 — 끄기(보정 1회) / 켜기(반복 보정)</figcaption>
+    </figure>
+    <div class="note">
+      <span class="tag">언제 켜나</span>
+      <div>
+        간단한 폼·목록은 <b>끄기</b>로 충분합니다. 시안과 픽셀 단위로 맞춰야 하는 화면, 또는 결과를 그대로 리뷰에
+        올려야 할 때 <b>켜기</b>를 쓰세요. 반복하는 만큼 시간과 토큰을 더 씁니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.6 결과 -->
+  <h3 class="head" id="s2-6"><span class="num">2.6</span>결과 확인</h3>
+  <figure>
+    <img src="images/06-complete-preview.png" alt="검증 루프 통과 후 점수 로그와 렌더 미리보기, Storybook 알림" loading="lazy" decoding="async">
+    <figcaption>완료 — 점수 로그 · 렌더 미리보기 임베드 · Storybook 제안</figcaption>
+  </figure>
+  <ul class="list">
+    <li><b>렌더 미리보기</b> — 통과 직후 방금 만들어진 화면의 실제 스크린샷이 채팅에 바로 임베드됩니다. 파일을 열지 않고 눈으로 확인합니다</li>
+    <li><b>Storybook 미리보기</b> — <code>Storybook 으로 미리볼까요?</code> 알림에서 원클릭. 한화 폰트·테마로 light/dark 를 모두 확인할 수 있습니다
+      (명령: <code>NEXTLAB Builder: Storybook 미리보기</code>, 슬래시: <code>/preview</code>)</li>
+    <li><b>산출물 위치</b> — <code>.nextlab/generated/&lt;컴포넌트명&gt;/</code> 에 생성됩니다. 결과 카드에서 복사 · 새 파일로 열기 · 재생성 · 프로젝트 적용으로 바로 이어집니다</li>
+  </ul>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>원본 (Figma)</th><th>생성 결과 (Storybook)</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><img src="images/rc1-figma.png" alt="Figma 원본 — 계정 복구 신청 화면" loading="lazy" decoding="async"></td>
+          <td><img src="images/rc3-light.png" alt="생성된 코드의 Storybook 실제 렌더" loading="lazy" decoding="async"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    다크 모드를 따로 만들지 않아도 됩니다 — 테마 토큰 기반이라 Storybook 툴바 토글 한 번으로 Dark 와 Light 가 모두 나옵니다.
+  </p>
+
+  <!-- 2.7 리터치 -->
+  <h3 class="head" id="s2-7"><span class="num">2.7</span>리터치 — 자연어로 보정</h3>
+  <p>
+    결과가 대체로 맞는데 일부만 어긋났다면, 재생성하지 말고 <b>리터치</b>로 고치는 편이 빠릅니다.
+    Figma 입력 영역의 <b>리터치</b> 버튼 또는 슬래시 명령 <code>/retouch</code> 로 실행합니다.
+  </p>
+<pre><span class="c"># 리터치 지시 예시</span>
+카드 사이 여백을 24px 로 좁혀줘
+결재선 영역 제목을 16px 볼드로 바꿔줘
+하단 버튼을 오른쪽 정렬로 옮겨줘</pre>
+
+  <!-- 2.8 적용 -->
+  <h3 class="head" id="s2-8"><span class="num">2.8</span>산출물 적용 — 프로젝트로 옮기기</h3>
+  <p>
+    검수를 마쳤으면 <code>NEXTLAB Builder: 산출물 적용 (프로젝트로 복사)</code> 를 실행합니다.
+    생성 폴더의 결과물이 프로젝트 안으로 복사되며, 컴포넌트별 하위 폴더로 정리됩니다.
+  </p>
+  <div class="pipe">
+    <div class="pipe-row"><span class="s">생성 위치</span><span class="t"><code>.nextlab/generated/&lt;컴포넌트명&gt;/</code></span></div>
+    <div class="pipe-row"><span class="s">적용 위치</span><span class="t"><code>src/generated/</code> — <code>nxlCode.genHtml.applyDir</code> 로 변경 가능</span></div>
+  </div>
+  <p>
+    어떤 UI 킷으로 생성했든 적용 대상은 한 곳으로 모이므로 결과물이 흩어지지 않습니다.
+    쌓인 생성물은 <code>NEXTLAB Builder: 생성 산출물 정리</code> 로 비울 수 있습니다.
+  </p>
+
+  <h4 class="sub">Figma → Code 체크리스트</h4>
+  <ul class="check">
+    <li>Figma <b>데스크톱 앱</b>이 켜져 있고, 대상 파일이 열려 있다</li>
+    <li>Dev Mode 의 <b>MCP server</b> 가 Enable 되어 있다</li>
+    <li>환경 셋업에서 <code>figma MCP 등록</code> 이 <code>✓</code> 였다</li>
+    <li>링크에 <code>node-id</code> 가 포함되어 있다</li>
+    <li>화면 성격에 맞는 UI 킷을 골랐다 (MUI / DS2 / DS3)</li>
+    <li>결과를 <b>미리보기로 눈으로</b> 확인했다</li>
+  </ul>
+</section>
+
+<!-- ═══════════ 3장 ═══════════ -->
+<section class="chap" id="ch3">
+  <p class="chap-n">CHAPTER 03</p>
+  <h2>AI 채팅 · 인라인 편집</h2>
+  <p class="intro">
+    어느 AI 를 고르든 한화 개발표준이 자동으로 주입됩니다. 표준에 어긋나는 요청은 실행되지 않고,
+    규칙 번호와 함께 대안으로 대체됩니다.
+  </p>
+
+  <h3 class="head"><span class="num">3.1</span>채팅 기본</h3>
+  <ul class="list">
+    <li><b>파일 첨부</b> — 입력창에서 <code>@</code> 를 치면 워크스페이스 파일 검색이 열립니다. 📎 버튼으로 파일·이미지도 첨부할 수 있습니다</li>
+    <li><b>선택 코드 첨부</b> — 에디터에서 코드를 선택하고 <kbd>Cmd</kbd>+<kbd>I</kbd></li>
+    <li><b>슬래시 명령</b> — 줄 맨 앞에서 <code>/</code> 를 치면 내장 명령 목록이 열립니다 (6.4 참조)</li>
+    <li><b>입력창 포커스</b> — 어디서든 <kbd>Cmd</kbd>+<kbd>L</kbd></li>
+  </ul>
+  <div class="note note--warn">
+    <span class="tag">표준 고지</span>
+    <div>
+      <b>표준을 어기는 요청은 그대로 실행되지 않습니다.</b>
+      예를 들어 "타입은 any 로", "useEffect 안에서 fetch 로", "상태값은 enum 으로" 라고 요청하면,
+      응답 첫머리에 <b>표준 고지</b>가 붙고 규칙 번호와 함께 대안이 적용됩니다
+      (T-01 → <code>unknown</code> + Zod, R-09 → TanStack Query, T-08 → <code>as const</code> 유니언).
+    </div>
+  </div>
+
+  <h3 class="head"><span class="num">3.2</span>인라인 편집 — <kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>K</kbd></h3>
+  <p>에디터를 떠나지 않고 선택한 코드를 자연어로 고칩니다. 적용 전에 diff 로 확인합니다.</p>
+  <h4 class="sub">1. 지시</h4>
+  <p>위반이 있는 코드를 선택하고 <kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>K</kbd> → <code>NXL 표준에 맞게 리팩터링해줘</code> 한 줄이면 됩니다.</p>
+  <figure>
+    <img src="images/ie1-ask.png" alt="코드를 선택하고 자연어로 지시하는 화면" loading="lazy" decoding="async">
+    <figcaption>에디터를 떠나지 않고 자연어로 지시합니다</figcaption>
+  </figure>
+
+  <h4 class="sub">2. 제안 — 적용 전에 diff 로</h4>
+  <p>
+    원본과 AI 제안을 나란히 비교합니다. <code>any</code> · <code>as</code> 단언 · <code>var</code> 가
+    <code>unknown</code> + 타입 가드 구조로 바뀐 것이 한눈에 보입니다.
+  </p>
+  <figure>
+    <img src="images/ie2-diff.png" alt="원본과 AI 제안을 나란히 비교하는 diff 화면" loading="lazy" decoding="async">
+    <figcaption>원본 ↔ 제안 diff — 적용 전에 확인합니다</figcaption>
+  </figure>
+
+  <h4 class="sub">3. 적용 — 오류 0</h4>
+  <p>진단 경고가 모두 사라지고, 반환 타입까지 명시된 표준 코드만 남습니다.</p>
+  <figure>
+    <img src="images/ie3-clean.png" alt="적용 후 진단 경고가 모두 사라진 화면" loading="lazy" decoding="async">
+    <figcaption>적용 후 — 진단 경고 없음</figcaption>
+  </figure>
+
+  <h3 class="head"><span class="num">3.3</span>AI Quick Fix</h3>
+  <p>
+    표준 위반 진단에 커서를 두고 전구 아이콘(<kbd>Cmd</kbd>+<kbd>.</kbd>)을 클릭하면
+    <b>AI 가 그 규칙에 맞게 그 자리에서 수정</b>합니다. 진단이 무엇을, 왜, 대신 무엇을 쓰라는지 함께 알려주므로
+    규칙을 외울 필요가 없습니다.
+  </p>
+
+  <h3 class="head"><span class="num">3.4</span>그 밖의 생성 기능</h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>기능</th><th>실행</th><th>설명</th></tr></thead>
+      <tbody>
+        <tr><td>현재 파일 설명</td><td class="m">/explain</td><td>열려 있는 파일의 구조와 역할을 설명</td></tr>
+        <tr><td>현재 파일 리팩토링</td><td class="m">/refactor</td><td>표준 기준 개선안 제안</td></tr>
+        <tr><td>테스트 생성</td><td class="m">/test</td><td>현재 파일 기준 테스트 코드 생성</td></tr>
+        <tr><td>Storybook 스토리 생성</td><td class="m">/storybook</td><td>현재 파일 기준 스토리 생성</td></tr>
+        <tr><td>API 클라이언트 생성</td><td class="m">/api</td><td>OpenAPI·샘플 → Zod + TanStack Query 클라이언트</td></tr>
+        <tr><td>프롬프트 템플릿</td><td class="m">명령 팔레트</td><td>자주 쓰는 지시문을 저장·불러오기</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════ 4장 ═══════════ -->
+<section class="chap" id="ch4">
+  <p class="chap-n">CHAPTER 04</p>
+  <h2>코드 리뷰 · 커밋</h2>
+
+  <h3 class="head"><span class="num">4.1</span>코드 리뷰 — <kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>R</kbd></h3>
+  <p>
+    현재 변경사항(git diff)을 한화 개발표준 기준으로 점검합니다.
+    지적은 <b>규칙 번호와 파일:라인</b>으로 근거를 남기므로, 리뷰어와의 논쟁이 아니라 확인 작업이 됩니다.
+    커밋 전에 한 번 돌리면 리뷰 반려를 크게 줄일 수 있습니다.
+  </p>
+
+  <h3 class="head"><span class="num">4.2</span>커밋 생성 — <kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd></h3>
+  <p>
+    변경 내용을 분석해 표준 형식의 커밋 메시지를 작성하고, 확인 후 실제 커밋까지 진행합니다.
+    diff 가 크면 반복되는 잡음 줄(타임스탬프·해시·로그)을 <code>[xN]</code> 으로 접어 토큰을 아낍니다
+    (<code>nxlCode.optimizePromptTokens</code>, 기본 켜짐 — 코드 본문은 손대지 않습니다).
+  </p>
+</section>
+
+<!-- ═══════════ 5장 ═══════════ -->
+<section class="chap" id="ch5">
+  <p class="chap-n">CHAPTER 05</p>
+  <h2>표준 · 보안 — 자동으로 지켜지는 것</h2>
+  <p class="intro">
+    이 장의 기능은 <b>따로 실행하지 않아도 항상 켜져 있습니다.</b> 무엇이 자동으로 지켜지는지만 알아 두면 됩니다.
+  </p>
+
+  <h3 class="head"><span class="num">5.1</span>실시간 표준 진단 — 18개 규칙</h3>
+  <p>
+    AI 가 짠 코드든 사람이 짠 코드든, <code>.ts</code> · <code>.tsx</code> 를 편집·저장하는 즉시 위반을 표시합니다
+    (<code>nxlCode.liveDiagnostics</code>).
+  </p>
+  <figure>
+    <img src="images/dx1-t01.png" alt="에디터에서 T-01 any 타입 금지 규칙 위반이 표시된 화면" loading="lazy" decoding="async">
+    <figcaption>툴팁 한 줄에 규칙 번호 + 금지 이유 + 대안이 함께 표시됩니다</figcaption>
+  </figure>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th class="m">규칙</th><th>내용</th></tr></thead>
+      <tbody>
+        <tr><td class="rid">T-01</td><td><code>any</code> 금지 — <code>unknown</code> + 타입 가드 / Zod 로 대체</td></tr>
+        <tr><td class="rid">T-02</td><td>타입 단언 <code>as Type</code> 금지 — 타입 가드 / <code>satisfies</code> (<code>as const</code> 는 허용)</td></tr>
+        <tr><td class="rid">T-03</td><td><code>var</code> 금지 — <code>const</code> 기본, 불가피하면 <code>let</code></td></tr>
+        <tr><td class="rid">T-06</td><td><code>@ts-ignore</code> / <code>@ts-expect-error</code> 남용 금지 — 타입 자체를 수정</td></tr>
+        <tr><td class="rid">T-07</td><td><code>do...while</code> 금지 — <code>while</code> / 고차함수 사용</td></tr>
+        <tr><td class="rid">T-08</td><td>enum 전면 금지 (문자열 enum 포함) — <code>as const</code> 객체 + 유니언 타입</td></tr>
+        <tr><td class="rid">R-01</td><td>Sanitize 없는 <code>dangerouslySetInnerHTML</code> 금지 — DOMPurify 정제 후 사용</td></tr>
+        <tr><td class="rid">R-03</td><td><code>React.FC</code> 금지 — 일반 함수 + props 타입 명시</td></tr>
+        <tr><td class="rid">R-05</td><td><code>getServerSideProps</code> / <code>getStaticProps</code> 금지 — RSC + fetch</td></tr>
+        <tr><td class="rid">R-06</td><td>내부 이동에 <code>window.location</code> 금지 — <code>&lt;Link&gt;</code> / <code>useRouter</code></td></tr>
+        <tr><td class="rid">S-01</td><td>시크릿·API 키에 <code>NEXT_PUBLIC_</code> / <code>VITE_</code> 접두사 금지</td></tr>
+        <tr><td class="rid">S-03</td><td><code>eval()</code> / <code>new Function()</code> 금지</td></tr>
+        <tr><td class="rid">S-04</td><td><code>innerHTML</code> 직접 조작 금지 — React 렌더링으로</td></tr>
+        <tr><td class="rid">S-07</td><td><code>next/image</code> remotePatterns 와일드카드 <code>hostname:"**"</code> 금지</td></tr>
+        <tr><td class="rid">S-08</td><td>인증 토큰 localStorage/sessionStorage 저장 금지 — httpOnly 쿠키로만</td></tr>
+        <tr><td class="rid">C-01</td><td>인라인 스타일 <code>style={{ }}</code> 금지 — <code>sx</code> / <code>styled()</code> / module.scss</td></tr>
+        <tr><td class="rid">C-02</td><td><code>!important</code> 금지</td></tr>
+        <tr><td class="rid">E-02</td><td>프로덕션 코드에 <code>console.log</code> 금지 — 로거·에러 리포팅 사용</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="head"><span class="num">5.2</span>민감정보 전송 차단 — 8종</h3>
+  <p>
+    입력창의 내용과 첨부 파일 본문을 <b>전송 직전에</b> 검사합니다. 검사는 PC 안에서 끝나므로
+    민감정보가 AI 서버에 도달하지 않습니다 (<code>nxlCode.security.enabled</code>).
+  </p>
+  <figure class="crop">
+    <img src="images/sec2-block-key.png" alt=".env 첨부 시 AWS 키를 감지해 전송을 중단한 화면" loading="lazy" decoding="async">
+    <figcaption>.env 첨부 → AWS 액세스 키 감지 → 전송 중단. 감지 값은 마스킹해 보여줍니다</figcaption>
+  </figure>
+  <div class="chips">
+    <span class="chip chip--brand">주민등록번호</span>
+    <span class="chip">Anthropic API 키</span>
+    <span class="chip">OpenAI API 키</span>
+    <span class="chip">AWS 액세스 키</span>
+    <span class="chip">GitHub 토큰</span>
+    <span class="chip">Google API 키</span>
+    <span class="chip">Slack 토큰</span>
+    <span class="chip">개인 키(PEM)</span>
+  </div>
+  <p>차단되면 해당 값을 제거하거나 마스킹한 뒤 다시 보내면 됩니다.</p>
+
+  <h3 class="head"><span class="num">5.3</span>개발표준 하네스 — 21개 모듈</h3>
+  <ul class="list">
+    <li><b>자동 주입</b> — 작업 성격에 맞는 모듈을 골라 AI 프롬프트에 강제합니다. 채팅·생성·리뷰 어디서나, 어느 Provider 를 골라도 동일합니다</li>
+    <li><b>트랙 자동 감지</b> — 워크스페이스의 <code>package.json</code> 에 <code>next</code> 가 있으면 Next 트랙, <code>vite</code> 면 Vite 트랙으로 판정해 해당 규칙만 적용합니다. 감지가 틀릴 때만 <code>nxlCode.stack</code> 으로 고정하세요</li>
+    <li><b>팀 커스터마이징</b> — <code>NEXTLAB Builder: 하네스 초기화</code> 로 <code>.nextlab/harness</code> 를 만들면 팀 규칙을 문서로 관리할 수 있습니다. 문서를 고치면 다음 실행부터 전원에게 반영됩니다</li>
+    <li><b>보안 잠금</b> — 절대금지·보안 모듈은 워크스페이스 하네스로 대체할 수 없습니다. 로컬 파일로 보안 정책을 무력화하는 우회가 차단됩니다</li>
+  </ul>
+</section>
+
+<!-- ═══════════ 6장 ═══════════ -->
+<section class="chap" id="ch6">
+  <p class="chap-n">CHAPTER 06 · 참조</p>
+  <h2>옵션과 설정</h2>
+  <p class="intro">
+    기본값 그대로 써도 됩니다. 이 장은 <b>바꾸고 싶어졌을 때</b> 찾아보는 참조 문서입니다.
+  </p>
+
+  <h3 class="head" id="s6-1"><span class="num">6.1</span>패널 옵션 — 대화마다 바꾸는 것</h3>
+  <figure>
+    <img src="images/02-options.png" alt="패널의 작업·Provider·권한·강도·모델 선택 드롭다운" loading="lazy" decoding="async">
+    <figcaption>패널 한 곳에서 작업 · AI · 모델 · 강도 · 권한을 전부 제어합니다</figcaption>
+  </figure>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>옵션</th><th>선택지</th><th>기준</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>작업</b></td>
+          <td class="m">AI Chat · Figma to Code · 현재 파일 설명 · 현재 파일 리팩토링</td>
+          <td>작업에 맞는 표준 모듈·프롬프트가 자동 구성됩니다</td>
+        </tr>
+        <tr>
+          <td><b>Provider</b></td>
+          <td class="m">Claude · CodeX</td>
+          <td>어느 쪽이든 같은 한화 표준이 주입됩니다</td>
+        </tr>
+        <tr>
+          <td><b>강도</b></td>
+          <td class="m">기본 · 낮음(빠름) · 보통 · 높음(정밀)</td>
+          <td>간단한 일은 낮음, 복잡한 화면은 높음</td>
+        </tr>
+        <tr>
+          <td><b>권한</b></td>
+          <td class="m">편집만 자동 · Auto(전체 허용)</td>
+          <td>Auto 는 설치 명령 등 도구 실행까지 허용해 중간에 막히지 않고 완주합니다</td>
+        </tr>
+        <tr>
+          <td><b>모델</b></td>
+          <td class="m">계정 기본 · Fable(최신) · Opus · Sonnet · Haiku</td>
+          <td>Claude 기준. 대화 중에도 바꿀 수 있습니다</td>
+        </tr>
+        <tr>
+          <td><b>검증 루프</b></td>
+          <td class="m">끄기(보정 1회) · 켜기(반복 보정)</td>
+          <td>Figma → Code 전용. 2.5 참조</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="head" id="s6-2"><span class="num">6.2</span>설정 전체 — <code>settings.json</code></h3>
+  <p>
+    VSCode 설정에서 <code>nxlCode</code> 로 검색하면 모두 보입니다.
+    아래는 실제로 손댈 일이 있는 것들만 목적별로 묶은 것입니다.
+  </p>
+
+  <h4 class="sub">생성 · 검증</h4>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th class="m">설정</th><th class="m">기본값</th><th>설명</th></tr></thead>
+      <tbody>
+        <tr><td class="m">genHtml.uiKit</td><td class="m">ask</td><td>Figma → Code 대상 UI 킷 고정. <code>ask</code> 는 매번 선택(의존성으로 추천)</td></tr>
+        <tr><td class="m">genHtml.applyDir</td><td class="m">src/generated</td><td>산출물 적용 대상 폴더 (워크스페이스 루트 기준)</td></tr>
+        <tr><td class="m">autoFixBuild</td><td class="m">true</td><td>빌드 실패 시 원인 분석 후 1회 자동 수정</td></tr>
+        <tr><td class="m">visualFix</td><td class="m">true</td><td>Figma 원본과 1:1 대조해 간격·색 1회 자동 보정</td></tr>
+        <tr><td class="m">precisionGate</td><td class="m">true</td><td>토큰 미사용·하드코딩 색 과다 시 정밀도 경고</td></tr>
+        <tr><td class="m">validationLoop.enabled</td><td class="m">false</td><td>검증 루프 사용 (패널에서도 전환 가능)</td></tr>
+        <tr><td class="m">validationLoop.maxIterations</td><td class="m">3</td><td>최대 반복 횟수</td></tr>
+        <tr><td class="m">validationLoop.visualGate</td><td class="m">90</td><td>통과 기준 시각 점수 (0–100)</td></tr>
+        <tr><td class="m">validationLoop.budgetMinutes</td><td class="m">15</td><td>루프 총 시간 예산(분). <code>0</code> 이면 무제한</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4 class="sub">Figma · 미리보기</h4>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th class="m">설정</th><th class="m">기본값</th><th>설명</th></tr></thead>
+      <tbody>
+        <tr><td class="m">figma.mcpUrl</td><td class="m">127.0.0.1:3845/mcp</td><td>Figma 데스크톱 MCP 서버 주소. 비우면 기본값</td></tr>
+        <tr><td class="m">figma.designSystemUrl</td><td class="m">(비어 있음)</td><td>디자인시스템 Figma 파일 URL. 생성 시 이 DS 를 조회해 컴포넌트·아이콘·로고를 매칭</td></tr>
+        <tr><td class="m">figma.storybookMcpUrl</td><td class="m">(엔진 기본값)</td><td>디자인시스템 Storybook MCP 주소</td></tr>
+        <tr><td class="m">preview.viewports</td><td class="m">[]</td><td>미리보기 뷰포트 프리셋 추가 — 예: <code>[{"name":"FHD","width":1920,"height":1080}]</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4 class="sub">AI · 실행</h4>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th class="m">설정</th><th class="m">기본값</th><th>설명</th></tr></thead>
+      <tbody>
+        <tr><td class="m">defaultProvider</td><td class="m">claude</td><td>기본 Provider (<code>claude</code> / <code>codex</code>)</td></tr>
+        <tr><td class="m">defaultTaskType</td><td class="m">chat</td><td>패널을 열었을 때의 기본 작업</td></tr>
+        <tr><td class="m">reasoningEffort</td><td class="m">(CLI 기본)</td><td>추론 강도 (<code>low</code> / <code>medium</code> / <code>high</code>)</td></tr>
+        <tr><td class="m">claude.model</td><td class="m">(계정 기본)</td><td>Claude 실행 모델</td></tr>
+        <tr><td class="m">claude.permissionMode</td><td class="m">acceptEdits</td><td>권한 모드. UI 드롭다운 선택이 우선합니다</td></tr>
+        <tr><td class="m">claude.path / codex.path</td><td class="m">(자동 탐색)</td><td>CLI 절대경로. PATH 에서 못 찾을 때만 지정</td></tr>
+        <tr><td class="m">runTimeoutMs</td><td class="m">180000</td><td>무응답(idle) 타임아웃(ms). 출력이 계속되는 긴 생성은 영향 없음. <code>0</code> 이면 비활성</td></tr>
+        <tr><td class="m">optimizePromptTokens</td><td class="m">true</td><td>리뷰·커밋 diff 의 반복 잡음을 접어 토큰 절감</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4 class="sub">표준 · 보안 · 환경</h4>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th class="m">설정</th><th class="m">기본값</th><th>설명</th></tr></thead>
+      <tbody>
+        <tr><td class="m">stack</td><td class="m">auto</td><td>하네스 트랙. <code>auto</code> 는 <code>package.json</code> 으로 감지 — 감지가 틀릴 때만 고정</td></tr>
+        <tr><td class="m">liveDiagnostics</td><td class="m">true</td><td>실시간 표준 진단 (5.1)</td></tr>
+        <tr><td class="m">security.enabled</td><td class="m">true</td><td>민감정보 입력 차단 (5.2)</td></tr>
+        <tr><td class="m">harness.allowWorkspace</td><td class="m">true</td><td>워크스페이스 하네스 로딩 허용. 끄면 동봉 정본만 사용 <span class="d">machine 스코프 — 워크스페이스 설정으로는 변경 불가</span></td></tr>
+        <tr><td class="m">nexus.enabled</td><td class="m">false</td><td>사내망 Nexus 레지스트리 사용. 기본 꺼짐(외부망 모드)</td></tr>
+        <tr><td class="m">updates.channelUrl</td><td class="m">nxl-web.vercel.app</td><td>시작 시 1회 새 버전 확인. 버전·체크섬 조회만 하며 아무 정보도 보내지 않습니다</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <span class="tag">사용량</span>
+    <div>
+      <b>실행 이력과 비용은 기록됩니다.</b>
+      <code>NEXTLAB Builder: 실행 이력 보기</code> 로 무엇을 실행했는지, <code>내 사용량 (토큰·비용 대시보드)</code> 로
+      얼마나 썼는지 확인할 수 있습니다. 조직 집계용 텔레메트리는 기능·Provider·성공여부·소요시간만 보내며,
+      <b>프롬프트·코드·응답 본문은 전송하지 않습니다.</b>
+    </div>
+  </div>
+
+  <h3 class="head" id="s6-3"><span class="num">6.3</span>단축키</h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th class="m">macOS</th><th class="m">Windows · Linux</th><th>동작</th></tr></thead>
+      <tbody>
+        <tr><td class="m"><kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd></td><td class="m"><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd></td><td>패널 열기</td></tr>
+        <tr><td class="m"><kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>F</kbd></td><td class="m"><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F</kbd></td><td>Figma → Code</td></tr>
+        <tr><td class="m"><kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>R</kbd></td><td class="m"><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>R</kbd></td><td>코드 리뷰</td></tr>
+        <tr><td class="m"><kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd></td><td class="m"><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd></td><td>커밋 생성</td></tr>
+        <tr><td class="m"><kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>K</kbd></td><td class="m"><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>K</kbd></td><td>인라인 편집</td></tr>
+        <tr><td class="m"><kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd></td><td class="m"><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd></td><td>실행 중지</td></tr>
+        <tr><td class="m"><kbd>Cmd</kbd>+<kbd>I</kbd></td><td class="m"><kbd>Ctrl</kbd>+<kbd>I</kbd></td><td>선택 코드 첨부</td></tr>
+        <tr><td class="m"><kbd>Cmd</kbd>+<kbd>L</kbd></td><td class="m"><kbd>Ctrl</kbd>+<kbd>L</kbd></td><td>입력창으로 포커스</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="head" id="s6-4"><span class="num">6.4</span>슬래시 명령과 명령 팔레트</h3>
+  <h4 class="sub">입력창 슬래시 명령 — 줄 맨 앞에서 <code>/</code></h4>
+  <div class="chips">
+    <span class="chip chip--brand">/figma</span><span class="chip">/review</span><span class="chip">/commit</span>
+    <span class="chip">/explain</span><span class="chip">/refactor</span><span class="chip">/test</span>
+    <span class="chip">/storybook</span><span class="chip">/api</span><span class="chip">/retouch</span><span class="chip">/preview</span>
+  </div>
+
+  <h4 class="sub">명령 팔레트 — <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> → <code>NEXTLAB</code></h4>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>분류</th><th>명령</th></tr></thead>
+      <tbody>
+        <tr><td><b>생성</b></td><td>Figma → Code · 환경 셋업(자동) · 리터치 · 산출물 적용 · 생성 산출물 정리 · Storybook 미리보기</td></tr>
+        <tr><td><b>코딩</b></td><td>인라인 편집 · AI Quick Fix · 선택 코드 첨부 · 입력창으로 포커스 · 현재 파일 설명 · 현재 파일 리팩토링 제안</td></tr>
+        <tr><td><b>품질</b></td><td>코드 리뷰 · 커밋 생성 · 테스트 생성 · Storybook 스토리 생성 · API 클라이언트 생성 · NXL 검사 훅 설치</td></tr>
+        <tr><td><b>표준</b></td><td>하네스 초기화(.nextlab/harness)</td></tr>
+        <tr><td><b>운영</b></td><td>계정 연동 · 실행 이력 보기 · 내 사용량 · 사용량 내보내기 · 팀 사용량 리포트 · 업데이트 확인 · 실행 중지</td></tr>
+        <tr><td><b>고급</b></td><td>고급 CLI 터미널 열기 (서버·MCP 관리) · 고급 CLI 명령 (헬스체크)</td></tr>
+        <tr><td><b>템플릿</b></td><td>프롬프트 템플릿 저장 · 프롬프트 템플릿 불러오기</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════ 7장 ═══════════ -->
+<section class="chap" id="ch7">
+  <p class="chap-n">CHAPTER 07</p>
+  <h2>문제 해결</h2>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>증상</th><th>원인과 해결</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>Figma → Code 가 시작되지 않음</b></td>
+          <td>Figma 데스크톱 앱이 꺼져 있거나 MCP 서버가 꺼진 상태입니다. Figma 앱을 켜고 <kbd>Shift</kbd>+<kbd>D</kbd> → MCP server 를 다시 Enable 한 뒤, 환경 셋업을 한 번 더 실행하세요. (2.1)</td>
+        </tr>
+        <tr>
+          <td><b>엉뚱한 화면이 생성됨</b></td>
+          <td>링크에 <code>node-id</code> 가 없습니다. 프레임을 선택하고 <b>우클릭 → Copy link to selection</b> 으로 다시 복사하세요. (2.2)</td>
+        </tr>
+        <tr>
+          <td><b>CodeX 로 바꾸니 Figma 가 안 됨</b></td>
+          <td>MCP 는 Provider 별로 등록됩니다. codex 를 설치한 뒤 환경 셋업을 다시 실행하면 codex 쪽에도 등록됩니다. (2.1-B)</td>
+        </tr>
+        <tr>
+          <td><b>연동 배지가 계속 <code>!</code></b></td>
+          <td>CLI 로그인이 만료되었거나 CLI 를 찾지 못하는 경우입니다. 배지를 클릭해 다시 로그인하고, 그래도 안 되면 <code>claude.path</code> 에 절대경로를 지정하세요. (1.2 · 6.2)</td>
+        </tr>
+        <tr>
+          <td><b>색·여백이 원본과 조금 다름</b></td>
+          <td>AI 특성상 미세한 차이는 남을 수 있습니다. 검증 루프를 <b>켜기</b>로 두거나, 리터치로 해당 부분만 보정하세요. (2.5 · 2.7)</td>
+        </tr>
+        <tr>
+          <td><b>실행이 도중에 멈춤</b></td>
+          <td>권한 모드가 <code>편집만 자동</code> 이면 도구 실행 단계에서 대기할 수 있습니다. <code>Auto(전체 허용)</code> 로 바꾸면 중단 없이 완주합니다. (6.1)</td>
+        </tr>
+        <tr>
+          <td><b>민감정보가 아닌데 차단됨</b></td>
+          <td>패턴이 우연히 일치한 경우입니다. 해당 값을 마스킹해 보내거나, 꼭 필요하면 <code>nxlCode.security.enabled</code> 를 일시적으로 끄고 다시 켜세요.</td>
+        </tr>
+        <tr>
+          <td><b>표준 규칙이 우리 팀과 다름</b></td>
+          <td><code>하네스 초기화</code> 로 <code>.nextlab/harness</code> 를 만들어 팀 규칙을 문서로 수정하세요. 단, 절대금지·보안 모듈은 대체되지 않습니다. (5.3)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note note--warn">
+    <span class="tag">전제</span>
+    <div>
+      <b>사람 검수를 전제로 한 도구입니다.</b>
+      Builder 는 표준을 지키며 빠르게 초안을 만들고 반복작업을 줄이는 도구이지, 검수를 없애는 도구가 아닙니다.
+      생성물은 미리보기로 대조하고, 어긋난 부분은 리터치로 보정한 뒤 적용하세요.
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <span>NEXTLAB Builder 사용자 메뉴얼 v1.0 · 확장 v0.3.5</span>
+  <span>사내 전용 — 외부 공유 금지 · 2026</span>
+</footer>
+
+</div>
+</main>
+</div>
+
+<script>
+(function(){
+  /* 목차 현재 위치 표시 */
+  var links = Array.prototype.slice.call(document.querySelectorAll('#toc a'));
+  var map = {};
+  var targets = [];
+  links.forEach(function(a){
+    var id = a.getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if (el) { map[id] = a; targets.push(el); }
+  });
+  if (!targets.length || !('IntersectionObserver' in window)) return;
+
+  var visible = {};
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ visible[e.target.id] = e.isIntersecting; });
+    var current = null;
+    for (var i = 0; i < targets.length; i++) {
+      if (visible[targets[i].id]) { current = targets[i].id; break; }
+    }
+    if (!current) return;
+    links.forEach(function(a){ a.classList.remove('is-active'); });
+    if (map[current]) map[current].classList.add('is-active');
+  }, { rootMargin: '-8% 0px -70% 0px', threshold: 0 });
+
+  targets.forEach(function(el){ io.observe(el); });
+})();
+</script>
+
+</body>
+</html>

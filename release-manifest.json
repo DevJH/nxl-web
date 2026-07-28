@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-27T01:17:58.126Z",
+  "generatedAt": "2026-07-28T07:31:15.269Z",
   "releases": [
     {
       "version": "0.3.8",
@@ -13,78 +13,14 @@
       },
       "files": [
         {
-          "name": "CHANGELOG.md",
-          "path": "/releases/0.3.8/CHANGELOG.md",
-          "bytes": 101151,
-          "modifiedAt": "2026-07-27T01:14:46.033Z"
-        },
-        {
-          "name": "CUSTOM-COMPONENTS-GUIDE.md",
-          "path": "/releases/0.3.8/CUSTOM-COMPONENTS-GUIDE.md",
-          "bytes": 8565,
-          "modifiedAt": "2026-07-27T01:14:46.050Z"
-        },
-        {
-          "name": "INSTALL.md",
-          "path": "/releases/0.3.8/INSTALL.md",
-          "bytes": 3502,
-          "modifiedAt": "2026-07-27T01:14:46.038Z"
-        },
-        {
-          "name": "RELEASE-NOTES.md",
-          "path": "/releases/0.3.8/RELEASE-NOTES.md",
-          "bytes": 1507,
-          "modifiedAt": "2026-07-27T01:14:46.029Z"
-        },
-        {
-          "name": "SHA256SUMS.txt",
-          "path": "/releases/0.3.8/SHA256SUMS.txt",
-          "bytes": 89,
-          "modifiedAt": "2026-07-27T01:14:46.198Z"
-        },
-        {
-          "name": "USER-GUIDE.md",
-          "path": "/releases/0.3.8/USER-GUIDE.md",
-          "bytes": 25666,
-          "modifiedAt": "2026-07-27T01:14:46.044Z"
-        },
-        {
-          "name": "figma-mapping_example.md",
-          "path": "/releases/0.3.8/figma-mapping_example.md",
-          "bytes": 6891,
-          "modifiedAt": "2026-07-27T01:14:46.055Z"
-        },
-        {
           "name": "nxl-builder-0.3.8.vsix",
           "path": "/releases/0.3.8/nxl-builder-0.3.8.vsix",
           "bytes": 11285007,
           "sha256": "f5ccf1d3296a35cc4b3620e16ef0694e395ea2680920db8b955e406142b17616",
           "modifiedAt": "2026-07-27T01:14:46.022Z"
-        },
-        {
-          "name": "nxl-builder-0.3.8.vsix",
-          "path": "/releases/0.3.8/nxl-builder-0.3.8.vsix",
-          "bytes": 11285007,
-          "sha256": "f5ccf1d3296a35cc4b3620e16ef0694e395ea2680920db8b955e406142b17616",
-          "modifiedAt": "2026-07-27T01:14:45.414Z"
         }
       ]
     }
   ],
-  "docs": [
-    {
-      "title": "NEXTLAB Builder & Studio 소개 (웹)",
-      "kind": "html",
-      "path": "/docs/builder-studio-intro-v1.4.html",
-      "bytes": 161969,
-      "modifiedAt": "2026-07-16T02:08:09.521Z"
-    },
-    {
-      "title": "NEXTLAB Builder & Studio 소개 (PDF)",
-      "kind": "pdf",
-      "path": "/docs/builder-studio-intro-v1.4.pdf",
-      "bytes": 10926642,
-      "modifiedAt": "2026-07-15T00:38:09.746Z"
-    }
-  ]
+  "docs": []
 }

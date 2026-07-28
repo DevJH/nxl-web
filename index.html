@@ -2,8 +2,187 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>nxl-web</title>
+<title>NEXTLAB Builder — 배포 채널</title>
+<style>
+  :root {
+    --brand: #fa6600;
+    --brand-strong: #d95700;
+    --ink: #272b2f;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --bg-soft: #f7f8f9;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Malgun Gothic", sans-serif;
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 24px; }
+
+  /* 히어로 */
+  header.hero { background: #16181a; color: #fff; }
+  .hero .wrap { padding: 56px 24px 52px; }
+  .eyebrow {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 700; letter-spacing: .16em;
+    color: var(--brand); margin: 0;
+  }
+  .eyebrow::before {
+    content: ""; width: 20px; height: 10px;
+    background: var(--brand); transform: skewX(-18deg);
+  }
+  h1 { margin: 14px 0 0; font-size: 32px; line-height: 1.3; letter-spacing: -.02em; }
+  .hero p { margin: 14px 0 0; color: #c9ced4; max-width: 620px; }
+
+  /* 본문 */
+  main .wrap { padding: 44px 24px 64px; }
+  h2 { font-size: 20px; letter-spacing: -.01em; margin: 0 0 4px; }
+  .section-desc { color: var(--muted); margin: 0 0 20px; font-size: 14px; }
+  section + section { margin-top: 48px; }
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .card {
+    border: 1px solid var(--line); border-radius: 14px; padding: 22px;
+    background: #fff; display: flex; flex-direction: column;
+  }
+  .card h3 { margin: 0; font-size: 16px; }
+  .card p { margin: 8px 0 0; font-size: 13.5px; color: var(--muted); flex: 1; }
+  .tag {
+    align-self: flex-start; font-size: 11px; font-weight: 700; letter-spacing: .08em;
+    color: var(--brand); text-transform: uppercase; margin: 0 0 6px;
+  }
+  .btn {
+    display: inline-block; margin-top: 16px; padding: 10px 18px; border-radius: 8px;
+    font-size: 14px; font-weight: 600; text-decoration: none; text-align: center;
+  }
+  .btn-primary { background: var(--brand); color: #fff; }
+  .btn-primary:hover { background: var(--brand-strong); }
+  .btn-ghost { border: 1px solid var(--line); color: var(--ink); }
+  .btn-ghost:hover { border-color: var(--brand); color: var(--brand); }
+
+  /* 다운로드 */
+  .dl {
+    border: 1px solid var(--line); border-radius: 14px; padding: 24px;
+    background: var(--bg-soft);
+  }
+  .dl-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; }
+  .ver { font-size: 24px; font-weight: 800; letter-spacing: -.02em; }
+  .meta { font-size: 13px; color: var(--muted); }
+  .hash {
+    margin: 16px 0 0; padding: 10px 12px; background: #fff;
+    border: 1px solid var(--line); border-radius: 8px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11.5px; color: #4b5563; word-break: break-all;
+  }
+  .hash b { color: var(--ink); font-family: inherit; }
+  ol.steps { margin: 14px 0 0; padding-left: 20px; font-size: 14px; }
+  ol.steps li { margin: 6px 0; }
+  ol.steps code {
+    background: var(--bg-soft); border: 1px solid var(--line); border-radius: 4px;
+    padding: 1px 5px; font-size: 12.5px;
+  }
+  .note { font-size: 13px; color: var(--muted); margin: 12px 0 0; }
+
+  footer { border-top: 1px solid var(--line); }
+  footer .wrap { padding: 22px 24px; font-size: 12.5px; color: var(--muted); }
+
+  @media (max-width: 640px) {
+    h1 { font-size: 25px; }
+    .hero .wrap { padding: 40px 20px 38px; }
+  }
+</style>
 </head>
-<body></body>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">NEXTLAB BUILDER</p>
+    <h1>Figma 디자인을 한화 DS 코드로 —<br>표준·보안이 자동 적용되는 VSCode 확장</h1>
+    <p>사용자 메뉴얼로 사용법을 익히고, VSIX 를 내려받아 5분 안에 설치하세요.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2>문서</h2>
+    <p class="section-desc">설치부터 기능별 사용법까지 — 처음이라면 사용자 메뉴얼부터 보세요.</p>
+    <div class="grid">
+      <article class="card">
+        <p class="tag">사용자 메뉴얼</p>
+        <h3>NEXTLAB Builder 사용자 메뉴얼 v1.0</h3>
+        <p>설치·계정 연동부터 Figma 변환, 인라인 편집, 개발표준 검사까지 화면 캡쳐와 함께 안내합니다.</p>
+        <a class="btn btn-primary" href="manual.html">메뉴얼 열기</a>
+      </article>
+      <article class="card">
+        <p class="tag">소개 자료</p>
+        <h3>NEXTLAB Builder &amp; Studio 소개</h3>
+        <p>Builder(확장)와 Studio(Launchpad)가 무엇을 해결하는지 — 공지·공유용 소개 자료입니다.</p>
+        <a class="btn btn-ghost" href="intro.html">소개 자료 열기</a>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2>다운로드</h2>
+    <p class="section-desc">
+      VSIX 파일 하나로 설치가 끝납니다 — 빌드·명령어 실행이 필요 없습니다.
+    </p>
+    <div class="dl">
+      <div class="dl-top">
+        <span class="ver" id="ver">—</span>
+        <span class="meta" id="meta">버전 정보를 불러오는 중…</span>
+      </div>
+      <a class="btn btn-primary" id="dl-link" href="#" download>VSIX 다운로드</a>
+      <p class="hash"><b>SHA-256</b> <span id="sha">—</span></p>
+
+      <h3 style="margin:24px 0 0;font-size:15px;">설치 방법</h3>
+      <ol class="steps">
+        <li>VSCode 확장 패널 우측 상단 메뉴에서 <b>Install from VSIX</b> 로 내려받은 파일을 설치합니다.</li>
+        <li>에디터를 완전히 재시작합니다 (<code>Cmd+Q</code> 후 다시 실행).</li>
+        <li><code>Cmd+Shift+A</code> 로 패널을 열고, 상단 연동 배지를 눌러 Claude / CodeX 계정을 연동합니다.</li>
+      </ol>
+      <p class="note">
+        Figma 변환은 최초 1회 환경 셋업이 추가로 필요합니다 — 설치 후 명령 팔레트에서
+        <b>NEXTLAB Builder: Figma → Code 환경 셋업</b> 을 실행하세요.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">NEXTLAB Builder · 사내 배포 채널</div>
+</footer>
+
+<script>
+// 버전·해시·크기는 release-manifest.json 에서 읽는다 —
+// 릴리스마다 이 HTML 을 고치지 않아도 최신 정보가 반영되도록.
+(async function () {
+  const set = (id, text) => { document.getElementById(id).textContent = text; };
+  try {
+    const res = await fetch('release-manifest.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('manifest ' + res.status);
+    const latest = (await res.json()).releases[0];
+    if (!latest) throw new Error('no release');
+    const mb = (latest.vsix.bytes / 1048576).toFixed(1);
+    const day = new Date(latest.releasedAt).toLocaleDateString('ko-KR');
+    set('ver', 'v' + latest.version);
+    set('meta', day + ' · ' + mb + ' MB');
+    set('sha', latest.vsix.sha256 || '—');
+    const link = document.getElementById('dl-link');
+    link.href = latest.vsix.path.replace(/^\//, '');
+    link.textContent = 'VSIX 다운로드 (v' + latest.version + ')';
+  } catch (err) {
+    set('meta', '버전 정보를 불러오지 못했습니다 — 잠시 후 새로고침해 주세요.');
+    document.getElementById('dl-link').style.display = 'none';
+  }
+})();
+</script>
+
+</body>
 </html>
