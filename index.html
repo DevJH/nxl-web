@@ -369,7 +369,10 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
   transition:border-color .25s ease,background .25s ease;
 }
 .dl-item:hover{border-color:var(--hair-strong);background:var(--ink-800)}
-.dl-meta b{display:block;font-size:1rem}
+.dl-meta > b{display:block;font-size:1rem}
+/* 무슨 파일이고 어디에 넣는지 한 줄 설명 — 처음 받는 사람 기준 */
+.dl-desc{margin:7px 0 0;font-size:.83rem;line-height:1.6;color:var(--fg-dim);max-width:58ch}
+.dl-desc b{color:var(--fg);font-weight:600}
 .dl-file{font-family:var(--mono);font-size:.74rem;color:var(--fg-faint);margin-top:5px;word-break:break-all}
 .dl-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
 .dl-btn{
@@ -395,8 +398,10 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
 .dl-step{padding:18px 20px;border-radius:var(--r);border:1px dashed var(--hair-strong);background:rgba(255,255,255,.015)}
 .dl-step i{display:block;font-family:var(--mono);font-style:normal;font-size:.66rem;letter-spacing:.14em;
   color:var(--fg-faint);margin-bottom:8px}
-.dl-step b{display:block;font-size:.9rem;font-weight:600}
-.dl-step span{font-size:.79rem;color:var(--fg-faint)}
+.dl-step > b{display:block;font-size:.9rem;font-weight:600}
+.dl-step span{font-size:.79rem;line-height:1.62;color:var(--fg-faint)}
+/* 설명 안에서 실제 메뉴 이름만 또렷하게 */
+.dl-step span b{color:var(--fg-dim);font-weight:600;white-space:nowrap}
 
 /* ── 푸터 ────────────────────────────────────────────────────────── */
 .foot{border-top:1px solid var(--hair);background:var(--ink-850);padding:52px 0 60px}
@@ -997,6 +1002,8 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
         <div class="dl-item">
           <div class="dl-meta">
             <b>확장 설치 파일 (VSIX)</b>
+            <p class="dl-desc">VSCode 확장 프로그램(Visual Studio Code Extension) 파일입니다.
+              내려받은 뒤 에디터의 <b>확장(Extensions)</b> 패널에서 직접 추가해 설치합니다.</p>
             <p class="dl-file" data-vsix-name>nxl-builder-0.3.8.vsix</p>
             <div class="dl-tags">
               <span class="chip chip--accent">VSCode</span><span class="chip">Cursor</span><span class="chip">Antigravity</span>
@@ -1024,7 +1031,7 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
       </div>
 
       <div class="dl-steps">
-        <div class="dl-step"><i>STEP 1</i><b>Install from VSIX</b><span>확장 패널에서 파일 설치 — 빌드·명령어 실행 불필요</span></div>
+        <div class="dl-step"><i>STEP 1</i><b>확장 패널에서 VSIX 설치</b><span>확장(Extensions) 패널 → 우측 상단 <b>···</b> → <b>Install from VSIX…</b> → 내려받은 파일 선택. 빌드·명령어 실행 불필요</span></div>
         <div class="dl-step"><i>STEP 2</i><b>에디터 완전 재시작</b><span>Cmd+Q 후 다시 열기</span></div>
         <div class="dl-step"><i>STEP 3</i><b>AI 연동 로그인</b><span>Cmd+Shift+A → 연동 배지 클릭 → 로그인</span></div>
       </div>
