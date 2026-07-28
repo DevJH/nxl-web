@@ -1,0 +1,11 @@
+# env (E-03)
+.env
+.env.*
+
+# sync-assets 스테이징 — 전 버전 vsix 가 모이는 작업 폴더(수십 MB)라 커밋하지 않는다.
+# 사용자에게 서빙되는 산출물은 저장소 루트(index.html·manual.html·images/·releases/·
+# release-manifest.json)이고 그건 커밋 대상이다 — publish-channel 이 루트에 쓴다.
+public/
+
+# 로컬 도구
+node_modules/
