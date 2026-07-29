@@ -334,7 +334,7 @@ await (async () => {
   <h2>macOS</h2>
   <p class="note" style="margin:0 0 10px">Apple 메뉴 &gt; 이 Mac에 관하여에서 <strong>칩</strong> 항목이 Apple M1~ 이면 Apple Silicon, Intel Core 면 Intel 입니다.</p>
 ${downloadButton('Apple Silicon (M1 이상)', macArmDmg, '')}
-${downloadButton('Intel Mac', macX64Dmg, '설치: dmg 를 열고 앱을 <code>응용 프로그램</code> 으로 끌어놓습니다. 첫 실행은 <strong>우클릭 → 열기 → 열기</strong> 로 해야 합니다.')}
+${downloadButton('Intel Mac', macX64Dmg, '설치: dmg 를 열고 앱을 <code>응용 프로그램</code> 으로 끌어놓습니다. 첫 실행에서 "악성 코드가 없음을 확인할 수 없습니다" 창이 뜨면 <strong>시스템 설정 → 개인정보 보호 및 보안</strong> 아래쪽의 <strong>"그래도 열기"</strong> 를 누르세요 (최초 1회). macOS 15부터는 우클릭 → 열기로는 풀리지 않습니다.')}
 
   <h2>Windows (x64)</h2>
 ${downloadButton('Windows 설치본 내려받기', winExe, '설치: exe 실행 후 SmartScreen 창이 뜨면 <strong>추가 정보 → 실행</strong> 을 누릅니다.')}
