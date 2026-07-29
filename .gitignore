@@ -9,3 +9,6 @@ public/
 
 # 로컬 도구
 node_modules/
+
+# nxl 확장 로컬 실행 이력 — 공개 채널에 올리지 않는다
+.nextlab/
