@@ -22,8 +22,11 @@ const DOWNLOADS = {
      릴리스마다 이 파일을 고치지 않도록. 매니페스트를 못 읽으면 "준비 중" 으로 남는다. */
   'builder-vsix'      : '',
   'builder-manual'    : 'manual.html',
-  'studio-win'        : '',   /* 예: 'downloads/NextLab-Studio-Setup-0.1.0.exe' */
-  'studio-mac'        : '',   /* 예: 'downloads/NextLab-Studio-0.1.0.dmg' */
+  /* Studio 설치본 경로·버전은 studio/version.json 에서 자동으로 채운다 (아래 스크립트 참조) —
+     설치본은 GitHub Release 자산이라 절대 URL 이 들어온다. 못 읽으면 "준비 중" 으로 남는다. */
+  'studio-win'        : '',
+  'studio-mac-arm'    : '',   /* Apple Silicon (M1~) */
+  'studio-mac-intel'  : '',   /* Intel Mac */
   'studio-manual'     : 'studio-manual.html'
 };
 </script>
@@ -511,7 +514,7 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
     <div class="hero-meta">
       <span class="chip chip--accent">Builder v<span data-ver>0.3.8</span> · VSIX</span>
       <span class="chip">VSCode · Cursor · Antigravity</span>
-      <span class="chip chip--accent">Studio v0.1.0</span>
+      <span class="chip chip--accent">Studio v<span data-studio-ver>0.1.0</span></span>
       <span class="chip">Windows · macOS</span>
     </div>
   </div>
@@ -833,7 +836,7 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
         내부망 모델을 연결하면 민감 정보가 외부로 나가지 않고 내부에서 완결됩니다.
       </p>
       <div class="part-badges">
-        <span class="chip chip--accent">Studio v0.1.0</span>
+        <span class="chip chip--accent">Studio v<span data-studio-ver>0.1.0</span></span>
         <span class="chip">Windows · macOS 설치형</span>
         <span class="chip">기획·디자인 · 엔지니어링 트랙 개발 완료</span>
         <span class="chip chip--concept">표준 에이전트 6종 — 컨셉안</span>
@@ -1043,13 +1046,13 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
     <div class="dl-group dl-group--studio" data-reveal>
       <div class="dl-group-h">
         <h3><img class="dl-logo" src="images/logos/studio-lockup.png" alt="NextLab Studio" width="1189" height="143" decoding="async"></h3>
-        <span>데스크톱 앱 · v0.1.0</span>
+        <span>데스크톱 앱 · v<span data-studio-ver>0.1.0</span></span>
       </div>
       <div class="dl-list">
         <div class="dl-item">
           <div class="dl-meta">
             <b>Windows 설치 파일</b>
-            <p class="dl-file">NextLab-Studio-Setup-0.1.0.exe</p>
+            <p class="dl-file" data-studio-file="win">NextLab.Studio.Setup.0.1.0.exe</p>
             <div class="dl-tags"><span class="chip chip--accent">Windows 10 이상</span><span class="chip">x64</span></div>
           </div>
           <a class="dl-btn" data-dl="studio-win" href="#download">
@@ -1059,13 +1062,24 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
         </div>
         <div class="dl-item">
           <div class="dl-meta">
-            <b>macOS 설치 파일</b>
-            <p class="dl-file">NextLab-Studio-0.1.0.dmg</p>
-            <div class="dl-tags"><span class="chip chip--accent">macOS 13 이상</span><span class="chip">Apple Silicon</span></div>
+            <b>macOS 설치 파일 — Apple Silicon</b>
+            <p class="dl-file" data-studio-file="mac-arm64">NextLab.Studio-0.1.0-arm64.dmg</p>
+            <div class="dl-tags"><span class="chip chip--accent">M1 이상</span><span class="chip">arm64</span></div>
           </div>
-          <a class="dl-btn" data-dl="studio-mac" href="#download">
+          <a class="dl-btn" data-dl="studio-mac-arm" href="#download">
             <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5v9m0 0 3.2-3.2M8 10.5 4.8 7.3M2 12.5v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            macOS 내려받기
+            Apple Silicon 내려받기
+          </a>
+        </div>
+        <div class="dl-item">
+          <div class="dl-meta">
+            <b>macOS 설치 파일 — Intel</b>
+            <p class="dl-file" data-studio-file="mac-x64">NextLab.Studio-0.1.0.dmg</p>
+            <div class="dl-tags"><span class="chip chip--accent">Intel Core</span><span class="chip">x64</span></div>
+          </div>
+          <a class="dl-btn" data-dl="studio-mac-intel" href="#download">
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5v9m0 0 3.2-3.2M8 10.5 4.8 7.3M2 12.5v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Intel Mac 내려받기
           </a>
         </div>
         <div class="dl-item">
@@ -1105,7 +1119,7 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
       </div>
     </div>
     <div class="foot-bar">
-      <span>NEXTLAB · Builder v<span data-ver>0.3.8</span> · Studio v0.1.0</span>
+      <span>NEXTLAB · Builder v<span data-ver>0.3.8</span> · Studio v<span data-studio-ver>0.1.0</span></span>
       <span>사내 전용 — 외부 공유 금지 · 2026</span>
     </div>
   </div>
@@ -1129,7 +1143,30 @@ function applyLatestRelease(){
     .catch(function(){ /* 매니페스트 없음 — 정적 표기 유지 */ });
 }
 
-applyLatestRelease().then(function(){
+/* Studio 설치본 링크를 studio/version.json 에서 채운다 — 설치본은 GitHub Release
+   자산(절대 URL)이고, 릴리스마다 이 HTML 을 고치지 않도록 메타에서 읽는다. */
+function applyStudioRelease(){
+  return fetch('studio/version.json', { cache: 'no-store' })
+    .then(function(r){ if (!r.ok) throw new Error('studio meta ' + r.status); return r.json(); })
+    .then(function(m){
+      var p = m.platforms || {};
+      var map = { 'studio-win': p['win'], 'studio-mac-arm': p['mac-arm64'], 'studio-mac-intel': p['mac-x64'] };
+      Object.keys(map).forEach(function(key){
+        if (map[key] && map[key].url) DOWNLOADS[key] = map[key].url;
+      });
+      var files = { 'win': p['win'], 'mac-arm64': p['mac-arm64'], 'mac-x64': p['mac-x64'] };
+      document.querySelectorAll('[data-studio-file]').forEach(function(el){
+        var f = files[el.getAttribute('data-studio-file')];
+        if (f && f.name) el.textContent = f.name;
+      });
+      if (m.version) {
+        document.querySelectorAll('[data-studio-ver]').forEach(function(el){ el.textContent = m.version; });
+      }
+    })
+    .catch(function(){ /* 메타 없음 — 정적 표기 유지, 버튼은 "준비 중" */ });
+}
+
+Promise.all([applyLatestRelease(), applyStudioRelease()]).then(function(){
   /* 배포 링크 연결 — DOWNLOADS 가 비어 있으면 "준비 중" 상태 */
   document.querySelectorAll('[data-dl]').forEach(function(a){
     var url = DOWNLOADS[a.getAttribute('data-dl')];
