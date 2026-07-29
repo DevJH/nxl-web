@@ -8,9 +8,7 @@
 <meta name="description" content="Figma → Code 를 중심으로 한 NEXTLAB Builder 사용 설명서. MCP 연결부터 산출물 적용, 옵션·설정까지.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<!-- 파비콘 — 워드마크가 아니라 심볼만 쓴다. 243x40 워드마크는 16px 에서 뭉개진다. -->
-<link rel="icon" href="favicon.ico" sizes="any">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111111'/%3E%3Cpath d='M9 24V8h3.4l7.2 10.4V8H23v16h-3.4L12.4 13.6V24H9z' fill='%23EA5504'/%3E%3C/svg%3E">
 
 <style>
 :root{
@@ -42,10 +40,9 @@
 }
 
 *,*::before,*::after{box-sizing:border-box}
-/* overflow-x 는 body 에만 걸면 뷰포트 스크롤을 못 막는다 — html 에도 함께 건다 */
-html{scroll-behavior:smooth;overflow-x:hidden}
+html{scroll-behavior:smooth}
 body{
-  margin:0;background:var(--paper);color:var(--ink);overflow-x:hidden;
+  margin:0;background:var(--paper);color:var(--ink);
   font-family:var(--sans);font-size:16px;line-height:1.78;
   -webkit-font-smoothing:antialiased;
   word-break:keep-all;overflow-wrap:break-word;
@@ -64,9 +61,9 @@ ul,ol{margin:0;padding:0;list-style:none}
   position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;
   border-right:1px solid var(--line);padding:26px 20px 40px;background:var(--paper);
 }
-.toc-brand{display:block;text-decoration:none;margin-bottom:8px}
-/* 제품 락업 — 배경을 투명하게 뺀 PNG. 사이드바 폭에 맞춰 줄인다 */
-.toc-logo{width:100%;max-width:186px;height:auto;display:block}
+.toc-brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink);margin-bottom:6px}
+.toc-brand svg{width:24px;height:24px;flex:none}
+.toc-brand b{font-size:.94rem;letter-spacing:-.02em}
 .toc-ver{font-family:var(--mono);font-size:.68rem;color:var(--ink-4);letter-spacing:.06em;margin-bottom:22px}
 .toc nav{display:grid;gap:2px}
 .toc-sec{
@@ -251,9 +248,10 @@ td .d{display:block;color:var(--ink-3);font-size:.82rem;margin-top:2px}
 <!-- ══ 목차 ══════════════════════════════════════════════════ -->
 <aside class="toc">
   <a class="toc-brand" href="#top">
-    <img class="toc-logo" src="images/logos/builder-lockup-onlight.png" alt="NEXTLAB Builder" width="1204" height="131" decoding="async">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#15171C"/><path d="M9 24V8h3.4l7.2 10.4V8H23v16h-3.4L12.4 13.6V24H9z" fill="#EA5504"/></svg>
+    <b>NEXTLAB Builder</b>
   </a>
-  <p class="toc-ver">사용자 메뉴얼 v1.0 · 확장 v0.3.8</p>
+  <p class="toc-ver">사용자 메뉴얼 v1.0 · 확장 v0.3.5</p>
 
   <nav id="toc">
     <p class="toc-sec">시작</p>
@@ -300,7 +298,7 @@ td .d{display:block;color:var(--ink-3);font-size:.82rem;margin-top:2px}
     설정과 옵션은 6장에 모아 두었습니다 — 처음에는 읽지 않아도 됩니다.
   </p>
   <div class="cover-meta">
-    <span class="chip chip--brand">확장 v0.3.8</span>
+    <span class="chip chip--brand">확장 v0.3.5</span>
     <span class="chip">VSCode · Cursor · Antigravity</span>
     <span class="chip">Claude · CodeX</span>
     <span class="chip">MUI · DS2 · DS3</span>
@@ -1094,7 +1092,7 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
 </section>
 
 <footer class="foot">
-  <span>NEXTLAB Builder 사용자 메뉴얼 v1.0 · 확장 v0.3.8</span>
+  <span>NEXTLAB Builder 사용자 메뉴얼 v1.0 · 확장 v0.3.5</span>
   <span>사내 전용 — 외부 공유 금지 · 2026</span>
 </footer>
 
