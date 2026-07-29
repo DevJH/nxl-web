@@ -407,6 +407,12 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
 .dl-step span{font-size:.79rem;line-height:1.62;color:var(--fg-faint)}
 /* 설명 안에서 실제 메뉴 이름만 또렷하게 */
 .dl-step span b{color:var(--fg-dim);font-weight:600;white-space:nowrap}
+/* 서명 전까지만 필요한 단계임을 배지로 — 아래 dl-foot-note 가 이유를 설명한다 */
+.dl-step > b .dl-tmp{margin-left:7px;padding:2px 7px;border-radius:999px;font-family:var(--mono);
+  font-style:normal;font-size:.6rem;letter-spacing:.08em;vertical-align:middle;
+  color:var(--brand);border:1px solid rgba(234,85,4,.42);background:rgba(234,85,4,.1)}
+.dl-foot-note{margin-top:14px;font-size:.79rem;line-height:1.62;color:var(--fg-faint)}
+.dl-foot-note b{color:var(--fg-dim);font-weight:600}
 
 /* ── 푸터 ────────────────────────────────────────────────────────── */
 .foot{border-top:1px solid var(--hair);background:var(--ink-850);padding:52px 0 60px}
@@ -1091,6 +1097,15 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
           <a class="dl-btn" data-dl="studio-manual" data-newtab href="#download">메뉴얼 보기</a>
         </div>
       </div>
+
+      <div class="dl-steps dl-steps--studio">
+        <div class="dl-step"><i>STEP 1</i><b>설치</b><span>macOS 는 dmg 를 열어 앱을 <b>응용 프로그램</b> 으로 끌어놓고, Windows 는 exe 를 실행합니다</span></div>
+        <div class="dl-step"><i>STEP 2</i><b>첫 실행 허용 <em class="dl-tmp">임시</em></b><span>macOS: 차단 창을 닫고 <b>시스템 설정 → 개인정보 보호 및 보안</b> 아래쪽 <b>“그래도 열기”</b><br>Windows: SmartScreen 파란 창 → <b>추가 정보 → 실행</b></span></div>
+        <div class="dl-step"><i>STEP 3</i><b>AI 계정 연동</b><span>표지의 <b>시작하기</b> → 개인 Claude 계정 연결 후 바로 사용</span></div>
+      </div>
+      <p class="dl-foot-note">
+        STEP 2 는 <b>아직 OS 인증서 서명이 적용되지 않아 생기는 임시 절차</b>입니다 — 정식 서명이 적용되면 사라지며, 기기당 최초 1회만 필요합니다.
+      </p>
     </div>
   </div>
 </section>
