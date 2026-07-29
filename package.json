@@ -2,10 +2,11 @@
   "name": "nxl-web",
   "version": "0.1.0",
   "private": true,
-  "description": "NEXTLAB Builder 배포 채널 — 정적 사이트(사용자메뉴얼·소개자료·VSIX) + 자산 동기화 스크립트",
+  "description": "NEXTLAB 배포 채널 — 정적 사이트(사용자메뉴얼·소개자료·VSIX) + Studio 설치본·업데이트 채널(studio/) + 자산 동기화 스크립트",
   "scripts": {
     "sync-assets": "node scripts/sync-assets.mjs",
     "publish-channel": "node scripts/publish-channel.mjs",
+    "publish-studio": "node scripts/publish-studio.mjs",
     "release": "node scripts/sync-assets.mjs && node scripts/publish-channel.mjs"
   }
 }

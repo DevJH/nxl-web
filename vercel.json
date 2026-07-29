@@ -6,6 +6,12 @@
       "headers": [
         { "key": "Cache-Control", "value": "no-store, must-revalidate" }
       ]
+    },
+    {
+      "source": "/studio/(latest.yml|latest-mac.yml|version.json)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store, must-revalidate" }
+      ]
     }
   ]
 }
