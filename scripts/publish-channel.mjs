@@ -92,8 +92,10 @@ if (copied === 0) {
 // 저장소가 불필요하게 무거워진다.
 // nextlab-landing.html 이 채널 메인(index.html)이다 — 소개+다운로드가 이미 한 페이지라
 // 별도 인덱스를 두지 않는다.
+// stamp: 메뉴얼에 박힌 "<라벨> v0.0.0" 표기를 릴리스 버전으로 맞춘다(아래 stampVersion).
+// index.html 은 data-ver 를 매니페스트에서 런타임에 채우므로 대상이 아니다.
 const DOC_PAGES = [
-  { src: 'nextlab-builder-사용자메뉴얼-v1.0.html', dest: 'manual.html' },
+  { src: 'nextlab-builder-사용자메뉴얼-v1.0.html', dest: 'manual.html', stamp: '확장' },
   { src: 'nextlab-landing.html', dest: 'index.html' },
 ];
 // 원본 docs 위치 — sync-assets 와 같은 규칙(위치 추측 금지, env 우선)
@@ -105,18 +107,65 @@ const DOCS_SRC = (() => {
   }
   return path.resolve(ROOT, '../docs');
 })();
+/**
+ * 메뉴얼에 박힌 버전 표기를 실제 릴리스 버전으로 맞춘다.
+ *
+ * 메뉴얼은 index.html 과 달리 매니페스트를 런타임에 읽지 않는다 — 표지·목차·푸터에
+ * 숫자가 그대로 박혀 있어, 손으로 안 고치면 릴리스마다 조용히 어긋난다.
+ * (실제로 Builder 는 0.3.5 에, Studio 는 0.1.0 에 멈춰 있었다.)
+ *
+ * 문구가 아니라 "v" 뒤 숫자만 바꾼다 — 라벨(확장/앱)까지 스크립트가 정하면
+ * 메뉴얼 문장을 고칠 때마다 여기도 따라 고쳐야 한다.
+ * 메뉴얼 문서 버전(사용자 메뉴얼 v1.0)은 제품 버전과 별개라 건드리지 않는다.
+ */
+function stampVersion(html, label, version) {
+  const re = new RegExp(`(${label} v)\\d+\\.\\d+\\.\\d+`, 'g');
+  const hits = html.match(re);
+  return { html: html.replace(re, `$1${version}`), hits: hits ? hits.length : 0 };
+}
+
 const referenced = new Set();
 let pages = 0;
-for (const { src, dest } of DOC_PAGES) {
+for (const { src, dest, stamp } of DOC_PAGES) {
   const abs = path.join(DOCS_SRC, src);
   if (!fs.existsSync(abs)) {
     console.warn(`[publish-channel] 문서 없음(건너뜀): ${abs}`);
     continue;
   }
-  const html = fs.readFileSync(abs, 'utf8');
+  let html = fs.readFileSync(abs, 'utf8');
+  if (stamp) {
+    const r = stampVersion(html, stamp, latest);
+    html = r.html;
+    if (r.hits === 0) {
+      // 표기가 하나도 없으면 메뉴얼 쪽 문구가 바뀐 것이다 — 조용히 넘기면
+      // 다시 버전이 굳는다.
+      console.warn(`[publish-channel] ${dest}: "${stamp} v0.0.0" 표기를 못 찾아 버전을 못 박았습니다`);
+    } else {
+      console.log(`[publish-channel] ${dest}: ${stamp} 버전 ${r.hits}곳 → v${latest}`);
+    }
+  }
   for (const m of html.matchAll(/(?:src|href)="(images\/[^"]+)"/g)) referenced.add(m[1]);
   fs.writeFileSync(path.join(CHANNEL_DIR, dest), html, 'utf8');
   pages++;
+}
+
+// Studio 메뉴얼은 업스트림 docs 가 아니라 이 저장소에서 관리한다 — 복사 대상이 아니라
+// 제자리에서 고친다. 버전 출처도 매니페스트가 아니라 studio/version.json 이다
+// (설치본이 GitHub Release 자산이라 릴리스 파이프라인이 다르다).
+const STUDIO_META = path.join(CHANNEL_DIR, 'studio', 'version.json');
+const STUDIO_MANUAL = path.join(CHANNEL_DIR, 'studio-manual.html');
+if (fs.existsSync(STUDIO_META) && fs.existsSync(STUDIO_MANUAL)) {
+  const studioVer = JSON.parse(fs.readFileSync(STUDIO_META, 'utf8')).version;
+  if (studioVer) {
+    const before = fs.readFileSync(STUDIO_MANUAL, 'utf8');
+    const r = stampVersion(before, '앱', studioVer);
+    if (r.hits === 0) {
+      console.warn('[publish-channel] studio-manual.html: "앱 v0.0.0" 표기를 못 찾아 버전을 못 박았습니다');
+    } else if (r.html !== before) {
+      fs.writeFileSync(STUDIO_MANUAL, r.html, 'utf8');
+      console.log(`[publish-channel] studio-manual.html: 앱 버전 ${r.hits}곳 → v${studioVer}`);
+    }
+  }
 }
 let imgs = 0;
 let missingImgs = 0;
