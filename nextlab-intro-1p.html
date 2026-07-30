@@ -75,12 +75,14 @@ h1 .hl{color:var(--brand-hi)}
 .sec-h p{font-size:9px;color:var(--fg-faint);margin-left:auto;text-align:right}
 
 /* 캡쳐 — 결과물만 잘라 쓴 것. 프레임을 얇게 둘러 실물임을 보인다. */
-.shots{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;align-items:start}
-.shot{border:1px solid var(--hair-2);border-radius:8px;overflow:hidden;background:var(--ink-800)}
-/* 콘텐츠 세로 길이가 캡쳐마다 다르다(문서 1:1 · 렌더결과 1.15:1 · 폰화면 1:2).
-   한 값으로 맞추면 어딘가엔 여백이 남으므로 타일별로 높이를 준다. */
-.shot img{width:100%;height:455px;object-fit:cover;object-position:left top;display:block}
-
+/* 결과물 3장 — 각 캡쳐를 자기 비율대로 보여준다(잘라내지 않는다).
+   비율이 서로 달라(0.52 / 0.55 / 0.81) 높이가 조금씩 다르지만,
+   캡션을 아래로 밀어 밑변을 맞춘다. */
+.shots{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;align-items:stretch}
+.shot{border:1px solid var(--hair-2);border-radius:8px;overflow:hidden;background:var(--ink-800);
+  display:flex;flex-direction:column}
+.shot img{width:100%;height:auto;display:block}
+.shot figcaption{margin-top:auto}
 .shot figcaption{padding:5px 8px 6px;font-size:8px;line-height:1.4;color:var(--fg-dim);border-top:1px solid var(--hair)}
 .shot figcaption b{color:var(--fg);display:block;font-size:8.6px;margin-bottom:1px}
 
