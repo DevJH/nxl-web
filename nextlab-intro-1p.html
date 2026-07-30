@@ -75,18 +75,12 @@ h1 .hl{color:var(--brand-hi)}
 .sec-h p{font-size:9px;color:var(--fg-faint);margin-left:auto;text-align:right}
 
 /* 캡쳐 — 결과물만 잘라 쓴 것. 프레임을 얇게 둘러 실물임을 보인다. */
-/* 가로 흐름도(User Flow)는 넓은 타일, 세로형 둘은 오른쪽에 쌓는다 —
-   같은 크기 3열로 두면 가로 흐름이 뭉개지거나 잘린다. */
-/* 결과물 3장 — 같은 크기로 나란히. 각 캡쳐를 타일 비율(236x300)에 맞게
-   미리 잘라 두었으므로 cover 로 채워도 여백이 생기지 않는다. */
 .shots{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;align-items:start}
 .shot{border:1px solid var(--hair-2);border-radius:8px;overflow:hidden;background:var(--ink-800)}
-/* 캡쳐는 미리 같은 세로비(0.62)로 잘라 두었다. contain 으로 두어 좌우가 잘리지 않게 한다 —
-   cover 로 채우면 폰 목업의 좌우 글자가 잘려 무슨 화면인지 알 수 없게 된다. */
-/* 고정 높이 + cover — 캡쳐 비율이 서로 달라도 타일은 같은 크기로 꽉 찬다.
-   넘치는 부분(흐름도 오른쪽 · 폰 화면 아래)은 잘린다 — 여백을 남기지 않는 게 우선. */
-.shot img{width:100%;height:415px;object-fit:cover;object-position:left top;display:block}
-/* 세로로 긴 폰 목업은 잘라내면 맥락이 사라진다 — 흰 여백 위에 통째로 앉힌다 */
+/* 콘텐츠 세로 길이가 캡쳐마다 다르다(문서 1:1 · 렌더결과 1.15:1 · 폰화면 1:2).
+   한 값으로 맞추면 어딘가엔 여백이 남으므로 타일별로 높이를 준다. */
+.shot img{width:100%;height:455px;object-fit:cover;object-position:left top;display:block}
+
 .shot figcaption{padding:5px 8px 6px;font-size:8px;line-height:1.4;color:var(--fg-dim);border-top:1px solid var(--hair)}
 .shot figcaption b{color:var(--fg);display:block;font-size:8.6px;margin-bottom:1px}
 
@@ -190,15 +184,15 @@ h1 .hl{color:var(--brand-hi)}
       <h2>만들어진 화면 — 목업이 아니라 동작하는 실물</h2>
     </div>
     <div class="shots">
-      <figure class="shot">
-        <img src="images/intro1p/studio-userflow.png" alt="Studio User Flow — 화면 노드와 정상·오류 경로를 배치한 흐름도">
-        <figcaption><b>Studio · User Flow</b>정상(초록) · 오류(빨강) 경로 자동 배치</figcaption>
+      <figure class="shot shot--spec">
+        <img src="images/intro1p/studio-spec.png" alt="Studio Talk to Spec — 아이디어에서 도출된 PRD 문서">
+        <figcaption><b>Studio · Talk to Spec</b>아이디어 대화로 도출된 PRD · 기능명세</figcaption>
       </figure>
-      <figure class="shot">
+      <figure class="shot shot--build">
         <img src="images/intro1p/builder-verified.png" alt="Builder 검증 루프 통과 후 렌더된 결재 이력 화면">
         <figcaption><b>Builder · Figma → Code</b>검증 루프 통과(시각 97) 후 렌더된 화면</figcaption>
       </figure>
-      <figure class="shot shot--tall">
+      <figure class="shot shot--design">
         <img src="images/intro1p/studio-design.png" alt="Studio Talk to Design 으로 만든 연금 계산 결과 화면">
         <figcaption><b>Studio · Talk to Design</b>대화로 만든 실물 React 화면</figcaption>
       </figure>
