@@ -288,8 +288,14 @@ ul{margin:0;padding:0;list-style:none}
 .step p{font-size:.87rem;color:var(--fg-dim)}
 /* 세로로 긴 패널 캡쳐 — 세 칸의 높이를 맞춰 설명 줄이 나란히 오게 한다 */
 .flow--portrait .frame img{aspect-ratio:5/9;object-fit:cover;object-position:top center}
-/* 4단계 파이프라인 — 화면 캡쳐가 읽히도록 2×2 로 크게 배치한다 */
+/* 4단계 파이프라인 — 화면 캡쳐가 읽히도록 2열 + 전폭 카드를 섞어 배치한다 */
 .flow--4{grid-template-columns:repeat(2,1fr);gap:26px 20px}
+.step--wide{grid-column:1/-1}
+/* STEP 1 — 질문지·PRD 두 장면을 나란히 (과정 → 산출물) */
+.step-duo{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.step-duo .fcap{padding:9px 14px;font-family:var(--mono);font-size:.67rem;letter-spacing:.07em;
+  color:var(--fg-faint);border-top:1px solid var(--hair)}
+@media (max-width:880px){ .step-duo{grid-template-columns:1fr} }
 
 /* 원본 ↔ 생성 */
 .compare{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
@@ -894,9 +900,18 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
         <p>네 기능의 묶음이 아니라 하나의 연결된 파이프라인입니다. 아이디어 → PRD·기능명세 → 화면 흐름도 → 실물 화면 → 클릭해 보는 프로토타입.</p>
       </div>
       <div class="flow flow--4">
-        <article class="step" data-reveal>
+        <article class="step step--wide" data-reveal>
           <p class="step-n">STEP 1 — Talk to Spec</p>
-          <figure class="frame"><img src="images/launchpad/01_spec.png" alt="Talk to Spec — 아이디어 대화와 도출되는 PRD 화면" loading="lazy" decoding="async"></figure>
+          <div class="step-duo">
+            <figure class="frame" style="margin:0">
+              <img src="images/launchpad/00_questions.png" alt="Talk to Spec 질문 단계 — 객관식 질문지에 답하며 요건을 채우는 화면" loading="lazy" decoding="async">
+              <figcaption class="fcap">① 질문지 — 보기 선택 · 직접 입력 · 건너뛰기로 요건 채우기</figcaption>
+            </figure>
+            <figure class="frame" style="margin:0">
+              <img src="images/launchpad/01_spec.png" alt="Talk to Spec — 답변으로 도출된 PRD 를 검토·수정하는 화면" loading="lazy" decoding="async">
+              <figcaption class="fcap">② PRD — 답변을 근거로 도출된 문서를 검토·수정</figcaption>
+            </figure>
+          </div>
           <h4>기획 양식을 몰라도 됩니다</h4>
           <p>아이디어를 입력하면 <b>객관식 질문지</b>가 빠진 요건을 채웁니다 — 보기 선택·직접 입력·건너뛰기 모두 가능하고, 답할수록 기획 서술이 실시간으로 구체화됩니다. 답변을 근거로 PRD 와 기능명세(우선순위·인수조건)가 도출되며, 현업 요구사항 문서를 올려 가져올 수도 있습니다.</p>
         </article>
@@ -912,7 +927,7 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
           <h4>목업이 아니라 동작하는 화면</h4>
           <p>내장 캔버스에서 사내 디자인 킷(MUI 관리자 · DS 2.0 운영/모바일 · DS 3.0 영업)으로 실물 화면이 렌더됩니다. 요소 선택·드래그 재배치·텍스트 수정은 물론 <b>버튼·카드·이미지 요소 추가</b>와 <b>Talk to Image 그래픽 삽입</b>까지 캔버스에서 직접 — 저장하면 이후 AI 수정이 그 위에서 이어집니다.</p>
         </article>
-        <article class="step" data-reveal>
+        <article class="step step--wide" data-reveal>
           <p class="step-n">STEP 4 — Prototype</p>
           <figure class="frame"><img src="images/launchpad/04_prototype.png" alt="Prototype — 테스트 케이스별 더미 데이터로 화면 흐름을 클릭해 체험하는 화면" loading="lazy" decoding="async"></figure>
           <h4>개발 전에 서비스를 미리 써봅니다</h4>
