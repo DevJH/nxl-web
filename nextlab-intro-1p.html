@@ -53,7 +53,7 @@ h1 .hl{color:var(--brand-hi)}
 .qr span{display:block;font-family:var(--mono);font-size:6.6px;color:var(--fg-faint);letter-spacing:.02em}
 
 /* ── 두 제품 ── */
-.duo{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:16px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:14px}
 .card{padding:13px 14px 12px;border-radius:10px;background:var(--ink-850);border:1px solid var(--hair);border-top:2px solid var(--brand)}
 .card--s{border-top-color:var(--studio)}
 .card .kind{font-family:var(--mono);font-size:7.2px;letter-spacing:.13em;color:var(--fg-faint);text-transform:uppercase}
@@ -66,7 +66,7 @@ h1 .hl{color:var(--brand-hi)}
 .card li b{color:var(--fg)}
 
 /* ── 섹션 ── */
-.sec{margin-top:15px}
+.sec{margin-top:13px}
 .sec-h{display:flex;align-items:baseline;gap:9px;margin-bottom:8px}
 .tag{font-family:var(--mono);font-size:7.4px;letter-spacing:.16em;text-transform:uppercase;padding:2.5px 7px;border-radius:999px;white-space:nowrap}
 .tag--b{color:var(--brand-hi);border:1px solid rgba(255,122,31,.42)}
@@ -75,11 +75,15 @@ h1 .hl{color:var(--brand-hi)}
 .sec-h p{font-size:9px;color:var(--fg-faint);margin-left:auto;text-align:right}
 
 /* 캡쳐 — 결과물만 잘라 쓴 것. 프레임을 얇게 둘러 실물임을 보인다. */
-.shots{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;align-items:start}
+/* 세로형 2장은 위 한 줄, 가로로 긴 User Flow 는 아래 한 줄 통째로 —
+   흐름도를 세로 타일에 넣으면 노드가 뭉개져 읽히지 않는다. */
+.shots{display:grid;grid-template-columns:1fr 1fr;gap:9px;align-items:start}
+.shot--wide{grid-column:1/-1}
+.shot--wide img{height:158px;object-fit:cover;object-position:left top}
 .shot{border:1px solid var(--hair-2);border-radius:8px;overflow:hidden;background:var(--ink-800)}
 /* 캡쳐는 미리 같은 세로비(0.62)로 잘라 두었다. contain 으로 두어 좌우가 잘리지 않게 한다 —
    cover 로 채우면 폰 목업의 좌우 글자가 잘려 무슨 화면인지 알 수 없게 된다. */
-.shot img{width:100%;aspect-ratio:.6;object-fit:contain;object-position:top center;background:#0E1115}
+.shot img{width:100%;height:196px;object-fit:cover;object-position:top center;background:#0E1115}
 /* 세로로 긴 폰 목업은 잘라내면 맥락이 사라진다 — 흰 여백 위에 통째로 앉힌다 */
 .shot figcaption{padding:5px 8px 6px;font-size:8px;line-height:1.4;color:var(--fg-dim);border-top:1px solid var(--hair)}
 .shot figcaption b{color:var(--fg);display:block;font-size:8.6px;margin-bottom:1px}
@@ -192,9 +196,9 @@ h1 .hl{color:var(--brand-hi)}
         <img src="images/intro1p/studio-design.png" alt="Studio Talk to Design 으로 만든 연금 계산 결과 화면">
         <figcaption><b>Studio · Talk to Design</b>대화로 만든 실물 React 화면</figcaption>
       </figure>
-      <figure class="shot shot--tall">
-        <img src="images/intro1p/studio-prototype.png" alt="Studio 프로토타입에서 클릭해 진행하는 서비스 화면">
-        <figcaption><b>Studio · Prototype</b>더미 데이터로 직접 클릭해 검증</figcaption>
+      <figure class="shot shot--wide">
+        <img src="images/intro1p/studio-userflow.png" alt="Studio User Flow — 화면 노드와 정상·오류 경로를 배치한 흐름도">
+        <figcaption><b>Studio · User Flow</b>화면 간 흐름을 자동 배치 — 정상(초록) · 오류·예외(빨강) 경로를 색으로 구분</figcaption>
       </figure>
     </div>
   </section>
