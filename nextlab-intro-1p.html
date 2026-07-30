@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>NEXTLAB Builder &amp; Studio — 소개 자료 (1p)</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+/* 이메일 첨부용 A4 1장 요약 — 상세본은 nextlab-intro.html.
+   높이가 고정이므로(A4) 요소를 늘리면 넘친다. 렌더: node scripts/render-intro.mjs
+   캡쳐는 전체 창이 아니라 "결과물"만 잘라 쓴다 — 축소하면 UI 잔글씨가 뭉개지기 때문. */
+@page{size:A4;margin:0}
+:root{
+  --ink-950:#08090B; --ink-900:#0C0E11; --ink-850:#12151A; --ink-800:#171B21;
+  --fg:#F2F4F6; --fg-dim:#A9B0BA; --fg-faint:#6B7280;
+  --hair:rgba(255,255,255,.09); --hair-2:rgba(255,255,255,.17);
+  --brand:#EA5504; --brand-hi:#FF7A1F;
+  --studio:#7C6BFF; --studio-hi:#9B8DFF;
+  --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--ink-950);color:var(--fg);
+  font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  -webkit-font-smoothing:antialiased;word-break:keep-all;
+}
+img{display:block;max-width:100%}
+ul{list-style:none}
+
+/* A4 = 794x1123 @96dpi. 고정 캔버스로 두고 내용을 여기 맞춘다. */
+.sheet{
+  width:794px;height:1123px;margin:0 auto;padding:30px 34px 26px;
+  display:flex;flex-direction:column;
+  background:
+    radial-gradient(680px 300px at 88% -8%, rgba(124,107,255,.16), transparent 60%),
+    radial-gradient(600px 280px at 4% -6%, rgba(234,85,4,.20), transparent 62%),
+    var(--ink-950);
+}
+
+/* ── 헤더 ── */
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.eyebrow{font-family:var(--mono);font-size:8.5px;letter-spacing:.2em;color:var(--brand-hi);text-transform:uppercase}
+h1{font-size:25px;line-height:1.2;letter-spacing:-.03em;font-weight:800;margin:7px 0 6px}
+h1 .hl{color:var(--brand-hi)}
+.lede{font-size:10.5px;line-height:1.62;color:var(--fg-dim);max-width:56ch}
+.lede b{color:var(--fg)}
+/* QR — 헤더 우측. 메일로 받은 사람이 첫 화면에서 바로 사이트로 넘어가게 둔다. */
+.qr{flex:0 0 auto;text-align:center;width:104px}
+.qr svg{width:78px;height:78px;background:#fff;border-radius:7px;padding:5px;margin:0 auto}
+.qr b{display:block;font-size:8px;line-height:1.35;margin-top:6px;color:var(--fg)}
+.qr span{display:block;font-family:var(--mono);font-size:6.6px;color:var(--fg-faint);letter-spacing:.02em}
+
+/* ── 두 제품 ── */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:16px}
+.card{padding:13px 14px 12px;border-radius:10px;background:var(--ink-850);border:1px solid var(--hair);border-top:2px solid var(--brand)}
+.card--s{border-top-color:var(--studio)}
+.card .kind{font-family:var(--mono);font-size:7.2px;letter-spacing:.13em;color:var(--fg-faint);text-transform:uppercase}
+.card h3{font-size:14px;margin:5px 0 5px;letter-spacing:-.02em}
+.card>p{font-size:9.4px;line-height:1.55;color:var(--fg-dim)}
+.card ul{margin-top:8px;display:grid;gap:4px}
+.card li{font-size:9px;line-height:1.45;color:var(--fg-dim);padding-left:11px;position:relative}
+.card li::before{content:"";position:absolute;left:0;top:.52em;width:4px;height:4px;border-radius:50%;background:var(--brand)}
+.card--s li::before{background:var(--studio-hi)}
+.card li b{color:var(--fg)}
+
+/* ── 섹션 ── */
+.sec{margin-top:15px}
+.sec-h{display:flex;align-items:baseline;gap:9px;margin-bottom:8px}
+.tag{font-family:var(--mono);font-size:7.4px;letter-spacing:.16em;text-transform:uppercase;padding:2.5px 7px;border-radius:999px;white-space:nowrap}
+.tag--b{color:var(--brand-hi);border:1px solid rgba(255,122,31,.42)}
+.tag--s{color:var(--studio-hi);border:1px solid rgba(155,141,255,.42)}
+.sec-h h2{font-size:12.5px;letter-spacing:-.02em;font-weight:700}
+.sec-h p{font-size:9px;color:var(--fg-faint);margin-left:auto;text-align:right}
+
+/* 캡쳐 — 결과물만 잘라 쓴 것. 프레임을 얇게 둘러 실물임을 보인다. */
+.shots{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;align-items:start}
+.shot{border:1px solid var(--hair-2);border-radius:8px;overflow:hidden;background:var(--ink-800)}
+/* 캡쳐는 미리 같은 세로비(0.62)로 잘라 두었다. contain 으로 두어 좌우가 잘리지 않게 한다 —
+   cover 로 채우면 폰 목업의 좌우 글자가 잘려 무슨 화면인지 알 수 없게 된다. */
+.shot img{width:100%;aspect-ratio:.6;object-fit:contain;object-position:top center;background:#0E1115}
+/* 세로로 긴 폰 목업은 잘라내면 맥락이 사라진다 — 흰 여백 위에 통째로 앉힌다 */
+.shot figcaption{padding:5px 8px 6px;font-size:8px;line-height:1.4;color:var(--fg-dim);border-top:1px solid var(--hair)}
+.shot figcaption b{color:var(--fg);display:block;font-size:8.6px;margin-bottom:1px}
+
+/* 파이프라인 */
+.flow{display:flex;align-items:stretch;gap:0;margin-top:10px;border:1px solid var(--hair);border-radius:9px;overflow:hidden}
+.flow div{flex:1;padding:8px 9px;background:var(--ink-850);border-right:1px solid var(--hair)}
+.flow div:last-child{border-right:0}
+.flow .n{font-family:var(--mono);font-size:7px;letter-spacing:.1em;color:var(--studio-hi)}
+.flow b{display:block;font-size:9.4px;margin:2px 0 1px;letter-spacing:-.01em}
+.flow span{font-size:8.2px;line-height:1.4;color:var(--fg-faint)}
+
+/* 표준·검증 행 */
+.rows{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--hair);border:1px solid var(--hair);border-radius:9px;overflow:hidden;margin-top:11px}
+.rows>div{background:var(--ink-850);padding:9px 11px;display:grid;grid-template-columns:64px 1fr;gap:9px;align-items:baseline}
+.rows dt{font-family:var(--mono);font-size:7.4px;letter-spacing:.1em;color:var(--fg-faint)}
+.rows dd{font-size:8.8px;line-height:1.5;color:var(--fg-dim)}
+.rows dd b{color:var(--fg)}
+
+/* 푸터 */
+.foot{margin-top:auto;padding-top:11px;border-top:1px solid var(--hair);display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:7.6px;color:var(--fg-faint);letter-spacing:.05em}
+.foot .u{color:var(--brand-hi)}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header class="top">
+    <div>
+      <p class="eyebrow">한화생명 · AI 개발도구 · NEXT LAB</p>
+      <h1>표준을 아는 AI 로,<br><span class="hl">기획부터 코드까지</span></h1>
+      <p class="lede">
+        <b>NEXTLAB Builder</b> 는 Figma 디자인을 한화 DS 코드로 바꾸는 VSCode 확장,
+        <b>NextLab Studio</b> 는 기획·디자인부터 코드까지 잇는 데스크톱 워크스페이스입니다.
+        어느 AI 를 골라도 한화생명 개발표준이 자동으로 주입됩니다.
+      </p>
+    </div>
+    <div class="qr">
+      <svg viewBox="-2 -2 29 29" role="img" aria-label="nxl-web.vercel.app QR 코드" shape-rendering="crispEdges">
+        <rect x="-2" y="-2" width="29" height="29" fill="#fff"/>
+        <path d="M0 0h7v1h-7zM8 0h3v1h-3zM13 0h4v1h-4zM18 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM9 1h5v1h-5zM18 1h1v1h-1zM24 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM11 2h1v1h-1zM14 2h1v1h-1zM18 2h1v1h-1zM20 2h3v1h-3zM24 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h1v1h-1zM11 3h5v1h-5zM18 3h1v1h-1zM20 3h3v1h-3zM24 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h1v1h-1zM11 4h3v1h-3zM15 4h2v1h-2zM18 4h1v1h-1zM20 4h3v1h-3zM24 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h2v1h-2zM14 5h1v1h-1zM18 5h1v1h-1zM24 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h7v1h-7zM8 7h1v1h-1zM10 7h2v1h-2zM0 8h1v1h-1zM4 8h1v1h-1zM6 8h5v1h-5zM15 8h1v1h-1zM17 8h5v1h-5zM24 8h1v1h-1zM2 9h1v1h-1zM5 9h1v1h-1zM7 9h1v1h-1zM9 9h1v1h-1zM11 9h1v1h-1zM13 9h3v1h-3zM17 9h1v1h-1zM20 9h2v1h-2zM23 9h1v1h-1zM3 10h4v1h-4zM8 10h1v1h-1zM10 10h4v1h-4zM15 10h4v1h-4zM20 10h3v1h-3zM1 11h1v1h-1zM5 11h1v1h-1zM7 11h1v1h-1zM9 11h1v1h-1zM14 11h1v1h-1zM16 11h2v1h-2zM19 11h2v1h-2zM22 11h2v1h-2zM1 12h3v1h-3zM5 12h2v1h-2zM8 12h2v1h-2zM11 12h2v1h-2zM17 12h3v1h-3zM21 12h4v1h-4zM0 13h1v1h-1zM2 13h1v1h-1zM5 13h1v1h-1zM9 13h2v1h-2zM12 13h5v1h-5zM20 13h1v1h-1zM23 13h1v1h-1zM2 14h6v1h-6zM11 14h1v1h-1zM14 14h2v1h-2zM18 14h5v1h-5zM3 15h1v1h-1zM5 15h1v1h-1zM8 15h1v1h-1zM10 15h2v1h-2zM14 15h2v1h-2zM17 15h1v1h-1zM19 15h2v1h-2zM22 15h2v1h-2zM0 16h2v1h-2zM4 16h1v1h-1zM6 16h4v1h-4zM16 16h7v1h-7zM8 17h4v1h-4zM14 17h1v1h-1zM16 17h1v1h-1zM20 17h1v1h-1zM0 18h7v1h-7zM8 18h2v1h-2zM11 18h1v1h-1zM14 18h1v1h-1zM16 18h1v1h-1zM18 18h1v1h-1zM20 18h1v1h-1zM0 19h1v1h-1zM6 19h1v1h-1zM9 19h3v1h-3zM16 19h1v1h-1zM20 19h5v1h-5zM0 20h1v1h-1zM2 20h3v1h-3zM6 20h1v1h-1zM8 20h3v1h-3zM14 20h1v1h-1zM16 20h7v1h-7zM0 21h1v1h-1zM2 21h3v1h-3zM6 21h1v1h-1zM11 21h1v1h-1zM14 21h3v1h-3zM18 21h2v1h-2zM22 21h3v1h-3zM0 22h1v1h-1zM2 22h3v1h-3zM6 22h1v1h-1zM11 22h4v1h-4zM16 22h3v1h-3zM21 22h1v1h-1zM23 22h1v1h-1zM0 23h1v1h-1zM6 23h1v1h-1zM9 23h3v1h-3zM18 23h6v1h-6zM0 24h7v1h-7zM8 24h1v1h-1zM12 24h1v1h-1zM15 24h1v1h-1zM17 24h2v1h-2zM22 24h3v1h-3z" fill="#08090B"/>
+      </svg>
+      <b>자세한 안내 및<br>설치파일 링크</b>
+      <span>nxl-web.vercel.app</span>
+    </div>
+  </header>
+
+  <section class="duo">
+    <article class="card">
+      <p class="kind">VSCode 확장 · 개발 완료</p>
+      <h3>NEXTLAB Builder</h3>
+      <p>쓰던 에디터 안에서 디자인 변환 · AI 코딩 · 표준 검사 · 커밋까지. 서버 구축 없이 확장 하나로 끝납니다.</p>
+      <ul>
+        <li><b>대상</b> — 프론트엔드 개발자 · 수행사</li>
+        <li><b>핵심</b> — Figma → 한화 DS React 코드, 빌드·렌더 검증까지 자동</li>
+        <li><b>환경</b> — VSCode · Cursor · Antigravity, 같은 VSIX 하나</li>
+      </ul>
+    </article>
+    <article class="card card--s">
+      <p class="kind">데스크톱 앱 · 개발 완료</p>
+      <h3>NextLab Studio</h3>
+      <p>아이디어 → 기획 → 화면 흐름 → 실물 UI → 프로토타입을 한 흐름으로 잇고, Figma to Code 까지 품은 워크스페이스입니다.</p>
+      <ul>
+        <li><b>대상</b> — 현업 · 기획자 · 디자이너 · 개발자</li>
+        <li><b>핵심</b> — Launchpad 로 0 to 1 + Builder 와 동일한 Figma to Code</li>
+        <li><b>환경</b> — DS 자산 내장, Figma 없는 외부 SI·오프라인에서도 동작</li>
+      </ul>
+    </article>
+  </section>
+
+  <section class="sec">
+    <div class="sec-h">
+      <span class="tag tag--b">Part 01 · Builder</span>
+      <h2>Figma 링크 하나로, 검증까지 끝난 표준 코드</h2>
+    </div>
+    <div class="rows">
+      <div><dt>Convert</dt><dd><b>Figma → DS React</b> — 색·간격은 실측값 그대로, DS 토큰 자동 매핑</dd></div>
+      <div><dt>Verify</dt><dd><b>검증 루프</b> — 빌드·렌더·시각 채점을 반복해 통과본만 산출</dd></div>
+      <div><dt>Standard</dt><dd><b>표준 자동 주입</b> — Claude·Codex·Gemini 어느 쪽이든 같은 규칙</dd></div>
+      <div><dt>Review</dt><dd><b>리뷰 · 커밋</b> — NXL 리뷰 프로토콜 기반 지적과 메시지 표준화</dd></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-h">
+      <span class="tag tag--s">Part 02 · Studio</span>
+      <h2>아이디어에서 프로토타입까지, 한 파이프라인</h2>
+      <p>앞 단계 산출물이 뒷 단계 입력</p>
+    </div>
+    <div class="flow">
+      <div><p class="n">STEP 1</p><b>Talk to Spec</b><span>객관식 질문지로 PRD·기능명세 도출</span></div>
+      <div><p class="n">STEP 2</p><b>User Flow</b><span>정상·예외 경로를 자동 배치</span></div>
+      <div><p class="n">STEP 3</p><b>Talk to Design</b><span>사내 디자인 킷으로 실물 화면 렌더</span></div>
+      <div><p class="n">STEP 4</p><b>Prototype</b><span>테스트 케이스별로 직접 클릭해 검증</span></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-h">
+      <span class="tag tag--b">결과물</span>
+      <h2>만들어진 화면 — 목업이 아니라 동작하는 실물</h2>
+    </div>
+    <div class="shots">
+      <figure class="shot">
+        <img src="images/intro1p/builder-verified.png" alt="Builder 검증 루프 통과 후 렌더된 결재 이력 화면">
+        <figcaption><b>Builder · Figma → Code</b>검증 루프 통과(시각 97) 후 렌더된 화면</figcaption>
+      </figure>
+      <figure class="shot shot--tall">
+        <img src="images/intro1p/studio-design.png" alt="Studio Talk to Design 으로 만든 연금 계산 결과 화면">
+        <figcaption><b>Studio · Talk to Design</b>대화로 만든 실물 React 화면</figcaption>
+      </figure>
+      <figure class="shot shot--tall">
+        <img src="images/intro1p/studio-prototype.png" alt="Studio 프로토타입에서 클릭해 진행하는 서비스 화면">
+        <figcaption><b>Studio · Prototype</b>더미 데이터로 직접 클릭해 검증</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>NEXTLAB — Builder &amp; Studio · 상세 자료는 <span class="u">nxl-web.vercel.app</span></span>
+    <span>사내 전용 · 외부 공유 금지 · 2026</span>
+  </footer>
+
+</div>
+</body>
+</html>
