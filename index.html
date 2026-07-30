@@ -318,19 +318,6 @@ ul{margin:0;padding:0;list-style:none}
 .frame--crop img{width:100%;height:340px;object-fit:cover;object-position:top center}
 .chips{display:flex;flex-wrap:wrap;align-items:flex-start;gap:7px}
 
-/* 표 */
-.tablewrap{overflow-x:auto;border:1px solid var(--hair);border-radius:var(--r);background:var(--ink-850)}
-table{width:100%;border-collapse:collapse;min-width:640px}
-th,td{text-align:left;padding:16px 20px;border-bottom:1px solid var(--hair);font-size:.88rem;vertical-align:top}
-thead th{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--fg-faint);font-weight:500;background:var(--ink-800)}
-tbody tr:last-child td{border-bottom:0}
-td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--fg-dim)}
-td.gain{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--brand-hi);font-weight:600}
-td.name b{display:block;color:var(--fg)}
-td.name span{font-size:.78rem;color:var(--fg-faint)}
-.footnote{margin-top:14px;font-size:.76rem;color:var(--fg-faint);line-height:1.7}
-
 /* 에디터 */
 .editors{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .editor{display:flex;gap:16px;align-items:center;padding:20px 22px;border-radius:var(--r);
@@ -427,6 +414,13 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
   color:var(--brand);border:1px solid rgba(234,85,4,.42);background:rgba(234,85,4,.1)}
 .dl-foot-note{margin-top:14px;font-size:.79rem;line-height:1.62;color:var(--fg-faint)}
 .dl-foot-note b{color:var(--fg-dim);font-weight:600}
+
+/* ── 유의사항 ────────────────────────────────────────────────────── */
+.notice{border-top:1px solid var(--hair);padding:72px 0 84px;scroll-margin-top:70px}
+.notice-list{display:grid;gap:12px;max-width:78ch}
+.notice-list li{position:relative;padding-left:18px;font-size:.92rem;color:var(--fg-dim);line-height:1.8}
+.notice-list li::before{content:"";position:absolute;left:2px;top:.74em;width:5px;height:5px;border-radius:50%;background:var(--brand)}
+.notice-list li b{color:var(--fg)}
 
 /* ── 푸터 ────────────────────────────────────────────────────────── */
 .foot{border-top:1px solid var(--hair);background:var(--ink-850);padding:52px 0 60px}
@@ -785,41 +779,6 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
           <div class="frame frame--crop"><img src="images/sec2-block-key.png" alt=".env 첨부 시 AWS 키를 감지해 전송을 중단한 화면" loading="lazy" decoding="async"></div>
         </article>
       </div>
-    </div>
-
-    <!-- 기대효과 표 -->
-    <div class="sec" id="impact">
-      <div class="sec-head" data-reveal>
-        <p class="eyebrow">Impact</p>
-        <h3>복잡한 화면일수록, 더 크게 벌어집니다</h3>
-        <p>생성 시간은 화면 복잡도와 거의 무관합니다. 복잡도에 비례해 늘어나는 것은 수작업 쪽입니다.</p>
-      </div>
-      <div class="tablewrap" data-reveal>
-        <table>
-          <thead>
-            <tr><th>화면 유형</th><th>기존 수작업</th><th>Builder</th><th>화면당 절감</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="name"><b>단순 화면</b><span>폼 · 목록 위주, 상태 단순</span></td>
-              <td class="num">2~4시간</td><td class="num">20~30분</td><td class="gain">약 3시간</td>
-            </tr>
-            <tr>
-              <td class="name"><b>중간 복잡도</b><span>테이블 + 폼 + 로딩·에러·빈 상태</span></td>
-              <td class="num">8~16시간</td><td class="num">1~2시간</td><td class="gain">약 하루 (~85%)</td>
-            </tr>
-            <tr>
-              <td class="name"><b>복잡한 화면</b><span>다중 섹션 · 모달 · 상태 다수</span></td>
-              <td class="num">2~3일</td><td class="num">3~4시간</td><td class="gain">이틀 이상</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="footnote" data-reveal>
-        기준 — 단순: 폼·목록 1~2개 / 중간: 레이아웃 + 테이블·폼 + 상태 3종 / 복잡: 다중 섹션·모달 포함.
-        수작업 시간은 통상적인 퍼블리싱·마크업 공수이고, 절감치는 내부 추정치로 도입 후 실측 데이터로 갱신할 예정입니다.
-        표준 위반 수정·리뷰 반려 감소 효과는 별도입니다.
-      </p>
     </div>
 
     <!-- 에디터 -->
@@ -1192,25 +1151,33 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
   </div>
 </section>
 
+<!-- ══ 유의사항 ════════════════════════════════════════════════════ -->
+<section class="notice" id="notice">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <p class="eyebrow">Notice</p>
+      <h3>유의사항</h3>
+      <p>도입 전에 알아두셔야 할 전제와 범위입니다.</p>
+    </div>
+    <ul class="notice-list" data-reveal>
+      <li><b>사람 검수 전제</b> — AI 특성상 결과가 100% 일정하지 않습니다. 미세한 색·여백은 어긋날 수 있어 사람 검수를 전제로 하며, 자동 보정과 미리보기로 부담을 줄입니다.</li>
+      <li><b>AI 계정과 비용</b> — 각자 AI 계정이 필요하고, 사용량만큼 비용이 발생하며 이력·비용으로 추적합니다.</li>
+      <li><b>적용 범위</b> — Builder 는 프론트엔드(React) 특화 도구로 백엔드·타 프레임워크는 대상이 아닙니다.</li>
+      <li><b>보안·정책</b> — 사내 AI 사용 정책과의 정합성 확인이 필요하며, 민감정보 차단은 내장되어 있으나 보안팀 검토 후 도입을 권장합니다.</li>
+    </ul>
+  </div>
+</section>
+
 <!-- ══ 푸터 ════════════════════════════════════════════════════════ -->
 <footer class="foot">
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <h4>솔직한 한계</h4>
-        <p>
-          AI 특성상 결과가 100% 일정하지 않습니다. 미세한 색·여백은 어긋날 수 있어 사람 검수를 전제로 합니다
-          (자동 보정과 미리보기로 부담을 줄입니다). 각자 AI 계정이 필요하고, 사용량만큼 비용이 발생하며 이력·비용으로 추적합니다.
-          Builder 는 프론트엔드(React) 특화 도구로 백엔드·타 프레임워크는 대상이 아닙니다.
-          사내 AI 사용 정책과의 정합성 확인이 필요하며, 민감정보 차단은 내장되어 있으나 보안팀 검토 후 도입을 권장합니다.
-        </p>
-      </div>
-      <div>
         <h4>바로 가기</h4>
         <ul>
           <li><a href="#builder">NEXTLAB Builder — 기능 · 결과 · 표준</a></li>
           <li><a href="#studio">NextLab Studio — Launchpad · Talk to Image · Figma to Code</a></li>
-          <li><a href="#impact">기대효과와 절감 추정</a></li>
+          <li><a href="#notice">유의사항</a></li>
           <li><a href="#download">설치 파일 · 사용자 메뉴얼</a></li>
         </ul>
       </div>
