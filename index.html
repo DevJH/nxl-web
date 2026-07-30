@@ -417,10 +417,16 @@ ul{margin:0;padding:0;list-style:none}
 
 /* ── 유의사항 ────────────────────────────────────────────────────── */
 .notice{border-top:1px solid var(--hair);padding:72px 0 84px;scroll-margin-top:70px}
-.notice-list{display:grid;gap:12px;max-width:78ch}
-.notice-list li{position:relative;padding-left:18px;font-size:.92rem;color:var(--fg-dim);line-height:1.8}
-.notice-list li::before{content:"";position:absolute;left:2px;top:.74em;width:5px;height:5px;border-radius:50%;background:var(--brand)}
-.notice-list li b{color:var(--fg)}
+.notice-group{margin-top:26px;border:1px solid var(--hair);border-radius:var(--r);background:var(--ink-850);overflow:hidden}
+.notice-group-h{display:flex;align-items:baseline;gap:12px;padding:16px 24px;border-bottom:1px solid var(--hair);background:var(--ink-800)}
+.notice-group-h .no{font-family:var(--mono);font-size:.78rem;color:var(--brand-hi);font-weight:600}
+.notice-group-h b{font-size:.95rem;color:var(--fg)}
+.notice-group-h .en{margin-left:auto;font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-faint);white-space:nowrap}
+.notice-item{padding:20px 24px;border-bottom:1px solid var(--hair)}
+.notice-item:last-child{border-bottom:0}
+.notice-item h4{font-size:.98rem;font-weight:700;line-height:1.4;margin-bottom:7px}
+.notice-item p{max-width:86ch;font-size:.9rem;color:var(--fg-dim);line-height:1.85}
+.notice-ver{display:block;margin-top:10px;font-family:var(--mono);font-size:.76rem;color:var(--fg-faint)}
 
 /* ── 푸터 ────────────────────────────────────────────────────────── */
 .foot{border-top:1px solid var(--hair);background:var(--ink-850);padding:52px 0 60px}
@@ -480,6 +486,8 @@ ul{margin:0;padding:0;list-style:none}
   .wrap,.stage{padding-left:18px;padding-right:18px}
   .row{grid-template-columns:1fr;gap:8px}
   .compare--mobile{grid-template-columns:1fr 1fr}
+  .notice-group-h{flex-wrap:wrap}
+  .notice-group-h .en{margin-left:0;flex-basis:100%}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -1156,15 +1164,67 @@ ul{margin:0;padding:0;list-style:none}
   <div class="wrap">
     <div class="sec-head" data-reveal>
       <p class="eyebrow">Notice</p>
-      <h3>유의사항</h3>
-      <p>도입 전에 알아두셔야 할 전제와 범위입니다.</p>
+      <h3>도구를 받기 전에, 세 가지</h3>
+      <p>한화생명 표준 위에서 동작하지만, 판단과 책임은 사용자에게 남습니다.</p>
     </div>
-    <ul class="notice-list" data-reveal>
-      <li><b>사람 검수 전제</b> — AI 특성상 결과가 100% 일정하지 않습니다. 미세한 색·여백은 어긋날 수 있어 사람 검수를 전제로 하며, 자동 보정과 미리보기로 부담을 줄입니다.</li>
-      <li><b>AI 계정과 비용</b> — 각자 AI 계정이 필요하고, 사용량만큼 비용이 발생하며 이력·비용으로 추적합니다.</li>
-      <li><b>적용 범위</b> — Builder 는 프론트엔드(React) 특화 도구로 백엔드·타 프레임워크는 대상이 아닙니다.</li>
-      <li><b>보안·정책</b> — 사내 AI 사용 정책과의 정합성 확인이 필요하며, 민감정보 차단은 내장되어 있으나 보안팀 검토 후 도입을 권장합니다.</li>
-    </ul>
+
+    <div class="notice-group" data-reveal>
+      <div class="notice-group-h">
+        <span class="no">01</span><b>보안 · 데이터</b><span class="en">Security &amp; Data</span>
+      </div>
+      <div class="notice-item">
+        <h4>민감정보는 입력 대상이 아닙니다</h4>
+        <p>고객 실데이터·주민등록번호·계좌·인증서·API 키는 프롬프트와 첨부 파일에 넣지 않습니다.
+          화면 검증에는 더미 데이터를 사용하십시오. Builder 의 사전 차단(8종 패턴)은 보조 장치이며,
+          탐지 범위를 벗어난 정보에 대한 판단 책임은 사용자에게 있습니다.</p>
+      </div>
+      <div class="notice-item">
+        <h4>외부망 도구입니다</h4>
+        <p>입력한 요구사항·첨부 파일·선택한 코드와 Figma 디자인 데이터는 외부 LLM 서버를 경유합니다.
+          반출 가능 범위 내에서만 사용하십시오.</p>
+      </div>
+    </div>
+
+    <div class="notice-group" data-reveal>
+      <div class="notice-group-h">
+        <span class="no">02</span><b>계정 · 배포</b><span class="en">Account &amp; Distribution</span>
+      </div>
+      <div class="notice-item">
+        <h4>현재는 개인 LLM 구독 계정 연계입니다</h4>
+        <p>실행 계정은 각자의 Claude 개인 구독을 OAuth 로 연결해 사용하며, 토큰은 OS 키체인에 암호화 저장됩니다.
+          과금·감사 경로를 하나로 유지하기 위해 API 키 방식은 의도적으로 지원하지 않습니다.
+          사용량만큼 비용이 발생하며 실행 이력·토큰·비용은 기록됩니다.
+          계정 공유 및 공용 계정 사용은 제공사 약관 위반으로 금지합니다.
+          조직 단위 비즈니스 계정 체계로의 전환은 로드맵에 포함되어 있으며, 전환 시 별도 안내합니다.</p>
+      </div>
+      <div class="notice-item">
+        <h4>설치 파일은 이 페이지에서만 받습니다</h4>
+        <p>사내 배포용 파일로 외부 공유를 금지합니다. 재배포본·구버전은 최신 표준이 반영되지 않으므로 사용하지 않습니다.
+          <span class="notice-ver">현재 버전 — Builder v<span data-ver>0.3.8</span> · Studio v<span data-studio-ver>0.1.0</span></span></p>
+      </div>
+    </div>
+
+    <div class="notice-group" data-reveal>
+      <div class="notice-group-h">
+        <span class="no">03</span><b>품질 · 책임</b><span class="en">Quality &amp; Accountability</span>
+      </div>
+      <div class="notice-item">
+        <h4>결과는 사람이 확정합니다</h4>
+        <p>생성된 코드·기획서·디자인은 초안입니다. AI 특성상 결과가 100% 일정하지 않으므로 커밋·PR 리뷰를 거치고,
+          운영 배포는 기존 승인 절차를 그대로 따릅니다. 자동 검증 통과는 표준 적합성만 보장하며
+          업무 요건 충족을 보장하지 않습니다.</p>
+      </div>
+      <div class="notice-item">
+        <h4>표준 규칙은 개인이 끄지 않습니다</h4>
+        <p>개발표준 21개 모듈과 진단 규칙 18개는 팀 합의로 개정합니다.
+          로컬에서 규칙을 임의 해제하거나 표준 문서를 수정한 상태로 산출물을 제출하지 마십시오.</p>
+      </div>
+      <div class="notice-item">
+        <h4>외부 라이브러리는 기존 심의를 따릅니다</h4>
+        <p>AI 가 제안한 패키지·코드 조각도 사내 오픈소스·보안 심의 대상입니다.
+          라이선스 확인 없이 의존성을 추가하지 마십시오.</p>
+      </div>
+    </div>
   </div>
 </section>
 
