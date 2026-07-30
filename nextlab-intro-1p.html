@@ -29,9 +29,10 @@ body{
 img{display:block;max-width:100%}
 ul{list-style:none}
 
-/* A4 = 794x1123 @96dpi. 고정 캔버스로 두고 내용을 여기 맞춘다. */
+/* A4 = 794x1123 @96dpi. 인쇄 높이는 841.92pt(=1122.56px)라 1123 이면
+   0.44px 넘쳐 2페이지가 된다 — 1122 로 둔다. */
 .sheet{
-  width:794px;height:1123px;margin:0 auto;padding:30px 34px 26px;
+  width:794px;height:1122px;margin:0 auto;padding:30px 34px 26px;
   display:flex;flex-direction:column;
   background:
     radial-gradient(680px 300px at 88% -8%, rgba(124,107,255,.16), transparent 60%),
@@ -53,7 +54,7 @@ h1 .hl{color:var(--brand-hi)}
 .qr span{display:block;font-family:var(--mono);font-size:6.6px;color:var(--fg-faint);letter-spacing:.02em}
 
 /* ── 두 제품 ── */
-.duo{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:14px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:12px}
 .card{padding:13px 14px 12px;border-radius:10px;background:var(--ink-850);border:1px solid var(--hair);border-top:2px solid var(--brand)}
 .card--s{border-top-color:var(--studio)}
 .card .kind{font-family:var(--mono);font-size:7.2px;letter-spacing:.13em;color:var(--fg-faint);text-transform:uppercase}
@@ -64,9 +65,12 @@ h1 .hl{color:var(--brand-hi)}
 .card li::before{content:"";position:absolute;left:0;top:.52em;width:4px;height:4px;border-radius:50%;background:var(--brand)}
 .card--s li::before{background:var(--studio-hi)}
 .card li b{color:var(--fg)}
+/* 대상자는 이 자료의 핵심 독자 — 제품별 primary 색으로 눈에 먼저 걸리게 */
+.card li em{font-style:normal;font-weight:700;color:var(--brand-hi)}
+.card--s li em{color:var(--studio-hi)}
 
 /* ── 섹션 ── */
-.sec{margin-top:13px}
+.sec{margin-top:11px}
 .sec-h{display:flex;align-items:baseline;gap:9px;margin-bottom:8px}
 .tag{font-family:var(--mono);font-size:7.4px;letter-spacing:.16em;text-transform:uppercase;padding:2.5px 7px;border-radius:999px;white-space:nowrap}
 .tag--b{color:var(--brand-hi);border:1px solid rgba(255,122,31,.42)}
@@ -102,8 +106,15 @@ h1 .hl{color:var(--brand-hi)}
 .rows dd b{color:var(--fg)}
 
 /* 푸터 */
-.foot{margin-top:auto;padding-top:11px;border-top:1px solid var(--hair);display:flex;justify-content:space-between;align-items:center;
-  font-family:var(--mono);font-size:7.6px;color:var(--fg-faint);letter-spacing:.05em}
+/* 푸터 = 유의사항. 런칭 전 자료라 이 문구가 서명줄보다 중요하다 */
+.foot{margin-top:auto;padding-top:8px;border-top:1px solid var(--hair)}
+.foot .note{display:grid;grid-template-columns:auto 1fr;gap:9px;align-items:start;
+  padding:8px 11px;border-radius:8px;background:rgba(234,85,4,.07);border:1px solid rgba(255,122,31,.22)}
+.foot .note b{font-size:8.4px;letter-spacing:.02em;color:var(--brand-hi);white-space:nowrap;padding-top:1px}
+.foot .note p{font-size:8px;line-height:1.62;color:var(--fg-dim)}
+.foot .note em{font-style:normal;font-weight:700;color:var(--fg)}
+.foot .meta{display:flex;justify-content:space-between;margin-top:6px;
+  font-family:var(--mono);font-size:7.4px;color:var(--fg-faint);letter-spacing:.05em}
 .foot .u{color:var(--brand-hi)}
 </style>
 </head>
@@ -116,7 +127,7 @@ h1 .hl{color:var(--brand-hi)}
       <h1>표준을 아는 AI 로,<br><span class="hl">기획부터 코드까지</span></h1>
       <p class="lede">
         <b>NEXTLAB Builder</b> 는 Figma 디자인을 한화 DS 코드로 바꾸는 VSCode 확장,
-        <b>NextLab Studio</b> 는 기획·디자인부터 코드까지 잇는 데스크톱 워크스페이스입니다.
+        <b>NEXTLAB Studio</b> 는 기획·디자인부터 코드까지 잇는 데스크톱 워크스페이스입니다.
         어느 AI 를 골라도 한화생명 개발표준이 자동으로 주입됩니다.
       </p>
     </div>
@@ -136,17 +147,17 @@ h1 .hl{color:var(--brand-hi)}
       <h3>NEXTLAB Builder</h3>
       <p>쓰던 에디터 안에서 디자인 변환 · AI 코딩 · 표준 검사 · 커밋까지. 서버 구축 없이 확장 하나로 끝납니다.</p>
       <ul>
-        <li><b>대상</b> — 프론트엔드 개발자 · 수행사</li>
+        <li><b>대상</b> — <em>프론트엔드 개발자 · 수행사</em></li>
         <li><b>핵심</b> — Figma → 한화 DS React 코드, 빌드·렌더 검증까지 자동</li>
         <li><b>환경</b> — VSCode · Cursor · Antigravity, 같은 VSIX 하나</li>
       </ul>
     </article>
     <article class="card card--s">
       <p class="kind">데스크톱 앱 · 개발 완료</p>
-      <h3>NextLab Studio</h3>
+      <h3>NEXTLAB Studio</h3>
       <p>아이디어 → 기획 → 화면 흐름 → 실물 UI → 프로토타입을 한 흐름으로 잇고, Figma to Code 까지 품은 워크스페이스입니다.</p>
       <ul>
-        <li><b>대상</b> — 현업 · 기획자 · 디자이너 · 개발자</li>
+        <li><b>대상</b> — <em>현업 · 기획자 · 디자이너 · 개발자</em></li>
         <li><b>핵심</b> — Launchpad 로 0 to 1 + Builder 와 동일한 Figma to Code</li>
         <li><b>환경</b> — DS 자산 내장, Figma 없는 외부 SI·오프라인에서도 동작</li>
       </ul>
@@ -202,8 +213,20 @@ h1 .hl{color:var(--brand-hi)}
   </section>
 
   <footer class="foot">
-    <span>NEXTLAB — Builder &amp; Studio · 상세 자료는 <span class="u">nxl-web.vercel.app</span></span>
-    <span>사내 전용 · 외부 공유 금지 · 2026</span>
+    <div class="note">
+      <b>유의사항</b>
+      <p>
+        두 제품은 <em>정식 런칭 전 내부 검증 단계</em>입니다. 서비스가 정식 오픈되지 않아
+        기능·데이터가 예고 없이 변경되거나 초기화될 수 있습니다.
+        <em>고객정보 · 개인정보 · 대외비 자료는 입력하지 마세요.</em>
+        검증 목적의 임의 데이터만 사용해 주시고, 입력하신 내용으로 발생한 결과에 대해서는
+        책임지지 않습니다.
+      </p>
+    </div>
+    <div class="meta">
+      <span>상세 자료 <span class="u">nxl-web.vercel.app</span></span>
+      <span>사내 전용 · 외부 공유 금지 · 2026</span>
+    </div>
   </footer>
 
 </div>
