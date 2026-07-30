@@ -370,6 +370,9 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
 /* 제품 로고 락업 — 배경을 투명하게 뺀 PNG 라 뒤의 주황 글로우가 그대로 비친다 */
 .dl-logo{display:block;height:30px;width:auto;flex:none;align-self:center}
 @media (max-width:560px){ .dl-logo{height:24px} }
+/* Studio 앱 아이콘 — 설치되는 실물의 상징. 원본에 여백·라운드가 있어 그대로 쓴다 */
+.dl-appicon{display:block;width:46px;height:46px;flex:none;align-self:center;margin-right:-4px}
+@media (max-width:560px){ .dl-appicon{width:38px;height:38px} }
 .dl-group-h span{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--fg-faint)}
 .dl-group--studio{--accent:var(--studio);--accent-hi:var(--studio-hi)}
 .dl-list{display:grid;gap:12px}
@@ -1114,6 +1117,7 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
     <!-- Studio -->
     <div class="dl-group dl-group--studio" data-reveal>
       <div class="dl-group-h">
+        <img class="dl-appicon" src="images/logos/studio-appicon.png" alt="" width="512" height="512" decoding="async" aria-hidden="true">
         <h3><img class="dl-logo" src="images/logos/studio-lockup.png" alt="NextLab Studio" width="1189" height="143" decoding="async"></h3>
         <span>데스크톱 앱 · v<span data-studio-ver>0.1.0</span></span>
       </div>

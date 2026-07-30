@@ -86,6 +86,8 @@ ul,ol{margin:0;padding:0;list-style:none}
 
 /* ── 표지 ───────────────────────────────────────────────────── */
 .cover{padding:76px 0 42px;border-bottom:1px solid var(--line);margin-bottom:44px}
+/* 앱 아이콘 — 설치되는 실물. 원본에 라운드·여백이 있어 그림자만 살짝 얹는다 */
+.cover-icon{width:72px;height:72px;margin:26px 0 4px;filter:drop-shadow(0 10px 22px rgba(22,24,29,.18))}
 .cover-tag{
   display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.7rem;
   letter-spacing:.16em;text-transform:uppercase;color:var(--brand-deep);
@@ -296,6 +298,7 @@ td .d{display:block;color:var(--ink-3);font-size:.82rem;margin-top:2px}
 
 <header class="cover">
   <span class="cover-tag">User Manual · v1.1</span>
+  <img class="cover-icon" src="images/logos/studio-appicon.png" alt="NextLab Studio 앱 아이콘" width="512" height="512" decoding="async">
   <h1>NextLab Studio<br>사용자 메뉴얼</h1>
   <p>
     아이디어에서 기획 · 디자인 · 코드까지 잇는 데스크톱 AI 에이전트 워크스페이스의 사용 설명서입니다.
