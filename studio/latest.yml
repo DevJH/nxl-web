@@ -1,8 +1,8 @@
-version: 0.1.1
+version: 0.1.3
 files:
-  - url: https://github.com/DevJH/nxl-web/releases/download/studio-v0.1.1/NextLab.Studio.Setup.0.1.1.exe
-    sha512: dESoqJO9EREtamGBjy/wxrMuZENMYlokNeSgveVVCPzMljvqooF3S1jLvAfb9uqr1wNuDF/s2GBShhQn/2PRRg==
-    size: 184051340
-path: https://github.com/DevJH/nxl-web/releases/download/studio-v0.1.1/NextLab.Studio.Setup.0.1.1.exe
-sha512: dESoqJO9EREtamGBjy/wxrMuZENMYlokNeSgveVVCPzMljvqooF3S1jLvAfb9uqr1wNuDF/s2GBShhQn/2PRRg==
-releaseDate: '2026-07-29T07:42:07.225Z'
+  - url: https://github.com/DevJH/nxl-web/releases/download/studio-v0.1.3/NextLab.Studio.Setup.0.1.3.exe
+    sha512: tXQElAGu7ksRZeT2ZFLN4xiLb+YqExUQ/4y4Uh79McZjxbZQa7v6PFXMMln1BbtMKIqZ3NMRDUZLSOAkRsJp4g==
+    size: 184052638
+path: https://github.com/DevJH/nxl-web/releases/download/studio-v0.1.3/NextLab.Studio.Setup.0.1.3.exe
+sha512: tXQElAGu7ksRZeT2ZFLN4xiLb+YqExUQ/4y4Uh79McZjxbZQa7v6PFXMMln1BbtMKIqZ3NMRDUZLSOAkRsJp4g==
+releaseDate: '2026-07-30T00:18:20.265Z'
