@@ -64,9 +64,11 @@ ul,ol{margin:0;padding:0;list-style:none}
   position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;
   border-right:1px solid var(--line);padding:26px 20px 40px;background:var(--paper);
 }
-.toc-brand{display:block;text-decoration:none;margin-bottom:8px}
-/* 제품 락업 — 배경을 투명하게 뺀 PNG. 사이드바 폭에 맞춰 줄인다 */
-.toc-logo{width:100%;max-width:186px;height:auto;display:block}
+/* .toc a(0-1-1)보다 특이도를 높여야 display:flex 가 이긴다 */
+.toc a.toc-brand{display:flex;align-items:center;gap:7px;text-decoration:none;margin-bottom:8px;padding:0;border-left:0}
+/* 제품 락업 — 앱 아이콘(N 자리)과 텍스트 크롭의 조합. 사이드바 폭에 맞춰 줄인다 */
+.toc-appicon{width:30px;height:30px;flex:none}
+.toc-logo{width:100%;max-width:150px;height:auto;display:block}
 .toc-ver{font-family:var(--mono);font-size:.68rem;color:var(--ink-4);letter-spacing:.06em;margin-bottom:22px}
 .toc nav{display:grid;gap:2px}
 .toc-sec{
@@ -266,7 +268,8 @@ td .d{display:block;color:var(--ink-3);font-size:.82rem;margin-top:2px}
 <!-- ══ 목차 ══════════════════════════════════════════════════ -->
 <aside class="toc">
   <a class="toc-brand" href="#top">
-    <img class="toc-logo" src="images/logos/studio-lockup-onlight.png" alt="NextLab Studio" width="1186" height="128" decoding="async">
+    <img class="toc-appicon" src="images/logos/studio-appicon.png" alt="" width="512" height="512" decoding="async" aria-hidden="true">
+    <img class="toc-logo" src="images/logos/studio-lockup-text-onlight.png" alt="NextLab Studio" width="1000" height="128" decoding="async">
   </a>
   <p class="toc-ver">사용자 메뉴얼 v1.1 · 앱 v0.1.1</p>
 
