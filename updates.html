@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>업데이트 내역 — NEXTLAB Builder &amp; Studio</title>
+<meta name="description" content="NEXTLAB Builder 와 NextLab Studio 의 버전별 업데이트 내역.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<style>
+:root{
+  --ink-900:#07080B;
+  --ink-850:#0A0C11;
+  --ink-800:#0C0E13;
+  --ink-700:#14171F;
+  --hair:rgba(255,255,255,.075);
+  --hair-strong:rgba(255,255,255,.14);
+  --fg:#E8EAF0;
+  --fg-dim:#9AA2B4;
+  --fg-faint:#5D6577;
+  --brand:#EA5504;
+  --brand-hi:#FF7A1F;
+  --studio:#7C6BFF;
+  --studio-hi:#9B8DFF;
+  --accent:var(--brand);
+  --accent-hi:var(--brand-hi);
+  --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  --sans:Pretendard Variable,Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --wrap:920px;
+  --r:14px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--ink-900);color:var(--fg);
+  font-family:var(--sans);font-size:16px;line-height:1.72;
+  -webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word;
+}
+a{color:inherit}
+h1,h2,h3,h4{margin:0;font-weight:800;letter-spacing:-.028em;line-height:1.2;text-wrap:balance}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 28px}
+:focus-visible{outline:2px solid var(--accent-hi);outline-offset:3px;border-radius:4px}
+
+.eyebrow{
+  display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.7rem;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--accent-hi);
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--accent);opacity:.85}
+
+/* ── 내비 ─────────────────────────────────────────────────────────── */
+.nav{position:sticky;top:0;z-index:50;background:rgba(7,8,11,.82);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--hair)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:56px}
+.brand-mark{display:block;height:18px;width:auto}
+.nav-links{display:flex;gap:22px;font-size:.85rem;color:var(--fg-dim)}
+.nav-links a{text-decoration:none}
+.nav-links a:hover{color:var(--fg)}
+
+/* ── 헤더 ─────────────────────────────────────────────────────────── */
+.head{padding:76px 0 30px;border-bottom:1px solid var(--hair)}
+.head h1{font-size:clamp(1.7rem,4vw,2.4rem);margin:16px 0 12px}
+.head p{color:var(--fg-dim);max-width:64ch}
+
+/* ── 제품 섹션 ────────────────────────────────────────────────────── */
+.prod{padding:54px 0 10px;scroll-margin-top:70px}
+.prod--studio{--accent:var(--studio);--accent-hi:var(--studio-hi)}
+.prod-h{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:12px 0 6px}
+.prod-h h2{font-size:clamp(1.3rem,2.6vw,1.7rem)}
+.prod-h .cur{font-family:var(--mono);font-size:.72rem;color:var(--fg-faint)}
+.prod-h .cur b{color:var(--accent-hi);font-weight:600}
+.prod-sub{color:var(--fg-faint);font-size:.9rem;margin-bottom:8px}
+
+/* ── 릴리스 행 ────────────────────────────────────────────────────── */
+.rel{display:grid;grid-template-columns:128px minmax(0,1fr);gap:20px;
+  padding:20px 0;border-bottom:1px solid var(--hair)}
+.rel:last-child{border-bottom:0}
+.rel-meta{font-family:var(--mono)}
+.rel-v{font-size:.92rem;font-weight:600;color:var(--fg)}
+.rel-d{display:block;font-size:.7rem;color:var(--fg-faint);margin-top:3px}
+.rel-tag{display:inline-block;margin-top:8px;padding:2px 8px;border-radius:999px;
+  font-size:.6rem;letter-spacing:.08em;color:var(--accent-hi);
+  border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.rel-body h3{font-size:1rem;font-weight:700;line-height:1.45}
+.rel-body p{margin-top:6px;font-size:.88rem;color:var(--fg-dim);line-height:1.8}
+.rel-body ul{margin-top:8px;display:grid;gap:6px}
+.rel-body li{position:relative;padding-left:16px;font-size:.88rem;color:var(--fg-dim);line-height:1.75}
+.rel-body li::before{content:"";position:absolute;left:1px;top:.7em;width:5px;height:5px;
+  border-radius:50%;background:var(--accent)}
+
+/* ── 이전 버전 접힘 목록 ──────────────────────────────────────────── */
+details.old{margin:18px 0 40px;border:1px solid var(--hair);border-radius:var(--r);background:var(--ink-850)}
+details.old summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;
+  padding:14px 20px;font-family:var(--mono);font-size:.76rem;letter-spacing:.08em;color:var(--fg-dim)}
+details.old summary::-webkit-details-marker{display:none}
+details.old summary::before{content:"▸";color:var(--accent-hi);transition:transform .15s ease}
+details.old[open] summary::before{transform:rotate(90deg)}
+details.old summary:hover{color:var(--fg)}
+.old-list{padding:4px 20px 16px;border-top:1px solid var(--hair)}
+.old-list li{display:grid;grid-template-columns:128px minmax(0,1fr);gap:20px;
+  padding:9px 0;border-bottom:1px solid var(--hair);font-size:.84rem;color:var(--fg-dim)}
+.old-list li:last-child{border-bottom:0}
+.old-list .v{font-family:var(--mono);font-size:.8rem;color:var(--fg)}
+.old-list .v i{display:block;font-style:normal;font-size:.66rem;color:var(--fg-faint);margin-top:2px}
+
+/* ── 푸터 ─────────────────────────────────────────────────────────── */
+.foot{border-top:1px solid var(--hair);background:var(--ink-850);margin-top:50px;padding:28px 0}
+.foot-bar{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:.7rem;color:var(--fg-faint)}
+
+@media (max-width:640px){
+  .rel,.old-list li{grid-template-columns:1fr;gap:6px}
+  .head{padding-top:56px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="index.html">
+      <img class="brand-mark" src="images/logos/nextlab.svg" alt="NEXTLAB" width="110" height="18" decoding="async">
+    </a>
+    <div class="nav-links">
+      <a href="#builder">Builder</a>
+      <a href="#studio">Studio</a>
+      <a href="index.html#download">설치 · 메뉴얼</a>
+    </div>
+  </div>
+</nav>
+
+<header class="head">
+  <div class="wrap">
+    <p class="eyebrow">Release Notes</p>
+    <h1>업데이트 내역</h1>
+    <p>NEXTLAB Builder 와 NextLab Studio 의 버전별 변경 사항입니다.
+      설치 파일과 사용자 메뉴얼은 <a href="index.html#download">설치 페이지</a>에서 받을 수 있습니다.</p>
+  </div>
+</header>
+
+<!-- ══ Builder ═════════════════════════════════════════════════════ -->
+<section class="prod" id="builder">
+  <div class="wrap">
+    <p class="eyebrow">NEXTLAB Builder</p>
+    <div class="prod-h">
+      <h2>Builder — VSCode 확장</h2>
+      <span class="cur">현재 버전 <b>v<span data-ver>0.3.9</span></b></span>
+    </div>
+    <p class="prod-sub">Figma 디자인을 한화 DS 코드로 바꾸는 VSCode · Cursor 확장</p>
+
+    <div class="rel">
+      <div class="rel-meta">
+        <span class="rel-v">v0.3.9</span>
+        <span class="rel-d">2026-07-29</span>
+        <span class="rel-tag">현재 버전</span>
+      </div>
+      <div class="rel-body">
+        <h3>전사 배포 시작</h3>
+        <ul>
+          <li>배포 채널(이 사이트)을 통한 설치 파일·사용자 메뉴얼 제공 시작</li>
+          <li>사용량 집계에 제품 구분을 추가해 Builder · Studio 사용량을 분리 집계</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rel">
+      <div class="rel-meta"><span class="rel-v">v0.3.8</span><span class="rel-d">2026-07-27</span></div>
+      <div class="rel-body"><h3>기능별 사용량 집계 정합성 개선</h3>
+        <p>기능별 사용 현황이 대시보드에서 정확히 묶이도록 집계 기준을 정비했습니다.</p></div>
+    </div>
+    <div class="rel">
+      <div class="rel-meta"><span class="rel-v">v0.3.7</span><span class="rel-d">2026-07-27</span></div>
+      <div class="rel-body"><h3>사용량 집계 전송 설정 수정</h3>
+        <p>집계 이벤트가 수집 서버에 도달하지 않던 설정 문제를 바로잡았습니다.</p></div>
+    </div>
+    <div class="rel">
+      <div class="rel-meta"><span class="rel-v">v0.3.6</span><span class="rel-d">2026-07-27</span></div>
+      <div class="rel-body"><h3>사용량 집계 — 사번 기반 식별 도입</h3>
+        <p>실행 1건당 집계 이벤트 1개만 전송하며, 프롬프트·코드·응답 본문은 전송하지 않습니다.</p></div>
+    </div>
+    <div class="rel">
+      <div class="rel-meta"><span class="rel-v">v0.3.5</span><span class="rel-d">2026-07-24</span></div>
+      <div class="rel-body"><h3>설치 파일(VSIX) 경량화</h3>
+        <p>불필요한 의존성을 제거해 설치 파일 크기를 절반으로 줄였습니다.</p></div>
+    </div>
+    <div class="rel">
+      <div class="rel-meta"><span class="rel-v">v0.3.4</span><span class="rel-d">2026-07-24</span></div>
+      <div class="rel-body"><h3>실행 사용량 집계 1차 도입</h3></div>
+    </div>
+    <div class="rel">
+      <div class="rel-meta"><span class="rel-v">v0.3.3</span><span class="rel-d">2026-07-24</span></div>
+      <div class="rel-body"><h3>MUI 미리보기 충실도 — 정본 테마 전체 반영</h3>
+        <p>Figma → Code 미리보기가 실제 앱과 동일한 디자인시스템 테마 전체로 렌더됩니다.</p></div>
+    </div>
+    <div class="rel">
+      <div class="rel-meta"><span class="rel-v">v0.3.2</span><span class="rel-d">2026-07-16</span></div>
+      <div class="rel-body"><h3>프로젝트 커스텀 컴포넌트 인식</h3>
+        <p>프로젝트가 DS 를 래핑해 만든 컴포넌트를 워크스페이스 매핑(<code style="font-family:var(--mono);font-size:.85em">.nextlab/rules/figma-mapping.md</code>)과
+          Figma Code Connect 로 선언하면 Figma → Code 가 이를 반영합니다.</p></div>
+    </div>
+    <div class="rel">
+      <div class="rel-meta"><span class="rel-v">v0.3.0</span><span class="rel-d">2026-07-14</span></div>
+      <div class="rel-body"><h3>사내 배포 마일스톤 — 버전별 전달 패키지 체계</h3>
+        <p>설치 안내·릴리스 노트·사용자 가이드·무결성 검증 파일을 갖춘 전달 패키지 체계를 도입했습니다.</p></div>
+    </div>
+
+    <details class="old">
+      <summary>이전 버전 이력 보기 (v0.1.0 ~ v0.2.6)</summary>
+      <ul class="old-list">
+        <li><span class="v">v0.2.6<i>2026-07-14</i></span><span>codex 정상 응답이 "인증 필요" 에러로 표시되던 오탐 수정</span></li>
+        <li><span class="v">v0.2.5<i>2026-07-14</i></span><span>활성 파일 칩 상시 표시 — 클릭으로 컨텍스트 포함/제외</span></li>
+        <li><span class="v">v0.2.3<i>2026-07-14</i></span><span>확장 소개(README) 배포판 전면 재작성</span></li>
+        <li><span class="v">v0.2.2<i>2026-07-14</i></span><span>환영 화면 잔재 정리</span></li>
+        <li><span class="v">v0.2.1<i>2026-07-14</i></span><span>chat 파일 연계 · codex 응답 노이즈 근본 수정</span></li>
+        <li><span class="v">v0.2.0<i>2026-07-14</i></span><span>사내 배포 준비 — 지원 엔진 정리 · 멀티턴 강화 · 외부망 모드</span></li>
+        <li><span class="v">v0.1.68<i>2026-07-14</i></span><span>NXL 검사 훅 자동 적용 (설치 불필요)</span></li>
+        <li><span class="v">v0.1.67<i>2026-07-14</i></span><span>NXL 검사 훅 — AI 가 쓴 파일을 쓰는 즉시 결정론 검사</span></li>
+        <li><span class="v">v0.1.66<i>2026-07-14</i></span><span>하네스 보안 잠금 — 로컬 파일로 보안 정책을 무력화하는 우회 차단</span></li>
+        <li><span class="v">v0.1.65<i>2026-07-13</i></span><span>순차 큐 — 실행 중에도 다음 작업을 등록</span></li>
+        <li><span class="v">v0.1.64<i>2026-07-13</i></span><span>에러 후 대기 표시가 영구히 남던 문제 수정</span></li>
+        <li><span class="v">v0.1.63<i>2026-07-13</i></span><span>미리보기 뷰포트(width/height) 커스터마이징 설정</span></li>
+        <li><span class="v">v0.1.62<i>2026-07-13</i></span><span>Accessibility(axe) 위반 설명 한글화</span></li>
+        <li><span class="v">v0.1.61<i>2026-07-13</i></span><span>codex Figma → Code 복구 + 환영 화면 복원</span></li>
+        <li><span class="v">v0.1.60<i>2026-07-13</i></span><span>산출물 정리 체계(킷별 스토리) + MUI 충실도 하락 원인 4종 수정</span></li>
+        <li><span class="v">v0.1.59<i>2026-07-10</i></span><span>이름 변경 — NXL Code → NEXTLAB Builder</span></li>
+        <li><span class="v">v0.1.58<i>2026-07-09</i></span><span>실시간 진단 v1.0 동기화 (13→18 규칙)</span></li>
+        <li><span class="v">v0.1.57<i>2026-07-09</i></span><span>LAM 로고 동봉</span></li>
+        <li><span class="v">v0.1.56<i>2026-07-08</i></span><span>하네스 라벨에 스택(트랙) 표기</span></li>
+        <li><span class="v">v0.1.55<i>2026-07-08</i></span><span>개발표준 v1.0 반영 + 하네스 스택(트랙) 축</span></li>
+        <li><span class="v">v0.1.54<i>2026-07-08</i></span><span>DS2 충실도 — 참조 코드 오염 방어 + IconCheck 결함 교정</span></li>
+        <li><span class="v">v0.1.53<i>2026-07-07</i></span><span>Figma → Code 대화창 정리 — AI 작업 과정을 접힘 블록으로</span></li>
+        <li><span class="v">v0.1.52<i>2026-07-07</i></span><span>렌더 미리보기가 요청한 화면만 보여주도록 (과거 산출물 오염 제거)</span></li>
+        <li><span class="v">v0.1.51<i>2026-07-07</i></span><span>DS2 산출물 품질 — 폰트 px 고정 + 반응형 + 모바일 뷰포트 미리보기</span></li>
+        <li><span class="v">v0.1.50<i>2026-07-07</i></span><span>"렌더 미리보기" 흰 화면 근본 수정</span></li>
+        <li><span class="v">v0.1.49<i>2026-07-07</i></span><span>세 번째 UI 킷 — 사내 DS 2.0 (운영업무·모바일 웹)</span></li>
+        <li><span class="v">v0.1.38<i>2026-07-02</i></span><span>global/inherit 색이 의도대로 안 나오던 문제 수정</span></li>
+        <li><span class="v">v0.1.37<i>2026-07-02</i></span><span>툴바 Light/Dark 드롭다운 복구 + 거부/rate-limit 시 '완료' 오보 근절</span></li>
+        <li><span class="v">v0.1.36<i>2026-07-01</i></span><span>다크 화면이 화이트로 렌더되던 문제 + 아이콘 정확 교정</span></li>
+        <li><span class="v">v0.1.35<i>2026-07-01</i></span><span>검증 루프 중지·시간예산 — 무한로딩·중지 안 먹힘 근본 수정</span></li>
+        <li><span class="v">v0.1.34<i>2026-07-01</i></span><span>아이콘 색·DS 고유 아이콘·시맨틱 색 오매핑 3종 근본 수정</span></li>
+        <li><span class="v">v0.1.33<i>2026-07-01</i></span><span>모델 로그 간결화</span></li>
+        <li><span class="v">v0.1.32<i>2026-07-01</i></span><span>Divider dashed 판정 정확도 개선</span></li>
+        <li><span class="v">v0.1.31<i>2026-07-01</i></span><span>오픈소스 아이콘을 동봉 DS SVG 로 되돌리는 결정론적 후처리</span></li>
+        <li><span class="v">v0.1.30<i>2026-07-01</i></span><span>sx 로 풀어쓴 Typography 를 variant 로 되돌리는 후처리</span></li>
+        <li><span class="v">v0.1.29<i>2026-07-01</i></span><span>타이포 규칙 단순화("이름=variant") + 검증 게이트</span></li>
+        <li><span class="v">v0.1.28<i>2026-07-01</i></span><span>타이포 variant 매칭 신호 명시</span></li>
+        <li><span class="v">v0.1.27<i>2026-07-01</i></span><span>Storybook variant 미적용·색 다크반전·간격 자기모순 근본 수정</span></li>
+        <li><span class="v">v0.1.26<i>2026-06-30</i></span><span>Typography variant 를 sx 로 풀어쓰던 것 교정</span></li>
+        <li><span class="v">v0.1.25<i>2026-06-30</i></span><span>nlm 컴포넌트 theme override 주입 — variant·스타일 어긋남 근본 수정</span></li>
+        <li><span class="v">v0.1.24<i>2026-06-30</i></span><span>검증 루프 버그 3종 수정</span></li>
+        <li><span class="v">v0.1.23<i>2026-06-30</i></span><span>검증 루프 UI 토글</span></li>
+        <li><span class="v">v0.1.22<i>2026-06-30</i></span><span>검증 루프 부활(시각 게이트) · 결재형식 셀 교정</span></li>
+        <li><span class="v">v0.1.21<i>2026-06-30</i></span><span>MUI 충실도 4종 회귀 차단</span></li>
+        <li><span class="v">v0.1.20<i>2026-06-30</i></span><span>번들 폴더 재명명 · 하네스 정리 · MUI 규칙 누출 차단</span></li>
+        <li><span class="v">v0.1.19<i>2026-06-26</i></span><span>아이콘 — 번들 카탈로그 1순위, Iconify 폴백</span></li>
+        <li><span class="v">v0.1.18<i>2026-06-26</i></span><span>배경 회색 원인·앱 셸 누락 수정</span></li>
+        <li><span class="v">v0.1.17<i>2026-06-26</i></span><span>아이콘 추측 차단 · Switch 변형색 · 배경 정정</span></li>
+        <li><span class="v">v0.1.16<i>2026-06-26</i></span><span>미리보기 light/dark 지원 + 아이콘 매핑</span></li>
+        <li><span class="v">v0.1.15<i>2026-06-26</i></span><span>DS 아이콘 카탈로그 동봉</span></li>
+        <li><span class="v">v0.1.14<i>2026-06-26</i></span><span>NEXTLAB 로고 룰 + header 환각 보더 차단</span></li>
+        <li><span class="v">v0.1.13<i>2026-06-26</i></span><span>샌드박스 빌드 실패 수정 (pnpm 프로젝트)</span></li>
+        <li><span class="v">v0.1.12<i>2026-06-25</i></span><span>그림자 탐지 룰 문구 명확화</span></li>
+        <li><span class="v">v0.1.11<i>2026-06-25</i></span><span>그림자 평탄화 차단 강화</span></li>
+        <li><span class="v">v0.1.10<i>2026-06-25</i></span><span>Figma→MUI 충실도 개선 — 시각속성 보존·absolute 위치</span></li>
+        <li><span class="v">v0.1.9<i>2026-06-25</i></span><span>Figma→MUI 충실도 개선 — 룰 정합성·폰트</span></li>
+        <li><span class="v">v0.1.0<i>2026-06-23</i></span><span>첫 사내 릴리스</span></li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<!-- ══ Studio ══════════════════════════════════════════════════════ -->
+<section class="prod prod--studio" id="studio">
+  <div class="wrap">
+    <p class="eyebrow">NextLab Studio</p>
+    <div class="prod-h">
+      <h2>Studio — 데스크톱 앱</h2>
+      <span class="cur">현재 버전 <b>v<span data-studio-ver>0.2.1</span></b></span>
+    </div>
+    <p class="prod-sub">기획 · 디자인부터 코드까지 잇는 데스크톱 워크스페이스</p>
+
+    <div class="rel">
+      <div class="rel-meta">
+        <span class="rel-v">v0.2.1</span>
+        <span class="rel-d">2026-07-30</span>
+        <span class="rel-tag">현재 버전</span>
+      </div>
+      <div class="rel-body">
+        <h3>macOS 서명 안정화</h3>
+        <p>한글 파일명이 포함된 경우 macOS 서명 봉인이 깨져 앱이 열리지 않던 문제를 수정했습니다.</p>
+      </div>
+    </div>
+    <div class="rel">
+      <div class="rel-meta"><span class="rel-v">v0.2.0</span><span class="rel-d">2026-07-30</span></div>
+      <div class="rel-body">
+        <h3>첫 정식 서명 · 공증 릴리스</h3>
+        <ul>
+          <li>Apple Developer ID 서명·공증 적용 — 설치 후 첫 실행 시 OS 차단(Gatekeeper · SmartScreen) 허용 절차가 사라졌습니다</li>
+          <li>macOS 자동 업데이트 활성화 — 이후 버전부터 재설치 없이 앱 안에서 업데이트됩니다</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rel">
+      <div class="rel-meta"><span class="rel-v">v0.1.3</span><span class="rel-d">2026-07-30</span></div>
+      <div class="rel-body"><h3>macOS Dock 아이콘 중복 수정</h3>
+        <p>실행 중 Dock 에 아이콘이 두 개 표시되던 문제를 수정했습니다.</p></div>
+    </div>
+    <div class="rel">
+      <div class="rel-meta"><span class="rel-v">v0.1.2</span><span class="rel-d">2026-07-30</span></div>
+      <div class="rel-body"><h3>Apple Silicon 실행 오류 수정</h3>
+        <ul>
+          <li>Apple Silicon Mac 에서 앱이 실행 직후 종료되던 문제 수정</li>
+          <li>Talk to Image 에이전트가 누락되어 있던 문제 수정</li>
+        </ul></div>
+    </div>
+    <div class="rel">
+      <div class="rel-meta"><span class="rel-v">v0.1.1</span><span class="rel-d">2026-07-29</span></div>
+      <div class="rel-body"><h3>사용량 집계 도입</h3>
+        <p>Builder 와 동일한 체계의 사번 기반 사용량 집계를 추가했습니다.</p></div>
+    </div>
+    <div class="rel">
+      <div class="rel-meta"><span class="rel-v">v0.1.0</span><span class="rel-d">2026-07-29</span></div>
+      <div class="rel-body"><h3>첫 사내 릴리스</h3>
+        <p>Launchpad 4단계(Talk to Spec · User Flow · Talk to Design · Prototype) · Talk to Image · Figma to Code.
+          macOS(Apple Silicon · Intel) 와 Windows 설치본을 제공합니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap foot-bar">
+    <span>NEXTLAB · Builder v<span data-ver>0.3.9</span> · Studio v<span data-studio-ver>0.2.1</span></span>
+    <span>사내 전용 — 외부 공유 금지 · 2026</span>
+  </div>
+</footer>
+
+<script>
+/* 현재 버전 표기를 배포 메타에서 채운다 — 릴리스마다 이 파일을 고치지 않도록.
+   못 읽으면(로컬에서 그냥 연 경우) 정적 텍스트를 그대로 쓴다. */
+fetch('release-manifest.json', { cache: 'no-store' })
+  .then(function(r){ if (!r.ok) throw 0; return r.json(); })
+  .then(function(m){
+    var latest = m.releases && m.releases[0];
+    if (!latest) return;
+    document.querySelectorAll('[data-ver]').forEach(function(el){ el.textContent = latest.version; });
+  }).catch(function(){});
+fetch('studio/version.json', { cache: 'no-store' })
+  .then(function(r){ if (!r.ok) throw 0; return r.json(); })
+  .then(function(m){
+    if (!m.version) return;
+    document.querySelectorAll('[data-studio-ver]').forEach(function(el){ el.textContent = m.version; });
+  }).catch(function(){});
+</script>
+</body>
+</html>
