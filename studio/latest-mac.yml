@@ -1,17 +1,17 @@
-version: 0.2.2
+version: 0.3.1
 files:
-  - url: https://github.com/DevJH/nxl-web/releases/download/studio-v0.2.2/NextLab.Studio-0.2.2-arm64-mac.zip
-    sha512: TVlhAtEzKKtrZWOxBWhVo+oeLm14K46Ygq9fnjruZ0Dlkq8nP+dTjTSmvn4n8SQQ2ky8raDGI6kNQGRR61J5Hw==
-    size: 216793450
-  - url: https://github.com/DevJH/nxl-web/releases/download/studio-v0.2.2/NextLab.Studio-0.2.2-mac.zip
-    sha512: Iwsbt+VORGucBHtdV6lLO/stoRpyLlGeg+hSoNkxwNFhne3qYtyojXRJW3ETMVQlVy4gkMUqw/64FlvAagsgvQ==
-    size: 226386162
-  - url: https://github.com/DevJH/nxl-web/releases/download/studio-v0.2.2/NextLab.Studio-0.2.2-arm64.dmg
-    sha512: 4X++wP6PqSFqdHN9wfV2xtd/strGYsQlokK/BPp9lbCayS44n+gNNEawsF0BMFHULMTU/L8GsWC5GtvPusZkuw==
-    size: 224202727
-  - url: https://github.com/DevJH/nxl-web/releases/download/studio-v0.2.2/NextLab.Studio-0.2.2.dmg
-    sha512: j/Cq5flBQsqm/LL30A+4CP/C7Mk3AYiTI2OZFp2I29LKjFJYv4tkeyrpzkqPu0wrdGC26L5tPostXyZwznG1zg==
-    size: 233875802
-path: https://github.com/DevJH/nxl-web/releases/download/studio-v0.2.2/NextLab.Studio-0.2.2-arm64-mac.zip
-sha512: TVlhAtEzKKtrZWOxBWhVo+oeLm14K46Ygq9fnjruZ0Dlkq8nP+dTjTSmvn4n8SQQ2ky8raDGI6kNQGRR61J5Hw==
-releaseDate: '2026-07-31T01:37:15.076Z'
+  - url: NextLab Studio-0.3.1-arm64-mac.zip
+    sha512: 3dh56B9riHuPN7WT+tp12QlxhPR7QlJTnTDrlbPQKM020dGYfa0cP8dOpGjt7hIOhJy2yFm+9HEDtOS0pPNGgg==
+    size: 220585470
+  - url: NextLab Studio-0.3.1-mac.zip
+    sha512: Hs3vjUdCiN8I+mOJUjgJGe/jbTRAGRg9mWkz4cF4AMAanlNIurZAEMLy3AhFawEQU9oa/1Mk7NQ3gbjOZQuv0A==
+    size: 230178188
+  - url: NextLab Studio-0.3.1-arm64.dmg
+    sha512: 19aOQkcBKq8qmvHi8xAfatlDCeonBGCuj+oHkVJzZXvhwbnYpVPiopioWyYY5BgVK7IKdyK1g1dAcWmQiJZJfg==
+    size: 228079995
+  - url: NextLab Studio-0.3.1.dmg
+    sha512: X9PWrgiE3wclJ4y6mbZlmXbtbjfQ+fBV8F5tfgoLgQc36yYmNWSRJL277ZyKSh1l1uapvFHiECgWYpei0zk4Jw==
+    size: 237764925
+path: NextLab Studio-0.3.1-arm64-mac.zip
+sha512: 3dh56B9riHuPN7WT+tp12QlxhPR7QlJTnTDrlbPQKM020dGYfa0cP8dOpGjt7hIOhJy2yFm+9HEDtOS0pPNGgg==
+releaseDate: '2026-08-04T06:02:42.111Z'
