@@ -86,14 +86,14 @@ if (copied === 0) {
   process.exit(1);
 }
 
-// 사용자 문서(사용자메뉴얼·소개자료) + 참조 이미지를 채널로 복사한다.
-// 채널이 곧 사용자 사이트이므로 index.html 이 링크하는 이 파일들이 함께 올라가야 한다.
-// 이미지는 HTML 이 실제 참조하는 것만 복사한다 — docs/images 전체(14MB)를 올리면
-// 저장소가 불필요하게 무거워진다.
-// nextlab-landing.html 이 채널 메인(index.html)이다 — 소개+다운로드가 이미 한 페이지라
-// 별도 인덱스를 두지 않는다.
-// stamp: 메뉴얼에 박힌 "<라벨> v0.0.0" 표기를 릴리스 버전으로 맞춘다(아래 stampVersion).
-// index.html 은 data-ver 를 매니페스트에서 런타임에 채우므로 대상이 아니다.
+// 사용자 문서(사용자메뉴얼·소개자료) + 참조 이미지를 모노레포 docs 에서 복사한다.
+//
+// ⚠ 기본은 복사하지 않는다 (env NXL_PUBLISH_DOCS=1 일 때만).
+// 사이트 페이지(index.html·manual.html·images/)의 정본은 이제 채널 저장소 자신이다 —
+// 채널에서 직접 고친 뒤 모노레포 docs 사본이 낡았고, 릴리스마다 이 복사가
+// 낡은 사본으로 사이트를 회귀시켰다(v0.3.10 · v0.3.11 두 번 발생, 04ba7d4 · 2ee90e5).
+// 모노레포 docs 를 실제로 갱신한 릴리스에서만 NXL_PUBLISH_DOCS=1 로 켠다.
+const PUBLISH_DOCS = process.env.NXL_PUBLISH_DOCS === '1';
 const DOC_PAGES = [
   { src: 'nextlab-builder-사용자메뉴얼-v1.0.html', dest: 'manual.html', stamp: '확장' },
   { src: 'nextlab-landing.html', dest: 'index.html' },
@@ -126,7 +126,25 @@ function stampVersion(html, label, version) {
 
 const referenced = new Set();
 let pages = 0;
-for (const { src, dest, stamp } of DOC_PAGES) {
+// 복사를 건너뛰어도 메뉴얼 버전 표기는 릴리스마다 어긋나면 안 된다 —
+// 채널의 manual.html 을 제자리에서 스탬프한다 (studio-manual 과 같은 방식).
+if (!PUBLISH_DOCS) {
+  console.log('[publish-channel] 문서·이미지 복사 생략 (채널이 정본) — 모노레포 docs 반영은 NXL_PUBLISH_DOCS=1');
+  for (const { dest, stamp } of DOC_PAGES) {
+    if (!stamp) continue;
+    const abs = path.join(CHANNEL_DIR, dest);
+    if (!fs.existsSync(abs)) continue;
+    const before = fs.readFileSync(abs, 'utf8');
+    const r = stampVersion(before, stamp, latest);
+    if (r.hits === 0) {
+      console.warn(`[publish-channel] ${dest}: "${stamp} v0.0.0" 표기를 못 찾아 버전을 못 박았습니다`);
+    } else if (r.html !== before) {
+      fs.writeFileSync(abs, r.html, 'utf8');
+      console.log(`[publish-channel] ${dest}: ${stamp} 버전 ${r.hits}곳 → v${latest} (제자리)`);
+    }
+  }
+}
+for (const { src, dest, stamp } of PUBLISH_DOCS ? DOC_PAGES : []) {
   const abs = path.join(DOCS_SRC, src);
   if (!fs.existsSync(abs)) {
     console.warn(`[publish-channel] 문서 없음(건너뜀): ${abs}`);

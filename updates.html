@@ -135,15 +135,31 @@ ul{margin:0;padding:0;list-style:none}
     <p class="eyebrow">NEXTLAB Builder</p>
     <div class="prod-h">
       <h2>Builder — VSCode 확장</h2>
-      <span class="cur">현재 버전 <b>v<span data-ver>0.3.10</span></b></span>
+      <span class="cur">현재 버전 <b>v<span data-ver>0.3.11</span></b></span>
     </div>
     <p class="prod-sub">Figma 디자인을 한화 DS 코드로 바꾸는 VSCode · Cursor 확장</p>
 
     <div class="rel">
       <div class="rel-meta">
-        <span class="rel-v">v0.3.10</span>
+        <span class="rel-v">v0.3.11</span>
         <span class="rel-d">2026-08-04</span>
         <span class="rel-tag">현재 버전</span>
+      </div>
+      <div class="rel-body">
+        <h3>Windows 첫 설치 안정화 — 잔여 함정 5종 보강</h3>
+        <ul>
+          <li>셋업 점검에 claude 계정 로그인 확인을 추가 — 미로그인으로 실행만 조용히 실패하던 첫 설치 흔한 원인을 잡고, 미로그인 시 로그인 터미널을 바로 열어줍니다</li>
+          <li>Figma 연동 등록이 낡은 주소로 남아 '이미 등록됨'으로 위장하던 경우를 감지해 자동 재등록합니다</li>
+          <li>사용자 폴더 경로에 공백이 있는 환경(OneDrive 프로필 등)에서 실행이 실패하던 문제를 수정했습니다</li>
+          <li>백신 검사로 첫 실행이 지연될 때 간헐적으로 '미설치'로 오판하던 것을 방지했습니다 (점검 대기 상향)</li>
+          <li>claude 실행 경로 설정이 잘못 남아 있는 경우 원인을 명시해 안내합니다</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rel">
+      <div class="rel-meta">
+        <span class="rel-v">v0.3.10</span>
+        <span class="rel-d">2026-08-04</span>
       </div>
       <div class="rel-body">
         <h3>Windows 안정화 — claude CLI 인식 문제 근본 수정</h3>
@@ -245,7 +261,7 @@ ul{margin:0;padding:0;list-style:none}
 
 <footer class="foot">
   <div class="wrap foot-bar">
-    <span>NEXTLAB · Builder v<span data-ver>0.3.10</span> · Studio v<span data-studio-ver>0.3.1</span></span>
+    <span>NEXTLAB · Builder v<span data-ver>0.3.11</span> · Studio v<span data-studio-ver>0.3.1</span></span>
     <span>사내 전용 — 외부 공유 금지 · 2026</span>
   </div>
 </footer>
