@@ -195,12 +195,15 @@ ul{margin:0;padding:0;list-style:none}
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pane img{width:100%;display:block}
 
-.pane--back{width:47%;left:0;top:22px;transform:translate3d(0,0,-190px);opacity:.62}
-.pane--mid{width:46%;left:24%;top:186px;transform:translate3d(0,0,-70px);opacity:.86}
-.pane--front{width:60%;right:0;top:44px;transform:translate3d(0,0,60px)}
+.pane--back{width:42%;left:0;top:22px;transform:translate3d(0,0,-190px);opacity:.62}
+.pane--mid{width:40%;left:26%;top:158px;transform:translate3d(0,0,-70px);opacity:.86}
+.pane--front{width:48%;right:0;top:40px;transform:translate3d(0,0,60px)}
+/* Studio 판 — 좌하단 최전면. Builder 와 공동 주연이 되도록 가장 크게 둔다 */
+.pane--studio{width:52%;left:2%;top:226px;transform:translate3d(0,0,110px)}
 .stage-3d:hover .pane--back{transform:translate3d(-22px,-14px,-190px)}
 .stage-3d:hover .pane--mid{transform:translate3d(-10px,10px,-70px)}
 .stage-3d:hover .pane--front{transform:translate3d(16px,-10px,86px)}
+.stage-3d:hover .pane--studio{transform:translate3d(-14px,12px,132px)}
 
 /* ── 두 제품 ─────────────────────────────────────────────────────── */
 .duo{padding:88px 0;border-top:1px solid var(--hair)}
@@ -285,6 +288,14 @@ ul{margin:0;padding:0;list-style:none}
 .step p{font-size:.87rem;color:var(--fg-dim)}
 /* 세로로 긴 패널 캡쳐 — 세 칸의 높이를 맞춰 설명 줄이 나란히 오게 한다 */
 .flow--portrait .frame img{aspect-ratio:5/9;object-fit:cover;object-position:top center}
+/* 4단계 파이프라인 — 화면 캡쳐가 읽히도록 2열 + 전폭 카드를 섞어 배치한다 */
+.flow--4{grid-template-columns:repeat(2,1fr);gap:26px 20px}
+.step--wide{grid-column:1/-1}
+/* STEP 1 — 질문지·PRD 두 장면을 나란히 (과정 → 산출물) */
+.step-duo{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.step-duo .fcap{padding:9px 14px;font-family:var(--mono);font-size:.67rem;letter-spacing:.07em;
+  color:var(--fg-faint);border-top:1px solid var(--hair)}
+@media (max-width:880px){ .step-duo{grid-template-columns:1fr} }
 
 /* 원본 ↔ 생성 */
 .compare{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
@@ -306,19 +317,6 @@ ul{margin:0;padding:0;list-style:none}
 /* 세로로 긴 캡쳐는 의미가 있는 상단만 잘라 쓴다 */
 .frame--crop img{width:100%;height:340px;object-fit:cover;object-position:top center}
 .chips{display:flex;flex-wrap:wrap;align-items:flex-start;gap:7px}
-
-/* 표 */
-.tablewrap{overflow-x:auto;border:1px solid var(--hair);border-radius:var(--r);background:var(--ink-850)}
-table{width:100%;border-collapse:collapse;min-width:640px}
-th,td{text-align:left;padding:16px 20px;border-bottom:1px solid var(--hair);font-size:.88rem;vertical-align:top}
-thead th{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--fg-faint);font-weight:500;background:var(--ink-800)}
-tbody tr:last-child td{border-bottom:0}
-td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--fg-dim)}
-td.gain{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--brand-hi);font-weight:600}
-td.name b{display:block;color:var(--fg)}
-td.name span{font-size:.78rem;color:var(--fg-faint)}
-.footnote{margin-top:14px;font-size:.76rem;color:var(--fg-faint);line-height:1.7}
 
 /* 에디터 */
 .editors{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
@@ -365,6 +363,9 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
 /* 제품 로고 락업 — 배경을 투명하게 뺀 PNG 라 뒤의 주황 글로우가 그대로 비친다 */
 .dl-logo{display:block;height:30px;width:auto;flex:none;align-self:center}
 @media (max-width:560px){ .dl-logo{height:24px} }
+/* Studio 앱 아이콘 — 락업의 N 마크 자리를 대신한다 (텍스트 크롭과 한 몸으로 읽히게 간격을 좁힘) */
+.dl-appicon{display:block;width:46px;height:46px;flex:none;align-self:center;margin-right:-6px}
+@media (max-width:560px){ .dl-appicon{width:38px;height:38px} }
 .dl-group-h span{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--fg-faint)}
 .dl-group--studio{--accent:var(--studio);--accent-hi:var(--studio-hi)}
 .dl-list{display:grid;gap:12px}
@@ -407,12 +408,21 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
 .dl-step span{font-size:.79rem;line-height:1.62;color:var(--fg-faint)}
 /* 설명 안에서 실제 메뉴 이름만 또렷하게 */
 .dl-step span b{color:var(--fg-dim);font-weight:600;white-space:nowrap}
-/* 서명 전까지만 필요한 단계임을 배지로 — 아래 dl-foot-note 가 이유를 설명한다 */
-.dl-step > b .dl-tmp{margin-left:7px;padding:2px 7px;border-radius:999px;font-family:var(--mono);
-  font-style:normal;font-size:.6rem;letter-spacing:.08em;vertical-align:middle;
-  color:var(--brand);border:1px solid rgba(234,85,4,.42);background:rgba(234,85,4,.1)}
-.dl-foot-note{margin-top:14px;font-size:.79rem;line-height:1.62;color:var(--fg-faint)}
-.dl-foot-note b{color:var(--fg-dim);font-weight:600}
+/* Studio 는 서명·공증 적용으로 첫 실행 허용 단계가 없어 2단계 */
+.dl-steps--studio{grid-template-columns:repeat(2,1fr)}
+
+/* ── 유의사항 ────────────────────────────────────────────────────── */
+.notice{border-top:1px solid var(--hair);padding:72px 0 84px;scroll-margin-top:70px}
+.notice-group{margin-top:26px;border:1px solid var(--hair);border-radius:var(--r);background:var(--ink-850);overflow:hidden}
+.notice-group-h{display:flex;align-items:baseline;gap:12px;padding:16px 24px;border-bottom:1px solid var(--hair);background:var(--ink-800)}
+.notice-group-h .no{font-family:var(--mono);font-size:.78rem;color:var(--brand-hi);font-weight:600}
+.notice-group-h b{font-size:.95rem;color:var(--fg)}
+.notice-group-h .en{margin-left:auto;font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-faint);white-space:nowrap}
+.notice-item{padding:20px 24px;border-bottom:1px solid var(--hair)}
+.notice-item:last-child{border-bottom:0}
+.notice-item h4{font-size:.98rem;font-weight:700;line-height:1.4;margin-bottom:7px}
+.notice-item p{max-width:86ch;font-size:.9rem;color:var(--fg-dim);line-height:1.85}
+.notice-ver{display:block;margin-top:10px;font-family:var(--mono);font-size:.76rem;color:var(--fg-faint)}
 
 /* ── 푸터 ────────────────────────────────────────────────────────── */
 .foot{border-top:1px solid var(--hair);background:var(--ink-850);padding:52px 0 60px}
@@ -440,6 +450,7 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
 .pane--back{animation:settle 1.1s cubic-bezier(.2,.7,.2,1) .42s both}
 .pane--mid{animation:settle 1.1s cubic-bezier(.2,.7,.2,1) .54s both}
 .pane--front{animation:settle 1.1s cubic-bezier(.2,.7,.2,1) .66s both}
+.pane--studio{animation:settle 1.1s cubic-bezier(.2,.7,.2,1) .78s both}
 @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 @keyframes settle{from{opacity:0;transform:translate3d(0,52px,-320px)}}
 
@@ -471,6 +482,8 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
   .wrap,.stage{padding-left:18px;padding-right:18px}
   .row{grid-template-columns:1fr;gap:8px}
   .compare--mobile{grid-template-columns:1fr 1fr}
+  .notice-group-h{flex-wrap:wrap}
+  .notice-group-h .en{margin-left:0;flex-basis:100%}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -491,6 +504,7 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
       <a href="#builder">Builder</a>
       <a href="#studio">Studio</a>
       <a href="#download">설치 · 메뉴얼</a>
+      <a href="updates.html">업데이트</a>
     </div>
   </div>
 </nav>
@@ -508,7 +522,7 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
     <p class="lede">
       <b>NEXTLAB Builder</b> 는 Figma 디자인을 한화 DS 코드로 바꾸는 VSCode 확장,
       <b>NextLab Studio</b> 는 기획·디자인부터 코드까지 잇는 데스크톱 워크스페이스입니다.
-      어느 AI 를 골라도 한화생명 개발표준 21개 모듈이 자동으로 주입됩니다.
+      어느 AI 를 골라도 한화생명 개발표준이 자동으로 주입됩니다.
     </p>
     <div class="hero-cta">
       <a class="btn btn--primary" href="#download">
@@ -538,6 +552,10 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
       <figure class="pane pane--front">
         <div class="pane-bar"><span class="pane-dots"><i></i><i></i><i></i></span><span class="pane-path">검증 통과 · 렌더 미리보기</span></div>
         <img src="images/06-complete-preview.png" alt="검증 루프 통과 후 렌더 미리보기가 채팅에 임베드된 화면" loading="lazy" decoding="async">
+      </figure>
+      <figure class="pane pane--studio">
+        <div class="pane-bar"><span class="pane-dots"><i></i><i></i><i></i></span><span class="pane-path">nextlab-studio · talk-to-design</span></div>
+        <img src="images/studio15/09_design_canvas.png" alt="NextLab Studio — Talk to Design 캔버스에서 실물 화면을 편집하는 모습" loading="lazy" decoding="async">
       </figure>
     </div>
   </div>
@@ -569,10 +587,10 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
       <article class="duo-card duo-card--studio" data-reveal>
         <p class="duo-kind">데스크톱 앱 · 개발 완료</p>
         <h3>NextLab Studio</h3>
-        <p>Figma 를 쓸 수 없는 내부망 환경에서 아이디어 → 기획 → 화면 흐름 → 실물 UI 를 한 흐름으로 잇습니다.</p>
+        <p>아이디어 → 기획 → 화면 흐름 → 실물 UI → 프로토타입을 한 흐름으로 잇고, Figma to Code 까지 품은 데스크톱 워크스페이스입니다.</p>
         <ul class="duo-list">
           <li><b>대상</b><span>현업 · 기획자 · 디자이너 · 개발자</span></li>
-          <li><b>핵심</b><span>Launchpad 로 0 to 1, 표준 에이전트가 컨텍스트로 붙음</span></li>
+          <li><b>핵심</b><span>Launchpad 로 0 to 1 + Builder 와 동일한 Figma to Code</span></li>
           <li><b>설치</b><span>Windows · macOS 설치형</span></li>
         </ul>
         <a class="duo-jump" href="#studio">Studio 자세히 보기 →</a>
@@ -768,41 +786,6 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
       </div>
     </div>
 
-    <!-- 기대효과 표 -->
-    <div class="sec" id="impact">
-      <div class="sec-head" data-reveal>
-        <p class="eyebrow">Impact</p>
-        <h3>복잡한 화면일수록, 더 크게 벌어집니다</h3>
-        <p>생성 시간은 화면 복잡도와 거의 무관합니다. 복잡도에 비례해 늘어나는 것은 수작업 쪽입니다.</p>
-      </div>
-      <div class="tablewrap" data-reveal>
-        <table>
-          <thead>
-            <tr><th>화면 유형</th><th>기존 수작업</th><th>Builder</th><th>화면당 절감</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="name"><b>단순 화면</b><span>폼 · 목록 위주, 상태 단순</span></td>
-              <td class="num">2~4시간</td><td class="num">20~30분</td><td class="gain">약 3시간</td>
-            </tr>
-            <tr>
-              <td class="name"><b>중간 복잡도</b><span>테이블 + 폼 + 로딩·에러·빈 상태</span></td>
-              <td class="num">8~16시간</td><td class="num">1~2시간</td><td class="gain">약 하루 (~85%)</td>
-            </tr>
-            <tr>
-              <td class="name"><b>복잡한 화면</b><span>다중 섹션 · 모달 · 상태 다수</span></td>
-              <td class="num">2~3일</td><td class="num">3~4시간</td><td class="gain">이틀 이상</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="footnote" data-reveal>
-        기준 — 단순: 폼·목록 1~2개 / 중간: 레이아웃 + 테이블·폼 + 상태 3종 / 복잡: 다중 섹션·모달 포함.
-        수작업 시간은 통상적인 퍼블리싱·마크업 공수이고, 절감치는 내부 추정치로 도입 후 실측 데이터로 갱신할 예정입니다.
-        표준 위반 수정·리뷰 반려 감소 효과는 별도입니다.
-      </p>
-    </div>
-
     <!-- 에디터 -->
     <div class="sec">
       <div class="sec-head" data-reveal>
@@ -838,7 +821,8 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
       <h2>Figma 를 못 쓰는 환경을,<br>제약이 아니라 요건으로 봤습니다</h2>
       <p class="lede">
         아이디어에서 기획 · 디자인 · 코드까지 이어지는 <b>AI 에이전트 워크스페이스</b>입니다.
-        기획·디자인 트랙과 엔지니어링 트랙은 개발이 완료되어 바로 사용할 수 있고,
+        기획·디자인 트랙(Talk to Spec → User Flow → Talk to Design → Prototype)과
+        엔지니어링 트랙(Figma to Code)은 개발이 완료되어 바로 사용할 수 있고,
         내부망 모델을 연결하면 민감 정보가 외부로 나가지 않고 내부에서 완결됩니다.
       </p>
       <div class="part-badges">
@@ -863,40 +847,100 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
             <p>좌측 사이드바는 기획·디자인 / 엔지니어링 / 에이전트 / 라이브러리 네 구역입니다. 에이전트를 고르면 연결된 스킬·메뉴얼이 컨텍스트로 자동 주입됩니다.</p>
           </div>
           <dl class="rows">
-            <div class="row"><dt>Plan</dt><dd><b>Launchpad</b> — Talk to Spec · User Flow · Talk to Design 으로 기획부터 실물 UI 까지</dd></div>
-            <div class="row"><dt>Build</dt><dd><b>Figma to Code</b> — 디자인 링크에서 NXL 표준 코드 생성</dd></div>
+            <div class="row"><dt>Plan</dt><dd><b>Launchpad</b> — Talk to Spec · User Flow · Talk to Design · Prototype 으로 기획부터 검증까지</dd></div>
+            <div class="row"><dt>Draw</dt><dd><b>Talk to Image</b> — 말로 그리는 SVG 일러스트·아이콘, 화면과 같은 색 언어</dd></div>
+            <div class="row"><dt>Build</dt><dd><b>Figma to Code</b> — Builder 와 동일한 NXL 표준 코드 생성을 VSCode 없이</dd></div>
             <div class="row"><dt>Govern</dt><dd><b>라이브러리 · 계정</b> — 스킬·메뉴얼 정본 관리와 실행 계정·권한 통제</dd></div>
           </dl>
         </div>
       </div>
     </div>
 
-    <!-- Launchpad 3단계 -->
+    <!-- Launchpad 4단계 -->
     <div class="sec">
       <div class="sec-head" data-reveal>
         <p class="eyebrow">Launchpad · 0 to 1</p>
         <h3>앞 단계 산출물이 뒷 단계 입력이 됩니다</h3>
-        <p>세 기능의 묶음이 아니라 하나의 연결된 파이프라인입니다. 아이디어 → PRD·기능명세 → 화면 흐름도 → 실물 MVP 화면.</p>
+        <p>네 기능의 묶음이 아니라 하나의 연결된 파이프라인입니다. 아이디어 → PRD·기능명세 → 화면 흐름도 → 실물 화면 → 클릭해 보는 프로토타입.</p>
       </div>
-      <div class="flow">
-        <article class="step" data-reveal>
+      <div class="flow flow--4">
+        <article class="step step--wide" data-reveal>
           <p class="step-n">STEP 1 — Talk to Spec</p>
-          <figure class="frame"><img src="images/launchpad/01_spec.png" alt="Talk to Spec — 아이디어 대화와 도출되는 PRD 화면" loading="lazy" decoding="async"></figure>
+          <div class="step-duo">
+            <figure class="frame" style="margin:0">
+              <img src="images/launchpad/00_questions.png" alt="Talk to Spec 질문 단계 — 객관식 질문지에 답하며 요건을 채우는 화면" loading="lazy" decoding="async">
+              <figcaption class="fcap">① 질문지 — 보기 선택 · 직접 입력 · 건너뛰기로 요건 채우기</figcaption>
+            </figure>
+            <figure class="frame" style="margin:0">
+              <img src="images/launchpad/01_spec.png" alt="Talk to Spec — 답변으로 도출된 PRD 를 검토·수정하는 화면" loading="lazy" decoding="async">
+              <figcaption class="fcap">② PRD — 답변을 근거로 도출된 문서를 검토·수정</figcaption>
+            </figure>
+          </div>
           <h4>기획 양식을 몰라도 됩니다</h4>
-          <p>아이디어를 입력하면 LLM 이 되묻는 질문으로 빠진 요건을 채우고, PRD → 유저플로우 → 와이어프레임 방향을 순서대로 도출합니다.</p>
+          <p>아이디어를 입력하면 <b>객관식 질문지</b>가 빠진 요건을 채웁니다 — 보기 선택·직접 입력·건너뛰기 모두 가능하고, 답할수록 기획 서술이 실시간으로 구체화됩니다. 답변을 근거로 PRD 와 기능명세(우선순위·인수조건)가 도출되며, 현업 요구사항 문서를 올려 가져올 수도 있습니다.</p>
         </article>
         <article class="step" data-reveal>
           <p class="step-n">STEP 2 — User Flow</p>
           <figure class="frame"><img src="images/launchpad/02_userflow.png" alt="User Flow — 화면 노드를 흐름도로 배치한 화면" loading="lazy" decoding="async"></figure>
           <h4>예외 경로까지 한 화면에</h4>
-          <p>도출된 기획을 바탕으로 화면 간 흐름을 자동 배치합니다. 정상 흐름과 오류·예외 흐름을 톤으로 구분해 그 자리에서 검토·수정합니다.</p>
+          <p>도출된 기획을 바탕으로 화면 간 흐름을 AI 가 자동 배치합니다. 정상 진행(초록)과 오류·거절(빨강) 경로를 색으로 구분하고, <b>화면·분기·메모 노드를 직접 추가</b>하거나 노드 우클릭으로 <b>디자인을 연결</b>해 실제 화면 썸네일을 붙입니다.</p>
         </article>
         <article class="step" data-reveal>
           <p class="step-n">STEP 3 — Talk to Design</p>
-          <figure class="frame"><img src="images/launchpad/03_design.png" alt="Talk to Design — 내장 HTML 캔버스에서 실물 React 화면을 편집하는 화면" loading="lazy" decoding="async"></figure>
+          <figure class="frame"><img src="images/launchpad/03_design.png" alt="Talk to Design — 내장 캔버스에서 실물 React 화면을 편집하는 화면" loading="lazy" decoding="async"></figure>
           <h4>목업이 아니라 동작하는 화면</h4>
-          <p>내장 캔버스에서 사내 디자인 킷으로 실물 React 화면이 렌더됩니다. 디자이너가 아니어도 직접 옮기고 간격·정렬·색을 다듬습니다.</p>
+          <p>내장 캔버스에서 사내 디자인 킷(MUI 관리자 · DS 2.0 운영/모바일 · DS 3.0 영업)으로 실물 화면이 렌더됩니다. 요소 선택·드래그 재배치·텍스트 수정은 물론 <b>버튼·카드·이미지 요소 추가</b>와 <b>Talk to Image 그래픽 삽입</b>까지 캔버스에서 직접 — 저장하면 이후 AI 수정이 그 위에서 이어집니다.</p>
         </article>
+        <article class="step step--wide" data-reveal>
+          <p class="step-n">STEP 4 — Prototype</p>
+          <figure class="frame"><img src="images/launchpad/04_prototype.png" alt="Prototype — 테스트 케이스별 더미 데이터로 화면 흐름을 클릭해 체험하는 화면" loading="lazy" decoding="async"></figure>
+          <h4>개발 전에 서비스를 미리 써봅니다</h4>
+          <p>기획·흐름·화면을 근거로 정상 · 예외 · 엣지 테스트 케이스를 자동 설계하고, 케이스별 더미 데이터가 실린 화면을 실제 서비스처럼 <b>직접 클릭하며</b> 진행합니다. 화면 연결·케이스 커버리지 지표로 빠진 곳이 바로 드러납니다.</p>
+        </article>
+      </div>
+    </div>
+
+    <!-- Talk to Image -->
+    <div class="sec">
+      <div class="split">
+        <figure class="frame" data-reveal style="margin:0">
+          <div class="pane-bar"><span class="pane-dots"><i></i><i></i><i></i></span><span class="pane-path">nextlab-studio · talk-to-image</span></div>
+          <img src="images/studio15/07_talk_to_image.png" alt="Talk to Image — 대화로 그린 인물 일러스트와 스타일·크기·색 패널" loading="lazy" decoding="async">
+        </figure>
+        <div data-reveal>
+          <div class="sec-head" style="margin-bottom:22px">
+            <p class="eyebrow">Talk to Image</p>
+            <h3>화면에 넣을 그래픽도 말로 그립니다</h3>
+            <p>일러스트 · 아이콘 · 로딩 씬 같은 낱개 SVG 그래픽을 대화로 생성하는 캔버스입니다. 스톡 이미지를 찾아 헤매거나 디자이너 일정에 기다리지 않아도 됩니다.</p>
+          </div>
+          <dl class="rows">
+            <div class="row"><dt>Style</dt><dd><b>라인 · 솔리드 · 듀오톤 · 일러스트</b> — 사내 표준 팔레트로 그려져 Talk to Design 화면과 같은 색 언어를 씁니다</dd></div>
+            <div class="row"><dt>Edit</dt><dd><b>캔버스 직접 편집</b> — 크기·색을 그 자리에서 조정하고, 선택한 요소를 대화에 첨부해 부분 수정합니다</dd></div>
+            <div class="row"><dt>Export</dt><dd><b>SVG 다운로드 · GIF/WEBM 모션 내보내기</b> — 산출물을 바로 화면·문서에 씁니다</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <!-- Figma to Code (엔지니어링 트랙) -->
+    <div class="sec">
+      <div class="split" style="grid-template-columns:1fr 1.15fr">
+        <div data-reveal>
+          <div class="sec-head" style="margin-bottom:22px">
+            <p class="eyebrow">Engineering · Figma to Code</p>
+            <h3>Builder 의 Figma to Code 를 Studio 안에서도</h3>
+            <p>VSCode 확장(Builder)과 동일한 NXL 표준 생성 워크플로를 데스크톱 앱에 내장했습니다. 개발 환경이 없는 PC 에서도 탐색기 · 에디터 · 에이전트 패널을 갖춘 IDE 워크스페이스로 코드를 만들고 검증합니다.</p>
+          </div>
+          <dl class="rows">
+            <div class="row"><dt>Generate</dt><dd><b>Figma 링크 → NXL 표준 React 코드</b> — UI 킷(MUI 관리자 · DS 2.0 · DS 3.0)을 고르면 개발표준·매핑 규칙이 자동 적용됩니다</dd></div>
+            <div class="row"><dt>Verify</dt><dd><b>빌드 검증 + 실패 시 자동수정</b>, 정밀도 경고 시 Figma 재조회로 시각 충실도 보정 — Builder 와 같은 후처리 파이프라인</dd></div>
+            <div class="row"><dt>Preview</dt><dd><b>Storybook 미리보기 샌드박스</b>에서 생성 컴포넌트를 사내 테마(light/dark)로 렌더하고, 자연어 리터치로 다듬습니다</dd></div>
+          </dl>
+        </div>
+        <figure class="frame" data-reveal style="margin:0">
+          <div class="pane-bar"><span class="pane-dots"><i></i><i></i><i></i></span><span class="pane-path">nextlab-studio · figma-to-code</span></div>
+          <img src="images/studio15/08_figma_to_code.png" alt="Figma to Code — 탐색기·에디터·생성 패널을 갖춘 IDE 워크스페이스" loading="lazy" decoding="async">
+        </figure>
       </div>
     </div>
 
@@ -919,6 +963,7 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
           <ul>
             <li>도메인을 몰라도 <b>기획 가이드와 LLM 안내</b>로 정확한 화면을 설계</li>
             <li>Talk to Spec 으로 <b>기획을 역으로 도출</b>하고, 캔버스에서 화면을 직접 다듬어 재작업을 줄임</li>
+            <li>확정된 Figma 디자인은 <b>Figma to Code</b> 로 그 자리에서 NXL 표준 코드까지 — Builder 설치 없이</li>
           </ul>
         </article>
       </div>
@@ -1051,7 +1096,8 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
     <!-- Studio -->
     <div class="dl-group dl-group--studio" data-reveal>
       <div class="dl-group-h">
-        <h3><img class="dl-logo" src="images/logos/studio-lockup.png" alt="NextLab Studio" width="1189" height="143" decoding="async"></h3>
+        <img class="dl-appicon" src="images/logos/studio-appicon.png" alt="" width="512" height="512" decoding="async" aria-hidden="true">
+        <h3><img class="dl-logo" src="images/logos/studio-lockup-text.png" alt="NextLab Studio" width="1004" height="143" decoding="async"></h3>
         <span>데스크톱 앱 · v<span data-studio-ver>0.1.0</span></span>
       </div>
       <div class="dl-list">
@@ -1100,12 +1146,77 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
 
       <div class="dl-steps dl-steps--studio">
         <div class="dl-step"><i>STEP 1</i><b>설치</b><span>macOS 는 dmg 를 열어 앱을 <b>응용 프로그램</b> 으로 끌어놓고, Windows 는 exe 를 실행합니다</span></div>
-        <div class="dl-step"><i>STEP 2</i><b>첫 실행 허용 <em class="dl-tmp">임시</em></b><span>macOS: 차단 창을 닫고 <b>시스템 설정 → 개인정보 보호 및 보안</b> 아래쪽 <b>“그래도 열기”</b><br>Windows: SmartScreen 파란 창 → <b>추가 정보 → 실행</b></span></div>
-        <div class="dl-step"><i>STEP 3</i><b>AI 계정 연동</b><span>표지의 <b>시작하기</b> → 개인 Claude 계정 연결 후 바로 사용</span></div>
+        <div class="dl-step"><i>STEP 2</i><b>AI 계정 연동</b><span>표지의 <b>시작하기</b> → 개인 Claude 계정 연결 후 바로 사용</span></div>
       </div>
-      <p class="dl-foot-note">
-        STEP 2 는 <b>아직 OS 인증서 서명이 적용되지 않아 생기는 임시 절차</b>입니다 — 정식 서명이 적용되면 사라지며, 기기당 최초 1회만 필요합니다.
-      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 유의사항 ════════════════════════════════════════════════════ -->
+<section class="notice" id="notice">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <p class="eyebrow">Notice</p>
+      <h3>도구를 받기 전에, 세 가지</h3>
+      <p>한화생명 표준 위에서 동작하지만, 판단과 책임은 사용자에게 남습니다.</p>
+    </div>
+
+    <div class="notice-group" data-reveal>
+      <div class="notice-group-h">
+        <span class="no">01</span><b>보안 · 데이터</b><span class="en">Security &amp; Data</span>
+      </div>
+      <div class="notice-item">
+        <h4>민감정보는 입력 대상이 아닙니다</h4>
+        <p>고객 실데이터·주민등록번호·계좌·인증서·API 키는 프롬프트와 첨부 파일에 넣지 않습니다.
+          화면 검증에는 더미 데이터를 사용하십시오. Builder 의 사전 차단(8종 패턴)은 보조 장치이며,
+          탐지 범위를 벗어난 정보에 대한 판단 책임은 사용자에게 있습니다.</p>
+      </div>
+      <div class="notice-item">
+        <h4>외부망 도구입니다</h4>
+        <p>입력한 요구사항·첨부 파일·선택한 코드와 Figma 디자인 데이터는 외부 LLM 서버를 경유합니다.
+          반출 가능 범위 내에서만 사용하십시오.</p>
+      </div>
+    </div>
+
+    <div class="notice-group" data-reveal>
+      <div class="notice-group-h">
+        <span class="no">02</span><b>계정 · 배포</b><span class="en">Account &amp; Distribution</span>
+      </div>
+      <div class="notice-item">
+        <h4>현재는 개인 LLM 구독 계정 연계입니다</h4>
+        <p>실행 계정은 각자의 Claude 개인 구독을 OAuth 로 연결해 사용하며, 토큰은 OS 키체인에 암호화 저장됩니다.
+          과금·감사 경로를 하나로 유지하기 위해 API 키 방식은 의도적으로 지원하지 않습니다.
+          사용량만큼 비용이 발생하며 실행 이력·토큰·비용은 기록됩니다.
+          계정 공유 및 공용 계정 사용은 제공사 약관 위반으로 금지합니다.
+          조직 단위 비즈니스 계정 체계로의 전환은 로드맵에 포함되어 있으며, 전환 시 별도 안내합니다.</p>
+      </div>
+      <div class="notice-item">
+        <h4>설치 파일은 이 페이지에서만 받습니다</h4>
+        <p>사내 배포용 파일로 외부 공유를 금지합니다. 재배포본·구버전은 최신 표준이 반영되지 않으므로 사용하지 않습니다.
+          <span class="notice-ver">현재 버전 — Builder v<span data-ver>0.3.8</span> · Studio v<span data-studio-ver>0.1.0</span></span></p>
+      </div>
+    </div>
+
+    <div class="notice-group" data-reveal>
+      <div class="notice-group-h">
+        <span class="no">03</span><b>품질 · 책임</b><span class="en">Quality &amp; Accountability</span>
+      </div>
+      <div class="notice-item">
+        <h4>결과는 사람이 확정합니다</h4>
+        <p>생성된 코드·기획서·디자인은 초안입니다. AI 특성상 결과가 100% 일정하지 않으므로 커밋·PR 리뷰를 거치고,
+          운영 배포는 기존 승인 절차를 그대로 따릅니다. 자동 검증 통과는 표준 적합성만 보장하며
+          업무 요건 충족을 보장하지 않습니다.</p>
+      </div>
+      <div class="notice-item">
+        <h4>표준 규칙은 개인이 끄지 않습니다</h4>
+        <p>개발표준 21개 모듈과 진단 규칙 18개는 팀 합의로 개정합니다.
+          로컬에서 규칙을 임의 해제하거나 표준 문서를 수정한 상태로 산출물을 제출하지 마십시오.</p>
+      </div>
+      <div class="notice-item">
+        <h4>외부 라이브러리는 기존 심의를 따릅니다</h4>
+        <p>AI 가 제안한 패키지·코드 조각도 사내 오픈소스·보안 심의 대상입니다.
+          라이선스 확인 없이 의존성을 추가하지 마십시오.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1115,21 +1226,13 @@ td.name span{font-size:.78rem;color:var(--fg-faint)}
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <h4>솔직한 한계</h4>
-        <p>
-          AI 특성상 결과가 100% 일정하지 않습니다. 미세한 색·여백은 어긋날 수 있어 사람 검수를 전제로 합니다
-          (자동 보정과 미리보기로 부담을 줄입니다). 각자 AI 계정이 필요하고, 사용량만큼 비용이 발생하며 이력·비용으로 추적합니다.
-          Builder 는 프론트엔드(React) 특화 도구로 백엔드·타 프레임워크는 대상이 아닙니다.
-          사내 AI 사용 정책과의 정합성 확인이 필요하며, 민감정보 차단은 내장되어 있으나 보안팀 검토 후 도입을 권장합니다.
-        </p>
-      </div>
-      <div>
         <h4>바로 가기</h4>
         <ul>
           <li><a href="#builder">NEXTLAB Builder — 기능 · 결과 · 표준</a></li>
-          <li><a href="#studio">NextLab Studio — Launchpad · 에이전트</a></li>
-          <li><a href="#impact">기대효과와 절감 추정</a></li>
+          <li><a href="#studio">NextLab Studio — Launchpad · Talk to Image · Figma to Code</a></li>
+          <li><a href="#notice">유의사항</a></li>
           <li><a href="#download">설치 파일 · 사용자 메뉴얼</a></li>
+          <li><a href="updates.html">업데이트 내역</a></li>
         </ul>
       </div>
     </div>
