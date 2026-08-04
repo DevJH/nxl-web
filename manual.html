@@ -212,22 +212,6 @@ td .d{display:block;color:var(--ink-3);font-size:.82rem;margin-top:2px}
 }
 .chip--brand{border-color:var(--brand-line);background:var(--brand-tint);color:var(--brand-deep)}
 
-/* ── 배포 채널 QR ────────────────────────────────────────────── */
-/* 인쇄해서 나눠주는 문서다 — 외부 이미지 서비스에 의존하지 않도록
-   QR 을 인라인 SVG 로 박는다. 오프라인·사내망에서도 보이고 인쇄도 선명하다. */
-.qr{
-  display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;
-  margin:56px 0 0;padding:20px 22px;border:1px solid var(--line);border-radius:12px;
-  background:var(--panel);
-}
-.qr-img{width:104px;height:104px;display:block;background:#fff;border-radius:8px;padding:6px}
-.qr-t b{display:block;font-size:1rem;margin-bottom:4px}
-.qr-t p{color:var(--ink-2);font-size:.9rem}
-.qr-t code{font-size:.82em}
-@media (max-width:520px){
-  .qr{grid-template-columns:1fr;justify-items:center;text-align:center}
-}
-
 .foot{margin-top:80px;padding-top:26px;border-top:1px solid var(--line);
   font-family:var(--mono);font-size:.72rem;color:var(--ink-4);letter-spacing:.06em;
   display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
@@ -251,7 +235,7 @@ td .d{display:block;color:var(--ink-3);font-size:.82rem;margin-top:2px}
   .shell{display:block}
   .doc{padding:0}
   body{font-size:10.5pt}
-  pre,figure,.stage,.tablewrap,.qr{break-inside:avoid}
+  pre,figure,.stage,.tablewrap{break-inside:avoid}
   .chap{break-before:page}
   a{color:var(--ink);text-decoration:none}
 }
@@ -267,7 +251,7 @@ td .d{display:block;color:var(--ink-3);font-size:.82rem;margin-top:2px}
     <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#15171C"/><path d="M9 24V8h3.4l7.2 10.4V8H23v16h-3.4L12.4 13.6V24H9z" fill="#EA5504"/></svg>
     <b>NEXTLAB Builder</b>
   </a>
-  <p class="toc-ver">사용자 메뉴얼 v1.0 · 확장 v0.3.10</p>
+  <p class="toc-ver">사용자 메뉴얼 v1.0 · 확장 v0.3.11</p>
 
   <nav id="toc">
     <p class="toc-sec">시작</p>
@@ -314,7 +298,7 @@ td .d{display:block;color:var(--ink-3);font-size:.82rem;margin-top:2px}
     설정과 옵션은 6장에 모아 두었습니다 — 처음에는 읽지 않아도 됩니다.
   </p>
   <div class="cover-meta">
-    <span class="chip chip--brand">확장 v0.3.10</span>
+    <span class="chip chip--brand">확장 v0.3.11</span>
     <span class="chip">VSCode · Cursor · Antigravity</span>
     <span class="chip">Claude · CodeX</span>
     <span class="chip">MUI · DS2 · DS3</span>
@@ -341,38 +325,8 @@ td .d{display:block;color:var(--ink-3);font-size:.82rem;margin-top:2px}
   </p>
 
   <h3 class="head" id="s1-1"><span class="num">1.1</span>설치</h3>
-
-  <h4 class="sub">쓰던 에디터 그대로 — VSIX 하나로 세 에디터</h4>
-  <p>
-    Builder 는 <b>VSCode 계열 에디터</b>에서 동작합니다. 에디터마다 따로 받을 것 없이
-    <b>같은 <code>.vsix</code> 파일 하나</b>를 씁니다. 설치 경로와 단축키도 모두 같습니다.
-  </p>
-  <div class="tablewrap">
-    <table>
-      <thead><tr><th>에디터</th><th>동작</th><th class="m">비고</th></tr></thead>
-      <tbody>
-        <tr>
-          <td><b>Visual Studio Code</b></td>
-          <td>표준 개발 환경 — 설치 즉시 사이드바에서 사용</td>
-          <td class="m">권장</td>
-        </tr>
-        <tr>
-          <td><b>Cursor</b></td>
-          <td>AI 네이티브 에디터에서도 동일하게 동작</td>
-          <td class="m">동일 VSIX</td>
-        </tr>
-        <tr>
-          <td><b>Antigravity</b></td>
-          <td>Google 의 AI 에디터 — VSCode 계열이면 그대로</td>
-          <td class="m">동일 VSIX</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h4 class="sub">설치 절차</h4>
   <ol class="steps">
-    <li>확장 패널(<kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd>) 우측 상단 <b>…</b> → <b>Install from VSIX…</b> → 배포받은 <code>.vsix</code> 파일 선택 — Cursor · Antigravity 도 같은 위치입니다</li>
+    <li>VSCode 확장 패널(<kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd>) 우측 상단 <b>…</b> → <b>Install from VSIX…</b> → 배포받은 <code>.vsix</code> 파일 선택</li>
     <li><b>에디터를 완전히 종료했다 다시 엽니다.</b> 창만 새로고침하면 확장이 절반만 로드될 수 있습니다 (<kbd>Cmd</kbd>+<kbd>Q</kbd> 후 재실행)</li>
     <li>좌측 활동 표시줄 또는 우측 상단에 주황색 <b>N</b> 아이콘이 보이면 설치 완료</li>
   </ol>
@@ -1137,22 +1091,8 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
   </div>
 </section>
 
-<section class="qr" aria-label="배포 채널 안내">
-  <svg class="qr-img" viewBox="-2 -2 29 29" role="img" aria-label="nxl-web.vercel.app QR 코드" shape-rendering="crispEdges">
-    <rect x="-2" y="-2" width="29" height="29" fill="#fff"/>
-    <path d="M0 0h7v1h-7zM8 0h3v1h-3zM13 0h4v1h-4zM18 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM9 1h5v1h-5zM18 1h1v1h-1zM24 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM11 2h1v1h-1zM14 2h1v1h-1zM18 2h1v1h-1zM20 2h3v1h-3zM24 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h1v1h-1zM11 3h5v1h-5zM18 3h1v1h-1zM20 3h3v1h-3zM24 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h1v1h-1zM11 4h3v1h-3zM15 4h2v1h-2zM18 4h1v1h-1zM20 4h3v1h-3zM24 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h2v1h-2zM14 5h1v1h-1zM18 5h1v1h-1zM24 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h7v1h-7zM8 7h1v1h-1zM10 7h2v1h-2zM0 8h1v1h-1zM4 8h1v1h-1zM6 8h5v1h-5zM15 8h1v1h-1zM17 8h5v1h-5zM24 8h1v1h-1zM2 9h1v1h-1zM5 9h1v1h-1zM7 9h1v1h-1zM9 9h1v1h-1zM11 9h1v1h-1zM13 9h3v1h-3zM17 9h1v1h-1zM20 9h2v1h-2zM23 9h1v1h-1zM3 10h4v1h-4zM8 10h1v1h-1zM10 10h4v1h-4zM15 10h4v1h-4zM20 10h3v1h-3zM1 11h1v1h-1zM5 11h1v1h-1zM7 11h1v1h-1zM9 11h1v1h-1zM14 11h1v1h-1zM16 11h2v1h-2zM19 11h2v1h-2zM22 11h2v1h-2zM1 12h3v1h-3zM5 12h2v1h-2zM8 12h2v1h-2zM11 12h2v1h-2zM17 12h3v1h-3zM21 12h4v1h-4zM0 13h1v1h-1zM2 13h1v1h-1zM5 13h1v1h-1zM9 13h2v1h-2zM12 13h5v1h-5zM20 13h1v1h-1zM23 13h1v1h-1zM2 14h6v1h-6zM11 14h1v1h-1zM14 14h2v1h-2zM18 14h5v1h-5zM3 15h1v1h-1zM5 15h1v1h-1zM8 15h1v1h-1zM10 15h2v1h-2zM14 15h2v1h-2zM17 15h1v1h-1zM19 15h2v1h-2zM22 15h2v1h-2zM0 16h2v1h-2zM4 16h1v1h-1zM6 16h4v1h-4zM16 16h7v1h-7zM8 17h4v1h-4zM14 17h1v1h-1zM16 17h1v1h-1zM20 17h1v1h-1zM0 18h7v1h-7zM8 18h2v1h-2zM11 18h1v1h-1zM14 18h1v1h-1zM16 18h1v1h-1zM18 18h1v1h-1zM20 18h1v1h-1zM0 19h1v1h-1zM6 19h1v1h-1zM9 19h3v1h-3zM16 19h1v1h-1zM20 19h5v1h-5zM0 20h1v1h-1zM2 20h3v1h-3zM6 20h1v1h-1zM8 20h3v1h-3zM14 20h1v1h-1zM16 20h7v1h-7zM0 21h1v1h-1zM2 21h3v1h-3zM6 21h1v1h-1zM11 21h1v1h-1zM14 21h3v1h-3zM18 21h2v1h-2zM22 21h3v1h-3zM0 22h1v1h-1zM2 22h3v1h-3zM6 22h1v1h-1zM11 22h4v1h-4zM16 22h3v1h-3zM21 22h1v1h-1zM23 22h1v1h-1zM0 23h1v1h-1zM6 23h1v1h-1zM9 23h3v1h-3zM18 23h6v1h-6zM0 24h7v1h-7zM8 24h1v1h-1zM12 24h1v1h-1zM15 24h1v1h-1zM17 24h2v1h-2zM22 24h3v1h-3z" fill="#16181D"/>
-  </svg>
-  <div class="qr-t">
-    <b>자세한 안내 및 설치파일 링크</b>
-    <p>
-      휴대폰으로 QR 을 찍거나 <code>https://nxl-web.vercel.app</code> 으로 접속하면
-      최신 설치 파일과 소개 자료를 받을 수 있습니다.
-    </p>
-  </div>
-</section>
-
 <footer class="foot">
-  <span>NEXTLAB Builder 사용자 메뉴얼 v1.0 · 확장 v0.3.10</span>
+  <span>NEXTLAB Builder 사용자 메뉴얼 v1.0 · 확장 v0.3.11</span>
   <span>사내 전용 — 외부 공유 금지 · 2026</span>
 </footer>
 
