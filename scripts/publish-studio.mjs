@@ -254,6 +254,23 @@ const macArmDmg = pick(/-arm64\.dmg$/i);
 const macX64Dmg = pick(/^(?!.*arm64).*\.dmg$/i);
 const winExe = pick(/\.exe$/i);
 
+// ---- 릴리스 노트 게이트 ----
+// updates.html 은 손으로 쓰는 문서라 릴리스 때 잊히기 쉽다 (v0.3.2 에서 실제 누락).
+// 발행 전에 이번 버전 항목이 있는지 강제한다 — 없으면 업로드를 시작하기 전에 멈춘다.
+// 긴급 우회: env NXL_SKIP_UPDATES_CHECK=1
+{
+  const updatesPath = path.join(CHANNEL_DIR, 'updates.html');
+  const hasEntry =
+    fs.existsSync(updatesPath) && fs.readFileSync(updatesPath, 'utf8').includes(`>v${version}<`);
+  if (!hasEntry && !process.env.NXL_SKIP_UPDATES_CHECK) {
+    console.error(
+      `[publish-studio] updates.html 에 v${version} 항목이 없습니다 — 릴리스 노트를 먼저 추가하세요.\n` +
+        `  (Studio 섹션에 <span class="rel-v">v${version}</span> 블록. 우회: NXL_SKIP_UPDATES_CHECK=1)`,
+    );
+    process.exit(1);
+  }
+}
+
 await (async () => {
   console.log(`[publish-studio] v${version} → ${REPO} Release ${TAG} 업로드 시작`);
   const uploaded = await uploadAssets();
@@ -294,6 +311,9 @@ await (async () => {
       : `      <p class="note missing">${label} 설치본은 이번 릴리스에 포함되지 않았습니다.</p>`;
 
   const html = `<!doctype html>
+<!-- publish-studio.mjs 가 릴리스마다 통째로 재생성하는 파일 — 여기를 직접 수정하면
+     다음 발행에서 소리 없이 사라진다. 안내문·구조 변경은 scripts/publish-studio.mjs 의
+     템플릿에서 할 것. (index.html·manual.html·updates.html 은 채널이 정본 — 별개) -->
 <html lang="ko">
 <head>
 <meta charset="utf-8" />
