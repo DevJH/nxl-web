@@ -1,8 +1,8 @@
-version: 0.3.1
+version: 0.3.2
 files:
-  - url: NextLab Studio Setup 0.3.1.exe
-    sha512: IVQ8y4fWj4AHNgR0sftPZK1TLZGeooSmhOZMoDAbzIZCbfLmfYcbr6GbIIHK9bOhyUQqdsbNtWVnef5lhbcaTg==
-    size: 187835547
-path: NextLab Studio Setup 0.3.1.exe
-sha512: IVQ8y4fWj4AHNgR0sftPZK1TLZGeooSmhOZMoDAbzIZCbfLmfYcbr6GbIIHK9bOhyUQqdsbNtWVnef5lhbcaTg==
-releaseDate: '2026-08-04T05:58:09.055Z'
+  - url: NextLab Studio Setup 0.3.2.exe
+    sha512: PomzFWtamcrooUaxGf529rkDrYWWeyMhb91VAdeuBc+CbT44K0NHkicKfWIQIHhRQAJzeWmN8ybtYEzINP4UIA==
+    size: 188130389
+path: NextLab Studio Setup 0.3.2.exe
+sha512: PomzFWtamcrooUaxGf529rkDrYWWeyMhb91VAdeuBc+CbT44K0NHkicKfWIQIHhRQAJzeWmN8ybtYEzINP4UIA==
+releaseDate: '2026-08-05T00:12:03.629Z'

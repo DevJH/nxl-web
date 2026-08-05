@@ -1,17 +1,17 @@
-version: 0.3.1
+version: 0.3.2
 files:
-  - url: NextLab Studio-0.3.1-arm64-mac.zip
-    sha512: 3dh56B9riHuPN7WT+tp12QlxhPR7QlJTnTDrlbPQKM020dGYfa0cP8dOpGjt7hIOhJy2yFm+9HEDtOS0pPNGgg==
-    size: 220585470
-  - url: NextLab Studio-0.3.1-mac.zip
-    sha512: Hs3vjUdCiN8I+mOJUjgJGe/jbTRAGRg9mWkz4cF4AMAanlNIurZAEMLy3AhFawEQU9oa/1Mk7NQ3gbjOZQuv0A==
-    size: 230178188
-  - url: NextLab Studio-0.3.1-arm64.dmg
-    sha512: 19aOQkcBKq8qmvHi8xAfatlDCeonBGCuj+oHkVJzZXvhwbnYpVPiopioWyYY5BgVK7IKdyK1g1dAcWmQiJZJfg==
-    size: 228079995
-  - url: NextLab Studio-0.3.1.dmg
-    sha512: X9PWrgiE3wclJ4y6mbZlmXbtbjfQ+fBV8F5tfgoLgQc36yYmNWSRJL277ZyKSh1l1uapvFHiECgWYpei0zk4Jw==
-    size: 237764925
-path: NextLab Studio-0.3.1-arm64-mac.zip
-sha512: 3dh56B9riHuPN7WT+tp12QlxhPR7QlJTnTDrlbPQKM020dGYfa0cP8dOpGjt7hIOhJy2yFm+9HEDtOS0pPNGgg==
-releaseDate: '2026-08-04T06:02:42.111Z'
+  - url: NextLab Studio-0.3.2-arm64-mac.zip
+    sha512: IGslC08DOsoCpeOCYg024vDoataTqE4x8aoNiiVkb8zlegfnovJF8IgECxiwpBptnjlbaevYfKKOOuyOe0MWSA==
+    size: 220886516
+  - url: NextLab Studio-0.3.2-mac.zip
+    sha512: L7Nx9uOgbCwtemuq//EZY/fVDSO/5ysXsX4mtRGdVd5rlIBgv0wbtqOUUa3EKsE6bgl7MvqhOXld/pBD4NYEWA==
+    size: 230479221
+  - url: NextLab Studio-0.3.2-arm64.dmg
+    sha512: 4tWntXztDavKdE5k66rPFS257R3tXiQNa6A+8FaqXn7+KMq7qxfmcjDzGs3rdVbVTFNiE5t+QlJr/D2m4LcwMQ==
+    size: 228212152
+  - url: NextLab Studio-0.3.2.dmg
+    sha512: cb0s7NcBAtvwy8b9/iTC8IxjqUZA7iDLGRqxHC6OsJscwfhsrdjhtX++wbHrIld0qSpeoHQzdJ/U8/QWGk5KQQ==
+    size: 238078894
+path: NextLab Studio-0.3.2-arm64-mac.zip
+sha512: IGslC08DOsoCpeOCYg024vDoataTqE4x8aoNiiVkb8zlegfnovJF8IgECxiwpBptnjlbaevYfKKOOuyOe0MWSA==
+releaseDate: '2026-08-05T00:15:17.756Z'
