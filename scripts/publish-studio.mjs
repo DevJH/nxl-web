@@ -224,14 +224,13 @@ async function uploadAssets() {
 
 /** 업데이트 메타의 상대 파일명을 Release 자산 절대 URL 로 재작성한다. */
 function rewriteMeta(text) {
-  let out = text;
-  for (const name of assets) {
-    // url:/path: 값으로 등장하는 원본 파일명만 치환 (sha512 등 다른 줄은 건드리지 않는다)
-    out = out
-      .replaceAll(`url: ${name}`, `url: ${assetUrl(name)}`)
-      .replaceAll(`path: ${name}`, `path: ${assetUrl(name)}`);
-  }
-  return out;
+  // yml 은 electron-builder 원본 이름(공백)을 참조하지만, CI 스테이징 Release 에서
+  // 내려받은 로컬 자산은 GitHub 가 공백을 점으로 바꾼 이름이다 — 문자열 일치가 아니라
+  // 점 정규화(dotted)로 대조해야 두 경로(로컬 빌드·CI 다운로드) 모두에서 치환된다.
+  return text.replace(/^(\s*(?:-\s*)?(?:url|path):\s*)(.+)$/gm, (line, prefix, value) => {
+    const match = assets.find((name) => dotted(name) === dotted(value.trim()));
+    return match ? `${prefix}${assetUrl(match)}` : line;
+  });
 }
 
 const filesMeta = assets.map((name) => {

@@ -1,8 +1,8 @@
 version: 0.3.2
 files:
-  - url: NextLab Studio Setup 0.3.2.exe
+  - url: https://github.com/DevJH/nxl-web/releases/download/studio-v0.3.2/NextLab.Studio.Setup.0.3.2.exe
     sha512: PomzFWtamcrooUaxGf529rkDrYWWeyMhb91VAdeuBc+CbT44K0NHkicKfWIQIHhRQAJzeWmN8ybtYEzINP4UIA==
     size: 188130389
-path: NextLab Studio Setup 0.3.2.exe
+path: https://github.com/DevJH/nxl-web/releases/download/studio-v0.3.2/NextLab.Studio.Setup.0.3.2.exe
 sha512: PomzFWtamcrooUaxGf529rkDrYWWeyMhb91VAdeuBc+CbT44K0NHkicKfWIQIHhRQAJzeWmN8ybtYEzINP4UIA==
 releaseDate: '2026-08-05T00:12:03.629Z'

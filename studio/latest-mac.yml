@@ -1,17 +1,17 @@
 version: 0.3.2
 files:
-  - url: NextLab Studio-0.3.2-arm64-mac.zip
+  - url: https://github.com/DevJH/nxl-web/releases/download/studio-v0.3.2/NextLab.Studio-0.3.2-arm64-mac.zip
     sha512: IGslC08DOsoCpeOCYg024vDoataTqE4x8aoNiiVkb8zlegfnovJF8IgECxiwpBptnjlbaevYfKKOOuyOe0MWSA==
     size: 220886516
-  - url: NextLab Studio-0.3.2-mac.zip
+  - url: https://github.com/DevJH/nxl-web/releases/download/studio-v0.3.2/NextLab.Studio-0.3.2-mac.zip
     sha512: L7Nx9uOgbCwtemuq//EZY/fVDSO/5ysXsX4mtRGdVd5rlIBgv0wbtqOUUa3EKsE6bgl7MvqhOXld/pBD4NYEWA==
     size: 230479221
-  - url: NextLab Studio-0.3.2-arm64.dmg
+  - url: https://github.com/DevJH/nxl-web/releases/download/studio-v0.3.2/NextLab.Studio-0.3.2-arm64.dmg
     sha512: 4tWntXztDavKdE5k66rPFS257R3tXiQNa6A+8FaqXn7+KMq7qxfmcjDzGs3rdVbVTFNiE5t+QlJr/D2m4LcwMQ==
     size: 228212152
-  - url: NextLab Studio-0.3.2.dmg
+  - url: https://github.com/DevJH/nxl-web/releases/download/studio-v0.3.2/NextLab.Studio-0.3.2.dmg
     sha512: cb0s7NcBAtvwy8b9/iTC8IxjqUZA7iDLGRqxHC6OsJscwfhsrdjhtX++wbHrIld0qSpeoHQzdJ/U8/QWGk5KQQ==
     size: 238078894
-path: NextLab Studio-0.3.2-arm64-mac.zip
+path: https://github.com/DevJH/nxl-web/releases/download/studio-v0.3.2/NextLab.Studio-0.3.2-arm64-mac.zip
 sha512: IGslC08DOsoCpeOCYg024vDoataTqE4x8aoNiiVkb8zlegfnovJF8IgECxiwpBptnjlbaevYfKKOOuyOe0MWSA==
 releaseDate: '2026-08-05T00:15:17.756Z'
