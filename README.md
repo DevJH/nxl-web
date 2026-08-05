@@ -1,6 +1,6 @@
 # nxl-web — NEXTLAB 배포 채널
 
-사내 배포 채널. **https://nxl-web.vercel.app** (main 푸시 = Vercel 자동 배포)
+사내 배포 채널. **https://nxl-ai-tools.reala.pro** (main 푸시 = Vercel 자동 배포)
 
 두 제품을 함께 호스팅한다.
 

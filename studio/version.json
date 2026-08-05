@@ -2,7 +2,7 @@
   "product": "NextLab Studio",
   "version": "0.3.2",
   "releasedAt": "2026-08-05T00:24:20.827Z",
-  "downloadPage": "https://nxl-web.vercel.app/studio/",
+  "downloadPage": "https://nxl-ai-tools.reala.pro/studio/",
   "releaseTag": "studio-v0.3.2",
   "platforms": {
     "mac-arm64": {

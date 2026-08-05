@@ -182,7 +182,7 @@ async function ensureRelease() {
     body: JSON.stringify({
       tag_name: TAG,
       name: `NextLab Studio v${version}`,
-      body: `NextLab Studio ${version} 설치본. 다운로드 안내: https://nxl-web.vercel.app/studio/`,
+      body: `NextLab Studio ${version} 설치본. 다운로드 안내: https://nxl-ai-tools.reala.pro/studio/`,
       draft: false,
       prerelease: false,
     }),
@@ -290,7 +290,7 @@ await (async () => {
     product: 'NextLab Studio',
     version,
     releasedAt: new Date().toISOString(),
-    downloadPage: 'https://nxl-web.vercel.app/studio/',
+    downloadPage: 'https://nxl-ai-tools.reala.pro/studio/',
     releaseTag: TAG,
     platforms: {
       ...(macArmDmg ? { 'mac-arm64': platformEntry(macArmDmg) } : {}),
