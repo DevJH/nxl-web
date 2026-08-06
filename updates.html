@@ -238,6 +238,21 @@ ul{margin:0;padding:0;list-style:none}
     </div>
     <div class="rel">
       <div class="rel-meta">
+        <span class="rel-v">v0.3.5</span>
+        <span class="rel-d">2026-08-05</span>
+      </div>
+      <div class="rel-body">
+        <h3>Claude 계정 로그인 · 로그아웃 · 사용량 조회 정정</h3>
+        <ul>
+          <li>계정 연동에 "Claude 로그인" 방식이 추가됐습니다 — 공식 Claude Code 로그인을 그대로 실행하는 방식이라, 인증은 브라우저에서 Anthropic 과 직접 이뤄지고 자격증명은 OS 키체인에 보관됩니다 (토큰이 Studio 를 거치지 않습니다). 기존 토큰 붙여넣기 방식도 그대로 쓸 수 있습니다</li>
+          <li>로그아웃 · 연결 해제 신설 — 항목별(로그인 세션 / 토큰 / API 키) 또는 전체 해제가 가능하고, 로그아웃 상태에서는 워크스페이스가 열리지 않습니다. 이전에는 로그아웃해도 앱을 다시 열면 로그인 상태로 돌아왔습니다</li>
+          <li>사용량이 조회되지 않던 문제를 고쳤습니다 — 붙여넣기 토큰에는 사용량 조회 권한이 없어 실패했고, 실패가 쌓이면 원인이 "일시적 제한" 처럼 보였습니다. 이제 로그인 세션을 먼저 사용하고, 토큰 방식일 때는 기다리라는 대신 방식 전환을 안내합니다</li>
+          <li>Windows 설치본에서도 사용량이 조회됩니다 — 그동안 macOS 키체인만 읽어, 로그인해도 구조적으로 값이 나오지 않았습니다</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rel">
+      <div class="rel-meta">
         <span class="rel-v">v0.3.4</span>
         <span class="rel-d">2026-08-05</span>
       </div>
