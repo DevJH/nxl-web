@@ -151,10 +151,25 @@ ul{margin:0;padding:0;list-style:none}
 
     <div class="rel">
       <div class="rel-meta">
-        <span class="rel-v">v0.3.12</span>
-        <span class="rel-d">2026-08-05</span>
+        <span class="rel-v">v0.4.0</span>
+        <span class="rel-d">2026-08-12</span>
         <span class="rel-tag">현재 버전</span>
       </div>
+      <div class="rel-body">
+        <h3>NXLDS 정식 UI Kit</h3>
+        <ul>
+          <li>새 디자인시스템 NXLDS가 네 번째 UI Kit으로 들어왔습니다 — Figma → Code와 Studio 핸드오프에서 DS 2.0 · DS 3.0 · MUI와 같은 방식으로 선택해 쓸 수 있습니다</li>
+          <li>컴포넌트 177종 · 토큰 312개 · 패턴 화면 30종 카탈로그를 확장에 동봉해, 존재하지 않는 컴포넌트를 지어내는 문제를 원천 차단합니다</li>
+          <li>Studio에서 만든 NXLDS 화면을 프로젝트로 가져오는 Registry 설치기가 추가됐습니다 — 화면 소스와 디자인시스템 코어를 함께 복사하고, 프로젝트에서 이미 수정한 파일은 덮어쓰지 않습니다</li>
+          <li>생성 직후 확인할 수 있는 전용 Storybook 샌드박스가 함께 설치됩니다 — customer · fp · backoffice 대상, 글자 확대, 라이트/다크를 툴바에서 전환하며 검증합니다</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rel">
+      <div class="rel-meta">
+        <span class="rel-v">v0.3.12</span>
+        <span class="rel-d">2026-08-05</span>
+              </div>
       <div class="rel-body">
         <h3>Windows 터미널 호환 수정 — 계정 연동·Storybook 미리보기</h3>
         <ul>
@@ -223,10 +238,25 @@ ul{margin:0;padding:0;list-style:none}
 
     <div class="rel">
       <div class="rel-meta">
-        <span class="rel-v">v0.3.7</span>
-        <span class="rel-d">2026-08-06</span>
+        <span class="rel-v">v0.4.0</span>
+        <span class="rel-d">2026-08-12</span>
         <span class="rel-tag">현재 버전</span>
       </div>
+      <div class="rel-body">
+        <h3>NXLDS 디자인 파이프라인</h3>
+        <ul>
+          <li>Talk to Design 캔버스에 NXLDS 킷이 추가됐습니다 — 고르면 실제 디자인시스템 컴포넌트로 렌더되고, Storybook 패턴 화면 30종을 정본 삼아 화면을 조립합니다</li>
+          <li>화면마다 생성 계약(화면 유형 · 정상/예외 흐름 · 반응형 기준)을 만들어 전달하고, 생성 결과는 시각 검수 레이어가 점검합니다</li>
+          <li>생성 화면이 조용히 깨지던 원인 세 가지를 막았습니다 — 스타일이 소리 없이 사라지는 클래스, 잘못된 import로 화면 전체가 죽는 문제, 한글 파일명이 저장 · 내보내기에서 거부되던 문제</li>
+          <li>Studio에서 만든 화면을 Builder로 넘기는 핸드오프 상태 관리가 추가됐습니다 — 어떤 화면이 어디까지 반영됐는지 양쪽에서 같은 상태를 봅니다</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rel">
+      <div class="rel-meta">
+        <span class="rel-v">v0.3.7</span>
+        <span class="rel-d">2026-08-06</span>
+              </div>
       <div class="rel-body">
         <h3>기능명세 검토 · 프로토타입 시나리오</h3>
         <ul>
