@@ -1,23 +1,23 @@
 {
-  "generatedAt": "2026-08-12T01:29:06.067Z",
+  "generatedAt": "2026-08-13T08:31:47.071Z",
   "releases": [
     {
-      "version": "0.4.0",
-      "releasedAt": "2026-08-12T01:26:32.780Z",
+      "version": "0.4.1",
+      "releasedAt": "2026-08-13T08:30:09.065Z",
       "vsix": {
-        "name": "nxl-builder-0.4.0.vsix",
-        "path": "/releases/0.4.0/nxl-builder-0.4.0.vsix",
-        "bytes": 11988313,
-        "sha256": "bc05ec46681ad43b7885bbc3f8704e41f4702bb5b896335905bd609f5cbe4a85",
-        "modifiedAt": "2026-08-12T01:26:32.780Z"
+        "name": "nxl-builder-0.4.1.vsix",
+        "path": "/releases/0.4.1/nxl-builder-0.4.1.vsix",
+        "bytes": 12652747,
+        "sha256": "96acc77fd48e95a12591eee64b375e67b9c86f123b87d07516334b3d89c2c2fa",
+        "modifiedAt": "2026-08-13T08:30:09.065Z"
       },
       "files": [
         {
-          "name": "nxl-builder-0.4.0.vsix",
-          "path": "/releases/0.4.0/nxl-builder-0.4.0.vsix",
-          "bytes": 11988313,
-          "sha256": "bc05ec46681ad43b7885bbc3f8704e41f4702bb5b896335905bd609f5cbe4a85",
-          "modifiedAt": "2026-08-12T01:26:33.289Z"
+          "name": "nxl-builder-0.4.1.vsix",
+          "path": "/releases/0.4.1/nxl-builder-0.4.1.vsix",
+          "bytes": 12652747,
+          "sha256": "96acc77fd48e95a12591eee64b375e67b9c86f123b87d07516334b3d89c2c2fa",
+          "modifiedAt": "2026-08-13T08:30:48.899Z"
         }
       ]
     }
