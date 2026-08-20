@@ -151,9 +151,25 @@ ul{margin:0;padding:0;list-style:none}
 
     <div class="rel">
       <div class="rel-meta">
+        <span class="rel-v">v1.0.0</span>
+        <span class="rel-d">2026-08-20</span>
+        <span class="rel-tag">현재 버전</span>
+      </div>
+      <div class="rel-body">
+        <h3>1.0 — 새 프로젝트 구성 위저드 · 4개 디자인시스템 외부망 설치 · DS 3.0 차세대(@nxl-dsp) 전환</h3>
+        <ul>
+          <li><b>새 프로젝트 구성</b>: 채팅 첫 화면의 「새 프로젝트 구성」(또는 <code>/init</code>)에서 질문 3개(무엇을 · 누가 쓰나 · 디자인시스템)에 답하면 — 프로젝트 생성부터 개발표준 골격, 디자인시스템 설치·테마 배선, 폰트, 브랜드 스타터 화면까지 한 번에 준비됩니다. 4개 킷(DS 2.0 · DS 3.0 · MUI · NXLDS) 전부 <code>pnpm dev</code> 즉시 동작을 확인했습니다</li>
+          <li><b>외부망 설치 완비</b>: 사내 레지스트리 없이도 DS 2.0(동봉 패키지), DS 3.0, MUI, NXLDS 를 프로젝트에 설치합니다. 채팅에 "DS2 세팅해줘"라고 하면 직접 수행합니다</li>
+          <li><b>DS 3.0 차세대(@nxl-dsp)</b>: 공식 dsp 레지스트리의 최신 세트를 동봉하고, 화면 생성 규칙도 차세대 기준으로 전환했습니다(기존 sales-frontend 프로젝트는 기존 규칙 유지). 명령 「사내 DS 3.0(@nxl-dsp) 동봉 세트 설치」로 프로젝트에 공급합니다</li>
+          <li>MUI 프로젝트에는 사내 관리자(nlm) 정본 테마(팔레트·타이포·컴포넌트 overrides 전부)가 <code>src/theme/</code> 으로 함께 들어갑니다</li>
+          <li>알려진 제약: 새 프로젝트 구성의 Windows 실기기 검증은 진행 중입니다 — 문제가 보이면 "NEXTLAB 프로젝트 구성" 출력 채널 로그와 함께 제보해 주세요</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rel">
+      <div class="rel-meta">
         <span class="rel-v">v0.4.13</span>
         <span class="rel-d">2026-08-19</span>
-        <span class="rel-tag">현재 버전</span>
       </div>
       <div class="rel-body">
         <h3>Studio→Code 인터랙션 완결성 · NXLDS 브랜드 아이콘 정본 · DS 3.0 컴포지션 확장</h3>
@@ -307,9 +323,24 @@ ul{margin:0;padding:0;list-style:none}
 
     <div class="rel">
       <div class="rel-meta">
+        <span class="rel-v">v0.5.0</span>
+        <span class="rel-d">2026-08-20</span>
+        <span class="rel-tag">현재 버전</span>
+      </div>
+      <div class="rel-body">
+        <h3>개발 모드 완결성 — 버튼이 실제로 동작하고, 개발 결정이 반출까지 이어집니다</h3>
+        <ul>
+          <li>개발 모드에서 만든 화면의 버튼·이동이 장식으로 남지 않습니다 — 화면 사이 이동 경로가 여러 단계까지 이어지고, 목업 데이터는 시나리오 리모컨으로 바꿔가며 확인할 수 있습니다</li>
+          <li>개발 모드에서 확정한 것들(API 경계 · 목업 시나리오 · 화면을 건너 이어지는 값)이 사내 반출 패키지에 계약으로 실립니다 — 지금까지는 정적 화면만 넘어가 개발 결정이 증발했습니다</li>
+          <li>DS 3.0 화면 패턴이 실서비스 캡처 기반으로 재편되고 기기(모바일 · 태블릿PC) 축으로 정리됐습니다</li>
+          <li>NXLDS 버튼 스타일이 DS 3.0 전역 스타일에 지워지던 문제와, 흐름 버튼이 비활성일 때 프로토타입 검사가 실패로 오판하던 문제를 고쳤습니다</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rel">
+      <div class="rel-meta">
         <span class="rel-v">v0.4.3</span>
         <span class="rel-d">2026-08-18</span>
-        <span class="rel-tag">현재 버전</span>
       </div>
       <div class="rel-body">
         <h3>NXLDS 0.2 · DS 3.0 공식 레지스트리 · 유저플로우 생성 안정화</h3>
