@@ -151,9 +151,23 @@ ul{margin:0;padding:0;list-style:none}
 
     <div class="rel">
       <div class="rel-meta">
-        <span class="rel-v">v1.0.1</span>
+        <span class="rel-v">v1.0.2</span>
         <span class="rel-d">2026-08-25</span>
         <span class="rel-tag">현재 버전</span>
+      </div>
+      <div class="rel-body">
+        <h3>사용 조건 동의 게이트 · 생성 엔진 갱신(Storybook 실행 잠금 해소)</h3>
+        <ul>
+          <li><b>사용 조건(보안 서약) 동의</b>: 최초 사용 시 사용 조건 — 연구·개발 목적 한정(실서비스 데이터 사용 불가) · 연구개발망 단말 한정 설치 · 고객 실데이터/주민등록번호/계좌/인증서/API 키 입력·계정 공유·설치 파일 외부 공유 금지 · 생성 결과는 초안이며 서비스 적용 시 기존 배포 승인 절차 준용 — 에 동의해야 Builder 를 사용할 수 있습니다. 전문은 명령 「사용 조건(보안 서약) 보기」로 언제든 열람할 수 있습니다</li>
+          <li><b>Storybook 실행 잠금 해소</b>: 동봉 생성 엔진(ju-hong-e)이 0.9.0 으로 올라갔습니다. 구버전 엔진이 강제 업데이트 안내와 함께 종료되어 Figma → Code 후 「Storybook 실행」이 <code>/server-start</code> 오류로 막히던 문제가 해소됩니다</li>
+          <li><b>엔진 부팅 안정화</b>: 엔진 터미널 부팅 점검을 간소화하고 명령 주입 대기를 실측(8~10초)에 맞춰 조정해, 미리보기 명령이 부팅 중에 유실되지 않습니다</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rel">
+      <div class="rel-meta">
+        <span class="rel-v">v1.0.1</span>
+        <span class="rel-d">2026-08-25</span>
       </div>
       <div class="rel-body">
         <h3>NXLDS 0.2.1 동봉 — 관리자 화면 골격 정본 · 색 매핑 복원</h3>
