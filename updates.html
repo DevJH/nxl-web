@@ -351,9 +351,25 @@ ul{margin:0;padding:0;list-style:none}
 
     <div class="rel">
       <div class="rel-meta">
+        <span class="rel-v">v0.5.2</span>
+        <span class="rel-d">2026-08-26</span>
+        <span class="rel-tag">현재 버전</span>
+      </div>
+      <div class="rel-body">
+        <h3>디자인 문서 파이프라인 · Figma 왕복 동기화 · 넓어진 캔버스</h3>
+        <ul>
+          <li><b>디자인 문서 파이프라인</b>: Talk to Design 화면의 정본이 구조화된 디자인 문서로 전환됩니다. 요소 선택·속성 편집이 문서 기반 인스펙터로 정확해지고, 컴포넌트 카탈로그가 디자인시스템에서 기계적으로 추출되어 킷별 편집 항목이 일관됩니다</li>
+          <li><b>편집 되쓰기 엔진 교체</b>: 캔버스에서 고친 색·문구·구조를 화면 코드에 반영할 때 문자열 치환이 아니라 구문 트리(AST)로 고쳐 씁니다 — 편집이 소스를 깨뜨리거나 조용히 유실되던 문제가 구조적으로 사라집니다</li>
+          <li><b>Figma 왕복 동기화</b>: Studio 에서 Figma 로 보낸 화면을 Figma 에서 손본 뒤, 그 변경을 다시 Studio 로 가져올 수 있습니다 — 변경점 비교·선택 적용·모두 무시를 지원하고, 색·간격 표기 차이로 생기던 반복 diff 노이즈와 큰 화면에서 가져오기가 타임아웃 나던 문제를 함께 정리했습니다</li>
+          <li><b>삽입 팔레트 레시피</b>: 디자인시스템 컴포넌트 삽입이 완성된 조합(레시피) 단위로 들어갑니다 — 빈 인스턴스나 부품 단독 삽입으로 화면이 깨지던 오류를 해소했습니다</li>
+          <li><b>캔버스가 넓어졌습니다</b>: 디자인 작업 화면의 보조 내비(좌측 메뉴 · 화면 레일 · 레이어 패널)가 기본 접힘으로 바뀌어, 들어온 첫 순간부터 그림이 가장 넓게 보입니다. 필요할 때 화살표로 펴고, 펼친 선택은 다음 진입에도 유지됩니다</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rel">
+      <div class="rel-meta">
         <span class="rel-v">v0.5.1</span>
         <span class="rel-d">2026-08-25</span>
-        <span class="rel-tag">현재 버전</span>
       </div>
       <div class="rel-body">
         <h3>Talk to Design 관리자 화면 품질 — 좌측 메뉴 정본 · 색 복원 · 금융 패턴 확장</h3>

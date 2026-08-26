@@ -1,99 +1,99 @@
 {
   "product": "NextLab Studio",
-  "version": "0.5.1",
-  "releasedAt": "2026-08-25T00:38:30.457Z",
+  "version": "0.5.2",
+  "releasedAt": "2026-08-26T09:01:11.138Z",
   "downloadPage": "https://nxl-ai-tools.reala.pro/studio/",
-  "releaseTag": "studio-v0.5.1",
+  "releaseTag": "studio-v0.5.2",
   "platforms": {
     "mac-arm64": {
-      "name": "NextLab.Studio-0.5.1-arm64.dmg",
-      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.1/NextLab.Studio-0.5.1-arm64.dmg",
-      "bytes": 253307328,
-      "sha256": "a2051cde0cdb5d8f86a1620a3007e731d40b64e57e8007988eac7918d288076d"
+      "name": "NextLab.Studio-0.5.2-arm64.dmg",
+      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.2/NextLab.Studio-0.5.2-arm64.dmg",
+      "bytes": 253816647,
+      "sha256": "35f62c974cd77536a277f5297c69496d0e52667606d7106c36ad794b98fb60e5"
     },
     "mac-x64": {
-      "name": "NextLab.Studio-0.5.1.dmg",
-      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.1/NextLab.Studio-0.5.1.dmg",
-      "bytes": 262148219,
-      "sha256": "17dcf7c02efa1b34a4c464630ef8eeb4cb54bbba9b094dfeb875b90518a75292"
+      "name": "NextLab.Studio-0.5.2.dmg",
+      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.2/NextLab.Studio-0.5.2.dmg",
+      "bytes": 262883044,
+      "sha256": "76f60b7ec471d4390676a6879a02b080a171404ed8a0e4b05d572ca73a278136"
     },
     "win": {
-      "name": "NextLab.Studio.Setup.0.5.1.exe",
-      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.1/NextLab.Studio.Setup.0.5.1.exe",
-      "bytes": 206006439,
-      "sha256": "2bf3d9207a86b946fe82e3b8525f63ced979826653f21ad72e2f3bace05dcb09"
+      "name": "NextLab.Studio.Setup.0.5.2.exe",
+      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.2/NextLab.Studio.Setup.0.5.2.exe",
+      "bytes": 206418889,
+      "sha256": "df69ad2fbf41d01aec11d3a69ba88a3ae1309ca8aef1d150cfa0722fa6bb80ca"
     }
   },
   "files": [
     {
-      "name": "NextLab.Studio-0.5.1-arm64-mac.zip",
-      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.1/NextLab.Studio-0.5.1-arm64-mac.zip",
-      "bytes": 245330981,
-      "sha256": "dc88ef3de41a318b794f6acfc9d4cbdff4836d83cece567f0b78f9b96ece4cda",
-      "modifiedAt": "2026-08-25T00:34:29.940Z"
+      "name": "NextLab.Studio-0.5.2-arm64-mac.zip",
+      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.2/NextLab.Studio-0.5.2-arm64-mac.zip",
+      "bytes": 245809866,
+      "sha256": "f91fbb10f166ff8abd4a3794163f68e0b6c9ea4a997a1dcb530e53855aa06445",
+      "modifiedAt": "2026-08-26T08:57:20.617Z"
     },
     {
-      "name": "NextLab.Studio-0.5.1-arm64-mac.zip.blockmap",
-      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.1/NextLab.Studio-0.5.1-arm64-mac.zip.blockmap",
-      "bytes": 252019,
-      "sha256": "d53078511fe53b193cd7dad329b6955a6abf98f0688eb8b4607801e3d8455c2b",
-      "modifiedAt": "2026-08-25T00:34:30.991Z"
+      "name": "NextLab.Studio-0.5.2-arm64-mac.zip.blockmap",
+      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.2/NextLab.Studio-0.5.2-arm64-mac.zip.blockmap",
+      "bytes": 252550,
+      "sha256": "c834de628861c855edb27a279d0f8ee200d7e4c2c914e6a1a41cbe3e86fc60f3",
+      "modifiedAt": "2026-08-26T08:57:21.270Z"
     },
     {
-      "name": "NextLab.Studio-0.5.1-arm64.dmg",
-      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.1/NextLab.Studio-0.5.1-arm64.dmg",
-      "bytes": 253307328,
-      "sha256": "a2051cde0cdb5d8f86a1620a3007e731d40b64e57e8007988eac7918d288076d",
-      "modifiedAt": "2026-08-25T00:35:02.751Z"
+      "name": "NextLab.Studio-0.5.2-arm64.dmg",
+      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.2/NextLab.Studio-0.5.2-arm64.dmg",
+      "bytes": 253816647,
+      "sha256": "35f62c974cd77536a277f5297c69496d0e52667606d7106c36ad794b98fb60e5",
+      "modifiedAt": "2026-08-26T08:57:55.195Z"
     },
     {
-      "name": "NextLab.Studio-0.5.1-arm64.dmg.blockmap",
-      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.1/NextLab.Studio-0.5.1-arm64.dmg.blockmap",
-      "bytes": 262850,
-      "sha256": "ea030509d29ecbe3aa2ffba70befe038213cc4bc7a5d98e991efb54de15d06e5",
-      "modifiedAt": "2026-08-25T00:35:04.638Z"
+      "name": "NextLab.Studio-0.5.2-arm64.dmg.blockmap",
+      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.2/NextLab.Studio-0.5.2-arm64.dmg.blockmap",
+      "bytes": 262840,
+      "sha256": "4a870cc05c1be240c46c263a7399e711db535e67eae2195877b558e29a36f69f",
+      "modifiedAt": "2026-08-26T08:57:55.986Z"
     },
     {
-      "name": "NextLab.Studio-0.5.1-mac.zip",
-      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.1/NextLab.Studio-0.5.1-mac.zip",
-      "bytes": 254379225,
-      "sha256": "477d283586687b10931bb15640232e59410f56755fa789fc7499485a026e413b",
-      "modifiedAt": "2026-08-25T00:35:36.639Z"
+      "name": "NextLab.Studio-0.5.2-mac.zip",
+      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.2/NextLab.Studio-0.5.2-mac.zip",
+      "bytes": 254858185,
+      "sha256": "e9d42c33e59a9a52e20ae6f6b3e09850c9313be049075900c3ed80c30c992d2e",
+      "modifiedAt": "2026-08-26T08:58:25.906Z"
     },
     {
-      "name": "NextLab.Studio-0.5.1-mac.zip.blockmap",
-      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.1/NextLab.Studio-0.5.1-mac.zip.blockmap",
-      "bytes": 261580,
-      "sha256": "883d95681aad4df59f9e55f9b80f7ca3fcb31a5614584849ed76767737d80fc2",
-      "modifiedAt": "2026-08-25T00:35:38.253Z"
+      "name": "NextLab.Studio-0.5.2-mac.zip.blockmap",
+      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.2/NextLab.Studio-0.5.2-mac.zip.blockmap",
+      "bytes": 262426,
+      "sha256": "be7d3c614b8e5d9f048647171ff5e166b069b57541c2415fdbe8498e20cc4d5c",
+      "modifiedAt": "2026-08-26T08:58:26.631Z"
     },
     {
-      "name": "NextLab.Studio-0.5.1.dmg",
-      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.1/NextLab.Studio-0.5.1.dmg",
-      "bytes": 262148219,
-      "sha256": "17dcf7c02efa1b34a4c464630ef8eeb4cb54bbba9b094dfeb875b90518a75292",
-      "modifiedAt": "2026-08-25T00:36:08.061Z"
+      "name": "NextLab.Studio-0.5.2.dmg",
+      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.2/NextLab.Studio-0.5.2.dmg",
+      "bytes": 262883044,
+      "sha256": "76f60b7ec471d4390676a6879a02b080a171404ed8a0e4b05d572ca73a278136",
+      "modifiedAt": "2026-08-26T08:58:55.619Z"
     },
     {
-      "name": "NextLab.Studio-0.5.1.dmg.blockmap",
-      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.1/NextLab.Studio-0.5.1.dmg.blockmap",
-      "bytes": 270953,
-      "sha256": "1dcc24dfa755079ac888a4575ff2f21b0bb9623f0ef6727369e1b2a5916d5c1e",
-      "modifiedAt": "2026-08-25T00:36:09.226Z"
+      "name": "NextLab.Studio-0.5.2.dmg.blockmap",
+      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.2/NextLab.Studio-0.5.2.dmg.blockmap",
+      "bytes": 274192,
+      "sha256": "a355df498ce39a4646a0b932d1bb15a445fa9a6f4267f50d6e4ac93dcceb5676",
+      "modifiedAt": "2026-08-26T08:58:56.268Z"
     },
     {
-      "name": "NextLab.Studio.Setup.0.5.1.exe",
-      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.1/NextLab.Studio.Setup.0.5.1.exe",
-      "bytes": 206006439,
-      "sha256": "2bf3d9207a86b946fe82e3b8525f63ced979826653f21ad72e2f3bace05dcb09",
-      "modifiedAt": "2026-08-25T00:36:35.465Z"
+      "name": "NextLab.Studio.Setup.0.5.2.exe",
+      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.2/NextLab.Studio.Setup.0.5.2.exe",
+      "bytes": 206418889,
+      "sha256": "df69ad2fbf41d01aec11d3a69ba88a3ae1309ca8aef1d150cfa0722fa6bb80ca",
+      "modifiedAt": "2026-08-26T08:59:20.768Z"
     },
     {
-      "name": "NextLab.Studio.Setup.0.5.1.exe.blockmap",
-      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.1/NextLab.Studio.Setup.0.5.1.exe.blockmap",
-      "bytes": 210070,
-      "sha256": "0fb9e5d183a8f284b414d0d4a0a2b8bd1319163960da90ae89b39d1dffc822f0",
-      "modifiedAt": "2026-08-25T00:36:36.858Z"
+      "name": "NextLab.Studio.Setup.0.5.2.exe.blockmap",
+      "url": "https://github.com/DevJH/nxl-web/releases/download/studio-v0.5.2/NextLab.Studio.Setup.0.5.2.exe.blockmap",
+      "bytes": 210510,
+      "sha256": "82591f74f9a6f7c7c4a744e4e80febf0de7be424de02fa20ebd2b8d9746765a9",
+      "modifiedAt": "2026-08-26T08:59:22.624Z"
     }
   ]
 }
