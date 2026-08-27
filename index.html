@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>NEXTLAB Builder &amp; Studio — 표준을 아는 AI 개발도구</title>
-<meta name="description" content="Figma 디자인을 한화 DS 코드로 바꾸는 VSCode 확장 NEXTLAB Builder, 기획·디자인부터 코드까지 잇는 데스크톱 워크스페이스 NextLab Studio.">
+<meta name="description" content="Figma 디자인을 한화 DS 코드로 바꾸는 VSCode 확장 NEXTLAB Builder, 기획·디자인부터 코드까지 잇는 데스크톱 워크스페이스 NextLab Studio(Beta).">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="NEXTLAB">
@@ -123,6 +123,13 @@ ul{margin:0;padding:0;list-style:none}
 .chip--ok{border-color:color-mix(in oklab,var(--ok) 40%,transparent);color:var(--ok)}
 .chip--stop{border-color:color-mix(in oklab,var(--stop) 40%,transparent);color:var(--stop)}
 .chip--concept{border-color:color-mix(in oklab,var(--warn) 34%,transparent);color:var(--warn)}
+/* Beta 딱지 — Studio 는 베타 배포. 칩 안·락업 옆에 같은 모양으로 붙는다 */
+.beta{
+  display:inline-block;vertical-align:middle;margin-left:6px;padding:2px 6px;border-radius:5px;
+  font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.12em;line-height:1;
+  color:#fff;background:var(--brand);
+}
+.dl-group-h .beta{align-self:center;margin-left:0;padding:4px 8px;font-size:.68rem}
 
 /* ── 내비게이션 ──────────────────────────────────────────────────── */
 .nav{
@@ -544,7 +551,7 @@ ul{margin:0;padding:0;list-style:none}
     <div class="hero-meta">
       <span class="chip chip--accent">Builder v<span data-ver>0.3.8</span> · VSIX</span>
       <span class="chip">VSCode · Cursor · Antigravity</span>
-      <span class="chip chip--accent">Studio v<span data-studio-ver>0.1.0</span></span>
+      <span class="chip chip--accent">Studio v<span data-studio-ver>0.1.0</span><span class="beta">BETA</span></span>
       <span class="chip">Windows · macOS</span>
     </div>
   </div>
@@ -596,7 +603,7 @@ ul{margin:0;padding:0;list-style:none}
 
       <article class="duo-card duo-card--studio" data-reveal>
         <p class="duo-kind">데스크톱 앱 · 개발 완료</p>
-        <h3>NextLab Studio</h3>
+        <h3>NextLab Studio <span class="beta">BETA</span></h3>
         <p>아이디어 → 기획 → 화면 흐름 → 실물 UI → 프로토타입을 한 흐름으로 잇고, Figma to Code 까지 품은 데스크톱 워크스페이스입니다.</p>
         <ul class="duo-list">
           <li><b>대상</b><span>현업 · 기획자 · 디자이너 · 개발자</span></li>
@@ -836,7 +843,7 @@ ul{margin:0;padding:0;list-style:none}
         내부망 모델을 연결하면 민감 정보가 외부로 나가지 않고 내부에서 완결됩니다.
       </p>
       <div class="part-badges">
-        <span class="chip chip--accent">Studio v<span data-studio-ver>0.1.0</span></span>
+        <span class="chip chip--accent">Studio v<span data-studio-ver>0.1.0</span><span class="beta">BETA</span></span>
         <span class="chip">Windows · macOS 설치형</span>
         <span class="chip">기획·디자인 · 엔지니어링 트랙 개발 완료</span>
         <span class="chip chip--concept">표준 에이전트 6종 — 컨셉안</span>
@@ -1090,7 +1097,7 @@ ul{margin:0;padding:0;list-style:none}
       <div class="notice-item">
         <h4>설치 파일은 이 페이지에서만 받습니다</h4>
         <p>사내 배포용 파일로 외부 공유를 금지합니다. 재배포본·구버전은 최신 표준이 반영되지 않으므로 사용하지 않습니다.
-          <span class="notice-ver">현재 버전 — Builder v<span data-ver>0.3.8</span> · Studio v<span data-studio-ver>0.1.0</span></span></p>
+          <span class="notice-ver">현재 버전 — Builder v<span data-ver>0.3.8</span> · Studio v<span data-studio-ver>0.1.0</span><span class="beta">BETA</span></span></p>
       </div>
     </div>
 
@@ -1177,6 +1184,7 @@ ul{margin:0;padding:0;list-style:none}
       <div class="dl-group-h">
         <img class="dl-appicon" src="images/logos/studio-appicon.png" alt="" width="512" height="512" decoding="async" aria-hidden="true">
         <h3><img class="dl-logo" src="images/logos/studio-lockup-text.png" alt="NextLab Studio" width="1004" height="143" decoding="async"></h3>
+        <span class="beta">BETA</span>
         <span>데스크톱 앱 · v<span data-studio-ver>0.1.0</span></span>
       </div>
       <div class="dl-list">
@@ -1247,7 +1255,7 @@ ul{margin:0;padding:0;list-style:none}
       </div>
     </div>
     <div class="foot-bar">
-      <span>NEXTLAB · Builder v<span data-ver>0.3.8</span> · Studio v<span data-studio-ver>0.1.0</span></span>
+      <span>NEXTLAB · Builder v<span data-ver>0.3.8</span> · Studio v<span data-studio-ver>0.1.0</span><span class="beta">BETA</span></span>
       <span>사내 전용 — 외부 공유 금지 · 2026</span>
     </div>
   </div>

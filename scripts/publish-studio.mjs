@@ -319,7 +319,7 @@ await (async () => {
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex" />
-<title>NextLab Studio 다운로드</title>
+<title>NextLab Studio (Beta) 다운로드</title>
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="ko_KR" />
 <meta property="og:site_name" content="NEXTLAB" />
@@ -339,6 +339,7 @@ await (async () => {
   body { margin:0; background:var(--bg); color:var(--fg); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic",sans-serif; line-height:1.6; }
   .wrap { max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; }
   h1 { font-size: 28px; margin: 0 0 8px; letter-spacing: -0.02em; }
+  .beta { display:inline-block; vertical-align:middle; margin-left:8px; padding:3px 8px; border-radius:6px; font-size:12px; font-weight:700; letter-spacing:.12em; line-height:1; color:#fff; background:var(--accent); }
   .appicon { width: 64px; height: 64px; display:block; margin: 0 0 14px; filter: drop-shadow(0 8px 18px rgba(0,0,0,.22)); }
   .ver { color: var(--muted); font-size: 14px; margin-bottom: 40px; }
   h2 { font-size: 17px; margin: 36px 0 12px; }
@@ -359,7 +360,7 @@ await (async () => {
 <body>
 <div class="wrap">
   <img class="appicon" src="../images/logos/studio-appicon.png" alt="" width="512" height="512" decoding="async" />
-  <h1>NextLab Studio</h1>
+  <h1>NextLab Studio <span class="beta">BETA</span></h1>
   <div class="ver">버전 ${version} · ${new Date().toISOString().slice(0, 10)}</div>
 
   <h2>macOS</h2>
