@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" viewBox="0 0 960 720" role="img" aria-labelledby="title desc">
+  <title id="title">주말의 발견 전시 패스 일러스트</title>
+  <desc id="desc">보랏빛 전시 공간과 오렌지색 작품, 크림색 입장권을 조합한 편집 가능한 벡터 그래픽</desc>
+  <defs>
+    <linearGradient id="wall" x2="0" y2="1"><stop stop-color="#dad5ef"/><stop offset="1" stop-color="#eeeaf8"/></linearGradient>
+    <linearGradient id="arch" x2="1" y2="1"><stop stop-color="#7970a4"/><stop offset="1" stop-color="#b9adce"/></linearGradient>
+    <linearGradient id="orb" x2="1" y2="1"><stop stop-color="#ffc287"/><stop offset=".55" stop-color="#e98d57"/><stop offset="1" stop-color="#c46539"/></linearGradient>
+    <linearGradient id="plinth" x2="1"><stop stop-color="#fdf9f2"/><stop offset="1" stop-color="#e4dcd2"/></linearGradient>
+  </defs>
+  <rect width="960" height="720" rx="32" fill="#f5f2ec"/>
+  <text x="64" y="76" font-family="Arial,sans-serif" font-size="14" letter-spacing="4" fill="#69616f">A WEEKEND WELL SPENT</text>
+  <text x="64" y="132" font-family="Georgia,serif" font-size="44" fill="#342d42">Make room for wonder.</text>
+  <rect x="70" y="192" width="595" height="425" rx="16" fill="url(#wall)"/>
+  <path d="M208 562V357a155 155 0 0 1 310 0v205" fill="url(#arch)"/>
+  <path d="M238 562V361a125 125 0 0 1 250 0v201" fill="#514762"/>
+  <path d="M70 563h595v38a16 16 0 0 1-16 16H86a16 16 0 0 1-16-16z" fill="#ccc2d8"/>
+  <ellipse cx="361" cy="568" rx="133" ry="23" fill="#3a3049" opacity=".12"/>
+  <path d="M298 442h125v120H298z" fill="url(#plinth)"/>
+  <path d="m298 442 28-17h125l-28 17z" fill="#fffaf2"/>
+  <path d="m423 442 28-17v116l-28 21z" fill="#cdc2b7"/>
+  <circle cx="363" cy="369" r="74" fill="url(#orb)"/>
+  <path d="M315 376c30 30 73 35 109 10" fill="none" stroke="#ffcc99" stroke-width="1.5" opacity=".65"/>
+  <g transform="translate(563 284) rotate(8 135 176)">
+    <rect x="10" y="13" width="251" height="335" rx="14" fill="#564064" opacity=".11"/>
+    <path d="M0 14A14 14 0 0 1 14 0h223a14 14 0 0 1 14 14v207a16 16 0 0 0 0 32v67a14 14 0 0 1-14 14H14a14 14 0 0 1-14-14v-67a16 16 0 0 0 0-32z" fill="#fffaf0" stroke="#dcd1be"/>
+    <text x="27" y="44" font-family="Arial,sans-serif" font-size="11" letter-spacing="2" fill="#827664">WEEKEND DISCOVERY</text>
+    <text x="24" y="109" font-family="Georgia,serif" font-size="39" fill="#453852">Art is</text>
+    <text x="24" y="153" font-family="Georgia,serif" font-size="39" font-style="italic" fill="#453852">a good plan.</text>
+    <text x="26" y="193" font-family="Arial,sans-serif" font-size="12" letter-spacing="2" fill="#827664">EXHIBITION PASS / 2026</text>
+    <path d="M24 236h202" stroke="#cbbb9f" stroke-dasharray="3 5"/>
+    <g fill="#63566d"><path d="M27 267h3v35h-3zm7 0h5v35h-5zm10 0h2v35h-2zm7 0h7v35h-7zm12 0h3v35h-3zm8 0h2v35h-2zm7 0h6v35h-6zm12 0h4v35h-4zm10 0h2v35h-2zm6 0h7v35h-7zm12 0h3v35h-3zm8 0h5v35h-5z"/></g>
+    <text x="164" y="283" font-family="Arial,sans-serif" font-size="10" fill="#827664">ADMIT</text><text x="164" y="305" font-family="Georgia,serif" font-size="22" fill="#453852">ONE</text>
+  </g>
+  <circle cx="766" cy="221" r="34" fill="#d5dcbc"/><path d="M751 221h30m-15-15v30" stroke="#667650" stroke-width="1.5"/>
+  <text x="71" y="664" font-family="Arial,sans-serif" font-size="11" letter-spacing="3" fill="#8b827c">CURATED MOMENTS. YOUR OWN PACE.</text>
+</svg>

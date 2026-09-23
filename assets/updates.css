@@ -1,0 +1,38 @@
+.updates-layout { display: grid; grid-template-columns: 224px minmax(0, 1fr); gap: 64px; padding-block: 12px 70px; }
+.release-nav { position: sticky; top: 108px; align-self: start; }
+.release-nav > .page-eyebrow { color: var(--color-muted); margin-bottom: 18px; }
+.release-nav nav { display: grid; gap: 12px; }
+.release-nav nav a { display: grid; grid-template-columns: 1fr auto; gap: 5px 12px; align-items: center; padding: 18px; border: 1px solid var(--color-border); border-radius: 9px; background: var(--color-surface); text-decoration: none; }
+.release-nav strong { font-size: 15px; font-weight: 600; }
+.release-nav [data-version] { grid-column: 1; font-size: 13px; font-variant-numeric: tabular-nums; color: var(--page-accent); }
+.release-nav svg { grid-column: 2; grid-row: 1 / 3; width: 17px; height: 17px; color: var(--color-muted); }
+.release-nav > p:last-child { font-size: 13px; color: var(--color-muted); margin-top: 24px; line-height: 1.8; }
+.release-entries { min-width: 0; }
+.release-product { scroll-margin-top: 110px; }
+.release-product + .release-product { margin-top: 70px; }
+.release-product > h2 { margin-bottom: 30px; }
+.release-product > h2 .product-logo { width: 290px; }
+.rel { display: grid; grid-template-columns: 95px minmax(0, 1fr); gap: 30px; border-top: 1px solid var(--color-border); padding-block: 36px; }
+.rel-meta { display: flex; flex-direction: column; align-items: start; gap: 10px; }
+.rel-v { font-size: 18px; font-weight: 650; letter-spacing: -.025em; font-variant-numeric: tabular-nums; }
+.rel-d { color: var(--color-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.rel-tag { font-size: 12px; line-height: 1.5; color: var(--page-accent); background: var(--page-wash); padding: 5px 8px; border-radius: 4px; }
+.rel-body { min-width: 0; }
+.rel-body h3 { font-size: 23px; font-weight: 650; line-height: 1.5; letter-spacing: -.03em; margin-bottom: 22px; text-wrap: pretty; }
+.rel-body p, .rel-body li { font-size: 15px; color: var(--page-reading); line-height: 1.85; }
+.rel-body ul { padding-inline-start: 20px; margin: 0; display: grid; gap: 16px; }
+.rel-body li { padding-inline-start: 4px; }
+.rel-body li::marker { color: var(--color-muted); }
+.rel-body b, .rel-body strong { color: var(--color-text); font-weight: 600; }
+.rel-body code { font-size: .87em; background: var(--color-subtle); border-radius: 4px; padding: 2px 4px; overflow-wrap: anywhere; }
+.rel-latest { background: linear-gradient(145deg, var(--page-wash), transparent 72%); border: 1px solid var(--color-border); border-radius: 12px; padding: 30px; margin-bottom: 8px; }
+.rel-latest h3 { font-size: clamp(24px, 2.4vw, 30px); font-weight: 700; line-height: 1.35; }
+.older-updates > summary { min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 15px 20px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 8px; cursor: pointer; font-size: 14px; list-style: none; }
+.older-updates > summary::-webkit-details-marker { display: none; }
+.older-updates > summary::after { content: '+'; font-size: 22px; color: var(--color-muted); }
+.older-updates[open] > summary::after { content: '−'; }
+.older-updates > .rel:first-of-type { border-top: 0; }
+@media (hover: hover) { .release-nav a:hover { border-color: var(--page-accent); }.older-updates > summary:hover { color: var(--page-accent); } }
+@media (max-width: 70rem) { .updates-layout { grid-template-columns: 190px minmax(0, 1fr); gap: 36px; }.rel { grid-template-columns: 1fr; gap: 20px; }.rel-meta { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 16px; } }
+@media (max-width: 52rem) { .updates-layout { grid-template-columns: 1fr; gap: 40px; }.release-nav { position: static; }.release-nav nav { grid-template-columns: 1fr 1fr; }.release-nav > p:last-child { display: none; } }
+@media (max-width: 38rem) { .updates-layout { padding-bottom: 48px; }.release-nav nav { gap: 10px; }.release-nav nav a { padding: 14px 12px; }.release-nav strong { font-size: 13px; }.release-nav svg { width: 14px; height: 14px; }.release-product > h2 .product-logo { width: 270px; }.rel-latest { padding: 22px 20px; }.rel { padding-block: 28px; }.rel-body h3 { font-size: 21px; }.rel-latest h3 { font-size: 25px; }.rel-body p, .rel-body li { font-size: 15px; }.rel-body ul { padding-inline-start: 17px; }.release-product + .release-product { margin-top: 54px; } }

@@ -1,5 +1,5 @@
 // scripts/publish-studio.mjs
-// NextLab Studio(데스크톱 설치본) 를 배포 채널로 발행한다.
+// NEXTLAB Studio(데스크톱 설치본) 를 배포 채널로 발행한다.
 //
 // 구조 — 왜 설치본을 git 에 커밋하지 않는가:
 //   설치본이 개당 175~220MB 라 GitHub 의 파일당 100MB 하드리밋에 걸려 푸시 자체가
@@ -57,6 +57,13 @@ function resolveReleaseDir() {
 
 const RELEASE_DIR = resolveReleaseDir();
 const OUT_DIR = path.join(CHANNEL_DIR, 'studio');
+// The channel owns the page. Resolve it before any output cleanup or network write.
+const STUDIO_PAGE = path.join(ROOT, 'studio', 'index.html');
+if (!fs.existsSync(STUDIO_PAGE)) {
+  console.error('[publish-studio] studio/index.html 다운로드 페이지가 없습니다. 채널 파일을 확인하세요.');
+  process.exit(1);
+}
+const studioPageHtml = fs.readFileSync(STUDIO_PAGE, 'utf8');
 
 if (!fs.existsSync(path.join(CHANNEL_DIR, '.git'))) {
   console.error(`[publish-studio] 채널 저장소가 없습니다: ${CHANNEL_DIR} (env NXL_CHANNEL_DIR 로 지정 가능)`);
@@ -181,8 +188,8 @@ async function ensureRelease() {
     method: 'POST',
     body: JSON.stringify({
       tag_name: TAG,
-      name: `NextLab Studio v${version}`,
-      body: `NextLab Studio ${version} 설치본. 다운로드 안내: https://nxl-ai-tools.reala.pro/studio/`,
+      name: `NEXTLAB Studio v${version}`,
+      body: `NEXTLAB Studio ${version} 설치본. 다운로드 안내: https://nxl-ai-tools.reala.pro/studio/`,
       draft: false,
       prerelease: false,
     }),
@@ -287,7 +294,7 @@ await (async () => {
   const platformEntry = (f) =>
     f ? { name: f.name, url: f.url, bytes: f.bytes, sha256: f.sha256 } : undefined;
   const versionJson = {
-    product: 'NextLab Studio',
+    product: 'NEXTLAB Studio',
     version,
     releasedAt: new Date().toISOString(),
     downloadPage: 'https://nxl-ai-tools.reala.pro/studio/',
@@ -301,99 +308,8 @@ await (async () => {
   };
   fs.writeFileSync(path.join(OUT_DIR, 'version.json'), JSON.stringify(versionJson, null, 2), 'utf8');
 
-  // ---- 다운로드 페이지 ----
-  const downloadButton = (label, file, note) =>
-    file
-      ? `      <a class="dl" href="${file.url}">
-        <span class="dl-label">${label}</span>
-        <span class="dl-meta">${file.name} · ${human(file.bytes)}</span>
-      </a>${note ? `\n      <p class="note">${note}</p>` : ''}`
-      : `      <p class="note missing">${label} 설치본은 이번 릴리스에 포함되지 않았습니다.</p>`;
-
-  const html = `<!doctype html>
-<!-- publish-studio.mjs 가 릴리스마다 통째로 재생성하는 파일 — 여기를 직접 수정하면
-     다음 발행에서 소리 없이 사라진다. 안내문·구조 변경은 scripts/publish-studio.mjs 의
-     템플릿에서 할 것. (index.html·manual.html·updates.html 은 채널이 정본 — 별개) -->
-<html lang="ko">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="robots" content="noindex" />
-<title>NextLab Studio (Beta) 다운로드</title>
-<meta property="og:type" content="website" />
-<meta property="og:locale" content="ko_KR" />
-<meta property="og:site_name" content="NEXTLAB" />
-<meta property="og:title" content="NextLab Studio 다운로드" />
-<meta property="og:description" content="NextLab Studio 설치 파일 — macOS · Windows" />
-<meta property="og:url" content="https://nxl-web.vercel.app/studio/" />
-<meta property="og:image" content="https://nxl-web.vercel.app/images/og.png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta name="twitter:card" content="summary_large_image" />
-<style>
-  :root { color-scheme: light dark; --bg:#fff; --fg:#16191d; --muted:#5b636d; --line:#e3e6ea; --accent:#fa6600; --card:#fff; }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg:#16191d; --fg:#f2f4f6; --muted:#a0a7b0; --line:#2b3037; --card:#1d2126; }
-  }
-  * { box-sizing: border-box; }
-  body { margin:0; background:var(--bg); color:var(--fg); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic",sans-serif; line-height:1.6; }
-  .wrap { max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; }
-  h1 { font-size: 28px; margin: 0 0 8px; letter-spacing: -0.02em; }
-  .beta { display:inline-block; vertical-align:middle; margin-left:8px; padding:3px 8px; border-radius:6px; font-size:12px; font-weight:700; letter-spacing:.12em; line-height:1; color:#fff; background:var(--accent); }
-  .appicon { width: 64px; height: 64px; display:block; margin: 0 0 14px; filter: drop-shadow(0 8px 18px rgba(0,0,0,.22)); }
-  .ver { color: var(--muted); font-size: 14px; margin-bottom: 40px; }
-  h2 { font-size: 17px; margin: 36px 0 12px; }
-  .dl { display:flex; flex-direction:column; gap:2px; padding:16px 20px; border:1px solid var(--line); border-radius:12px; background:var(--card); text-decoration:none; color:inherit; transition:border-color .15s; margin-bottom:10px; }
-  .dl:hover { border-color: var(--accent); }
-  .dl-label { font-weight:600; font-size:15px; }
-  .dl-meta { color:var(--muted); font-size:13px; }
-  .note { color:var(--muted); font-size:13px; margin:10px 2px 0; }
-  .note.missing { padding:16px 20px; border:1px dashed var(--line); border-radius:12px; margin:0; }
-  .box { border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:8px; padding:14px 18px; background:var(--card); margin:28px 0 0; }
-  .box p { margin:0 0 6px; font-size:14px; }
-  .box p:last-child { margin-bottom:0; }
-  code { background:rgba(128,128,128,.14); padding:1px 6px; border-radius:4px; font-size:13px; }
-  footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:13px; }
-  a.plain { color:var(--accent); }
-</style>
-</head>
-<body>
-<div class="wrap">
-  <img class="appicon" src="../images/logos/studio-appicon.png" alt="" width="512" height="512" decoding="async" />
-  <h1>NextLab Studio <span class="beta">BETA</span></h1>
-  <div class="ver">버전 ${version} · ${new Date().toISOString().slice(0, 10)}</div>
-
-  <h2>macOS</h2>
-  <p class="note" style="margin:0 0 10px">Apple 메뉴 &gt; 이 Mac에 관하여에서 <strong>칩</strong> 항목이 Apple M1~ 이면 Apple Silicon, Intel Core 면 Intel 입니다.</p>
-${downloadButton('Apple Silicon (M1 이상)', macArmDmg, '')}
-${downloadButton('Intel Mac', macX64Dmg, '설치: dmg 를 열고 앱을 <code>응용 프로그램</code> 으로 끌어놓습니다. 첫 실행이 차단되면 아래 <strong>첫 실행 안내</strong>를 따라주세요 (최초 1회).')}
-
-  <h2>Windows (x64)</h2>
-${downloadButton('Windows 설치본 내려받기', winExe, '설치: exe 실행 시 파란 SmartScreen 창이 뜨면 아래 <strong>첫 실행 안내</strong>를 따라주세요 (최초 1회).')}
-
-  <div class="box">
-    <p><strong>업데이트</strong></p>
-    <p>Windows 는 앱이 새 버전을 자동으로 확인하고 설치합니다.</p>
-    <p>macOS 는 새 버전이 나오면 앱이 알려주며, 이 페이지에서 새 dmg 를 받아 덮어쓰면 됩니다.</p>
-    <p>메뉴 <code>파일 &gt; 업데이트 확인…</code> 으로 언제든 직접 확인할 수 있습니다.</p>
-  </div>
-
-  <div class="box">
-    <p><strong>첫 실행 안내 — 임시 절차입니다</strong></p>
-    <p>아직 OS 인증서 서명이 적용되지 않아 첫 실행을 한 번 막습니다. 정식 서명이 적용되면 사라질 절차이며, <strong>최초 1회만</strong> 하면 됩니다.</p>
-    <p><strong>macOS</strong>: "악성 코드가 없음을 확인할 수 없습니다" 창 → 닫고 <strong>시스템 설정 → 개인정보 보호 및 보안</strong> 아래쪽 <strong>"그래도 열기"</strong> → 다시 실행</p>
-    <p><strong>Windows</strong>: SmartScreen 파란 창 → <strong>추가 정보 → 실행</strong></p>
-  </div>
-
-  <footer>
-    기존 데이터를 옮기려면 앱에서 <code>파일 &gt; 데이터 가져오기…</code> 를 사용하세요.<br />
-    <a class="plain" href="/">← 배포 채널 홈</a>
-  </footer>
-</div>
-</body>
-</html>
-`;
-  fs.writeFileSync(path.join(OUT_DIR, 'index.html'), html, 'utf8');
+  // Versions and artifact links are read from version.json by the shared site script.
+  fs.writeFileSync(path.join(OUT_DIR, 'index.html'), studioPageHtml, 'utf8');
 
   console.log(
     `[publish-studio] 자산 ${uploaded}개 → ${REPO}@${TAG} · 메타 ${metas.length}개 + 페이지 → ${OUT_DIR}`,

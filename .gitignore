@@ -12,3 +12,6 @@ node_modules/
 
 # nxl 확장 로컬 실행 이력 — 공개 채널에 올리지 않는다
 .nextlab/
+
+# NEXTLAB Builder — 사내 DS 패키지 사본(외부망 오프라인 설치용). 저장소에 커밋하지 않는다.
+.nextlab/vendor/

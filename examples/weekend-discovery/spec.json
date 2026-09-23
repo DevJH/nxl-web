@@ -1,0 +1,494 @@
+{
+  "version": 1,
+  "idea": "주말의 발견 — 전시와 공간을 탐색하고 방문 일정을 예약하는 문화 큐레이션 서비스. NEXTLAB 제품 소개용 가상 서비스입니다.",
+  "stage": "features",
+  "questions": [],
+  "answers": [],
+  "prd": {
+    "oneLiner": "취향에 맞는 전시를 발견하고, 방문할 주말을 예약하는 서비스",
+    "chapters": [
+      {
+        "id": "goal",
+        "title": "제품 목표",
+        "body": "탐색에서 예약까지 필요한 정보를 짧은 여정 안에 제공합니다. 전시의 매력과 실제 방문 조건을 함께 전달합니다."
+      },
+      {
+        "id": "scope",
+        "title": "첫 출시 범위",
+        "body": "경험 탐색, 전시 상세, 방문 일정 선택, 예약 신청과 완료 확인을 제공합니다. 결제와 운영자 도구는 이번 예제에서 제외합니다."
+      },
+      {
+        "id": "journey",
+        "title": "대표 사용자 여정",
+        "body": "추천 전시 발견 → 상세 정보 확인 → 날짜와 시간 선택 → 예약 내용 확인 → 예약 완료"
+      }
+    ],
+    "attributes": {
+      "roles": [
+        "방문자",
+        "예약 회원"
+      ],
+      "devices": [
+        "모바일 웹"
+      ]
+    }
+  },
+  "features": [
+    {
+      "id": "discovery",
+      "name": "경험 탐색",
+      "description": "전시·문화와 공간을 카테고리별로 탐색합니다. 카드에는 이미지, 이름, 지역, 운영 기간을 표시하고 선택하면 상세 화면으로 이동합니다.",
+      "priority": "P0",
+      "surface": "ui",
+      "roles": [
+        "방문자"
+      ],
+      "screens": [
+        "경험 탐색"
+      ],
+      "acceptance": [
+        "카테고리를 선택하면 해당 경험만 표시합니다.",
+        "카드를 선택하면 해당 전시의 상세 화면으로 이동합니다.",
+        "결과가 없으면 전체 경험으로 돌아갈 수 있는 안내를 표시합니다."
+      ],
+      "status": "todo"
+    },
+    {
+      "id": "detail",
+      "name": "전시 상세 확인",
+      "description": "전시 소개, 운영 기간, 관람 시간과 위치를 한 화면에서 확인합니다. 예약 가능한 전시에만 방문 일정 선택 버튼을 제공합니다.",
+      "priority": "P0",
+      "surface": "ui",
+      "roles": [
+        "방문자"
+      ],
+      "screens": [
+        "전시 상세"
+      ],
+      "acceptance": [
+        "전시명·기간·장소·관람 시간을 함께 표시합니다.",
+        "방문 일정 선택을 누르면 현재 전시가 선택된 상태로 이동합니다.",
+        "운영이 종료되면 예약 버튼 대신 종료 안내를 표시합니다."
+      ],
+      "status": "todo"
+    },
+    {
+      "id": "schedule",
+      "name": "방문 일정 선택",
+      "description": "달력에서 방문 날짜를 고르고 예약 가능한 시간을 선택합니다. 날짜별 운영 여부와 남은 예약 가능 시간을 구분해 안내합니다.",
+      "priority": "P0",
+      "surface": "ui",
+      "roles": [
+        "예약 회원"
+      ],
+      "screens": [
+        "방문 일정"
+      ],
+      "acceptance": [
+        "운영하지 않는 날짜는 선택할 수 없습니다.",
+        "날짜를 바꾸면 해당 날짜의 시간 목록을 표시합니다.",
+        "필수 선택이 누락되면 해당 입력으로 초점을 이동합니다."
+      ],
+      "status": "todo"
+    },
+    {
+      "id": "reservation",
+      "name": "예약 신청",
+      "description": "전시, 날짜, 시간과 관람 인원을 최종 확인한 뒤 예약을 신청합니다. 처리 중에는 중복 요청을 막고 성공하면 예약 완료 화면으로 이동합니다.",
+      "priority": "P0",
+      "surface": "ui",
+      "roles": [
+        "예약 회원"
+      ],
+      "screens": [
+        "방문 일정",
+        "예약 완료"
+      ],
+      "acceptance": [
+        "신청 전에 전시명·날짜·시간·인원을 한 번 더 확인합니다.",
+        "예약 요청이 진행 중일 때 중복 신청을 막습니다.",
+        "정원이 마감되면 선택 내용을 유지하고 다른 시간을 안내합니다.",
+        "네트워크 오류가 발생하면 입력을 유지한 채 다시 시도할 수 있습니다."
+      ],
+      "status": "todo"
+    },
+    {
+      "id": "ticket",
+      "name": "예약 내역 확인",
+      "description": "예약 완료 화면에서 방문 일정과 예약 번호를 확인합니다. 다시 진입해도 동일한 예약 내용을 조회할 수 있습니다.",
+      "priority": "P0",
+      "surface": "ui",
+      "roles": [
+        "예약 회원"
+      ],
+      "screens": [
+        "예약 완료"
+      ],
+      "acceptance": [
+        "성공한 예약의 일시·인원·장소·예약 번호를 표시합니다.",
+        "중복 새로고침이 새 예약을 만들지 않습니다.",
+        "다른 경험 둘러보기를 선택하면 홈으로 돌아갑니다."
+      ],
+      "status": "todo"
+    },
+    {
+      "id": "visit",
+      "name": "방문 안내",
+      "description": "예약 완료 후 방문 장소, 도착 시간과 현장 확인 방법을 안내합니다. 관람 전에 다시 확인할 수 있도록 예약 내역과 함께 제공합니다.",
+      "priority": "P1",
+      "surface": "ui",
+      "roles": [
+        "예약 회원"
+      ],
+      "screens": [
+        "예약 완료"
+      ],
+      "acceptance": [
+        "예약한 전시의 방문 장소를 표시합니다.",
+        "도착 권장 시간과 예약 내역 제시 방법을 안내합니다.",
+        "다른 경험 둘러보기를 선택하면 탐색으로 돌아갑니다."
+      ],
+      "status": "todo"
+    }
+  ],
+  "userFlowId": "f-mudchn3n",
+  "designChatIds": [
+    560
+  ],
+  "updatedAt": 1790123466834,
+  "uiKit": "nxlds",
+  "designSystem": {
+    "kit": "nxlds",
+    "nxlds": {
+      "brand": "mono",
+      "profile": "customer",
+      "domain": "none",
+      "textScale": "standard",
+      "colorMode": "light",
+      "viewport": "mobile"
+    }
+  },
+  "plan": {
+    "version": 1,
+    "startMode": "new-service",
+    "roles": [
+      "방문자",
+      "예약 회원"
+    ],
+    "devices": [
+      "모바일 웹"
+    ],
+    "signals": {
+      "domains": [],
+      "audiences": [],
+      "channels": [
+        "mobile-web",
+        "mobile",
+        "desktop"
+      ],
+      "dataSignals": [],
+      "productSignals": []
+    },
+    "brief": {
+      "oneLiner": "취향에 맞는 전시를 발견하고, 방문할 주말을 예약하는 서비스",
+      "problem": "",
+      "users": "",
+      "value": "",
+      "outcomes": [],
+      "mvp": [],
+      "nonGoals": [],
+      "scenarios": [],
+      "constraints": [],
+      "risks": [],
+      "roadmap": []
+    },
+    "evidence": [
+      {
+        "id": "ev-idea",
+        "type": "user-input",
+        "title": "최초 아이디어 입력",
+        "excerpt": "주말의 발견 — 전시와 공간을 탐색하고 방문 일정을 예약하는 문화 큐레이션 서비스. NEXTLAB 제품 소개용 가상 서비스입니다.",
+        "source": "사용자 입력",
+        "collectedAt": null,
+        "owner": null,
+        "confidence": "provided"
+      }
+    ],
+    "assumptions": [],
+    "decisions": [],
+    "requirements": [],
+    "features": [
+      {
+        "id": "discovery",
+        "name": "경험 탐색",
+        "description": "전시·문화와 공간을 카테고리별로 탐색합니다. 카드에는 이미지, 이름, 지역, 운영 기간을 표시하고 선택하면 상세 화면으로 이동합니다.",
+        "priority": "P0",
+        "surface": "ui",
+        "roles": [
+          "방문자"
+        ],
+        "screens": [
+          "경험 탐색"
+        ],
+        "acceptance": [
+          "카테고리를 선택하면 해당 경험만 표시합니다.",
+          "카드를 선택하면 해당 전시의 상세 화면으로 이동합니다.",
+          "결과가 없으면 전체 경험으로 돌아갈 수 있는 안내를 표시합니다."
+        ],
+        "status": "todo"
+      },
+      {
+        "id": "detail",
+        "name": "전시 상세 확인",
+        "description": "전시 소개, 운영 기간, 관람 시간과 위치를 한 화면에서 확인합니다. 예약 가능한 전시에만 방문 일정 선택 버튼을 제공합니다.",
+        "priority": "P0",
+        "surface": "ui",
+        "roles": [
+          "방문자"
+        ],
+        "screens": [
+          "전시 상세"
+        ],
+        "acceptance": [
+          "전시명·기간·장소·관람 시간을 함께 표시합니다.",
+          "방문 일정 선택을 누르면 현재 전시가 선택된 상태로 이동합니다.",
+          "운영이 종료되면 예약 버튼 대신 종료 안내를 표시합니다."
+        ],
+        "status": "todo"
+      },
+      {
+        "id": "schedule",
+        "name": "방문 일정 선택",
+        "description": "달력에서 방문 날짜를 고르고 예약 가능한 시간을 선택합니다. 날짜별 운영 여부와 남은 예약 가능 시간을 구분해 안내합니다.",
+        "priority": "P0",
+        "surface": "ui",
+        "roles": [
+          "예약 회원"
+        ],
+        "screens": [
+          "방문 일정"
+        ],
+        "acceptance": [
+          "운영하지 않는 날짜는 선택할 수 없습니다.",
+          "날짜를 바꾸면 해당 날짜의 시간 목록을 표시합니다.",
+          "필수 선택이 누락되면 해당 입력으로 초점을 이동합니다."
+        ],
+        "status": "todo"
+      },
+      {
+        "id": "reservation",
+        "name": "예약 신청",
+        "description": "전시, 날짜, 시간과 관람 인원을 최종 확인한 뒤 예약을 신청합니다. 처리 중에는 중복 요청을 막고 성공하면 예약 완료 화면으로 이동합니다.",
+        "priority": "P0",
+        "surface": "ui",
+        "roles": [
+          "예약 회원"
+        ],
+        "screens": [
+          "방문 일정",
+          "예약 완료"
+        ],
+        "acceptance": [
+          "신청 전에 전시명·날짜·시간·인원을 한 번 더 확인합니다.",
+          "예약 요청이 진행 중일 때 중복 신청을 막습니다.",
+          "정원이 마감되면 선택 내용을 유지하고 다른 시간을 안내합니다.",
+          "네트워크 오류가 발생하면 입력을 유지한 채 다시 시도할 수 있습니다."
+        ],
+        "status": "todo"
+      },
+      {
+        "id": "ticket",
+        "name": "예약 내역 확인",
+        "description": "예약 완료 화면에서 방문 일정과 예약 번호를 확인합니다. 다시 진입해도 동일한 예약 내용을 조회할 수 있습니다.",
+        "priority": "P0",
+        "surface": "ui",
+        "roles": [
+          "예약 회원"
+        ],
+        "screens": [
+          "예약 완료"
+        ],
+        "acceptance": [
+          "성공한 예약의 일시·인원·장소·예약 번호를 표시합니다.",
+          "중복 새로고침이 새 예약을 만들지 않습니다.",
+          "다른 경험 둘러보기를 선택하면 홈으로 돌아갑니다."
+        ],
+        "status": "todo"
+      },
+      {
+        "id": "visit",
+        "name": "방문 안내",
+        "description": "예약 완료 후 방문 장소, 도착 시간과 현장 확인 방법을 안내합니다. 관람 전에 다시 확인할 수 있도록 예약 내역과 함께 제공합니다.",
+        "priority": "P1",
+        "surface": "ui",
+        "roles": [
+          "예약 회원"
+        ],
+        "screens": [
+          "예약 완료"
+        ],
+        "acceptance": [
+          "예약한 전시의 방문 장소를 표시합니다.",
+          "도착 권장 시간과 예약 내역 제시 방법을 안내합니다.",
+          "다른 경험 둘러보기를 선택하면 탐색으로 돌아갑니다."
+        ],
+        "status": "todo"
+      }
+    ],
+    "packs": {
+      "selectedPackIds": [],
+      "appliedRules": [],
+      "exceptions": []
+    },
+    "quality": null,
+    "legacyChapters": [
+      {
+        "id": "goal",
+        "title": "제품 목표",
+        "body": "탐색에서 예약까지 필요한 정보를 짧은 여정 안에 제공합니다. 전시의 매력과 실제 방문 조건을 함께 전달합니다."
+      },
+      {
+        "id": "scope",
+        "title": "첫 출시 범위",
+        "body": "경험 탐색, 전시 상세, 방문 일정 선택, 예약 신청과 완료 확인을 제공합니다. 결제와 운영자 도구는 이번 예제에서 제외합니다."
+      },
+      {
+        "id": "journey",
+        "title": "대표 사용자 여정",
+        "body": "추천 전시 발견 → 상세 정보 확인 → 날짜와 시간 선택 → 예약 내용 확인 → 예약 완료"
+      }
+    ],
+    "generatedAt": 1790122541827,
+    "updatedAt": 1790122541827
+  },
+  "prototype": {
+    "generatedAt": 1790123462390,
+    "cases": [
+      {
+        "id": "exhibition-booking",
+        "name": "관심 전시를 발견하고 방문 일정 예약하기",
+        "goal": "선택한 날짜와 시간으로 예약을 마치고 방문 안내를 확인합니다.",
+        "description": "NEXTLAB 소개용으로 직접 작성한 가상 전시 예약 시나리오입니다.",
+        "data": [
+          {
+            "label": "전시",
+            "value": "빛과 색 사이의 오후"
+          },
+          {
+            "label": "방문 인원",
+            "value": "1명"
+          }
+        ],
+        "steps": [
+          {
+            "nodeId": "screen-1",
+            "action": "빛과 색 사이의 오후 전시를 선택하세요.",
+            "trigger": "이번 주 에디터 추천빛과 색 사이의 오후성수 · 기획 전시 · 10. 01 — 11. 15",
+            "expected": "전시 상세 화면으로 이동합니다.",
+            "interaction": "click",
+            "outcome": {
+              "kind": "navigate",
+              "nodeId": "screen-2"
+            }
+          },
+          {
+            "nodeId": "screen-2",
+            "action": "전시 정보를 확인하고 방문 일정을 선택하세요.",
+            "trigger": "방문 일정 선택 →",
+            "expected": "날짜와 시간을 선택하는 화면으로 이동합니다.",
+            "interaction": "click",
+            "outcome": {
+              "kind": "navigate",
+              "nodeId": "screen-3"
+            }
+          },
+          {
+            "nodeId": "screen-3",
+            "action": "방문 날짜와 시간을 확인하고 예약하세요.",
+            "trigger": "이 일정으로 예약 →",
+            "expected": "선택한 일정을 예약 완료 화면에서 확인합니다.",
+            "interaction": "click",
+            "outcome": {
+              "kind": "navigate",
+              "nodeId": "screen-4"
+            }
+          },
+          {
+            "nodeId": "screen-4",
+            "action": "예약 내역과 방문 안내를 확인하세요.",
+            "expected": "예약 번호와 방문 일정이 표시됩니다.",
+            "interaction": "observe",
+            "outcome": {
+              "kind": "visible",
+              "label": "방문 준비가 끝났습니다."
+            }
+          }
+        ]
+      }
+    ],
+    "screenMaps": [
+      {
+        "nodeId": "screen-1",
+        "hotspots": [
+          {
+            "label": "이번 주 에디터 추천빛과 색 사이의 오후성수 · 기획 전시 · 10. 01 — 11. 15",
+            "to": "screen-2"
+          }
+        ]
+      },
+      {
+        "nodeId": "screen-2",
+        "hotspots": [
+          {
+            "label": "방문 일정 선택 →",
+            "to": "screen-3"
+          }
+        ]
+      },
+      {
+        "nodeId": "screen-3",
+        "hotspots": [
+          {
+            "label": "이 일정으로 예약 →",
+            "to": "screen-4"
+          }
+        ]
+      },
+      {
+        "nodeId": "screen-4",
+        "hotspots": [
+          {
+            "label": "다른 경험 둘러보기 →",
+            "to": "screen-1"
+          }
+        ]
+      }
+    ]
+  },
+  "devWorkspace": {
+    "environmentVersion": 7,
+    "root": "/Users/junghun/NextlabProjects/취향에-맞는-전시를-발견하고-방문할-주말을-예약하는-서비스-559",
+    "track": "vite",
+    "kit": "nxlds",
+    "createdAt": 1790123466756,
+    "handoffId": "hf_a28baa2b-5d6",
+    "screens": {
+      "screen-1": {
+        "status": "pending",
+        "sourceSha256": "247df15de8c54bac7c7f012859a70bbc054eaf404feb9568b0854465047e7e4f"
+      },
+      "screen-2": {
+        "status": "pending",
+        "sourceSha256": "b8940e1a0f1c278377e02c73d53b37edbafb609329d4bfcd111ec500a6b768a8"
+      },
+      "screen-3": {
+        "status": "pending",
+        "sourceSha256": "02a59454c1d4c2a3fc5abf877a6c25ac74dbddb7e0bcb7c805fe64e8a3dd97c7"
+      },
+      "screen-4": {
+        "status": "pending",
+        "sourceSha256": "999570935b86e2b85b40e295e265e73eeca740335251bc6ce97bf5f2f8b4f61e"
+      }
+    }
+  }
+}

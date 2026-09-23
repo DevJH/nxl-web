@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="480" viewBox="0 0 720 480" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">주말 전시를 위한 두 장의 패스</title>
+  <desc id="desc">보라색 곡선 그래픽 카드 위에 크림색 전시 패스가 겹쳐진 SVG 구성 예시. 패스에는 Weekend라는 제목과 오렌지색 원형 그래픽, 입장권 바코드가 있습니다.</desc>
+  <defs>
+    <linearGradient id="violet" x1="158" y1="75" x2="438" y2="423" gradientUnits="userSpaceOnUse"><stop stop-color="#B9A3ED"/><stop offset="1" stop-color="#8F70CE"/></linearGradient>
+    <linearGradient id="paper" x1="328" y1="62" x2="552" y2="414" gradientUnits="userSpaceOnUse"><stop stop-color="#FFFCF3"/><stop offset="1" stop-color="#EEE6D7"/></linearGradient>
+    <linearGradient id="orange" x1="342" y1="174" x2="453" y2="308" gradientUnits="userSpaceOnUse"><stop stop-color="#E6996E"/><stop offset="1" stop-color="#CB6039"/></linearGradient>
+    <filter id="shadow" x="-35%" y="-25%" width="180%" height="175%" color-interpolation-filters="sRGB"><feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#21132D" flood-opacity=".1"/><feDropShadow dx="2" dy="16" stdDeviation="17" flood-color="#21132D" flood-opacity=".17"/></filter>
+    <clipPath id="back-art"><rect x="174" y="112" width="228" height="242"/></clipPath>
+    <clipPath id="orb"><circle cx="420" cy="228" r="64"/></clipPath>
+  </defs>
+  <g transform="rotate(-13 290 248)" filter="url(#shadow)">
+    <rect x="150" y="62" width="276" height="364" rx="5" fill="url(#violet)"/>
+    <rect x="150.5" y="62.5" width="275" height="363" rx="4.5" stroke="#FFF" stroke-opacity=".25"/>
+    <text x="174" y="94" fill="#302144" font-family="Arial, sans-serif" font-size="10" letter-spacing="2.3">A DIFFERENT PERSPECTIVE</text>
+    <g clip-path="url(#back-art)" stroke="#352049" stroke-width="1.3">
+      <ellipse cx="285" cy="233" rx="104" ry="119"/>
+      <ellipse cx="285" cy="233" rx="90" ry="119"/>
+      <ellipse cx="285" cy="233" rx="76" ry="119"/>
+      <ellipse cx="285" cy="233" rx="62" ry="119"/>
+      <ellipse cx="285" cy="233" rx="48" ry="119"/>
+      <ellipse cx="285" cy="233" rx="34" ry="119"/>
+      <ellipse cx="285" cy="233" rx="20" ry="119"/>
+      <path d="M285 114v238M181 233h208"/>
+    </g>
+    <path d="M174 376h228" stroke="#352049" stroke-opacity=".35"/>
+    <text x="174" y="401" fill="#302144" font-family="Arial, sans-serif" font-size="10" letter-spacing="1.8">ART / SPACE / WEEKEND</text>
+  </g>
+  <g transform="rotate(9 437 250)" filter="url(#shadow)">
+    <path d="M314 53h244a5 5 0 0 1 5 5v271a12 12 0 0 0 0 24v70a5 5 0 0 1-5 5H314a5 5 0 0 1-5-5v-70a12 12 0 0 0 0-24V58a5 5 0 0 1 5-5Z" fill="url(#paper)"/>
+    <path d="M326 77h220" stroke="#483C3C" stroke-opacity=".25"/>
+    <text x="332" y="99" fill="#74675E" font-family="Arial, sans-serif" font-size="8.5" letter-spacing="1.8">THE WEEKEND COLLECTION</text>
+    <text x="329" y="143" fill="#302834" font-family="Georgia, 'Times New Roman', serif" font-size="36" letter-spacing="-1.6">Weekend.</text>
+    <circle cx="420" cy="228" r="64" fill="url(#orange)"/>
+    <g clip-path="url(#orb)" stroke="#FFD0A2" stroke-width="1" opacity=".82">
+      <path d="M348 187c42 38 107 45 148 6M347 197c42 38 107 45 150 6M347 207c42 38 107 45 150 6M347 217c42 38 107 45 150 6M347 227c42 38 107 45 150 6M347 237c42 38 107 45 150 6M347 247c42 38 107 45 150 6M347 257c42 38 107 45 150 6M347 267c42 38 107 45 150 6"/>
+    </g>
+    <path d="M361 274c32-55 93-81 125-70 32 12 3 64-58 89-59 24-104 6-83-20" stroke="#4B3654" stroke-width="2"/>
+    <text x="333" y="318" fill="#61564F" font-family="Arial, sans-serif" font-size="9" letter-spacing=".6">MAKE ROOM FOR A LITTLE WONDER.</text>
+    <path d="M326 341h220" stroke="#C0B4A3" stroke-dasharray="3 4"/>
+    <g fill="#433844">
+      <path d="M333 365h2v33h-2zm5 0h4v33h-4zm8 0h2v33h-2zm6 0h6v33h-6zm10 0h2v33h-2zm6 0h4v33h-4zm8 0h1v33h-1zm5 0h5v33h-5zm9 0h2v33h-2zm6 0h4v33h-4zm8 0h2v33h-2zm6 0h6v33h-6zm10 0h2v33h-2"/>
+    </g>
+    <text x="536" y="375" text-anchor="end" fill="#7A6B60" font-family="Arial, sans-serif" font-size="8" letter-spacing="1.8">ADMIT ONE</text>
+    <text x="536" y="400" text-anchor="end" fill="#40313C" font-family="Georgia, 'Times New Roman', serif" font-size="20" font-style="italic">a day of art</text>
+  </g>
+</svg>

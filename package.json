@@ -9,5 +9,10 @@
     "publish-studio": "node scripts/publish-studio.mjs",
     "render-intro": "node scripts/render-intro.mjs",
     "release": "node scripts/sync-assets.mjs && node scripts/publish-channel.mjs"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@hanwhalife/design-system": "file:.nextlab/vendor/hanwhalife-design-system.tgz"
   }
 }

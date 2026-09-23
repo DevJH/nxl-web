@@ -1,1424 +1,204 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<title>NEXTLAB Builder &amp; Studio — 표준을 아는 AI 개발도구</title>
-<meta name="description" content="Figma 디자인을 한화 DS 코드로 바꾸는 VSCode 확장 NEXTLAB Builder, 기획·디자인부터 코드까지 잇는 데스크톱 워크스페이스 NextLab Studio(Beta).">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="ko_KR">
-<meta property="og:site_name" content="NEXTLAB">
-<meta property="og:title" content="NEXTLAB Builder &amp; Studio — 표준을 아는 AI 개발도구">
-<meta property="og:description" content="설치 파일 · 사용자 메뉴얼 · 업데이트 내역 — 사내 배포 채널">
-<meta property="og:url" content="https://nxl-web.vercel.app/">
-<meta property="og:image" content="https://nxl-web.vercel.app/images/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<!-- 파비콘 — 워드마크가 아니라 심볼만 쓴다. 243x40 워드마크는 16px 에서 뭉개진다. -->
-<link rel="icon" href="favicon.ico" sizes="any">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!doctype html>
+<html lang="ko" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>NEXTLAB Builder &amp; Studio — 기획부터 코드까지</title><meta name="description" content="Studio에서 아이디어를 구체화하고, Builder로 코드까지 연결하세요. 제품 소개, 설치 파일, 사용 가이드를 한곳에서 확인하세요."><meta property="og:title" content="NEXTLAB Builder &amp; Studio — 기획부터 코드까지"><meta property="og:description" content="Studio에서 아이디어를 구체화하고, Builder로 코드까지 연결하세요. 제품 소개, 설치 파일, 사용 가이드를 한곳에서 확인하세요."><meta property="og:type" content="website"><meta property="og:locale" content="ko_KR"><meta property="og:url" content="https://nxl-ai-tools.reala.pro/"><meta property="og:image" content="https://nxl-ai-tools.reala.pro/images/og.png"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png?v=74b8c85dbe36"><script src="/assets/theme.js?v=ee72fdb8de2e"></script><link rel="stylesheet" href="/assets/site.css?v=6700099899ab"><link rel="stylesheet" href="/assets/product.css?v=c925a7cf69ad"><script src="/assets/site.js?v=e8a05842a2ea" defer></script><noscript><style>.site-nav{display:flex!important}.menu-toggle,.theme-toggle,.preview-tabs,[data-zoom]{display:none!important}</style></noscript></head><body>
+<a class="skip-link" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="container header-inner"><a class="wordmark" href="/" aria-label="NEXTLAB 홈"><svg class="brand-logo" width="122" height="21" viewBox="0 0 243 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<path d="M13.097 39.3061H0L10.4577 10.0386H23.5504L13.097 39.3061Z" fill="#EA5504"/>
+<mask id="nxlm" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="20" y="0" width="29" height="40">
+<path d="M48.2758 10.0383L41.0707 0.689453L27.7879 10.0383H31.425L20.9241 39.3101L34.0125 39.3058L44.5091 10.0383H48.2758Z" fill="white"/>
+</mask>
+<g mask="url(#nxlm)">
+<path d="M51.8438 10.0245H17.4598L17.2697 8.16943H51.6537L51.8438 10.0245Z" fill="#EA5504"/>
+<path d="M51.8438 13.757H17.4598L17.2697 11.9019H51.6537L51.8438 13.757Z" fill="#EA5504"/>
+<path d="M51.8438 17.4885H17.4598L17.2697 15.6377H51.6537L51.8438 17.4885Z" fill="#EA5504"/>
+<path d="M51.8438 21.2247H17.4598L17.2697 19.3696H51.6537L51.8438 21.2247Z" fill="#EA5504"/>
+<path d="M51.8438 24.9562H17.4598L17.2697 23.1011H51.6537L51.8438 24.9562Z" fill="#EA5504"/>
+<path d="M51.8438 28.6876H17.4598L17.2697 26.8325H51.6537L51.8438 28.6876Z" fill="#EA5504"/>
+<path d="M51.8438 32.424H17.4598L17.2697 30.5688H51.6537L51.8438 32.424Z" fill="#EA5504"/>
+<path d="M51.8438 36.1564H17.4598L17.2697 34.3013H51.6537L51.8438 36.1564Z" fill="#EA5504"/>
+<path d="M51.8438 39.8878H17.4598L17.2697 38.0327H51.6537L51.8438 39.8878Z" fill="#EA5504"/>
+<path d="M51.8438 6.2843H17.4598L17.2697 4.4292H51.6537L51.8438 6.2843Z" fill="#EA5504"/>
+<path d="M51.8438 2.53976H17.4598L17.2697 0.688965H51.6537L51.8438 2.53976Z" fill="#EA5504"/>
+</g>
+<path d="M20.9198 39.3061H34.0082L23.5505 10.0386H10.4621L20.9198 39.3061Z" fill="#EE7800"/>
+<path d="M80.2996 39.3108H73.3324L64.5316 23.7936V39.3108H57.9311V13.4487H64.8983L73.699 28.966V13.4487H80.2996V39.3108Z" fill="currentColor"/>
+<path d="M147.362 39.3108H140.762V18.6211H133.061V13.4487H155.063V18.6211H147.362V39.3108Z" fill="currentColor"/>
+<path d="M174.37 34.1384H187.754V39.3108H167.769V13.4487H174.37V34.1384Z" fill="currentColor"/>
+<path d="M197.838 39.3108H190.688L200.405 13.4487H207.739L217.457 39.3108H210.306L208.656 34.6926H199.489L197.838 39.3108ZM201.139 29.8896H207.006L204.072 21.2074L201.139 29.8896Z" fill="currentColor"/>
+<path d="M220.023 13.4487H234.691C237.087 13.4487 238.847 13.9968 239.972 15.0928C241.096 16.1889 241.659 17.8576 241.659 20.099C241.659 21.5768 241.341 22.7775 240.705 23.7012C240.07 24.6248 239.287 25.2714 238.358 25.6408C240.338 26.1827 241.683 27.5128 242.392 29.631C242.636 30.3945 242.759 31.2812 242.759 32.2911C242.759 34.7049 242.196 36.4783 241.072 37.6113C239.947 38.7443 238.187 39.3108 235.791 39.3108H220.023V13.4487ZM235.058 20.8379C235.058 19.3601 234.325 18.6211 232.858 18.6211H226.624V23.7936H232.858C234.325 23.7936 235.058 23.0546 235.058 21.5768V20.8379ZM236.158 31.1827C236.158 29.7049 235.425 28.966 233.958 28.966H226.624V34.1384H233.958C235.425 34.1384 236.158 33.3995 236.158 31.9216V31.1827Z" fill="currentColor"/>
+<path d="M90.5671 28.7812V23.6088V23.1778V18.6211H104.318V13.4487H83.9666V39.3108H104.318V34.1384H90.5671V31.1642V28.7812Z" fill="currentColor"/>
+<path d="M114.017 13.4487H106.72L113.198 23.6088H90.567V28.7812H113.235L106.72 39.0029H114.017L122.164 26.2258L114.017 13.4487Z" fill="#EE7800"/>
+<path d="M123.442 24.2307L130.317 13.4487H123.02L119.793 18.5103L123.442 24.2307Z" fill="currentColor"/>
+<path d="M123.442 28.2275L119.793 33.948L123.02 39.0034H130.317L123.442 28.2275Z" fill="currentColor"/>
+</svg></a><nav class="site-nav" id="site-nav" aria-label="주요 메뉴"><a href="/#builder">Builder</a><a href="/#studio">Studio</a><a href="/guide.html">사용 가이드</a><a href="/updates.html">업데이트</a></nav><div class="header-actions"><button class="theme-toggle" type="button" aria-label="다크 모드로 전환" title="화면 테마 변경"><svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 14A8.7 8.7 0 0 1 10 3.5 8.7 8.7 0 1 0 20.5 14Z"/></svg><svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button><a class="button button-dark button-small header-download" href="/download.html">다운로드 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5"/></svg></a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="site-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></div></header>
 
-<script>
-/* ══════════════════════════════════════════════════════════════════
-   배포 링크 설정 — 파일을 업로드한 뒤 아래 URL 만 채우면 됩니다.
-   빈 문자열("") 로 두면 해당 버튼이 자동으로 "준비 중" 상태가 됩니다.
-   ══════════════════════════════════════════════════════════════════ */
-const DOWNLOADS = {
-  /* VSIX 경로·버전은 release-manifest.json 에서 자동으로 채운다 (아래 스크립트 참조) —
-     릴리스마다 이 파일을 고치지 않도록. 매니페스트를 못 읽으면 "준비 중" 으로 남는다. */
-  'builder-vsix'      : '',
-  'builder-manual'    : 'manual.html',
-  /* Studio 설치본 경로·버전은 studio/version.json 에서 자동으로 채운다 (아래 스크립트 참조) —
-     설치본은 GitHub Release 자산이라 절대 URL 이 들어온다. 못 읽으면 "준비 중" 으로 남는다. */
-  'studio-win'        : '',
-  'studio-mac-arm'    : '',   /* Apple Silicon (M1~) */
-  'studio-mac-intel'  : '',   /* Intel Mac */
-  'studio-manual'     : 'studio-manual.html'
-};
-</script>
-
-<style>
-/* ── 토큰 ────────────────────────────────────────────────────────── */
-:root{
-  --ink-900:#07080B;
-  --ink-850:#0A0C11;
-  --ink-800:#0C0E13;
-  --ink-700:#14171F;
-  --ink-600:#1C2029;
-  --hair:rgba(255,255,255,.075);
-  --hair-strong:rgba(255,255,255,.14);
-  --fg:#E8EAF0;
-  --fg-dim:#9AA2B4;
-  --fg-faint:#5D6577;
-  --brand:#EA5504;
-  --brand-hi:#FF7A1F;
-  --ember:#FFC08A;
-  --studio:#7C6BFF;
-  --studio-hi:#9B8DFF;
-  --ok:#3ECF8E;
-  --warn:#FFC53D;
-  --stop:#FF5C5C;
-  --accent:var(--brand);
-  --accent-hi:var(--brand-hi);
-  --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
-  --sans:Pretendard Variable,Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
-  --wrap:1180px;
-  --r:14px;
-}
-
-*,*::before,*::after{box-sizing:border-box}
-/* 부드러운 스크롤은 JS가 담당한다 — lazy 이미지 로딩으로 문서 높이가
-   변해도 목표 지점을 다시 계산해 정확히 도착시키기 위해서다.
-   overflow-x 는 body 에만 걸면 뷰포트 스크롤을 못 막아 html 에도 함께 건다. */
-html{scroll-behavior:auto;overflow-x:hidden}
-body{
-  margin:0;
-  background:var(--ink-900);
-  color:var(--fg);
-  font-family:var(--sans);
-  font-size:16px;
-  line-height:1.72;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-  /* 한글은 어절 단위로 끊는다 — 단어 중간 줄바꿈 방지 */
-  word-break:keep-all;
-  overflow-wrap:break-word;
-}
-/* 미세 그레인 — 평면적인 다크 배경에 질감 */
-body::after{
-  content:"";position:fixed;inset:0;z-index:9;pointer-events:none;opacity:.035;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-img{max-width:100%;height:auto;display:block}
-a{color:inherit}
-h1,h2,h3,h4{margin:0;font-weight:800;letter-spacing:-.028em;line-height:1.14;text-wrap:balance}
-p{margin:0}
-ul{margin:0;padding:0;list-style:none}
-
-.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 28px}
-:focus-visible{outline:2px solid var(--accent-hi);outline-offset:3px;border-radius:4px}
-
-/* ── 공통 조판 요소 ──────────────────────────────────────────────── */
-.eyebrow{
-  font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--fg-faint);display:flex;align-items:center;gap:10px;
-}
-.eyebrow::before{content:"";width:22px;height:1px;background:var(--accent);opacity:.85}
-.lede{color:var(--fg-dim);font-size:1.06rem;max-width:64ch}
-.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
-.hl{
-  background:linear-gradient(96deg,var(--brand) 8%,var(--brand-hi) 46%,var(--ember) 96%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.chip{
-  font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;
-  padding:4px 9px;border-radius:999px;border:1px solid var(--hair-strong);
-  color:var(--fg-dim);white-space:nowrap;
-}
-.chip--accent{border-color:color-mix(in oklab,var(--accent) 45%,transparent);color:var(--accent-hi)}
-.chip--ok{border-color:color-mix(in oklab,var(--ok) 40%,transparent);color:var(--ok)}
-.chip--stop{border-color:color-mix(in oklab,var(--stop) 40%,transparent);color:var(--stop)}
-.chip--concept{border-color:color-mix(in oklab,var(--warn) 34%,transparent);color:var(--warn)}
-/* Beta 딱지 — Studio 는 베타 배포. 칩 안·락업 옆에 같은 모양으로 붙는다 */
-.beta{
-  display:inline-block;vertical-align:middle;margin-left:6px;padding:2px 6px;border-radius:5px;
-  font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.12em;line-height:1;
-  color:#fff;background:var(--brand);
-}
-.dl-group-h .beta{align-self:center;margin-left:0;padding:4px 8px;font-size:.68rem}
-
-/* ── 내비게이션 ──────────────────────────────────────────────────── */
-.nav{
-  position:sticky;top:0;z-index:50;
-  backdrop-filter:blur(18px) saturate(150%);
-  background:color-mix(in oklab,var(--ink-900) 78%,transparent);
-  border-bottom:1px solid var(--hair);
-}
-.nav-in{display:flex;align-items:center;gap:26px;height:62px}
-.brand{display:flex;align-items:center;text-decoration:none;color:var(--fg)}
-/* 워드마크 SVG — 글자는 currentColor 라 배경 테마를 따라간다 */
-.brand-mark{display:block;height:18px;width:auto;flex:none}
-.nav-links{display:flex;gap:22px;margin-left:auto}
-.nav-links a{
-  font-size:.86rem;color:var(--fg-dim);text-decoration:none;
-  transition:color .18s ease;
-}
-.nav-links a:hover{color:var(--fg)}
-
-/* ── 히어로 ──────────────────────────────────────────────────────── */
-.hero{position:relative;padding:96px 0 0;overflow:hidden}
-.hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
-.hero-glow{
-  position:absolute;left:50%;top:-22%;width:1300px;height:900px;transform:translateX(-50%);
-  background:
-    radial-gradient(38% 42% at 42% 46%,rgba(234,85,4,.30),transparent 70%),
-    radial-gradient(32% 34% at 66% 34%,rgba(124,107,255,.20),transparent 72%),
-    radial-gradient(46% 40% at 50% 60%,rgba(255,122,31,.10),transparent 76%);
-  filter:blur(28px);
-  animation:drift 22s ease-in-out infinite alternate;
-}
-@keyframes drift{
-  from{transform:translateX(-50%) translateY(0) scale(1)}
-  to{transform:translateX(-48%) translateY(26px) scale(1.06)}
-}
-/* 원근 격자 바닥 — 계측 장비 같은 인상 */
-.hero-floor{
-  position:absolute;left:-10%;right:-10%;bottom:-2px;height:52%;
-  background-image:
-    repeating-linear-gradient(90deg,rgba(234,85,4,.20) 0 1px,transparent 1px 88px),
-    repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0 1px,transparent 1px 88px);
-  transform:perspective(620px) rotateX(76deg);
-  transform-origin:bottom center;
-  -webkit-mask-image:linear-gradient(to top,#000 4%,transparent 72%);
-  mask-image:linear-gradient(to top,#000 4%,transparent 72%);
-}
-.hero-in{position:relative;z-index:1;display:grid;gap:26px;max-width:820px}
-.hero h1{font-size:clamp(2.3rem,5.6vw,4.3rem)}
-.hero .lede{font-size:clamp(1rem,1.6vw,1.14rem);max-width:60ch}
-.hero-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:4px}
-.btn{
-  display:inline-flex;align-items:center;gap:9px;
-  font-size:.94rem;font-weight:700;text-decoration:none;
-  padding:13px 22px;border-radius:11px;border:1px solid transparent;
-  transition:transform .18s ease,background .18s ease,border-color .18s ease;
-}
-.btn svg{width:15px;height:15px;flex:none}
-.btn--primary{background:var(--brand);color:#fff;box-shadow:0 12px 34px -14px rgba(234,85,4,.85)}
-.btn--primary:hover{background:var(--brand-hi);transform:translateY(-2px)}
-.btn--ghost{background:rgba(255,255,255,.045);border-color:var(--hair-strong);color:var(--fg)}
-.btn--ghost:hover{border-color:rgba(255,255,255,.3);transform:translateY(-2px)}
-.hero-meta{display:flex;flex-wrap:wrap;gap:8px 10px;font-size:.74rem}
-
-/* ── 히어로 3D 판 ───────────────────────────────────────────────── */
-.stage{position:relative;z-index:1;margin:66px auto 0;max-width:1320px;padding:0 28px 130px;perspective:1700px}
-.stage-3d{position:relative;height:560px;transform-style:preserve-3d;transform:rotateX(9deg) rotateY(-15deg)}
-.pane{
-  position:absolute;margin:0;border-radius:var(--r);overflow:hidden;
-  background:var(--ink-800);border:1px solid var(--hair-strong);
-  box-shadow:0 50px 100px -40px rgba(0,0,0,.95),0 0 0 1px rgba(255,255,255,.03) inset;
-  transition:transform .5s cubic-bezier(.2,.7,.2,1);
-}
-.pane-bar{
-  display:flex;align-items:center;gap:8px;padding:9px 13px;
-  background:var(--ink-700);border-bottom:1px solid var(--hair);
-}
-.pane-dots{display:flex;gap:5px}
-.pane-dots i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.16)}
-.pane-path{font-family:var(--mono);font-size:.66rem;color:var(--fg-faint);letter-spacing:.04em;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pane img{width:100%;display:block}
-
-.pane--back{width:42%;left:0;top:22px;transform:translate3d(0,0,-190px);opacity:.62}
-.pane--mid{width:40%;left:26%;top:158px;transform:translate3d(0,0,-70px);opacity:.86}
-.pane--front{width:48%;right:0;top:40px;transform:translate3d(0,0,60px)}
-/* Studio 판 — 좌하단 최전면. Builder 와 공동 주연이 되도록 가장 크게 둔다 */
-.pane--studio{width:52%;left:2%;top:226px;transform:translate3d(0,0,110px)}
-.stage-3d:hover .pane--back{transform:translate3d(-22px,-14px,-190px)}
-.stage-3d:hover .pane--mid{transform:translate3d(-10px,10px,-70px)}
-.stage-3d:hover .pane--front{transform:translate3d(16px,-10px,86px)}
-.stage-3d:hover .pane--studio{transform:translate3d(-14px,12px,132px)}
-
-/* ── 두 제품 ─────────────────────────────────────────────────────── */
-.duo{padding:88px 0;border-top:1px solid var(--hair)}
-.duo-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:34px}
-.duo-card{
-  position:relative;padding:30px 28px 26px;border-radius:18px;overflow:hidden;
-  background:linear-gradient(168deg,var(--ink-700),var(--ink-800) 62%);
-  border:1px solid var(--hair);
-  transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s ease;
-}
-.duo-card::before{
-  content:"";position:absolute;left:0;right:0;top:0;height:2px;
-  background:linear-gradient(90deg,var(--accent),transparent 72%);
-}
-.duo-card:hover{transform:translateY(-5px);border-color:var(--hair-strong)}
-.duo-card--studio{--accent:var(--studio);--accent-hi:var(--studio-hi)}
-.duo-kind{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-hi)}
-.duo-card h3{margin:12px 0 10px;font-size:1.52rem}
-.duo-card p{color:var(--fg-dim);font-size:.94rem}
-.duo-list{display:grid;gap:7px;margin:20px 0 22px;padding-top:18px;border-top:1px solid var(--hair)}
-.duo-list li{display:flex;gap:11px;font-size:.87rem;color:var(--fg-dim)}
-.duo-list b{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:var(--accent-hi);
-  flex:none;width:74px;padding-top:2px;font-weight:500}
-.duo-jump{
-  display:inline-flex;align-items:center;gap:7px;font-size:.85rem;font-weight:700;
-  color:var(--accent-hi);text-decoration:none;
-}
-.duo-jump:hover{text-decoration:underline;text-underline-offset:4px}
-
-/* ── 파트 헤더 ───────────────────────────────────────────────────── */
-.part{position:relative;padding:34px 0 0;scroll-margin-top:70px}
-.part--studio{--accent:var(--studio);--accent-hi:var(--studio-hi)}
-.part-head{position:relative;padding:76px 0 54px;border-top:1px solid var(--hair)}
-.part-head::before{
-  content:"";position:absolute;left:0;top:-1px;width:220px;height:2px;
-  background:linear-gradient(90deg,var(--accent),transparent);
-}
-.part-tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-hi)}
-.part-head h2{margin:18px 0 18px;font-size:clamp(2rem,4.2vw,3.1rem)}
-.part-head .lede{max-width:70ch}
-.part-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-
-/* ── 섹션 공통 ───────────────────────────────────────────────────── */
-.sec{padding:58px 0}
-.sec-head{display:grid;gap:14px;margin-bottom:34px;max-width:74ch}
-.sec-head h3{font-size:clamp(1.4rem,2.6vw,1.95rem)}
-.sec-head p{color:var(--fg-dim);font-size:.98rem}
-
-/* 7/5 비대칭 */
-.split{display:grid;grid-template-columns:1.15fr 1fr;gap:44px;align-items:start}
-.split--center{align-items:center}
-.rows{display:grid;gap:1px;background:var(--hair);border:1px solid var(--hair);border-radius:var(--r);overflow:hidden}
-.row{display:grid;grid-template-columns:96px 1fr;gap:18px;padding:20px 22px;background:var(--ink-850)}
-.row dt{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;color:var(--accent-hi);padding-top:4px}
-.row dd{margin:0;font-size:.9rem;color:var(--fg-dim)}
-.row dd b{color:var(--fg);font-weight:600}
-
-/* 2x2 기능군 */
-.caps{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.cap{padding:26px 24px;border-radius:var(--r);background:var(--ink-850);border:1px solid var(--hair);
-  transition:border-color .25s ease,background .25s ease}
-.cap:hover{border-color:var(--hair-strong);background:var(--ink-800)}
-.cap-h{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
-.cap-h h4{font-size:1.1rem}
-.cap-h span{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;color:var(--fg-faint)}
-.cap ul{display:grid;gap:11px}
-.cap li{font-size:.875rem;color:var(--fg-dim);padding-left:15px;position:relative}
-.cap li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:50%;
-  background:var(--accent);opacity:.7}
-.cap li b{color:var(--fg);font-weight:600}
-
-/* 순서가 있는 흐름 — 번호는 실제 순서를 뜻할 때만 */
-.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.step{display:grid;gap:0}
-.step-n{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;color:var(--accent-hi);margin-bottom:12px}
-.frame{
-  border-radius:var(--r);overflow:hidden;background:var(--ink-800);border:1px solid var(--hair);
-  transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s ease;
-}
-.frame:hover{transform:translateY(-4px);border-color:var(--hair-strong)}
-.step h4{margin:18px 0 8px;font-size:1.04rem}
-.step p{font-size:.87rem;color:var(--fg-dim)}
-/* 세로로 긴 패널 캡쳐 — 세 칸의 높이를 맞춰 설명 줄이 나란히 오게 한다 */
-.flow--portrait .frame img{aspect-ratio:5/9;object-fit:cover;object-position:top center}
-/* 4단계 파이프라인 — 화면 캡쳐가 읽히도록 2열 + 전폭 카드를 섞어 배치한다 */
-.flow--4{grid-template-columns:repeat(2,1fr);gap:26px 20px}
-.step--wide{grid-column:1/-1}
-/* STEP 1 — 질문지·PRD 두 장면을 나란히 (과정 → 산출물) */
-.step-duo{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.step-duo .fcap{padding:9px 14px;font-family:var(--mono);font-size:.67rem;letter-spacing:.07em;
-  color:var(--fg-faint);border-top:1px solid var(--hair)}
-@media (max-width:880px){ .step-duo{grid-template-columns:1fr} }
-
-/* 원본 ↔ 생성 */
-.compare{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
-.compare-item{display:grid;gap:12px}
-.compare-label{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.7rem;
-  letter-spacing:.12em;color:var(--fg-faint)}
-.compare-note{margin-top:22px;padding:18px 20px;border-radius:var(--r);
-  background:var(--ink-850);border:1px solid var(--hair);font-size:.88rem;color:var(--fg-dim)}
-.compare-note b{color:var(--fg)}
-.compare--mobile{grid-template-columns:1fr 1fr;max-width:640px;margin-top:26px}
-
-/* 실시간 진단 · 차단 */
-.live{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
-.live-card{display:grid;gap:16px;align-content:start;padding:24px;border-radius:var(--r);
-  background:var(--ink-850);border:1px solid var(--hair)}
-.live-card h4{font-size:1.08rem}
-.live-card p{font-size:.88rem;color:var(--fg-dim)}
-.stack{display:grid;gap:10px}
-/* 세로로 긴 캡쳐는 의미가 있는 상단만 잘라 쓴다 */
-.frame--crop img{width:100%;height:340px;object-fit:cover;object-position:top center}
-.chips{display:flex;flex-wrap:wrap;align-items:flex-start;gap:7px}
-
-/* 에디터 */
-.editors{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.editor{display:flex;gap:16px;align-items:center;padding:20px 22px;border-radius:var(--r);
-  background:var(--ink-850);border:1px solid var(--hair)}
-.editor img{width:40px;height:40px;flex:none;border-radius:9px}
-.editor b{display:block;font-size:.96rem}
-.editor span{font-size:.8rem;color:var(--fg-faint)}
-
-/* Studio — 에이전트 */
-.agents{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.agent{padding:20px;border-radius:var(--r);background:var(--ink-850);border:1px solid var(--hair)}
-.agent b{display:block;font-size:.95rem;margin-bottom:6px}
-.agent span{font-size:.82rem;color:var(--fg-dim)}
-.agent i{display:block;font-family:var(--mono);font-style:normal;font-size:.64rem;letter-spacing:.14em;
-  color:var(--accent-hi);margin-bottom:10px}
-
-/* Studio — 로드맵 */
-.roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.phase{position:relative;padding:26px 24px;border-radius:var(--r);background:var(--ink-850);border:1px solid var(--hair)}
-.phase::before{content:"";position:absolute;left:24px;right:24px;top:0;height:2px;
-  background:linear-gradient(90deg,var(--accent),transparent)}
-.phase--next::before{opacity:.55}
-.phase--future::before{opacity:.28}
-.phase-t{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-hi)}
-.phase h4{margin:12px 0 14px;font-size:1.1rem}
-.phase ul{display:grid;gap:9px}
-.phase li{font-size:.85rem;color:var(--fg-dim);padding-left:14px;position:relative}
-.phase li::before{content:"";position:absolute;left:0;top:.66em;width:4px;height:4px;border-radius:50%;
-  background:var(--fg-faint)}
-
-/* ── 다운로드 ────────────────────────────────────────────────────── */
-.dl{position:relative;padding:96px 0 84px;margin-top:60px;border-top:1px solid var(--hair);overflow:hidden;scroll-margin-top:70px}
-.dl::before{
-  content:"";position:absolute;left:50%;top:-40%;width:1100px;height:700px;transform:translateX(-50%);
-  background:radial-gradient(40% 44% at 50% 50%,rgba(234,85,4,.16),transparent 72%);filter:blur(20px);
-  pointer-events:none;
-}
-.dl-in{position:relative;z-index:1}
-.dl-group{margin-top:40px}
-.dl-group-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;padding-bottom:16px;
-  border-bottom:1px solid var(--hair);margin-bottom:18px}
-.dl-group-h h3{font-size:1.28rem}
-/* 제품 로고 락업 — 배경을 투명하게 뺀 PNG 라 뒤의 주황 글로우가 그대로 비친다 */
-.dl-logo{display:block;height:30px;width:auto;flex:none;align-self:center}
-@media (max-width:560px){ .dl-logo{height:24px} }
-/* Studio 앱 아이콘 — 락업의 N 마크 자리를 대신한다 (텍스트 크롭과 한 몸으로 읽히게 간격을 좁힘) */
-.dl-appicon{display:block;width:46px;height:46px;flex:none;align-self:center;margin-right:-6px}
-@media (max-width:560px){ .dl-appicon{width:38px;height:38px} }
-.dl-group-h span{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--fg-faint)}
-.dl-group--studio{--accent:var(--studio);--accent-hi:var(--studio-hi)}
-.dl-list{display:grid;gap:12px}
-.dl-item{
-  display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;
-  padding:20px 22px;border-radius:var(--r);background:var(--ink-850);border:1px solid var(--hair);
-  transition:border-color .25s ease,background .25s ease;
-}
-.dl-item:hover{border-color:var(--hair-strong);background:var(--ink-800)}
-.dl-meta > b{display:block;font-size:1rem}
-/* 무슨 파일이고 어디에 넣는지 한 줄 설명 — 처음 받는 사람 기준 */
-.dl-desc{margin:7px 0 0;font-size:.83rem;line-height:1.6;color:var(--fg-dim);max-width:58ch}
-.dl-desc b{color:var(--fg);font-weight:600}
-.dl-file{font-family:var(--mono);font-size:.74rem;color:var(--fg-faint);margin-top:5px;word-break:break-all}
-.dl-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
-.dl-btn{
-  display:inline-flex;align-items:center;gap:9px;white-space:nowrap;
-  font-size:.88rem;font-weight:700;text-decoration:none;
-  padding:11px 19px;border-radius:10px;
-  background:var(--accent);color:#fff;
-  transition:background .18s ease,transform .18s ease;
-}
-.dl-btn:hover{background:var(--accent-hi);transform:translateY(-1px)}
-.dl-btn svg{width:15px;height:15px;flex:none}
-.dl-btn[aria-disabled="true"]{
-  background:transparent;color:var(--fg-faint);border:1px dashed var(--hair-strong);
-  cursor:not-allowed;pointer-events:none;font-weight:500;
-}
-/* 한 항목에 버튼이 둘 이상일 때 — 보기(HTML) + 내려받기(PDF) */
-.dl-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.dl-btn--ghost{
-  background:transparent;color:var(--fg-dim);border:1px solid var(--hair-strong);font-weight:600;
-}
-.dl-btn--ghost:hover{background:var(--ink-700);color:var(--fg);border-color:var(--accent)}
-.dl-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
-.dl-step{padding:18px 20px;border-radius:var(--r);border:1px dashed var(--hair-strong);background:rgba(255,255,255,.015)}
-.dl-step i{display:block;font-family:var(--mono);font-style:normal;font-size:.66rem;letter-spacing:.14em;
-  color:var(--fg-faint);margin-bottom:8px}
-.dl-step > b{display:block;font-size:.9rem;font-weight:600}
-.dl-step span{font-size:.79rem;line-height:1.62;color:var(--fg-faint)}
-/* 설명 안에서 실제 메뉴 이름만 또렷하게 */
-.dl-step span b{color:var(--fg-dim);font-weight:600;white-space:nowrap}
-/* Studio 는 서명·공증 적용으로 첫 실행 허용 단계가 없어 2단계 */
-.dl-steps--studio{grid-template-columns:repeat(2,1fr)}
-
-/* ── 유의사항 ────────────────────────────────────────────────────── */
-.notice{border-top:1px solid var(--hair);padding:72px 0 84px;scroll-margin-top:70px}
-.notice-group{margin-top:26px;border:1px solid var(--hair);border-radius:var(--r);background:var(--ink-850);overflow:hidden}
-.notice-group-h{display:flex;align-items:baseline;gap:12px;padding:16px 24px;border-bottom:1px solid var(--hair);background:var(--ink-800)}
-.notice-group-h .no{font-family:var(--mono);font-size:.78rem;color:var(--brand-hi);font-weight:600}
-.notice-group-h b{font-size:.95rem;color:var(--fg)}
-.notice-group-h .en{margin-left:auto;font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-faint);white-space:nowrap}
-.notice-item{padding:20px 24px;border-bottom:1px solid var(--hair)}
-.notice-item:last-child{border-bottom:0}
-.notice-item h4{font-size:.98rem;font-weight:700;line-height:1.4;margin-bottom:7px}
-.notice-item p{max-width:86ch;font-size:.9rem;color:var(--fg-dim);line-height:1.85}
-.notice-ver{display:block;margin-top:10px;font-family:var(--mono);font-size:.76rem;color:var(--fg-faint)}
-
-/* ── 푸터 ────────────────────────────────────────────────────────── */
-.foot{border-top:1px solid var(--hair);background:var(--ink-850);padding:52px 0 60px}
-.foot-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:44px}
-.foot h4{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--fg-faint);font-weight:500;margin-bottom:14px}
-.foot p,.foot li{font-size:.84rem;color:var(--fg-faint);line-height:1.8}
-.foot ul{display:grid;gap:8px}
-.foot a{text-decoration:none;border-bottom:1px solid var(--hair-strong);padding-bottom:2px;
-  transition:color .18s ease,border-color .18s ease}
-.foot a:hover{color:var(--fg);border-color:var(--brand)}
-.foot-bar{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;
-  margin-top:42px;padding-top:22px;border-top:1px solid var(--hair);
-  font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--fg-faint)}
-
-/* ── 등장 연출 ───────────────────────────────────────────────────── */
-[data-reveal]{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
-[data-reveal].is-in{opacity:1;transform:none}
-.hero-in>*{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
-.hero-in>*:nth-child(1){animation-delay:.05s}
-.hero-in>*:nth-child(2){animation-delay:.13s}
-.hero-in>*:nth-child(3){animation-delay:.21s}
-.hero-in>*:nth-child(4){animation-delay:.29s}
-.hero-in>*:nth-child(5){animation-delay:.37s}
-.pane--back{animation:settle 1.1s cubic-bezier(.2,.7,.2,1) .42s both}
-.pane--mid{animation:settle 1.1s cubic-bezier(.2,.7,.2,1) .54s both}
-.pane--front{animation:settle 1.1s cubic-bezier(.2,.7,.2,1) .66s both}
-.pane--studio{animation:settle 1.1s cubic-bezier(.2,.7,.2,1) .78s both}
-@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-@keyframes settle{from{opacity:0;transform:translate3d(0,52px,-320px)}}
-
-/* ── 반응형 ──────────────────────────────────────────────────────── */
-/* 1440 아래에서는 stage 좌우 여백이 사라져 3D 로 튀어나온 판이 잘린다 — 축소해 담는다 */
-@media (max-width:1439px){
-  .stage-3d{transform:rotateX(9deg) rotateY(-14deg) scale(.86)}
-}
-@media (max-width:1120px){
-  .stage-3d{transform:rotateX(8deg) rotateY(-12deg) scale(.76)}
-}
-@media (max-width:1040px){
-  .stage-3d{height:460px}
-}
-@media (max-width:880px){
-  .nav-links{display:none}
-  .hero{padding-top:64px}
-  .stage{padding-bottom:70px;perspective:none}
-  .stage-3d{height:auto;transform:none;display:grid;gap:16px}
-  .pane{position:static;width:100%!important;opacity:1!important;transform:none!important;animation:none}
-  .pane--back{display:none}
-  .duo-grid,.split,.caps,.flow,.compare,.live,.editors,.agents,.roadmap,.dl-steps,.foot-grid,.dl-item{
-    grid-template-columns:1fr}
-  .dl-item{gap:16px}
-  .split{gap:30px}
-  .agents{gap:12px}
-}
-@media (max-width:560px){
-  .wrap,.stage{padding-left:18px;padding-right:18px}
-  .row{grid-template-columns:1fr;gap:8px}
-  .compare--mobile{grid-template-columns:1fr 1fr}
-  .notice-group-h{flex-wrap:wrap}
-  .notice-group-h .en{margin-left:0;flex-basis:100%}
-}
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  *,*::before,*::after{animation:none!important;transition:none!important}
-  [data-reveal]{opacity:1;transform:none}
-}
-</style>
-</head>
-<body>
-
-<!-- ══ 내비게이션 ══════════════════════════════════════════════════ -->
-<nav class="nav">
-  <div class="wrap nav-in">
-    <a class="brand" href="#top">
-      <img class="brand-mark" src="images/logos/nextlab.svg" alt="NEXTLAB" width="110" height="18" decoding="async">
-    </a>
-    <div class="nav-links">
-      <a href="#builder">Builder</a>
-      <a href="#studio">Studio</a>
-      <a href="#download">설치 · 메뉴얼</a>
-      <a href="updates.html">업데이트</a>
+<main id="main" class="marketing">
+  <section class="p-hero" aria-labelledby="hero-title">
+    <div class="p-atmosphere" aria-hidden="true"></div>
+    <div class="p-hero-copy">
+      <p class="p-eyebrow">NEXTLAB Builder &amp; Studio</p>
+      <h1 id="hero-title">표준을 아는 AI로,<br><span>기획부터 코드까지.</span></h1>
+      <p class="p-lead"><span>아이디어를 설계하는 <strong>Studio.</strong></span><span>디자인을 구현하는 <strong>Builder.</strong></span></p>
+      <div class="p-hero-actions"><a class="button p-button-builder" href="#builder">Builder 알아보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="button p-button-studio" href="#studio">Studio 알아보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
     </div>
-  </div>
-</nav>
-
-<!-- ══ 히어로 ══════════════════════════════════════════════════════ -->
-<header class="hero" id="top">
-  <div class="hero-bg" aria-hidden="true">
-    <div class="hero-glow"></div>
-    <div class="hero-floor"></div>
-  </div>
-
-  <div class="wrap hero-in">
-    <p class="eyebrow">한화생명 · AI 개발도구</p>
-    <h1>표준을 아는 AI 로,<br><span class="hl">기획부터 코드까지</span></h1>
-    <p class="lede">
-      <b>NEXTLAB Builder</b> 는 Figma 디자인을 한화 DS 코드로 바꾸는 VSCode 확장,
-      <b>NextLab Studio</b> 는 기획·디자인부터 코드까지 잇는 데스크톱 워크스페이스입니다.
-      어느 AI 를 골라도 한화생명 개발표준이 자동으로 주입됩니다.
-    </p>
-    <div class="hero-cta">
-      <a class="btn btn--primary" href="#download">
-        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5v9m0 0 3.2-3.2M8 10.5 4.8 7.3M2 12.5v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        설치 파일 · 메뉴얼 받기
-      </a>
-      <a class="btn btn--ghost" href="#builder">무엇을 하는 도구인지 보기</a>
-    </div>
-    <div class="hero-meta">
-      <span class="chip chip--accent">Builder v<span data-ver>0.3.8</span> · VSIX</span>
-      <span class="chip">VSCode · Cursor · Antigravity</span>
-      <span class="chip chip--accent">Studio v<span data-studio-ver>0.1.0</span><span class="beta">BETA</span></span>
-      <span class="chip">Windows · macOS</span>
-    </div>
-  </div>
-
-  <div class="stage">
-    <div class="stage-3d">
-      <figure class="pane pane--back">
-        <div class="pane-bar"><span class="pane-dots"><i></i><i></i><i></i></span><span class="pane-path">figma · 계정 복구 신청 (원본)</span></div>
-        <img src="images/rc1-figma.png" alt="Figma 원본 화면 — 계정 복구 신청 폼" loading="lazy" decoding="async">
-      </figure>
-      <figure class="pane pane--mid">
-        <div class="pane-bar"><span class="pane-dots"><i></i><i></i><i></i></span><span class="pane-path">nextlab · figma-to-code 입력</span></div>
-        <img src="images/03-input.png" alt="NEXTLAB Builder 의 Figma to Code 입력 화면" loading="lazy" decoding="async">
-      </figure>
-      <figure class="pane pane--front">
-        <div class="pane-bar"><span class="pane-dots"><i></i><i></i><i></i></span><span class="pane-path">검증 통과 · 렌더 미리보기</span></div>
-        <img src="images/06-complete-preview.png" alt="검증 루프 통과 후 렌더 미리보기가 채팅에 임베드된 화면" loading="lazy" decoding="async">
-      </figure>
-      <figure class="pane pane--studio">
-        <div class="pane-bar"><span class="pane-dots"><i></i><i></i><i></i></span><span class="pane-path">nextlab-studio · talk-to-design</span></div>
-        <img src="images/studio15/09_design_canvas.png" alt="NextLab Studio — Talk to Design 캔버스에서 실물 화면을 편집하는 모습" loading="lazy" decoding="async">
-      </figure>
-    </div>
-  </div>
-
-</header>
-
-<!-- ══ 두 제품 ═════════════════════════════════════════════════════ -->
-<section class="duo">
-  <div class="wrap">
-    <div class="sec-head" data-reveal>
-      <p class="eyebrow">두 개의 도구, 하나의 표준</p>
-      <h3>쓰는 자리가 다릅니다. 지키는 기준은 같습니다.</h3>
-      <p>이미 코드를 쓰는 사람은 Builder 를, 아이디어부터 화면을 만드는 사람은 Studio 를 씁니다.</p>
-    </div>
-
-    <div class="duo-grid">
-      <article class="duo-card" data-reveal>
-        <p class="duo-kind">VSCode 확장 · 개발 완료</p>
-        <h3>NEXTLAB Builder</h3>
-        <p>쓰던 에디터 안에서 디자인 변환·AI 코딩·표준 검사·커밋까지. 서버 구축 없이 VSIX 하나로 끝납니다.</p>
-        <ul class="duo-list">
-          <li><b>대상</b><span>프론트엔드 개발자 · 수행사</span></li>
-          <li><b>핵심</b><span>Figma → 한화 DS React 코드, 빌드·렌더 검증까지 자동</span></li>
-          <li><b>설치</b><span>VSIX 파일 설치 · 3단계 5분</span></li>
-        </ul>
-        <a class="duo-jump" href="#builder">Builder 자세히 보기 →</a>
-      </article>
-
-      <article class="duo-card duo-card--studio" data-reveal>
-        <p class="duo-kind">데스크톱 앱 · 개발 완료</p>
-        <h3>NextLab Studio <span class="beta">BETA</span></h3>
-        <p>아이디어 → 기획 → 화면 흐름 → 실물 UI → 프로토타입을 한 흐름으로 잇고, Figma to Code 까지 품은 데스크톱 워크스페이스입니다.</p>
-        <ul class="duo-list">
-          <li><b>대상</b><span>현업 · 기획자 · 디자이너 · 개발자</span></li>
-          <li><b>핵심</b><span>Launchpad 로 0 to 1 + Builder 와 동일한 Figma to Code</span></li>
-          <li><b>설치</b><span>Windows · macOS 설치형</span></li>
-        </ul>
-        <a class="duo-jump" href="#studio">Studio 자세히 보기 →</a>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════════════
-     PART · BUILDER
-     ══════════════════════════════════════════════════════════════════ -->
-<section class="part" id="builder">
-  <div class="wrap">
-    <div class="part-head" data-reveal>
-      <p class="part-tag">Part 01 — NEXTLAB Builder</p>
-      <h2>같은 AI 를 써도,<br>결과는 같지 않습니다</h2>
-      <p class="lede">
-        Claude · CodeX 는 경쟁사도 똑같이 쓰는 범용 엔진입니다. 차이는 모델이 아니라
-        <b>그 모델이 한화생명의 표준대로 일하게 만드는 체계</b>에서 나옵니다.
-        Builder 는 백지가 아니라 한화생명의 표준·디자인시스템·보안 위에서 시작합니다.
-      </p>
-      <div class="part-badges">
-        <span class="chip chip--accent">VSIX v<span data-ver>0.3.8</span></span>
-        <span class="chip">서버 · 인프라 불필요</span>
-        <span class="chip">표준 21개 모듈 동봉</span>
-        <span class="chip">DS 아이콘 415종 동봉</span>
-      </div>
-    </div>
-
-    <!-- 왜 -->
-    <div class="sec">
-      <div class="split split--center">
-        <div class="sec-head" data-reveal style="margin-bottom:0">
-          <p class="eyebrow">Why Builder</p>
-          <h3>품질을 사람이 아니라 체계가 만듭니다</h3>
-          <p>
-            그냥 쓰면 결과가 쓰는 사람에 따라 매번 다르고, 표준·보안은 "지켜달라"는 부탁에 그칩니다.
-            잘 쓰는 직원의 노하우는 그 사람이 떠나면 함께 사라집니다.
-            Builder 로 쓰면 따로 배우거나 외울 것 없이 — 새 인력이 써도, 수행사가 써도 같은 품질의 한화 코드가 나옵니다.
-          </p>
-        </div>
-        <dl class="rows" data-reveal>
-          <div class="row"><dt>Quality</dt><dd>개발표준 21개 모듈이 자동 적용되고, 위반은 <b>AI 가 파일을 쓰는 순간</b> 잡혀 스스로 고칩니다.</dd></div>
-          <div class="row"><dt>Security</dt><dd>주민번호·API 키는 <b>AI 로 나가기 전에 PC 안에서</b> 막히고, 보안 표준은 현장에서 끌 수 없게 잠겨 있습니다.</dd></div>
-          <div class="row"><dt>Adoption</dt><dd>명령어·프롬프트 지식 없이 <b>VSCode 화면에서 클릭과 선택</b>으로 씁니다. 온보딩 안내가 내장되어 설치 당일부터 씁니다.</dd></div>
-          <div class="row"><dt>Asset</dt><dd>일하는 방식이 표준 문서와 도구에 축적됩니다. <b>모델이 세대 교체돼도 체계는 그대로</b>입니다.</dd></div>
-        </dl>
-      </div>
-    </div>
-
-    <!-- 기능군 -->
-    <div class="sec">
-      <div class="sec-head" data-reveal>
-        <p class="eyebrow">Features</p>
-        <h3>디자인부터 커밋까지, 에디터 안에서</h3>
-      </div>
-      <div class="caps">
-        <article class="cap" data-reveal>
-          <div class="cap-h"><h4>디자인 → 코드</h4><span>DESIGN TO CODE</span></div>
-          <ul>
-            <li><b>Figma → Code</b> — 링크 하나로 실제 색·간격·구조·변수를 읽어 한화 DS React 코드로 변환</li>
-            <li><b>UI 킷 3종</b> — MUI(관리자) · DS2(모바일 웹) · DS3(영업지원) 중 선택 생성</li>
-            <li><b>검증 루프</b> — 실제 렌더 스크린샷을 Figma 와 항목별 대조, 기준 점수까지 자동 보정 반복</li>
-            <li><b>Storybook 미리보기</b> — 한화 폰트·테마·light/dark 를 원클릭 확인</li>
-          </ul>
-        </article>
-        <article class="cap" data-reveal>
-          <div class="cap-h"><h4>AI 코딩</h4><span>AI CODING</span></div>
-          <ul>
-            <li><b>멀티 AI 채팅</b> — Claude · CodeX 를 클릭으로 전환, 모델·추론 강도·권한 모드 선택</li>
-            <li><b>인라인 편집</b> — 코드를 선택하고 자연어로 지시, diff 미리보기 후 적용</li>
-            <li><b>AI Quick Fix</b> — 표준 위반 진단에서 전구 클릭 하나로 규칙에 맞게 수정</li>
-            <li><b>컨텍스트 첨부</b> — @파일 멘션, 파일·이미지 첨부, 선택 코드 첨부</li>
-          </ul>
-        </article>
-        <article class="cap" data-reveal>
-          <div class="cap-h"><h4>품질 · 표준</h4><span>QUALITY</span></div>
-          <ul>
-            <li><b>표준 자동 주입</b> — 21개 모듈을 작업 성격에 맞게 골라 주입, 어느 AI 를 써도 동일</li>
-            <li><b>실시간 진단</b> — 18개 규칙 위반을 타이핑 즉시 에디터에 표시</li>
-            <li><b>코드 리뷰 · 커밋</b> — 변경사항을 표준 기준으로 점검하고 커밋 메시지까지 작성</li>
-            <li><b>테스트 · 스토리 · API</b> — 테스트/Storybook 생성, OpenAPI → Zod + TanStack Query</li>
-          </ul>
-        </article>
-        <article class="cap" data-reveal>
-          <div class="cap-h"><h4>보안 · 운영</h4><span>SECURITY &amp; OPS</span></div>
-          <ul>
-            <li><b>민감정보 사전 차단</b> — 주민번호·API 키 등을 AI 전송 전에 탐지·차단</li>
-            <li><b>사내정보 번들 보호</b> — 동봉 번들을 allowlist + 자동 스크럽으로 정화 후 빌드</li>
-            <li><b>실행 이력 · 비용</b> — AI 실행 내역과 토큰·비용을 기록해 사용량을 추적</li>
-            <li><b>표준 커스터마이징</b> — 팀 규칙을 문서로 수정하면 도구 전체에 반영</li>
-          </ul>
-        </article>
-      </div>
-    </div>
-
-    <!-- 3단계 흐름 -->
-    <div class="sec">
-      <div class="sec-head" data-reveal>
-        <p class="eyebrow">Figma to Code</p>
-        <h3>링크 넣고, 킷 고르고, 말로 시키면 끝</h3>
-        <p>스크린샷 추측이 아니라 Figma Dev Mode 로 실제 디자인 데이터를 읽습니다. 입력부터 검증 통과까지 5~10분.</p>
-      </div>
-      <div class="flow flow--portrait">
-        <article class="step" data-reveal>
-          <p class="step-n">STEP 1 — 입력</p>
-          <figure class="frame"><img src="images/03-input.png" alt="컴포넌트명, UI 킷, Figma URL, 요구사항을 입력하는 화면" loading="lazy" decoding="async"></figure>
-          <h4>세 칸이면 됩니다</h4>
-          <p>컴포넌트명 · UI 킷 · Figma 링크. 필요하면 "왼쪽메뉴 제외하고 본문만" 처럼 자연어 지시를 덧붙입니다.</p>
-        </article>
-        <article class="step" data-reveal>
-          <p class="step-n">STEP 2 — 실행 · 검증</p>
-          <figure class="frame"><img src="images/04-running.png" alt="요청 요약 카드와 실시간 진행 로그가 표시된 실행 화면" loading="lazy" decoding="async"></figure>
-          <h4>실행은 투명하게</h4>
-          <p>무엇이 실행되는지 먼저 보여주고, 도구 호출 단위 진행과 경과 시간이 그대로 보입니다. 언제든 중지할 수 있습니다.</p>
-        </article>
-        <article class="step" data-reveal>
-          <p class="step-n">STEP 3 — 완료</p>
-          <figure class="frame"><img src="images/06-complete-preview.png" alt="검증 점수 로그와 렌더 미리보기, Storybook 알림이 표시된 완료 화면" loading="lazy" decoding="async"></figure>
-          <h4>기준을 넘은 것만 도착</h4>
-          <p>렌더 O · 규칙 100 · 시각 97 로 게이트 통과. 완료 화면을 그 자리에서 캡쳐해 채팅에 임베드합니다.</p>
-        </article>
-      </div>
-    </div>
-
-    <!-- 결과 비교 -->
-    <div class="sec">
-      <div class="sec-head" data-reveal>
-        <p class="eyebrow">Result</p>
-        <h3>원본과 나란히 — 같은 화면이 코드가 됐습니다</h3>
-      </div>
-      <div class="compare">
-        <figure class="compare-item" data-reveal>
-          <figcaption class="compare-label"><span class="chip">원본</span> Figma 디자인 — 계정 복구 신청</figcaption>
-          <div class="frame"><img src="images/rc1-figma.png" alt="Figma 원본 — 계정 복구 신청 화면" loading="lazy" decoding="async"></div>
+    <div class="p-stage container" aria-label="Builder와 Studio의 실제 작업 화면">
+      <div class="p-stage-inner">
+        <figure class="p-window p-window-studio">
+          <figcaption><strong>NEXTLAB Studio</strong><span>Design canvas</span></figcaption>
+          <img src="/images/studio-current/design-dark.jpg?v=1d59d4603a5a" data-light-src="/images/studio-current/design-light.jpg?v=f53cb5e17767" data-dark-src="/images/studio-current/design-dark.jpg?v=1d59d4603a5a" alt="Studio에서 완성된 LIFEPLUS SELECT 멤버십 홈 화면을 편집하는 디자인 캔버스" width="1680" height="1050" fetchpriority="high">
         </figure>
-        <figure class="compare-item" data-reveal>
-          <figcaption class="compare-label"><span class="chip chip--ok">생성 결과</span> Storybook 실제 렌더</figcaption>
-          <div class="frame"><img src="images/rc3-light.png" alt="생성된 코드의 Storybook 실제 렌더 — Light 테마" loading="lazy" decoding="async"></div>
-        </figure>
-      </div>
-      <p class="compare-note" data-reveal>
-        <b>다크 모드를 따로 만들지 않았습니다.</b> 테마 토큰 기반이라 Storybook 툴바 토글 한 번으로 Dark 와 Light 가 모두 나옵니다.
-        모바일 웹(DS2)·영업지원(DS3) 화면도 UI 킷 선택만 바꾸면 같은 흐름으로 생성됩니다.
-      </p>
-      <div class="compare compare--mobile">
-        <figure class="compare-item" data-reveal>
-          <figcaption class="compare-label"><span class="chip">원본</span> DS2 · 모바일</figcaption>
-          <div class="frame"><img src="images/rc4-figma-mobile.png" alt="Figma 원본 — 적정 생활비 팝업 모바일 화면" loading="lazy" decoding="async"></div>
-        </figure>
-        <figure class="compare-item" data-reveal>
-          <figcaption class="compare-label"><span class="chip chip--ok">생성 결과</span> 실제 렌더</figcaption>
-          <div class="frame"><img src="images/rc5-storybook-mobile.png" alt="생성된 모바일 코드의 실제 렌더" loading="lazy" decoding="async"></div>
+        <figure class="p-window p-window-builder">
+          <figcaption><strong>NEXTLAB Builder</strong><span>Figma to Code</span></figcaption>
+          <div class="p-builder-crop"><img src="/images/06-complete-preview.png?v=e68bef50c1e7" alt="Builder의 코드 검증 결과와 생성된 화면 미리보기" width="938" height="1700" fetchpriority="high"></div>
         </figure>
       </div>
     </div>
+  </section>
 
-    <!-- 표준 · 보안 -->
-    <div class="sec">
-      <div class="sec-head" data-reveal>
-        <p class="eyebrow">Standards &amp; Security · Live</p>
-        <h3>잘못 쓰는 순간, 규칙 번호로 알려줍니다</h3>
-        <p>표준을 어기라고 시켜도 표준으로 답합니다. 민감정보는 나가기 전에 막힙니다.</p>
+  <section class="p-products container" aria-label="두 제품 소개">
+    <a class="p-product-card p-builder" href="#builder"><div class="p-card-top"><span class="p-eyebrow">에디터 확장</span><span class="p-version" data-version="builder">버전 확인 중</span></div><h2><span class="product-logo"><img src="/images/logos/builder-black.jpg?v=8e5114cf6c38" data-light-src="/images/logos/builder-white.jpg?v=f59b74d02b7e" data-dark-src="/images/logos/builder-black.jpg?v=8e5114cf6c38" alt="NEXTLAB Builder" width="1280" height="434" loading="lazy"></span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></h2><p>쓰던 에디터에서, 디자인을 코드로.</p><span class="p-card-detail">Figma to Code · AI 코딩 · 개발표준 진단</span><span class="p-platform">VS Code · Cursor</span></a>
+    <a class="p-product-card p-studio" href="#studio"><div class="p-card-top"><span class="p-eyebrow">데스크톱 앱</span><span class="p-version" data-version="studio">버전 확인 중</span></div><h2><span class="product-logo"><img src="/images/logos/studio-black.jpg?v=e5464246146e" data-light-src="/images/logos/studio-white.jpg?v=ef3bbb02406c" data-dark-src="/images/logos/studio-black.jpg?v=e5464246146e" alt="NEXTLAB Studio" width="1280" height="434" loading="lazy"></span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></h2><p>하나의 아이디어에서, 작동하는 화면까지.</p><span class="p-card-detail">기획 · User Flow · 디자인 · 프로토타입 · 개발</span><span class="p-platform">macOS · Windows</span></a>
+  </section>
+
+  <section class="p-product-section p-builder container" id="builder" aria-labelledby="builder-title">
+    <div class="p-section-heading"><div><div class="p-product-lockup"><span class="product-logo"><img src="/images/logos/builder-black.jpg?v=8e5114cf6c38" data-light-src="/images/logos/builder-white.jpg?v=f59b74d02b7e" data-dark-src="/images/logos/builder-black.jpg?v=8e5114cf6c38" alt="NEXTLAB Builder" width="1280" height="434" loading="lazy"></span></div><h2 id="builder-title">디자인의 의도를,<br><span>프로젝트의 코드로.</span></h2></div><div class="p-section-intro"><p>Figma의 구조와 스타일을 읽고, 디자인 시스템에 맞는 React 코드를 만듭니다. 생성된 화면을 확인하고 수정하는 과정까지 에디터 안에서 이어집니다.</p><div class="p-inline-links"><a class="text-link" href="/download.html#builder">Builder 설치하기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="text-link" href="/manual.html">사용 가이드 ↗</a></div></div></div>
+    <div class="p-result-panel">
+      <div class="p-result-heading"><div><p class="p-eyebrow">Figma to Code</p><h3>같은 디자인. 실제로 렌더링한 결과.</h3></div><span>계정 복구 신청 화면</span></div>
+      <div class="p-comparison">
+        <figure><figcaption><span>01</span> Figma 디자인 <span class="p-result-type">SOURCE</span></figcaption><div class="p-comparison-image"><img src="/images/rc1-figma.png?v=c49a5fae6579" alt="Figma 원본의 계정 복구 신청 화면" width="1700" height="1255" loading="lazy"></div></figure>
+        <figure><figcaption><span>02</span> Builder 생성 결과 <span class="p-result-type">RENDERED</span></figcaption><div class="p-comparison-image"><img src="/images/rc3-light.png?v=3895e6a0868a" alt="Builder가 생성한 React 코드를 Storybook에서 렌더링한 계정 복구 신청 화면" width="1700" height="1109" loading="lazy"></div></figure>
       </div>
-      <div class="live">
-        <article class="live-card" data-reveal>
-          <h4>18개 규칙을 상시 감시</h4>
-          <p>AI 가 짠 코드든 사람이 짠 코드든 타이핑 즉시 잡습니다. 툴팁 한 줄에 규칙 번호 + 금지 이유 + 대안이 함께 나오고, Quick Fix 로 그 자리에서 고칩니다.</p>
-          <div class="chips">
-            <span class="chip chip--stop">T-01 any</span>
-            <span class="chip chip--stop">T-02 as 단언</span>
-            <span class="chip chip--stop">T-03 var</span>
-            <span class="chip chip--stop">T-08 enum</span>
-            <span class="chip">R-09 useEffect fetch</span>
-          </div>
-          <div class="stack">
-            <div class="frame"><img src="images/dx1-t01.png" alt="에디터에서 T-01 any 타입 금지 규칙 위반이 표시된 화면" loading="lazy" decoding="async"></div>
-            <div class="frame"><img src="images/dx2-t02.png" alt="에디터에서 T-02 타입 단언 금지 규칙 위반이 표시된 화면" loading="lazy" decoding="async"></div>
-            <div class="frame"><img src="images/dx3-t03.png" alt="에디터에서 T-03 var 금지 규칙 위반이 표시된 화면" loading="lazy" decoding="async"></div>
-          </div>
-        </article>
-        <article class="live-card" data-reveal>
-          <h4>차단은 PC 안에서 끝납니다</h4>
-          <p>직접 입력한 주민등록번호는 물론, 무심코 첨부한 .env 안의 AWS 키까지 전송 직전에 검사합니다. 검사가 로컬에서 끝나므로 민감정보가 AI 서버에 도달한 적 자체가 없습니다.</p>
-          <div class="chips">
-            <span class="chip chip--accent">탐지 8종</span>
-            <span class="chip">주민등록번호</span>
-            <span class="chip">AWS · GitHub · Slack 토큰</span>
-            <span class="chip">PEM 개인 키</span>
-          </div>
-          <div class="frame frame--crop"><img src="images/sec2-block-key.png" alt=".env 첨부 시 AWS 키를 감지해 전송을 중단한 화면" loading="lazy" decoding="async"></div>
-        </article>
-      </div>
+      <p class="p-image-note">실제 Figma 원본과 Storybook 렌더 결과입니다. 디자인 시스템의 컴포넌트와 테마를 사용합니다.</p>
     </div>
+    <div class="p-feature-row">
+      <article><h3>디자인 시스템에 맞게</h3><p>Figma 링크와 UI 킷을 선택하세요. 컴포넌트, 색상, 간격을 프로젝트의 기준에 맞춰 코드로 옮깁니다.</p></article>
+      <article><h3>눈으로 확인하는 결과</h3><p>빌드와 렌더 검증 결과를 확인하고, Storybook 미리보기에서 실제 화면을 살펴보세요.</p></article>
+      <article><h3>수정과 리뷰도 한곳에서</h3><p>선택한 코드를 자연어로 수정하고, 변경 내용을 비교하세요. 개발표준 진단과 코드 리뷰로 작업을 마무리합니다.</p></article>
+    </div>
+    <div class="p-editor-detail"><div><p class="p-eyebrow">코드 편집</p><h3>고칠 부분을 선택하고,<br>변경 내용을 확인하세요.</h3><p>AI 채팅, 인라인 편집, 표준 진단.<br>익숙한 코드와 작업 맥락을 그대로 이어갑니다.</p><a class="text-link" href="/manual.html">Builder 기능 살펴보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div><figure><img src="/images/ie2-diff.png?v=7d61ce05dd2b" alt="Builder 인라인 편집의 변경 전후 코드 비교 화면" width="1650" height="704" loading="lazy"><figcaption>인라인 편집 · 변경 내용 비교</figcaption></figure></div>
+  </section>
 
-    <!-- 에디터 -->
-    <div class="sec">
-      <div class="sec-head" data-reveal>
-        <p class="eyebrow">Anywhere</p>
-        <h3>쓰던 에디터 그대로 — VSIX 하나로 세 에디터</h3>
-        <p>생성 엔진 · 디자인시스템 3종 · 개발표준 문서 · 아이콘 415종이 VSIX 하나에 전부 들어 있습니다.</p>
-      </div>
-      <div class="editors">
-        <div class="editor" data-reveal>
-          <img src="images/icon-vscode.png" alt="" loading="lazy" decoding="async">
-          <div><b>Visual Studio Code</b><span>표준 개발 환경 — 설치 즉시 사이드바에서 사용</span></div>
+  <section class="p-studio-band">
+    <div class="p-product-section p-studio container" id="studio" aria-labelledby="studio-title">
+      <div class="p-section-heading"><div><div class="p-product-lockup"><span class="product-logo"><img src="/images/logos/studio-black.jpg?v=e5464246146e" data-light-src="/images/logos/studio-white.jpg?v=ef3bbb02406c" data-dark-src="/images/logos/studio-black.jpg?v=e5464246146e" alt="NEXTLAB Studio" width="1280" height="434" loading="lazy"></span></div><h2 id="studio-title">생각이 구체적인<br><span>화면이 되는 곳.</span></h2></div><div class="p-section-intro"><p>요구사항을 정리하고, 사용자 흐름을 연결하고, 화면을 다듬습니다. 기획부터 디자인·프로토타입·개발까지 하나의 프로젝트에서 이어가는 데스크톱 앱입니다.</p><div class="p-inline-links"><a class="text-link" href="/download.html#studio">Studio 설치하기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="text-link" href="/studio-manual.html">사용 가이드 ↗</a></div></div></div>
+      <div class="p-studio-showcase">
+        <div class="preview-tabs" role="tablist" aria-label="Studio의 실제 작업 화면">
+          <button class="preview-tab" id="preview-tab-spec" type="button" role="tab" aria-selected="true" aria-controls="preview-panel" data-preview="spec" data-light-src="/images/studio-current/spec-light.jpg?v=366d16ac7241" data-dark-src="/images/studio-current/spec-dark.jpg?v=8167598f8133"><span>기획 · 기능명세</span><small>요구사항을 검토 가능한 문서로</small></button>
+          <button class="preview-tab" id="preview-tab-flow" type="button" role="tab" aria-selected="false" aria-controls="preview-panel" tabindex="-1" data-preview="flow" data-light-src="/images/studio-current/flow-light.jpg?v=c16216d1d04c" data-dark-src="/images/studio-current/flow-dark.jpg?v=5aebed25ea66"><span>User Flow</span><small>실제 화면과 연결된 사용자 흐름</small></button>
+          <button class="preview-tab" id="preview-tab-design" type="button" role="tab" aria-selected="false" aria-controls="preview-panel" tabindex="-1" data-preview="design" data-light-src="/images/studio-current/design-light.jpg?v=f53cb5e17767" data-dark-src="/images/studio-current/design-dark.jpg?v=1d59d4603a5a"><span>화면 디자인</span><small>완성된 UI를 캔버스에서 편집</small></button>
+          <button class="preview-tab" id="preview-tab-prototype" type="button" role="tab" aria-selected="false" aria-controls="preview-panel" tabindex="-1" data-preview="prototype" data-light-src="/images/studio-current/prototype-light.jpg?v=0cb05c73c650" data-dark-src="/images/studio-current/prototype-dark.jpg?v=6fa0c6e805d9"><span>프로토타입</span><small>직접 눌러보는 사용자 여정</small></button>
+          <button class="preview-tab" id="preview-tab-dev" type="button" role="tab" aria-selected="false" aria-controls="preview-panel" tabindex="-1" data-preview="dev" data-light-src="/images/studio-current/dev-light.jpg?v=37d6f699bba0" data-dark-src="/images/studio-current/dev-dark.jpg?v=629ba6d58394"><span>개발</span><small>코드 수정부터 실행·검토까지</small></button>
         </div>
-        <div class="editor" data-reveal>
-          <img src="images/icon-cursor.png" alt="" loading="lazy" decoding="async">
-          <div><b>Cursor</b><span>AI 네이티브 에디터에서도 동일하게 동작</span></div>
+        <div class="product-preview"><div class="preview-bar"><div class="preview-name"><strong>NEXTLAB Studio</strong><span>/</span><span id="preview-label">기획 · 기능명세</span></div><span class="preview-live">실제 프로젝트 화면</span></div><div class="preview-figure" role="tabpanel" id="preview-panel" aria-labelledby="preview-tab-spec" tabindex="0"><img class="light-shot" id="preview-light" src="/images/studio-current/spec-light.jpg?v=366d16ac7241" alt="Studio의 주말의 발견 전시 예약 예제. 예약 기능의 설명과 완료 조건을 검토하는 화면 (라이트 모드)" width="1680" height="1050" loading="lazy"><img class="dark-shot" id="preview-dark" src="/images/studio-current/spec-dark.jpg?v=8167598f8133" alt="Studio의 주말의 발견 전시 예약 예제. 예약 기능의 설명과 완료 조건을 검토하는 화면 (다크 모드)" width="1680" height="1050" loading="lazy"><button class="button preview-zoom" type="button" data-zoom>화면 크게 보기 ↗</button></div></div>
+        <p class="p-image-note">제품 소개용 예제를 실제 Studio에서 촬영했습니다. 예제의 서비스·장소·혜택은 실제 운영과 무관합니다.</p>
+      </div>
+      <div class="p-feature-row"><article><h3>막연한 아이디어를 명세로</h3><p>요구사항에서 PRD와 기능명세를 정리합니다. 대상 사용자, 기능 설명, 완료 조건을 하나씩 검토하세요.</p></article><article><h3>흐름과 화면을 함께 설계</h3><p>User Flow로 화면 사이의 이동을 정하고, 디자인 캔버스에서 레이어·문구·스타일을 직접 다듬으세요.</p></article><article><h3>프로토타입에서 개발로</h3><p>프로토타입으로 화면을 오가는 경험을 확인합니다. 기획과 디자인을 바탕으로 개발 작업을 이어가세요.</p></article></div>
+      <section class="p-next-stage" id="studio-build" aria-labelledby="next-stage-title">
+        <div class="p-next-stage-heading"><p class="p-eyebrow">프로토타입에서 개발까지</p><h3 id="next-stage-title">직접 써보고,<br>실행되는 제품으로.</h3><p>화면이 완성된 다음의 작업도 이어집니다.<br>사용자의 여정을 확인하고, 코드와 동작을 다듬으세요.</p></div>
+        <div class="p-next-stage-grid">
+          <article>
+            <p class="p-stage-label">프로토타입</p><h4>버튼 하나부터,<br>전체 여정까지 눌러보세요.</h4>
+            <p>사용자가 목적을 이루는 과정을 시나리오로 확인합니다. 실제 화면을 넘기며 막히는 지점을 찾고, 해당 화면에 피드백을 남기세요.</p>
+            <dl><div><dt>시나리오 체험</dt><dd>다음 행동과 기대 결과를 보며 한 단계씩 진행합니다.</dd></div><div><dt>화면 자유 탐색</dt><dd>필요한 화면을 직접 열어 문구와 상호작용을 확인합니다.</dd></div><div><dt>피드백과 공유</dt><dd>화면에 의견을 남기고, 새 탭에서 체험을 이어갑니다.</dd></div></dl>
+            <div class="p-stage-links"><a class="text-link" href="/studio-manual.html#s2-4">프로토타입 사용 가이드 ↗</a><a class="text-link" href="/examples/weekend-discovery/">전시 예약 예제 체험 ↗</a></div>
+          </article>
+          <article>
+            <p class="p-stage-label">개발</p><h4>설계의 맥락을 담아,<br>코드 작업을 이어가세요.</h4>
+            <p>디자인 코드를 앱으로 연결하고, 필요한 기능을 대화로 구체화합니다. 미리보기·코드·변경 검토를 오가며 실제 동작을 완성하세요.</p>
+            <dl><div><dt>코드와 미리보기</dt><dd>파일을 열어 수정하고 실행 화면에서 결과를 확인합니다.</dd></div><div><dt>변경 내용 검토</dt><dd>수정 전후를 비교하고, 적용할 변경을 판단합니다.</dd></div><div><dt>Builder로 이어가기</dt><dd>같은 프로젝트 폴더를 에디터에서 열어 작업을 계속합니다.</dd></div></dl>
+            <div class="p-stage-links"><a class="text-link" href="/studio-manual.html#current-development">개발 작업대 사용 가이드 ↗</a><a class="text-link" href="#builder">Builder 살펴보기 ↗</a></div>
+          </article>
         </div>
-        <div class="editor" data-reveal>
-          <img src="images/icon-antigravity.png" alt="" loading="lazy" decoding="async">
-          <div><b>Antigravity</b><span>Google 의 AI 에디터 — VSCode 계열이면 그대로</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════════════
-     PART · STUDIO
-     ══════════════════════════════════════════════════════════════════ -->
-<section class="part part--studio" id="studio">
-  <div class="wrap">
-    <div class="part-head" data-reveal>
-      <p class="part-tag">Part 02 — NextLab Studio</p>
-      <h2>Figma 를 못 쓰는 환경을,<br>제약이 아니라 요건으로 봤습니다</h2>
-      <p class="lede">
-        아이디어에서 기획 · 디자인 · 코드까지 이어지는 <b>AI 에이전트 워크스페이스</b>입니다.
-        기획·디자인 트랙(Talk to Spec → User Flow → Talk to Design → Prototype)과
-        엔지니어링 트랙(Figma to Code)은 개발이 완료되어 바로 사용할 수 있고,
-        내부망 모델을 연결하면 민감 정보가 외부로 나가지 않고 내부에서 완결됩니다.
-      </p>
-      <div class="part-badges">
-        <span class="chip chip--accent">Studio v<span data-studio-ver>0.1.0</span><span class="beta">BETA</span></span>
-        <span class="chip">Windows · macOS 설치형</span>
-        <span class="chip">기획·디자인 · 엔지니어링 트랙 개발 완료</span>
-        <span class="chip chip--concept">표준 에이전트 6종 — 컨셉안</span>
-      </div>
-    </div>
-
-    <!-- 개요 -->
-    <div class="sec">
-      <div class="split">
-        <figure class="frame" data-reveal style="margin:0">
-          <div class="pane-bar"><span class="pane-dots"><i></i><i></i><i></i></span><span class="pane-path">nextlab-studio · home</span></div>
-          <img src="images/studio15/06_agents_home.png" alt="NextLab Studio 시작 화면 — 좌측 사이드바 네 구역과 에이전트 목록" loading="lazy" decoding="async">
-        </figure>
-        <div data-reveal>
-          <div class="sec-head" style="margin-bottom:22px">
-            <p class="eyebrow">Overview</p>
-            <h3>기획자·디자이너·개발자가 같은 워크스페이스에서</h3>
-            <p>좌측 사이드바는 기획·디자인 / 엔지니어링 / 에이전트 / 라이브러리 네 구역입니다. 에이전트를 고르면 연결된 스킬·메뉴얼이 컨텍스트로 자동 주입됩니다.</p>
-          </div>
-          <dl class="rows">
-            <div class="row"><dt>Plan</dt><dd><b>Launchpad</b> — Talk to Spec · User Flow · Talk to Design · Prototype 으로 기획부터 검증까지</dd></div>
-            <div class="row"><dt>Draw</dt><dd><b>Talk to Image</b> — 말로 그리는 SVG 일러스트·아이콘, 화면과 같은 색 언어</dd></div>
-            <div class="row"><dt>Build</dt><dd><b>Figma to Code</b> — Builder 와 동일한 NXL 표준 코드 생성을 VSCode 없이</dd></div>
-            <div class="row"><dt>Govern</dt><dd><b>라이브러리 · 계정</b> — 스킬·메뉴얼 정본 관리와 실행 계정·권한 통제</dd></div>
-          </dl>
-        </div>
-      </div>
-    </div>
-
-    <!-- Launchpad 4단계 -->
-    <div class="sec">
-      <div class="sec-head" data-reveal>
-        <p class="eyebrow">Launchpad · 0 to 1</p>
-        <h3>앞 단계 산출물이 뒷 단계 입력이 됩니다</h3>
-        <p>네 기능의 묶음이 아니라 하나의 연결된 파이프라인입니다. 아이디어 → PRD·기능명세 → 화면 흐름도 → 실물 화면 → 클릭해 보는 프로토타입.</p>
-      </div>
-      <div class="flow flow--4">
-        <article class="step step--wide" data-reveal>
-          <p class="step-n">STEP 1 — Talk to Spec</p>
-          <div class="step-duo">
-            <figure class="frame" style="margin:0">
-              <img src="images/launchpad/00_questions.png" alt="Talk to Spec 질문 단계 — 객관식 질문지에 답하며 요건을 채우는 화면" loading="lazy" decoding="async">
-              <figcaption class="fcap">① 질문지 — 보기 선택 · 직접 입력 · 건너뛰기로 요건 채우기</figcaption>
-            </figure>
-            <figure class="frame" style="margin:0">
-              <img src="images/launchpad/01_spec.png" alt="Talk to Spec — 답변으로 도출된 PRD 를 검토·수정하는 화면" loading="lazy" decoding="async">
-              <figcaption class="fcap">② PRD — 답변을 근거로 도출된 문서를 검토·수정</figcaption>
-            </figure>
-          </div>
-          <h4>기획 양식을 몰라도 됩니다</h4>
-          <p>아이디어를 입력하면 <b>객관식 질문지</b>가 빠진 요건을 채웁니다 — 보기 선택·직접 입력·건너뛰기 모두 가능하고, 답할수록 기획 서술이 실시간으로 구체화됩니다. 답변을 근거로 PRD 와 기능명세(우선순위·인수조건)가 도출되며, 현업 요구사항 문서를 올려 가져올 수도 있습니다.</p>
-        </article>
-        <article class="step" data-reveal>
-          <p class="step-n">STEP 2 — User Flow</p>
-          <figure class="frame"><img src="images/launchpad/02_userflow.png" alt="User Flow — 화면 노드를 흐름도로 배치한 화면" loading="lazy" decoding="async"></figure>
-          <h4>예외 경로까지 한 화면에</h4>
-          <p>도출된 기획을 바탕으로 화면 간 흐름을 AI 가 자동 배치합니다. 정상 진행(초록)과 오류·거절(빨강) 경로를 색으로 구분하고, <b>화면·분기·메모 노드를 직접 추가</b>하거나 노드 우클릭으로 <b>디자인을 연결</b>해 실제 화면 썸네일을 붙입니다.</p>
-        </article>
-        <article class="step" data-reveal>
-          <p class="step-n">STEP 3 — Talk to Design</p>
-          <figure class="frame"><img src="images/launchpad/03_design.png" alt="Talk to Design — 내장 캔버스에서 실물 React 화면을 편집하는 화면" loading="lazy" decoding="async"></figure>
-          <h4>목업이 아니라 동작하는 화면</h4>
-          <p>내장 캔버스에서 사내 디자인 킷(MUI 관리자 · DS 2.0 운영/모바일 · DS 3.0 영업)으로 실물 화면이 렌더됩니다. 요소 선택·드래그 재배치·텍스트 수정은 물론 <b>버튼·카드·이미지 요소 추가</b>와 <b>Talk to Image 그래픽 삽입</b>까지 캔버스에서 직접 — 저장하면 이후 AI 수정이 그 위에서 이어집니다.</p>
-        </article>
-        <article class="step step--wide" data-reveal>
-          <p class="step-n">STEP 4 — Prototype</p>
-          <figure class="frame"><img src="images/launchpad/04_prototype.png" alt="Prototype — 테스트 케이스별 더미 데이터로 화면 흐름을 클릭해 체험하는 화면" loading="lazy" decoding="async"></figure>
-          <h4>개발 전에 서비스를 미리 써봅니다</h4>
-          <p>기획·흐름·화면을 근거로 정상 · 예외 · 엣지 테스트 케이스를 자동 설계하고, 케이스별 더미 데이터가 실린 화면을 실제 서비스처럼 <b>직접 클릭하며</b> 진행합니다. 화면 연결·케이스 커버리지 지표로 빠진 곳이 바로 드러납니다.</p>
-        </article>
-      </div>
-    </div>
-
-    <!-- Talk to Image -->
-    <div class="sec">
-      <div class="split">
-        <figure class="frame" data-reveal style="margin:0">
-          <div class="pane-bar"><span class="pane-dots"><i></i><i></i><i></i></span><span class="pane-path">nextlab-studio · talk-to-image</span></div>
-          <img src="images/studio15/07_talk_to_image.png" alt="Talk to Image — 대화로 그린 인물 일러스트와 스타일·크기·색 패널" loading="lazy" decoding="async">
-        </figure>
-        <div data-reveal>
-          <div class="sec-head" style="margin-bottom:22px">
-            <p class="eyebrow">Talk to Image</p>
-            <h3>화면에 넣을 그래픽도 말로 그립니다</h3>
-            <p>일러스트 · 아이콘 · 로딩 씬 같은 낱개 SVG 그래픽을 대화로 생성하는 캔버스입니다. 스톡 이미지를 찾아 헤매거나 디자이너 일정에 기다리지 않아도 됩니다.</p>
-          </div>
-          <dl class="rows">
-            <div class="row"><dt>Style</dt><dd><b>라인 · 솔리드 · 듀오톤 · 일러스트</b> — 사내 표준 팔레트로 그려져 Talk to Design 화면과 같은 색 언어를 씁니다</dd></div>
-            <div class="row"><dt>Edit</dt><dd><b>캔버스 직접 편집</b> — 크기·색을 그 자리에서 조정하고, 선택한 요소를 대화에 첨부해 부분 수정합니다</dd></div>
-            <div class="row"><dt>Export</dt><dd><b>SVG 다운로드 · GIF/WEBM 모션 내보내기</b> — 산출물을 바로 화면·문서에 씁니다</dd></div>
-          </dl>
-        </div>
-      </div>
-    </div>
-
-    <!-- Figma to Code (엔지니어링 트랙) -->
-    <div class="sec">
-      <div class="split" style="grid-template-columns:1fr 1.15fr">
-        <div data-reveal>
-          <div class="sec-head" style="margin-bottom:22px">
-            <p class="eyebrow">Engineering · Figma to Code</p>
-            <h3>Builder 의 Figma to Code 를 Studio 안에서도</h3>
-            <p>VSCode 확장(Builder)과 동일한 NXL 표준 생성 워크플로를 데스크톱 앱에 내장했습니다. 개발 환경이 없는 PC 에서도 탐색기 · 에디터 · 에이전트 패널을 갖춘 IDE 워크스페이스로 코드를 만들고 검증합니다.</p>
-          </div>
-          <dl class="rows">
-            <div class="row"><dt>Generate</dt><dd><b>Figma 링크 → NXL 표준 React 코드</b> — UI 킷(MUI 관리자 · DS 2.0 · DS 3.0)을 고르면 개발표준·매핑 규칙이 자동 적용됩니다</dd></div>
-            <div class="row"><dt>Verify</dt><dd><b>빌드 검증 + 실패 시 자동수정</b>, 정밀도 경고 시 Figma 재조회로 시각 충실도 보정 — Builder 와 같은 후처리 파이프라인</dd></div>
-            <div class="row"><dt>Preview</dt><dd><b>Storybook 미리보기 샌드박스</b>에서 생성 컴포넌트를 사내 테마(light/dark)로 렌더하고, 자연어 리터치로 다듬습니다</dd></div>
-          </dl>
-        </div>
-        <figure class="frame" data-reveal style="margin:0">
-          <div class="pane-bar"><span class="pane-dots"><i></i><i></i><i></i></span><span class="pane-path">nextlab-studio · figma-to-code</span></div>
-          <img src="images/studio15/08_figma_to_code.png" alt="Figma to Code — 탐색기·에디터·생성 패널을 갖춘 IDE 워크스페이스" loading="lazy" decoding="async">
-        </figure>
-      </div>
-    </div>
-
-    <!-- 직군 가치 -->
-    <div class="sec">
-      <div class="sec-head" data-reveal>
-        <p class="eyebrow">Value</p>
-        <h3>다음 직군을 기다리지 않고 한 단계 더</h3>
-      </div>
-      <div class="caps">
-        <article class="cap" data-reveal>
-          <div class="cap-h"><h4>현업 · 기획자</h4><span>DOMAIN &amp; PLANNING</span></div>
-          <ul>
-            <li>IT 기획 양식을 몰라도 <b>아이디어와 도메인 지식만으로</b> 기획 도출 → 디자인 → MVP 화면까지 스스로 진행</li>
-            <li>아이디어를 대화로 풀면 <b>구조화된 기획서와 화면 흐름</b>이 나와, 곧바로 흐름 검증으로 넘어감</li>
-          </ul>
-        </article>
-        <article class="cap" data-reveal>
-          <div class="cap-h"><h4>디자이너 · 개발자</h4><span>DESIGN &amp; DEV</span></div>
-          <ul>
-            <li>도메인을 몰라도 <b>기획 가이드와 LLM 안내</b>로 정확한 화면을 설계</li>
-            <li>Talk to Spec 으로 <b>기획을 역으로 도출</b>하고, 캔버스에서 화면을 직접 다듬어 재작업을 줄임</li>
-            <li>확정된 Figma 디자인은 <b>Figma to Code</b> 로 그 자리에서 NXL 표준 코드까지 — Builder 설치 없이</li>
-          </ul>
-        </article>
-      </div>
-    </div>
-
-    <!-- 표준 에이전트 -->
-    <div class="sec">
-      <div class="sec-head" data-reveal>
-        <p class="eyebrow">Agents</p>
-        <h3>개발 이후 단계의 표준도 에이전트로 <span class="chip chip--concept">Concept · 순차 추가</span></h3>
-        <p>각 분야의 스킬과 사내 메뉴얼이 컨텍스트로 자동 주입되어, 자사 환경 기준으로 답하는 대화형 워크스페이스입니다.</p>
-      </div>
-      <div class="split" style="grid-template-columns:1fr 1.05fr">
-        <div class="agents" style="grid-template-columns:1fr 1fr" data-reveal>
-          <div class="agent"><i>FE</i><b>FE 표준 어시스턴트</b><span>NXL FE 개발표준 기반 코딩·리팩토링·리뷰</span></div>
-          <div class="agent"><i>BE</i><b>BE 표준 어시스턴트</b><span>REST API 설계 규칙 기반 스펙 확정·리뷰</span></div>
-          <div class="agent"><i>CLOUD</i><b>클라우드 관리</b><span>환경 구성(dev/stg/prd) · 배포 파이프라인</span></div>
-          <div class="agent"><i>ARCH</i><b>아키텍처 관리</b><span>시스템 설계 · ADR 작성 · 설계 리뷰</span></div>
-          <div class="agent"><i>SEC</i><b>보안 관리</b><span>보안 표준 점검 · 인증/인가 설계</span></div>
-          <div class="agent"><i>WBS</i><b>일정관리 · WBS</b><span>단계·담당·기간·상태를 대화로 조정</span></div>
-        </div>
-        <div data-reveal>
-          <figure class="frame" style="margin:0 0 18px">
-            <div class="pane-bar"><span class="pane-dots"><i></i><i></i><i></i></span><span class="pane-path">agents · fe-standard</span></div>
-            <img src="images/dark/03_fe_standard.png" alt="FE 표준 어시스턴트 대화 화면" loading="lazy" decoding="async">
-          </figure>
-          <dl class="rows">
-            <div class="row"><dt>Skill</dt><dd><b>SKILL.md</b> — 에이전트 컨텍스트에 주입되는 규칙 문서. 파일로 저장되어 버전 관리·이식이 쉽습니다.</dd></div>
-            <div class="row"><dt>Manual</dt><dd><b>사내 정본 문서</b> — 통합인증·인프라 개발가이드를 저장하면 해당 분야 에이전트가 자동 참조합니다.</dd></div>
-            <div class="row"><dt>Update</dt><dd>표준 개정은 <b>문서 한 곳</b>만 갱신하면 전 에이전트가 즉시 새 기준으로 동작합니다.</dd></div>
-          </dl>
-        </div>
-      </div>
-    </div>
-
-    <!-- 거버넌스 · 로드맵 -->
-    <div class="sec">
-      <div class="sec-head" data-reveal>
-        <p class="eyebrow">Governance &amp; Roadmap</p>
-        <h3>AI 사용을 개인의 실험이 아니라, 조직이 통제 가능한 자산으로</h3>
-        <p>OAuth 토큰은 OS 키체인에 암호화 저장되고 외부 서버로 전송되지 않습니다. 도구 권한은 표준 / 전체 허용 2단계로 통제합니다.</p>
-      </div>
-      <div class="roadmap">
-        <article class="phase" data-reveal>
-          <p class="phase-t">Phase 1 · Now</p>
-          <h4>외부망 서비스</h4>
-          <ul>
-            <li>기획·디자인 트랙 개발 완료 — Launchpad 전 기능</li>
-            <li>엔지니어링 트랙 개발 완료 — Figma to Code</li>
-            <li>외부 SI·오프라인 환경 지원 — DS 자산 앱 내장</li>
-          </ul>
-        </article>
-        <article class="phase phase--next" data-reveal>
-          <p class="phase-t">Phase 2 · Next</p>
-          <h4>내부망 · 중요망 도입</h4>
-          <ul>
-            <li>외부망에서 검증된 Launchpad 를 내부망에 도입</li>
-            <li>내부망 모델 연결로 외부 의존 없는 완결 구조</li>
-            <li>표준 에이전트 · 사내 메뉴얼 정본 연동 순차 확대</li>
-          </ul>
-        </article>
-        <article class="phase phase--future" data-reveal>
-          <p class="phase-t">Phase 3 · Future</p>
-          <h4>전사 AI 개발 플랫폼</h4>
-          <ul>
-            <li>사내 서비스별 skill.md / agent.md 관리 주체</li>
-            <li>비즈니스 계정 비용·사용량·권한 관리 일원화</li>
-            <li>사내 서비스를 쉽게 제작·배포하는 환경</li>
-          </ul>
-        </article>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ 유의사항 ════════════════════════════════════════════════════ -->
-<section class="notice" id="notice">
-  <div class="wrap">
-    <div class="sec-head" data-reveal>
-      <p class="eyebrow">Notice</p>
-      <h3>도구를 받기 전에, 세 가지</h3>
-      <p>한화생명 표준 위에서 동작하지만, 판단과 책임은 사용자에게 남습니다.</p>
-    </div>
-
-    <div class="notice-group" data-reveal>
-      <div class="notice-group-h">
-        <span class="no">01</span><b>보안 · 데이터</b><span class="en">Security &amp; Data</span>
-      </div>
-      <div class="notice-item">
-        <h4>민감정보는 입력 대상이 아닙니다</h4>
-        <p>고객 실데이터·주민등록번호·계좌·인증서·API 키는 프롬프트와 첨부 파일에 넣지 않습니다.
-          화면 검증에는 더미 데이터를 사용하십시오. Builder 의 사전 차단(8종 패턴)은 보조 장치이며,
-          탐지 범위를 벗어난 정보에 대한 판단 책임은 사용자에게 있습니다.</p>
-      </div>
-      <div class="notice-item">
-        <h4>외부망 도구입니다</h4>
-        <p>입력한 요구사항·첨부 파일·선택한 코드와 Figma 디자인 데이터는 외부 LLM 서버를 경유합니다.
-          반출 가능 범위 내에서만 사용하십시오.</p>
-      </div>
-    </div>
-
-    <div class="notice-group" data-reveal>
-      <div class="notice-group-h">
-        <span class="no">02</span><b>계정 · 배포</b><span class="en">Account &amp; Distribution</span>
-      </div>
-      <div class="notice-item">
-        <h4>현재는 개인 LLM 구독 계정 연계입니다</h4>
-        <p>실행 계정은 각자의 Claude 개인 구독을 OAuth 로 연결해 사용하며, 토큰은 OS 키체인에 암호화 저장됩니다.
-          과금·감사 경로를 하나로 유지하기 위해 API 키 방식은 의도적으로 지원하지 않습니다.
-          사용량만큼 비용이 발생하며 실행 이력·토큰·비용은 기록됩니다.
-          계정 공유 및 공용 계정 사용은 제공사 약관 위반으로 금지합니다.
-          조직 단위 비즈니스 계정 체계로의 전환은 로드맵에 포함되어 있으며, 전환 시 별도 안내합니다.</p>
-      </div>
-      <div class="notice-item">
-        <h4>설치 파일은 이 페이지에서만 받습니다</h4>
-        <p>사내 배포용 파일로 외부 공유를 금지합니다. 재배포본·구버전은 최신 표준이 반영되지 않으므로 사용하지 않습니다.
-          <span class="notice-ver">현재 버전 — Builder v<span data-ver>0.3.8</span> · Studio v<span data-studio-ver>0.1.0</span><span class="beta">BETA</span></span></p>
-      </div>
-    </div>
-
-    <div class="notice-group" data-reveal>
-      <div class="notice-group-h">
-        <span class="no">03</span><b>품질 · 책임</b><span class="en">Quality &amp; Accountability</span>
-      </div>
-      <div class="notice-item">
-        <h4>결과는 사람이 확정합니다</h4>
-        <p>생성된 코드·기획서·디자인은 초안입니다. AI 특성상 결과가 100% 일정하지 않으므로 커밋·PR 리뷰를 거치고,
-          운영 배포는 기존 승인 절차를 그대로 따릅니다. 자동 검증 통과는 표준 적합성만 보장하며
-          업무 요건 충족을 보장하지 않습니다.</p>
-      </div>
-      <div class="notice-item">
-        <h4>표준 규칙은 개인이 끄지 않습니다</h4>
-        <p>개발표준 21개 모듈과 진단 규칙 18개는 팀 합의로 개정합니다.
-          로컬에서 규칙을 임의 해제하거나 표준 문서를 수정한 상태로 산출물을 제출하지 마십시오.</p>
-      </div>
-      <div class="notice-item">
-        <h4>외부 라이브러리는 기존 심의를 따릅니다</h4>
-        <p>AI 가 제안한 패키지·코드 조각도 사내 오픈소스·보안 심의 대상입니다.
-          라이선스 확인 없이 의존성을 추가하지 마십시오.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ 다운로드 ════════════════════════════════════════════════════ -->
-<section class="dl" id="download">
-  <div class="wrap dl-in">
-    <div class="sec-head" data-reveal>
-      <p class="eyebrow">Install &amp; Manual</p>
-      <h3>설치 파일과 사용자 메뉴얼</h3>
-      <p>사내 배포용 파일입니다. 외부 공유를 금지합니다.</p>
-    </div>
-
-    <!-- Builder -->
-    <div class="dl-group" data-reveal>
-      <div class="dl-group-h">
-        <h3><img class="dl-logo" src="images/logos/builder-lockup.png" alt="NEXTLAB Builder" width="1202" height="132" decoding="async"></h3>
-        <span>VSCODE 확장 · v<span data-ver>0.3.8</span></span>
-      </div>
-      <div class="dl-list">
-        <div class="dl-item">
-          <div class="dl-meta">
-            <b>확장 설치 파일 (VSIX)</b>
-            <p class="dl-desc">VSCode 확장 프로그램(Visual Studio Code Extension) 파일입니다.
-              내려받은 뒤 에디터의 <b>확장(Extensions)</b> 패널에서 직접 추가해 설치합니다.</p>
-            <p class="dl-file" data-vsix-name>nxl-builder-0.3.8.vsix</p>
-            <div class="dl-tags">
-              <span class="chip chip--accent">VSCode</span><span class="chip">Cursor</span><span class="chip">Antigravity</span>
-              <span class="chip">서버 구축 불필요</span>
+      </section>
+      <section class="p-toolbox" aria-labelledby="toolbox-title" id="tools">
+        <div class="p-toolbox-heading"><div><p class="p-eyebrow">Studio의 개별 도구</p><h3 id="toolbox-title">작은 수정부터,<br>새로운 시도까지.</h3></div><p>문구와 그래픽, 반복하는 작업까지.<br>지금 필요한 도구를 골라 시작하세요.</p></div>
+        <div class="p-tool-grid">
+          <article class="p-tool-card p-tool-writing">
+            <div class="p-tool-visual p-writing-sample">
+              <span class="p-scene-label">BRAND VOICE / 주말의 발견</span>
+              <div class="p-writing-paper">
+                <span class="p-writing-kind">예약 완료 안내</span>
+                <p class="p-writing-message">예약이 완료됐어요.</p>
+                <p class="p-writing-detail">이번 주말, 전시에서 만나요.</p>
+                <span class="p-writing-action">예약 내역 보기 <span aria-hidden="true">↗</span></span>
+              </div>
+              <span class="p-visual-caption">문구 구성 예시</span>
             </div>
-          </div>
-          <a class="dl-btn" data-dl="builder-vsix" href="#download">
-            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5v9m0 0 3.2-3.2M8 10.5 4.8 7.3M2 12.5v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            VSIX 내려받기
-          </a>
+            <div class="p-tool-body"><span class="p-tool-name">UX Writing</span><h4>브랜드의 말투로,<br>더 명확한 안내.</h4><p>버튼부터 완료·오류 메시지까지. <br>브랜드 기준에 맞춰 문구를 다듬습니다.</p><a class="text-link" href="/studio-manual.html#tool-writing">문구 작성 살펴보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </article>
+          <article class="p-tool-card p-tool-image">
+            <div class="p-tool-visual p-graphic-sample">
+              <span class="p-graphic-label">WEEKEND / EXHIBITION PASS</span>
+              <img src="/images/graphics/weekend-pass.svg?v=cbcc6addade0" alt="보라색 곡선 그래픽 카드와 크림색 전시 패스를 겹친 SVG 구성 예시" width="720" height="480" loading="lazy">
+              <span class="p-visual-caption">직접 구성한 SVG 예시</span>
+            </div>
+            <div class="p-tool-body"><span class="p-tool-name">이미지 생성</span><h4>아이콘과 그래픽을,<br>만들고 다듬으세요.</h4><p>Claude로 SVG 그래픽 초안을 만들고, <br>색과 크기를 조정해 화면에 활용합니다.</p><a class="text-link" href="/studio-manual.html#ch3">SVG 그래픽 만들기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </article>
+          <article class="p-tool-card p-tool-skills">
+            <div class="p-tool-visual p-skills-sample">
+              <span class="p-scene-label">MY WORKFLOW / 작업의 기준</span>
+              <div class="p-skill-sheet">
+                <div class="p-skill-sheet-head"><span>기획 · 디자인</span><span>SKILL.md</span></div>
+                <p class="p-skill-sheet-title">화면 검토 기준</p>
+                <ol><li>사용자 흐름 확인</li><li>빈 화면과 오류 상태 점검</li><li>발견 위치와 수정안 정리</li></ol>
+              </div>
+              <span class="p-visual-caption">스킬 작성 예시</span>
+            </div>
+            <div class="p-tool-body"><span class="p-tool-name">스킬</span><h4>작업의 기준을,<br>하나의 스킬로.</h4><p>자주 쓰는 작업 순서와 검토 기준을 <br>스킬로 저장하고 관리합니다.</p><a class="text-link" href="/studio-manual.html#tool-skills">내 작업에 맞는 스킬 만들기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </article>
         </div>
-        <div class="dl-item">
-          <div class="dl-meta">
-            <b>Builder 사용자 메뉴얼</b>
-            <p class="dl-file">NEXTLAB Builder 사용자 메뉴얼 v1.0</p>
-            <div class="dl-tags"><span class="chip">설치 · 진입점</span><span class="chip">Figma to Code</span><span class="chip">표준 · 보안</span></div>
-          </div>
-          <div class="dl-actions">
-            <a class="dl-btn" data-dl="builder-manual" data-newtab href="#download">
-              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 2.5h7l3 3v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-10a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9.5 2.5v3.5H13M5 9h6M5 11.5h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-              메뉴얼 보기
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="dl-steps">
-        <div class="dl-step"><i>STEP 1</i><b>확장 패널에서 VSIX 설치</b><span>확장(Extensions) 패널 → 우측 상단 <b>···</b> → <b>Install from VSIX…</b> → 내려받은 파일 선택. 빌드·명령어 실행 불필요</span></div>
-        <div class="dl-step"><i>STEP 2</i><b>에디터 완전 재시작</b><span>Cmd+Q 후 다시 열기</span></div>
-        <div class="dl-step"><i>STEP 3</i><b>AI 연동 로그인</b><span>Cmd+Shift+A → 연동 배지 클릭 → 로그인</span></div>
-      </div>
+        <div class="p-toolbox-bottom"><p>프로젝트를 진행하면서도, 필요한 도구만 따로 사용해도 됩니다.</p><a class="text-link" href="/studio-manual.html#current-tools">Studio 도구 전체 보기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </section>
     </div>
+  </section>
 
-    <!-- Studio -->
-    <div class="dl-group dl-group--studio" data-reveal>
-      <div class="dl-group-h">
-        <img class="dl-appicon" src="images/logos/studio-appicon.png" alt="" width="512" height="512" decoding="async" aria-hidden="true">
-        <h3><img class="dl-logo" src="images/logos/studio-lockup-text.png" alt="NextLab Studio" width="1004" height="143" decoding="async"></h3>
-        <span class="beta">BETA</span>
-        <span>데스크톱 앱 · v<span data-studio-ver>0.1.0</span></span>
-      </div>
-      <div class="dl-list">
-        <div class="dl-item">
-          <div class="dl-meta">
-            <b>Windows 설치 파일</b>
-            <p class="dl-file" data-studio-file="win">NextLab.Studio.Setup.0.1.0.exe</p>
-            <div class="dl-tags"><span class="chip chip--accent">Windows 10 이상</span><span class="chip">x64</span></div>
-          </div>
-          <a class="dl-btn" data-dl="studio-win" href="#download">
-            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5v9m0 0 3.2-3.2M8 10.5 4.8 7.3M2 12.5v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Windows 내려받기
-          </a>
-        </div>
-        <div class="dl-item">
-          <div class="dl-meta">
-            <b>macOS 설치 파일 — Apple Silicon</b>
-            <p class="dl-file" data-studio-file="mac-arm64">NextLab.Studio-0.1.0-arm64.dmg</p>
-            <div class="dl-tags"><span class="chip chip--accent">M1 이상</span><span class="chip">arm64</span></div>
-          </div>
-          <a class="dl-btn" data-dl="studio-mac-arm" href="#download">
-            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5v9m0 0 3.2-3.2M8 10.5 4.8 7.3M2 12.5v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Apple Silicon 내려받기
-          </a>
-        </div>
-        <div class="dl-item">
-          <div class="dl-meta">
-            <b>macOS 설치 파일 — Intel</b>
-            <p class="dl-file" data-studio-file="mac-x64">NextLab.Studio-0.1.0.dmg</p>
-            <div class="dl-tags"><span class="chip chip--accent">Intel Core</span><span class="chip">x64</span></div>
-          </div>
-          <a class="dl-btn" data-dl="studio-mac-intel" href="#download">
-            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5v9m0 0 3.2-3.2M8 10.5 4.8 7.3M2 12.5v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Intel Mac 내려받기
-          </a>
-        </div>
-        <div class="dl-item">
-          <div class="dl-meta">
-            <b>Studio 사용자 메뉴얼</b>
-            <p class="dl-file">nextlab-studio-사용자메뉴얼</p>
-            <div class="dl-tags"><span class="chip">Launchpad</span><span class="chip">Figma to Code</span><span class="chip">계정 연동</span></div>
-          </div>
-          <a class="dl-btn" data-dl="studio-manual" data-newtab href="#download">메뉴얼 보기</a>
-        </div>
-      </div>
-
-      <div class="dl-steps dl-steps--studio">
-        <div class="dl-step"><i>STEP 1</i><b>설치</b><span>macOS 는 dmg 를 열어 앱을 <b>응용 프로그램</b> 으로 끌어놓고, Windows 는 exe 를 실행합니다</span></div>
-        <div class="dl-step"><i>STEP 2</i><b>AI 계정 연동</b><span>표지의 <b>시작하기</b> → 개인 Claude 계정 연결 후 바로 사용</span></div>
-      </div>
+  <section class="p-start container" id="download" aria-labelledby="start-title">
+    <div class="p-start-heading"><h2 id="start-title">다음 작업을,<br>여기서 시작하세요.</h2><p>기획부터 시작하는 독립된 작업 공간.<br>코드를 이어가는 익숙한 에디터.<br>작업 환경에 맞는 NEXTLAB을 선택하세요.</p></div>
+    <div class="p-install-options">
+      <article class="p-install-option p-studio"><span class="p-eyebrow">데스크톱 앱</span><h3><span class="product-logo"><img src="/images/logos/studio-black.jpg?v=e5464246146e" data-light-src="/images/logos/studio-white.jpg?v=ef3bbb02406c" data-dark-src="/images/logos/studio-black.jpg?v=e5464246146e" alt="NEXTLAB Studio" width="1280" height="434" loading="lazy"></span></h3><p>기획, User Flow, 디자인, 프로토타입, 개발까지.</p><div class="p-install-bottom"><span>macOS · Windows</span><a class="button p-button-studio" href="/studio/" aria-label="NEXTLAB Studio 다운로드">다운로드 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5"/></svg></a></div></article>
+      <article class="p-install-option p-builder"><span class="p-eyebrow">에디터 확장</span><h3><span class="product-logo"><img src="/images/logos/builder-black.jpg?v=8e5114cf6c38" data-light-src="/images/logos/builder-white.jpg?v=f59b74d02b7e" data-dark-src="/images/logos/builder-black.jpg?v=8e5114cf6c38" alt="NEXTLAB Builder" width="1280" height="434" loading="lazy"></span></h3><p>Figma 디자인을 코드로, 수정과 검토까지.</p><div class="p-install-bottom"><span>VS Code · Cursor</span><a class="button p-button-builder" href="/download.html#builder" aria-label="NEXTLAB Builder 다운로드">다운로드 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5"/></svg></a></div></article>
     </div>
-  </div>
-</section>
-
-<!-- ══ 푸터 ════════════════════════════════════════════════════════ -->
-<footer class="foot">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <h4>바로 가기</h4>
-        <ul>
-          <li><a href="#builder">NEXTLAB Builder — 기능 · 결과 · 표준</a></li>
-          <li><a href="#studio">NextLab Studio — Launchpad · Talk to Image · Figma to Code</a></li>
-          <li><a href="#notice">유의사항</a></li>
-          <li><a href="#download">설치 파일 · 사용자 메뉴얼</a></li>
-          <li><a href="updates.html">업데이트 내역</a></li>
-        </ul>
-      </div>
+    <div class="p-help-links"><a href="/guide.html">설치가 처음이라면, 시작 가이드 ↗</a><a href="/updates.html">업데이트 내역 ↗</a></div>
+  </section>
+</main>
+<dialog class="image-dialog" aria-labelledby="image-dialog-title"><div class="dialog-header"><h2 id="image-dialog-title">NEXTLAB Studio 화면</h2><button class="button button-small" type="button" data-close-dialog>닫기 ×</button></div><div class="dialog-scroll" tabindex="0" aria-label="Studio 화면 이미지. 작은 화면에서는 좌우로 스크롤할 수 있습니다."><img id="dialog-image" src="/images/studio-current/design-dark.jpg?v=1d59d4603a5a" alt="NEXTLAB Studio 디자인 캔버스" width="1680" height="1050"></div><p class="dialog-help">작은 화면에서는 좌우로 스크롤해 자세히 볼 수 있습니다.</p></dialog>
+<footer class="site-footer" id="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-intro"><a class="wordmark" href="/" aria-label="NEXTLAB 홈"><svg class="brand-logo" width="122" height="21" viewBox="0 0 243 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<path d="M13.097 39.3061H0L10.4577 10.0386H23.5504L13.097 39.3061Z" fill="#EA5504"/>
+<mask id="nxlm-footer" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="20" y="0" width="29" height="40">
+<path d="M48.2758 10.0383L41.0707 0.689453L27.7879 10.0383H31.425L20.9241 39.3101L34.0125 39.3058L44.5091 10.0383H48.2758Z" fill="white"/>
+</mask>
+<g mask="url(#nxlm-footer)">
+<path d="M51.8438 10.0245H17.4598L17.2697 8.16943H51.6537L51.8438 10.0245Z" fill="#EA5504"/>
+<path d="M51.8438 13.757H17.4598L17.2697 11.9019H51.6537L51.8438 13.757Z" fill="#EA5504"/>
+<path d="M51.8438 17.4885H17.4598L17.2697 15.6377H51.6537L51.8438 17.4885Z" fill="#EA5504"/>
+<path d="M51.8438 21.2247H17.4598L17.2697 19.3696H51.6537L51.8438 21.2247Z" fill="#EA5504"/>
+<path d="M51.8438 24.9562H17.4598L17.2697 23.1011H51.6537L51.8438 24.9562Z" fill="#EA5504"/>
+<path d="M51.8438 28.6876H17.4598L17.2697 26.8325H51.6537L51.8438 28.6876Z" fill="#EA5504"/>
+<path d="M51.8438 32.424H17.4598L17.2697 30.5688H51.6537L51.8438 32.424Z" fill="#EA5504"/>
+<path d="M51.8438 36.1564H17.4598L17.2697 34.3013H51.6537L51.8438 36.1564Z" fill="#EA5504"/>
+<path d="M51.8438 39.8878H17.4598L17.2697 38.0327H51.6537L51.8438 39.8878Z" fill="#EA5504"/>
+<path d="M51.8438 6.2843H17.4598L17.2697 4.4292H51.6537L51.8438 6.2843Z" fill="#EA5504"/>
+<path d="M51.8438 2.53976H17.4598L17.2697 0.688965H51.6537L51.8438 2.53976Z" fill="#EA5504"/>
+</g>
+<path d="M20.9198 39.3061H34.0082L23.5505 10.0386H10.4621L20.9198 39.3061Z" fill="#EE7800"/>
+<path d="M80.2996 39.3108H73.3324L64.5316 23.7936V39.3108H57.9311V13.4487H64.8983L73.699 28.966V13.4487H80.2996V39.3108Z" fill="currentColor"/>
+<path d="M147.362 39.3108H140.762V18.6211H133.061V13.4487H155.063V18.6211H147.362V39.3108Z" fill="currentColor"/>
+<path d="M174.37 34.1384H187.754V39.3108H167.769V13.4487H174.37V34.1384Z" fill="currentColor"/>
+<path d="M197.838 39.3108H190.688L200.405 13.4487H207.739L217.457 39.3108H210.306L208.656 34.6926H199.489L197.838 39.3108ZM201.139 29.8896H207.006L204.072 21.2074L201.139 29.8896Z" fill="currentColor"/>
+<path d="M220.023 13.4487H234.691C237.087 13.4487 238.847 13.9968 239.972 15.0928C241.096 16.1889 241.659 17.8576 241.659 20.099C241.659 21.5768 241.341 22.7775 240.705 23.7012C240.07 24.6248 239.287 25.2714 238.358 25.6408C240.338 26.1827 241.683 27.5128 242.392 29.631C242.636 30.3945 242.759 31.2812 242.759 32.2911C242.759 34.7049 242.196 36.4783 241.072 37.6113C239.947 38.7443 238.187 39.3108 235.791 39.3108H220.023V13.4487ZM235.058 20.8379C235.058 19.3601 234.325 18.6211 232.858 18.6211H226.624V23.7936H232.858C234.325 23.7936 235.058 23.0546 235.058 21.5768V20.8379ZM236.158 31.1827C236.158 29.7049 235.425 28.966 233.958 28.966H226.624V34.1384H233.958C235.425 34.1384 236.158 33.3995 236.158 31.9216V31.1827Z" fill="currentColor"/>
+<path d="M90.5671 28.7812V23.6088V23.1778V18.6211H104.318V13.4487H83.9666V39.3108H104.318V34.1384H90.5671V31.1642V28.7812Z" fill="currentColor"/>
+<path d="M114.017 13.4487H106.72L113.198 23.6088H90.567V28.7812H113.235L106.72 39.0029H114.017L122.164 26.2258L114.017 13.4487Z" fill="#EE7800"/>
+<path d="M123.442 24.2307L130.317 13.4487H123.02L119.793 18.5103L123.442 24.2307Z" fill="currentColor"/>
+<path d="M123.442 28.2275L119.793 33.948L123.02 39.0034H130.317L123.442 28.2275Z" fill="currentColor"/>
+</svg></a><p>기획과 개발을 잇는<br>우리 팀의 작업 도구.</p><span>Builder &amp; Studio</span></div>
+      <nav class="footer-directory" aria-label="하단 메뉴">
+        <div><h2>제품</h2><a href="/#builder">NEXTLAB Builder</a><a href="/#studio">NEXTLAB Studio</a><a href="/#tools">Studio 개별 도구</a></div>
+        <div><h2>시작하기</h2><a href="/download.html">다운로드</a><a href="/guide.html">시작 가이드</a><a href="/updates.html">업데이트 내역</a></div>
+        <div><h2>사용 안내</h2><a href="/manual.html">Builder 가이드</a><a href="/studio-manual.html">Studio 가이드</a><a href="/download.html#usage">이용 안내</a></div>
+      </nav>
     </div>
-    <div class="foot-bar">
-      <span>NEXTLAB · Builder v<span data-ver>0.3.8</span> · Studio v<span data-studio-ver>0.1.0</span><span class="beta">BETA</span></span>
-      <span>사내 전용 — 외부 공유 금지 · 2026</span>
-    </div>
+    <div class="footer-bottom"><p>© 2026 NEXTLAB</p><p>기획부터 코드까지.</p><span>사내 전용</span></div>
   </div>
 </footer>
-
-<script>
-/* 최신 VSIX 경로·버전을 release-manifest.json 에서 채운다 — 릴리스마다 이 HTML 을
-   고치지 않도록. 배포 채널에서만 존재하는 파일이라, 없으면(로컬에서 그냥 열어본 경우)
-   조용히 넘어가고 DOWNLOADS 의 기본값·정적 텍스트를 그대로 쓴다. */
-function applyLatestRelease(){
-  return fetch('release-manifest.json', { cache: 'no-store' })
-    .then(function(r){ if (!r.ok) throw new Error('manifest ' + r.status); return r.json(); })
-    .then(function(m){
-      var latest = m.releases && m.releases[0];
-      if (!latest || !latest.vsix || !latest.vsix.path) return;
-      DOWNLOADS['builder-vsix'] = latest.vsix.path.replace(/^\//, '');
-      var name = latest.vsix.path.split('/').pop();
-      document.querySelectorAll('[data-ver]').forEach(function(el){ el.textContent = latest.version; });
-      document.querySelectorAll('[data-vsix-name]').forEach(function(el){ el.textContent = name; });
-    })
-    .catch(function(){ /* 매니페스트 없음 — 정적 표기 유지 */ });
-}
-
-/* Studio 설치본 링크를 studio/version.json 에서 채운다 — 설치본은 GitHub Release
-   자산(절대 URL)이고, 릴리스마다 이 HTML 을 고치지 않도록 메타에서 읽는다. */
-function applyStudioRelease(){
-  return fetch('studio/version.json', { cache: 'no-store' })
-    .then(function(r){ if (!r.ok) throw new Error('studio meta ' + r.status); return r.json(); })
-    .then(function(m){
-      var p = m.platforms || {};
-      var map = { 'studio-win': p['win'], 'studio-mac-arm': p['mac-arm64'], 'studio-mac-intel': p['mac-x64'] };
-      Object.keys(map).forEach(function(key){
-        if (map[key] && map[key].url) DOWNLOADS[key] = map[key].url;
-      });
-      var files = { 'win': p['win'], 'mac-arm64': p['mac-arm64'], 'mac-x64': p['mac-x64'] };
-      document.querySelectorAll('[data-studio-file]').forEach(function(el){
-        var f = files[el.getAttribute('data-studio-file')];
-        if (f && f.name) el.textContent = f.name;
-      });
-      if (m.version) {
-        document.querySelectorAll('[data-studio-ver]').forEach(function(el){ el.textContent = m.version; });
-      }
-    })
-    .catch(function(){ /* 메타 없음 — 정적 표기 유지, 버튼은 "준비 중" */ });
-}
-
-Promise.all([applyLatestRelease(), applyStudioRelease()]).then(function(){
-  /* 배포 링크 연결 — DOWNLOADS 가 비어 있으면 "준비 중" 상태 */
-  document.querySelectorAll('[data-dl]').forEach(function(a){
-    var url = DOWNLOADS[a.getAttribute('data-dl')];
-    if (url) {
-      a.setAttribute('href', url);
-      a.removeAttribute('aria-disabled');
-      if (a.hasAttribute('data-newtab')) { a.target = '_blank'; a.rel = 'noopener'; }
-      /* PDF 등은 뷰어로 열지 않고 바로 내려받게 한다 */
-      if (a.hasAttribute('data-download')) { a.setAttribute('download', url.split('/').pop()); }
-    } else {
-      a.setAttribute('href', '#download');
-      a.setAttribute('aria-disabled', 'true');
-      a.textContent = '준비 중';
-    }
-  });
-});
-
-/* ── 앵커 스크롤 ──────────────────────────────────────────────────
-   CSS scroll-behavior:smooth 는 애니메이션 도중 lazy 이미지가 로딩되어
-   문서 높이가 늘어나면 목표 지점을 놓치고 중간에 멈춘다. 매 프레임
-   목표 좌표를 다시 읽어 그 어긋남을 따라잡는다. */
-(function(){
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function offsetTop(el){
-    return window.pageYOffset + el.getBoundingClientRect().top;
-  }
-
-  /* scroll-margin-top 을 그대로 존중해 헤더에 가리지 않게 한다 */
-  function targetY(el){
-    var margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
-    var max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-    return Math.min(Math.max(0, offsetTop(el) - margin), max);
-  }
-
-  function scrollToEl(el){
-    if (reduce) { window.scrollTo(0, targetY(el)); return; }
-
-    var startY = window.pageYOffset;
-    var startT = null;
-    var DUR = 620;
-    var ease = function(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3)/2; };
-
-    /* 사용자가 도중에 스크롤하면 즉시 양보한다 */
-    var lastY = startY, aborted = false;
-    function onUser(){ aborted = true; }
-    window.addEventListener('wheel', onUser, { passive: true, once: true });
-    window.addEventListener('touchstart', onUser, { passive: true, once: true });
-
-    function step(now){
-      if (aborted) { cleanup(); return; }
-      if (startT === null) startT = now;
-
-      var p = Math.min(1, (now - startT) / DUR);
-      /* 목표를 매 프레임 다시 계산한다 — 이미지 로딩으로 밀려도 따라간다 */
-      var y = startY + (targetY(el) - startY) * ease(p);
-      window.scrollTo(0, y);
-      lastY = window.pageYOffset;
-
-      if (p < 1) { requestAnimationFrame(step); }
-      else { settle(); }
-    }
-
-    /* 도착 후에도 늦게 뜬 이미지가 레이아웃을 밀 수 있어 잠시 보정한다 */
-    function settle(){
-      var tries = 0;
-      (function fix(){
-        if (aborted || tries++ > 30) { cleanup(); return; }
-        var diff = targetY(el) - window.pageYOffset;
-        if (Math.abs(diff) > 1) window.scrollTo(0, targetY(el));
-        requestAnimationFrame(fix);
-      })();
-    }
-
-    function cleanup(){
-      window.removeEventListener('wheel', onUser);
-      window.removeEventListener('touchstart', onUser);
-    }
-
-    requestAnimationFrame(step);
-  }
-
-  document.addEventListener('click', function(e){
-    var a = e.target.closest('a[href^="#"]');
-    if (!a) return;
-    /* 다운로드 버튼이 아직 준비 중이면 이동시키지 않는다 */
-    if (a.getAttribute('aria-disabled') === 'true') { e.preventDefault(); return; }
-
-    var id = a.getAttribute('href').slice(1);
-    if (!id) return;
-    var el = document.getElementById(id);
-    if (!el) return;
-
-    e.preventDefault();
-    scrollToEl(el);
-    history.pushState(null, '', '#' + id);
-  });
-})();
-
-(function(){
-
-  /* 스크롤 등장 */
-  var targets = document.querySelectorAll('[data-reveal]');
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce || !('IntersectionObserver' in window)) {
-    targets.forEach(function(el){ el.classList.add('is-in'); });
-    return;
-  }
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
-    });
-  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
-  targets.forEach(function(el){ io.observe(el); });
-})();
-</script>
-
-</body>
-</html>
+</body></html>

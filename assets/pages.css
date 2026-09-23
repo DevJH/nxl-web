@@ -1,0 +1,82 @@
+/* Inner pages use the home page's type, product colors and spacious composition. */
+html { background-color: var(--color-bg); }
+.inner-page { --builder: #b63f00; --studio: #654bcf; --page-accent: var(--builder); --page-wash: #fff3eb; --page-reading: #465064; --page-title-size: clamp(42px, 4.7vw, 68px); position: relative; isolation: isolate; }
+[data-theme='dark'] .inner-page { --builder: #ff9954; --studio: #ad9eff; --page-wash: #211811; --page-reading: #bdc3d1; }
+.inner-page::before { content: ''; position: absolute; z-index: -1; inset: 72px 0 auto; height: 680px; pointer-events: none; background: radial-gradient(ellipse 530px 340px at 80% 12%, rgb(234 85 4 / .055), transparent), radial-gradient(ellipse 420px 320px at 58% 26%, rgb(124 107 255 / .035), transparent); }
+[data-theme='dark'] .inner-page::before { background: radial-gradient(ellipse 560px 350px at 80% 8%, rgb(234 85 4 / .095), transparent), radial-gradient(ellipse 440px 340px at 55% 24%, rgb(124 107 255 / .065), transparent); }
+.theme-studio { --page-accent: var(--studio); --page-wash: #f0edfc; }
+[data-theme='dark'] .theme-studio { --page-wash: #1b182b; }
+.theme-builder { --page-accent: var(--builder); }
+.inner-page h1, .inner-page h2 { font-weight: 750; }
+.inner-page .product-logo { mix-blend-mode: multiply; }
+[data-theme='dark'] .inner-page .product-logo { mix-blend-mode: screen; }
+.inner-page .page-hero { padding-block: 48px 54px; }
+.page-crumb { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; color: var(--color-muted); font-size: 13px; line-height: 1.5; }
+.page-crumb a { display: inline-flex; align-items: center; min-height: 28px; text-decoration: none; }
+.page-crumb > span { color: var(--color-muted); }
+.page-hero-row { display: grid; grid-template-columns: 1.45fr 1fr; gap: 56px; align-items: end; margin-top: 34px; }
+.page-hero h1 { font-size: var(--page-title-size); line-height: 1.12; letter-spacing: -.055em; font-weight: 780; }
+.page-hero h1 span, .cover h1 span { color: var(--page-accent); }
+.page-hero-aside { padding-bottom: 3px; max-width: 400px; justify-self: end; }
+.page-hero-aside > p { color: var(--color-secondary); font-size: 16px; line-height: 1.85; }
+.page-hero-aside .text-link { margin-top: 16px; }
+.page-eyebrow { font-size: 13px; color: var(--page-accent); font-weight: 550; line-height: 1.5; }
+.guide-products { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+.guide-product { min-width: 0; border: 1px solid var(--color-border); border-radius: 14px; background: var(--color-surface); overflow: hidden; }
+.guide-product header { padding: 32px; background: linear-gradient(125deg, var(--page-wash), transparent 80%); }
+.guide-product h2 { margin-top: 24px; }
+.guide-product .product-logo { width: 310px; }
+.guide-product header > p:last-child { font-size: 15px; line-height: 1.75; color: var(--color-secondary); margin-top: 20px; }
+.guide-topics { padding-inline: 32px; }
+.guide-topic { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 92px; padding-block: 18px; border-top: 1px solid var(--color-border); text-decoration: none; }
+.guide-topic strong { display: block; font-weight: 600; font-size: 17px; letter-spacing: -.025em; }
+.guide-topic small { display: block; color: var(--color-muted); font-size: 13px; margin-top: 5px; }
+.guide-topic svg, .guide-open svg, .guide-help svg { width: 18px; height: 18px; }
+.guide-topic svg { color: var(--color-muted); }
+.guide-open { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 32px; font-size: 14px; color: var(--page-accent); background: var(--page-wash); text-decoration: none; font-weight: 600; }
+.guide-help { display: grid; grid-template-columns: 1fr 1.35fr; gap: 80px; padding-block: 80px; }
+.guide-help h2 { font-size: clamp(30px, 3vw, 40px); line-height: 1.25; margin-top: 16px; }
+.guide-help > div > p:last-child { color: var(--color-secondary); font-size: 15px; line-height: 1.85; margin-top: 22px; }
+.guide-help-rows > div { display: flex; align-items: center; gap: 24px; border-top: 1px solid var(--color-border); padding-block: 20px; }
+.guide-help-rows h3 { margin-inline-end: auto; font-size: 17px; font-weight: 550; }
+.guide-help-rows a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 14px; text-decoration: none; }
+.guide-help-rows a[href*='studio'] { color: var(--studio); }
+.guide-help-rows a[href*='/manual'] { color: var(--builder); }
+.guide-help-rows .guide-help-update { display: flex; justify-content: space-between; gap: 24px; padding-top: 18px; border-top: 1px solid var(--color-border); color: var(--color-secondary); font-size: 13px; }
+@media (hover: hover) {
+ .page-crumb a:hover { color: var(--color-text); }
+ .guide-topic:hover strong, .guide-help a:hover { color: var(--page-accent); }
+ .guide-open:hover { text-decoration: underline; }
+}
+@media (max-width: 70rem) {
+ .page-hero-row { gap: 32px; grid-template-columns: 1.2fr 1fr; }
+ .guide-product header { padding: 26px; }
+ .guide-topics { padding-inline: 26px; }
+ .guide-open { padding-inline: 26px; }
+ .guide-help { gap: 48px; }
+}
+@media (max-width: 52rem) {
+ .page-hero-row { grid-template-columns: 1fr; gap: 24px; }
+ .page-hero-aside { justify-self: start; max-width: 560px; }
+ .guide-products { grid-template-columns: 1fr; }
+ .guide-help { grid-template-columns: 1fr; gap: 32px; padding-block: 64px; }
+ .page-hero h1 { font-size: clamp(42px, 7vw, 60px); }
+}
+@media (max-width: 38rem) {
+ .inner-page .page-hero { padding-block: 28px 34px; }
+ .page-hero-row { margin-top: 24px; gap: 22px; }
+ .page-hero h1 { font-size: clamp(36px, 9.3vw, 48px); line-height: 1.16; }
+ .page-hero-aside > p { font-size: 15px; }
+ .guide-product header { padding: 24px; }
+ .guide-product .product-logo { width: 270px; }
+ .guide-product header > p:last-child { font-size: 14px; }
+ .guide-topics { padding-inline: 24px; }
+ .guide-topic { min-height: 88px; }
+ .guide-topic strong { font-size: 16px; }
+ .guide-topic small { font-size: 12px; }
+ .guide-open { padding: 21px 24px; }
+ .guide-help { padding-block: 48px; }
+ .guide-help-rows > div { flex-wrap: wrap; gap: 8px 24px; padding-block: 16px; }
+ .guide-help-rows h3 { flex-basis: 100%; }
+}
+@media print { .inner-page::before { display: none; } }

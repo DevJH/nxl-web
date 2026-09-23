@@ -1,0 +1,195 @@
+/* Download pages share the main site's surfaces, logos and theme tokens. */
+.download-page { --download-studio: var(--studio); --download-studio-soft: #eeebf7; --download-builder: var(--builder); --download-builder-soft: #faf0e9; }
+[data-theme='dark'] .download-page { --download-studio: var(--studio); --download-studio-soft: #191525; --download-builder: var(--builder); --download-builder-soft: #21180f; }
+.d-page { padding-bottom: 48px; }
+.d-products { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.d-product-jump { display: none; }
+.d-studio { --product-accent: var(--download-studio); --product-soft: var(--download-studio-soft); }
+.d-builder { --product-accent: var(--download-builder); --product-soft: var(--download-builder-soft); }
+.d-product { display: flex; flex-direction: column; min-width: 0; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); scroll-margin-top: 100px; overflow: clip; }
+.d-product-intro { padding: 30px 30px 28px; }
+.d-product-meta { display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 13px; color: var(--color-muted); margin-bottom: 24px; }
+.d-product-meta > span { color: var(--product-accent); font-weight: 550; }
+.d-product-meta a { display: inline-flex; align-items: center; min-height: 28px; gap: 8px; text-decoration: none; font-variant-numeric: tabular-nums; }
+.d-product h2 .product-logo { width: 310px; }
+.d-product-intro > p { margin-top: 20px; color: var(--color-secondary); font-size: 15px; }
+.d-product-visual { height: 230px; padding: 22px 28px 0; background: var(--product-soft); overflow: hidden; border-top: 1px solid var(--color-border); }
+.d-preview-frame { overflow: hidden; border: 1px solid var(--image-outline); border-radius: 8px; box-shadow: 0 12px 32px rgb(0 0 0 / .12); }
+.d-preview-frame img { width: 100%; height: auto; }
+.d-product-visual .d-preview-frame { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.d-builder .d-product-visual { display: flex; align-items: start; padding-top: 28px; }
+.d-builder .d-preview-frame { width: 100%; }
+.d-builder .d-preview-frame img { min-height: 195px; object-fit: cover; object-position: left top; }
+.d-product-download { padding: 0 28px 20px; display: flex; flex-direction: column; flex: 1; }
+.d-product-download h3, .d-studio-download h2 { font-size: 16px; line-height: 1.5; letter-spacing: -.015em; font-weight: 550; margin-bottom: 14px; }
+.d-platforms { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.d-platform { display: flex; flex-direction: column; min-width: 0; padding: 15px 13px 13px; border: 1px solid var(--color-border); border-radius: 8px; background: var(--color-bg); text-decoration: none; }
+.d-platform-name { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 15px; font-weight: 600; line-height: 1.5; letter-spacing: -.02em; }
+.d-platform svg { width: 17px; height: 17px; color: var(--product-accent); }
+.d-platform-chip { font-size: 13px; color: var(--color-secondary); line-height: 1.5; margin-top: 5px; }
+.d-file-info { font-size: 11px; color: var(--color-muted); line-height: 1.5; font-variant-numeric: tabular-nums; margin-top: 18px; white-space: nowrap; }
+.d-link-state { font-size: 12px; font-weight: 550; color: var(--product-accent); line-height: 1.6; margin-top: 5px; }
+.d-platform[aria-disabled='true'] .d-link-state, .d-platform[aria-disabled='true'] svg { color: var(--color-muted); }
+.d-builder-package { min-height: 147px; display: flex; flex-direction: column; justify-content: space-between; }
+.d-editors { display: flex; align-items: start; flex-wrap: wrap; column-gap: 20px; row-gap: 3px; margin-bottom: 12px; }
+.d-editors strong { font-size: 15px; font-weight: 550; }
+.d-editors strong span { margin-inline: 4px; color: var(--color-muted); }
+.d-editors > span { color: var(--color-muted); font-size: 12px; padding-top: 2px; }
+.d-download-button { display: flex; justify-content: space-between; align-items: center; gap: 16px; border: 1px solid #b5440b; border-radius: 8px; background: #b5440b; color: white; padding: 14px 18px; min-height: 52px; font-size: 14px; font-weight: 600; text-decoration: none; }
+[data-theme='dark'] .d-download-button { background: #ffab76; border-color: #ffab76; color: #251207; }
+.d-download-button svg { width: 18px; height: 18px; }
+.d-download-button[aria-disabled='true'] { background: var(--color-subtle); color: var(--color-muted); border-color: var(--color-border); }
+.d-builder-size { color: var(--color-muted); font-size: 11px; font-variant-numeric: tabular-nums; margin-top: 8px; text-align: center; }
+.d-product-bottom { margin-top: auto; padding-top: 17px; display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--color-muted); font-size: 12px; }
+.d-product-bottom a { display: inline-flex; align-items: center; min-height: 40px; gap: 8px; text-decoration: none; }
+.d-product-bottom a:last-child { color: var(--color-text); }
+.d-product-bottom svg { width: 16px; height: 16px; }
+.d-start-note { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 22px; font-size: 14px; color: var(--color-secondary); }
+.d-start-note a { color: var(--color-text); }
+.d-setup, .d-support { display: grid; grid-template-columns: 1fr 1.55fr; gap: 80px; padding-block: 64px; border-top: 1px solid var(--color-border); }
+.d-section-heading .d-kicker { color: var(--color-muted); font-size: 13px; margin-bottom: 16px; }
+.d-section-heading h2 { font-size: clamp(28px, 3vw, 38px); font-weight: 730; line-height: 1.35; }
+.d-section-heading h2 + p { font-size: 14px; color: var(--color-secondary); margin-top: 18px; line-height: 1.8; }
+.d-section-heading > a { margin-top: 19px; }
+.d-install-guides details, .d-questions details { border-bottom: 1px solid var(--color-border); }
+.d-install-guides details:first-child, .d-questions details:first-child { border-top: 1px solid var(--color-border); }
+.d-install-guides summary, .d-questions summary { display: flex; align-items: center; justify-content: space-between; gap: 24px; cursor: pointer; list-style: none; }
+.d-install-guides summary::-webkit-details-marker, .d-questions summary::-webkit-details-marker { display: none; }
+.d-install-guides summary { padding-block: 21px; }
+.d-install-guides summary strong { display: block; font-size: 19px; font-weight: 550; letter-spacing: -.025em; }
+.d-install-guides summary small { display: block; font-size: 12px; color: var(--color-muted); margin-top: 4px; }
+.d-detail-toggle { position: relative; width: 16px; height: 16px; flex: 0 0 16px; color: var(--color-secondary); }
+.d-detail-toggle::before, .d-detail-toggle::after { content: ''; position: absolute; background: currentColor; }
+.d-detail-toggle::before { height: 1px; width: 14px; inset-inline-start: 1px; top: 7px; }
+.d-detail-toggle::after { height: 14px; width: 1px; inset-inline-start: 7px; top: 1px; }
+[open] > summary > .d-detail-toggle::after { display: none; }
+.d-install-guides ol { padding-inline-start: 22px; margin: 4px 0 8px; display: grid; gap: 18px; }
+.d-install-guides li { padding-inline-start: 8px; font-size: 14px; }
+.d-install-guides li::marker { color: var(--color-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.d-install-guides li strong { font-weight: 550; }
+.d-install-guides li p { color: var(--color-secondary); font-size: 13px; margin-top: 3px; }
+.d-install-guides details > a { margin-block: 8px 16px; }
+.d-questions summary { font-size: 15px; font-weight: 500; padding-block: 23px; }
+.d-questions summary::after { content: '+'; flex: 0 0 16px; font-size: 22px; font-weight: 300; line-height: 1; color: var(--color-muted); }
+.d-questions details[open] summary::after { content: '−'; }
+.d-questions details p { color: var(--color-secondary); font-size: 14px; line-height: 1.8; padding: 0 32px 22px 0; }
+.d-usage { display: flex; align-items: start; justify-content: space-between; gap: 40px; padding-top: 20px; border-top: 1px solid var(--color-border); color: var(--color-muted); font-size: 12px; }
+.d-usage > span { flex-shrink: 0; padding-block: 9px; }
+.d-usage details { max-width: 650px; text-align: end; }
+.d-usage summary { cursor: pointer; padding-block: 9px; }
+.d-usage p { text-align: start; padding-block: 12px; }
+.d-no-script { font-size: 13px; margin-top: 12px; }
+.d-studio-hero { display: grid; grid-template-columns: 1fr 1.15fr; gap: 60px; align-items: center; padding-block: 48px 64px; }
+.d-studio-copy { min-width: 0; }
+.d-studio-copy h1 { margin-top: 36px; }
+.d-studio-copy .product-logo { width: 270px; margin-bottom: 25px; }
+.d-studio-headline { display: block; font-size: clamp(38px, 3.8vw, 55px); font-weight: 760; letter-spacing: -.055em; line-height: 1.25; }
+.d-studio-headline > span { color: var(--studio); }
+.d-studio-description { font-size: 15px; color: var(--color-secondary); line-height: 1.8; margin-top: 22px; }
+.d-version-link { display: inline-flex; align-items: center; gap: 12px; color: var(--color-muted); font-size: 12px; text-decoration: none; min-height: 40px; margin-top: 6px; }
+.d-version-link [data-version] { color: var(--product-accent); font-variant-numeric: tabular-nums; }
+.d-studio-download { margin-top: 24px; }
+.d-studio-download .d-platform { background: var(--color-surface); }
+.d-chip-help { display: inline-flex; min-height: 44px; align-items: center; color: var(--color-secondary); font-size: 12px; margin-top: 8px; }
+.d-studio-preview { min-width: 0; border-radius: 14px; background: var(--product-soft); padding: 28px 0 0 28px; overflow: hidden; }
+.d-studio-preview .d-preview-frame { width: 720px; max-width: none; border-end-end-radius: 0; border-start-end-radius: 0; }
+.d-studio-preview figcaption { color: var(--color-muted); font-size: 12px; padding-block: 16px; }
+.d-companion { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px 30px; margin-bottom: 64px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 10px; text-decoration: none; }
+.d-companion small { display: block; color: var(--color-muted); font-size: 12px; margin-bottom: 3px; }
+.d-companion strong { font-size: 19px; font-weight: 550; letter-spacing: -.025em; }
+.d-companion > span:last-child { display: flex; align-items: center; gap: 24px; font-size: 14px; color: var(--color-secondary); }
+.d-companion svg { width: 20px; height: 20px; }
+@media (hover: hover) {
+  .d-platform[href]:hover { border-color: var(--product-accent); background: var(--product-soft); }
+  .d-download-button[href]:hover { filter: brightness(.94); }
+  .d-product-meta a:hover, .d-product-bottom a:hover, .d-version-link:hover, .d-breadcrumb a:hover { color: var(--product-accent, var(--color-accent)); }
+  .d-install-guides summary:hover strong, .d-questions summary:hover { color: var(--color-accent); }
+  .d-companion:hover { border-color: var(--download-builder); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .d-platform { transition: border-color 150ms ease, background-color 150ms ease; }
+}
+@media (max-width: 70rem) {
+  .d-product-intro { padding-inline: 22px; }
+  .d-product-visual { padding-inline: 22px; height: 195px; }
+  .d-product-download { padding-inline: 22px; }
+  .d-platform { padding-inline: 10px; }
+  .d-platform-name { font-size: 14px; }
+  .d-platforms { gap: 8px; }
+  .d-setup, .d-support { gap: 48px; }
+  .d-studio-hero { gap: 36px; grid-template-columns: 1fr 1fr; }
+  .d-studio-preview .d-preview-frame { width: 640px; }
+}
+@media (max-width: 58rem) {
+  .d-products { grid-template-columns: 1fr; gap: 24px; }
+  .d-product-jump { display: flex; gap: 12px; margin-bottom: 24px; }
+  .d-product-jump a { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex: 1; padding: 10px 16px; min-height: 44px; border: 1px solid var(--color-border); border-radius: 8px; text-decoration: none; font-size: 14px; }
+  .d-product-jump span { color: var(--color-muted); }
+  .d-product-intro { padding: 24px 28px; }
+  .d-product-visual { height: 260px; padding-inline: 28px; }
+  .d-product-download { padding: 0 28px 20px; }
+  .d-platform { padding: 16px; }
+  .d-platform-name { font-size: 16px; }
+  .d-file-info { font-size: 12px; }
+  .d-builder-package { min-height: 0; }
+  .d-editors { justify-content: space-between; }
+  .d-builder .d-product-visual { padding-top: 24px; }
+  .d-setup, .d-support { grid-template-columns: .85fr 1.15fr; gap: 32px; padding-block: 48px; }
+  .d-studio-hero { grid-template-columns: 1fr; gap: 28px; }
+  .d-studio-copy { max-width: 620px; }
+  .d-studio-preview { padding: 24px 24px 0; }
+  .d-studio-preview .d-preview-frame { width: 100%; border-radius: 8px; }
+  .d-studio-preview figcaption { text-align: center; }
+  .d-studio-headline { font-size: 48px; }
+}
+@media (max-width: 38rem) {
+  .d-page { padding-bottom: 32px; }
+  .d-product { border-radius: 12px; }
+  .d-product-intro { padding: 18px 20px 22px; }
+  .d-product-meta { margin-bottom: 18px; }
+  .d-product h2 .product-logo { width: 255px; }
+  .d-product-intro > p { font-size: 13px; margin-top: 14px; }
+  .d-product-visual { height: 180px; padding: 18px 20px 0; }
+  .d-builder .d-product-visual { padding-top: 20px; }
+  .d-builder .d-preview-frame img { min-height: 160px; }
+  .d-product-download { padding: 0 20px 16px; }
+  .d-platforms { grid-template-columns: 1fr; gap: 10px; }
+  .d-platform { display: grid; grid-template-columns: 1fr auto; column-gap: 10px; row-gap: 2px; padding: 13px 15px; position: relative; }
+  .d-platform-name { grid-column: 1; grid-row: 1; display: block; font-size: 15px; }
+  .d-platform-name svg { position: absolute; inset-inline-end: 15px; top: 16px; }
+  .d-platform-chip { grid-column: 1; grid-row: 2; margin: 0; font-size: 12px; }
+  .d-file-info { grid-column: 1; grid-row: 3; font-size: 11px; margin: 3px 0 0; }
+  .d-link-state { grid-column: 2; grid-row: 3; align-self: end; font-size: 12px; margin: 0; }
+  .d-product-bottom { align-items: start; flex-direction: column; gap: 0; padding-top: 12px; }
+  .d-product-bottom > span { padding-top: 12px; }
+  .d-editors { display: block; }
+  .d-editors > span { display: block; margin-top: 4px; }
+  .d-builder-size { font-size: 12px; }
+  .d-start-note { align-items: start; flex-direction: column; gap: 2px; padding-block: 23px; font-size: 13px; }
+  .d-setup, .d-support { grid-template-columns: 1fr; gap: 25px; padding-block: 36px; }
+  .d-section-heading .d-kicker { margin-bottom: 12px; }
+  .d-section-heading h2 { font-size: 28px; }
+  .d-section-heading > a { margin-top: 12px; }
+  .d-install-guides summary { padding-block: 18px; }
+  .d-install-guides summary strong { font-size: 18px; }
+  .d-questions summary { font-size: 14px; padding-block: 20px; }
+  .d-questions details p { padding-inline-end: 0; font-size: 13px; }
+  .d-usage { gap: 20px; }
+  .d-studio-hero { padding-block: 28px 36px; }
+  .d-studio-copy h1 { margin-top: 28px; }
+  .d-studio-copy .product-logo { width: 245px; margin-bottom: 24px; }
+  .d-studio-headline { font-size: clamp(34px, 9vw, 46px); }
+  .d-studio-description { font-size: 14px; margin-top: 18px; }
+  .d-studio-download { margin-top: 20px; }
+  .d-studio-preview { padding: 16px 16px 0; }
+  .d-studio-preview figcaption { font-size: 11px; }
+  .d-companion { padding: 20px; margin-bottom: 36px; align-items: start; }
+  .d-companion strong { font-size: 16px; }
+  .d-companion > span:last-child { font-size: 12px; gap: 12px; align-self: center; }
+}
+@media (max-width: 23rem) {
+  .d-product-intro, .d-product-download { padding-inline: 16px; }
+  .d-product-visual { padding-inline: 16px; height: 155px; }
+  .d-product h2 .product-logo { width: 220px; }
+  .d-companion { flex-wrap: wrap; gap: 12px; }
+}

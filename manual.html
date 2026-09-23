@@ -1,363 +1,130 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
+<!doctype html>
+<html lang="ko"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>NEXTLAB Builder 사용자 메뉴얼 v1.0</title>
-<meta name="description" content="Figma → Code 를 중심으로 한 NEXTLAB Builder 사용 설명서. MCP 연결부터 산출물 적용, 옵션·설정까지.">
+<title>NEXTLAB Builder 사용 가이드</title>
+<meta name="description" content="NEXTLAB Builder 사용 가이드. 확장 설치, macOS·Windows Claude 설치와 로그인, Figma 연결부터 코드 생성·편집·검토까지.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="NEXTLAB">
 <meta property="og:title" content="NEXTLAB Builder 사용자 매뉴얼">
-<meta property="og:description" content="Figma → Code 를 중심으로 한 NEXTLAB Builder 사용 설명서">
-<meta property="og:url" content="https://nxl-web.vercel.app/manual.html">
-<meta property="og:image" content="https://nxl-web.vercel.app/images/og.png">
+<meta property="og:description" content="확장 설치, macOS·Windows Claude 설정, Figma 연결부터 코드 생성·편집·검토까지 안내합니다.">
+<meta property="og:url" content="https://nxl-ai-tools.reala.pro/manual.html">
+<meta property="og:image" content="https://nxl-ai-tools.reala.pro/images/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
+
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111111'/%3E%3Cpath d='M9 24V8h3.4l7.2 10.4V8H23v16h-3.4L12.4 13.6V24H9z' fill='%23EA5504'/%3E%3C/svg%3E">
 
-<style>
-:root{
-  --paper:#FFFFFF;
-  --panel:#F5F6F8;
-  --panel-2:#EEF0F4;
-  --ink:#16181D;
-  --ink-2:#3D434E;
-  --ink-3:#6B7280;
-  --ink-4:#9AA1AC;
-  --line:#E3E6EB;
-  --line-2:#CFD4DC;
-  --brand:#EA5504;
-  --brand-deep:#C64803;
-  --brand-tint:#FFF4EC;
-  --brand-line:#FFD9BE;
-  --info:#2C5FD1;
-  --info-tint:#EEF3FE;
-  --info-line:#C6D6F7;
-  --stop:#C62828;
-  --stop-tint:#FDF0EF;
-  --stop-line:#F3C9C6;
-  --ok:#0F7A4F;
-  --code-bg:#15181E;
-  --code-fg:#DFE3EA;
-  --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
-  --sans:Pretendard Variable,Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
-  --nav-w:264px;
-}
 
-*,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;background:var(--paper);color:var(--ink);
-  font-family:var(--sans);font-size:16px;line-height:1.78;
-  -webkit-font-smoothing:antialiased;
-  word-break:keep-all;overflow-wrap:break-word;
-}
-img{max-width:100%;height:auto;display:block}
-a{color:var(--brand-deep)}
-h1,h2,h3,h4{margin:0;line-height:1.3;letter-spacing:-.022em;text-wrap:balance}
-p{margin:0}
-ul,ol{margin:0;padding:0;list-style:none}
-:focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:3px}
-
-/* ── 레이아웃 ───────────────────────────────────────────────── */
-.shell{display:grid;grid-template-columns:var(--nav-w) minmax(0,1fr);gap:0;max-width:1360px;margin:0 auto}
-
-.toc{
-  position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;
-  border-right:1px solid var(--line);padding:26px 20px 40px;background:var(--paper);
-}
-.toc-brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink);margin-bottom:6px}
-.toc-brand svg{width:24px;height:24px;flex:none}
-.toc-brand b{font-size:.94rem;letter-spacing:-.02em}
-.toc-ver{font-family:var(--mono);font-size:.68rem;color:var(--ink-4);letter-spacing:.06em;margin-bottom:22px}
-.toc nav{display:grid;gap:2px}
-.toc-sec{
-  font-family:var(--mono);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--ink-4);margin:18px 0 6px;padding-left:10px;
-}
-.toc a{
-  display:block;text-decoration:none;color:var(--ink-2);font-size:.855rem;line-height:1.45;
-  padding:6px 10px;border-radius:6px;border-left:2px solid transparent;
-}
-.toc a:hover{background:var(--panel);color:var(--ink)}
-.toc a.sub{padding-left:22px;font-size:.82rem;color:var(--ink-3)}
-.toc a.is-active{background:var(--brand-tint);color:var(--brand-deep);border-left-color:var(--brand);font-weight:600}
-
-.doc{padding:0 56px 120px;min-width:0}
-.doc-in{max-width:780px}
-
-/* ── 표지 ───────────────────────────────────────────────────── */
-.cover{padding:76px 0 42px;border-bottom:1px solid var(--line);margin-bottom:44px}
-.cover-tag{
-  display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.7rem;
-  letter-spacing:.16em;text-transform:uppercase;color:var(--brand-deep);
-  background:var(--brand-tint);border:1px solid var(--brand-line);border-radius:999px;padding:5px 12px;
-}
-.cover h1{font-size:clamp(2rem,4vw,2.9rem);font-weight:800;margin:22px 0 16px}
-.cover p{color:var(--ink-2);font-size:1.05rem;max-width:60ch}
-.cover-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
-
-/* ── 섹션 ───────────────────────────────────────────────────── */
-.chap{padding-top:34px;margin-top:52px;border-top:2px solid var(--ink);scroll-margin-top:20px}
-.chap:first-of-type{margin-top:0}
-.chap-n{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;color:var(--brand);font-weight:600}
-.chap h2{font-size:clamp(1.5rem,2.8vw,2rem);font-weight:800;margin:10px 0 14px}
-.chap>p.intro{color:var(--ink-2);font-size:1rem}
-
-h3.head{font-size:1.22rem;font-weight:700;margin:44px 0 14px;scroll-margin-top:20px}
-h3.head .num{font-family:var(--mono);font-size:.86rem;color:var(--brand);margin-right:9px;font-weight:600}
-h4.sub{font-size:1rem;font-weight:700;margin:26px 0 10px}
-
-.doc p+p{margin-top:14px}
-.doc h3.head+p,.doc h4.sub+p{margin-top:0}
-
-/* ── 본문 요소 ──────────────────────────────────────────────── */
-.list{display:grid;gap:9px;margin:14px 0}
-.list li{padding-left:17px;position:relative;color:var(--ink-2)}
-.list li::before{content:"";position:absolute;left:2px;top:.68em;width:5px;height:5px;border-radius:50%;background:var(--brand)}
-.list li b,.list li strong{color:var(--ink)}
-
-ol.steps{display:grid;gap:11px;margin:14px 0;counter-reset:s}
-ol.steps li{
-  list-style:none;padding-left:34px;position:relative;color:var(--ink-2);counter-increment:s;
-}
-ol.steps li::before{
-  content:counter(s);position:absolute;left:0;top:.16em;
-  width:22px;height:22px;border-radius:6px;background:var(--panel-2);color:var(--ink-2);
-  font-family:var(--mono);font-size:.72rem;display:grid;place-items:center;font-weight:600;
-}
-ol.steps li b{color:var(--ink)}
-
-code{
-  font-family:var(--mono);font-size:.855em;background:var(--panel-2);
-  padding:2px 6px;border-radius:5px;color:var(--ink);word-break:break-all;
-}
-kbd{
-  font-family:var(--mono);font-size:.78em;background:var(--paper);border:1px solid var(--line-2);
-  border-bottom-width:2px;border-radius:6px;padding:2px 7px;color:var(--ink);white-space:nowrap;
-}
-pre{
-  margin:16px 0;background:var(--code-bg);color:var(--code-fg);border-radius:10px;
-  padding:16px 18px;overflow-x:auto;font-family:var(--mono);font-size:.82rem;line-height:1.72;
-}
-pre .c{color:#7C8798}
-pre .k{color:#FFA35C}
-pre .s{color:#8FD3A6}
-
-/* 콜아웃 */
-.note{
-  display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;
-  margin:18px 0;padding:15px 18px;border-radius:10px;font-size:.92rem;
-  background:var(--info-tint);border:1px solid var(--info-line);color:var(--ink-2);
-}
-.note b{color:var(--ink)}
-/* 첫 b 만 제목으로 블록 처리 — 문장 중간 강조는 인라인 유지 */
-.note>div>b:first-child{display:block;margin-bottom:3px}
-.note .tag{
-  font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--info);padding-top:4px;white-space:nowrap;
-}
-.note--warn{background:var(--brand-tint);border-color:var(--brand-line)}
-.note--warn .tag{color:var(--brand-deep)}
-.note--stop{background:var(--stop-tint);border-color:var(--stop-line)}
-.note--stop .tag{color:var(--stop)}
-
-/* 캡쳐 */
-figure{margin:20px 0}
-figure img{border:1px solid var(--line);border-radius:10px}
-/* 아래가 빈 세로형 캡쳐는 의미 있는 상단만 잘라 쓴다 */
-figure.crop img{width:100%;height:470px;object-fit:cover;object-position:top center}
-figcaption{margin-top:9px;font-size:.79rem;color:var(--ink-3);font-family:var(--mono);letter-spacing:.02em}
-
-/* 표 */
-.tablewrap{overflow-x:auto;margin:18px 0;border:1px solid var(--line);border-radius:10px}
-table{width:100%;border-collapse:collapse;min-width:520px;font-size:.875rem}
-th,td{text-align:left;padding:11px 15px;border-bottom:1px solid var(--line);vertical-align:top}
-thead th{
-  background:var(--panel);font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--ink-3);font-weight:600;white-space:nowrap;
-}
-tbody tr:last-child td{border-bottom:0}
-td.m,th.m{font-family:var(--mono);font-size:.8rem;white-space:nowrap}
-td.rid{font-family:var(--mono);font-weight:600;color:var(--brand-deep);white-space:nowrap}
-td .d{display:block;color:var(--ink-3);font-size:.82rem;margin-top:2px}
-
-/* 단계 카드 (Figma → Code) */
-.stage{
-  margin:26px 0;padding:24px 26px;border:1px solid var(--line);border-radius:12px;background:var(--paper);
-  box-shadow:0 1px 2px rgba(20,24,32,.04);
-}
-.stage-h{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
-.stage-h .n{
-  font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;color:#fff;background:var(--brand);
-  border-radius:5px;padding:3px 8px;white-space:nowrap;
-}
-.stage-h h4{font-size:1.1rem;font-weight:700}
-.stage-lead{color:var(--ink-3);font-size:.88rem;margin-bottom:14px}
-
-/* 흐름 요약 */
-.pipe{display:grid;gap:8px;margin:22px 0;padding:20px;background:var(--panel);border-radius:12px}
-.pipe-row{display:grid;grid-template-columns:88px 1fr;gap:14px;align-items:baseline;font-size:.88rem}
-.pipe-row .s{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--brand-deep);font-weight:600}
-.pipe-row .t{color:var(--ink-2)}
-.pipe-row .t b{color:var(--ink)}
-
-/* 체크리스트 */
-.check{display:grid;gap:8px;margin:16px 0}
-.check li{list-style:none;padding-left:28px;position:relative;color:var(--ink-2);font-size:.92rem}
-.check li::before{
-  content:"";position:absolute;left:0;top:.34em;width:16px;height:16px;border-radius:4px;
-  border:1.5px solid var(--line-2);background:var(--paper);
-}
-
-.chips{display:flex;flex-wrap:wrap;align-items:flex-start;gap:7px;margin:14px 0}
-.chip{
-  font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;padding:4px 10px;border-radius:999px;
-  border:1px solid var(--line-2);color:var(--ink-2);background:var(--paper);white-space:nowrap;
-}
-.chip--brand{border-color:var(--brand-line);background:var(--brand-tint);color:var(--brand-deep)}
-
-/* ── 배포 채널 QR ────────────────────────────────────────────── */
-/* 인쇄해서 나눠주는 문서다 — 외부 이미지 서비스에 의존하지 않도록
-   QR 을 인라인 SVG 로 박는다. 오프라인·사내망에서도 보이고 인쇄도 선명하다. */
-.qr{
-  display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;
-  margin:56px 0 0;padding:20px 22px;border:1px solid var(--line);border-radius:12px;
-  background:var(--panel);
-}
-.qr-img{width:104px;height:104px;display:block;background:#fff;border-radius:8px;padding:6px}
-.qr-t b{display:block;font-size:1rem;margin-bottom:4px}
-.qr-t p{color:var(--ink-2);font-size:.9rem}
-.qr-t code{font-size:.82em}
-@media (max-width:520px){
-  .qr{grid-template-columns:1fr;justify-items:center;text-align:center}
-}
-
-.foot{margin-top:80px;padding-top:26px;border-top:1px solid var(--line);
-  font-family:var(--mono);font-size:.72rem;color:var(--ink-4);letter-spacing:.06em;
-  display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
-
-/* ── 반응형 ─────────────────────────────────────────────────── */
-@media (max-width:1080px){
-  .shell{grid-template-columns:1fr}
-  .toc{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:20px 24px 24px}
-  .toc nav{grid-template-columns:repeat(auto-fill,minmax(210px,1fr));display:grid}
-  .toc a.sub{display:none}
-  .doc{padding:0 24px 80px}
-}
-@media (max-width:640px){
-  body{font-size:15.5px}
-  .doc{padding:0 18px 64px}
-  .stage{padding:18px 16px}
-  .pipe-row{grid-template-columns:1fr;gap:2px}
-}
-@media print{
-  .toc{display:none}
-  .shell{display:block}
-  .doc{padding:0}
-  body{font-size:10.5pt}
-  pre,figure,.stage,.tablewrap,.qr{break-inside:avoid}
-  .chap{break-before:page}
-  a{color:var(--ink);text-decoration:none}
-}
-</style>
-</head>
-<body>
+<script src="/assets/theme.js?v=ee72fdb8de2e"></script>
+<link rel="stylesheet" href="/assets/site.css?v=6700099899ab"><link rel="stylesheet" href="/assets/pages.css?v=a9b52fc37c92">
+<link rel="stylesheet" href="/assets/docs.css?v=e9a41943e36c">
+<script src="/assets/site.js?v=e8a05842a2ea" defer=""></script>
+<noscript><style>.site-nav{display:flex!important}.menu-toggle,.theme-toggle,.preview-tabs,[data-zoom]{display:none!important}</style></noscript><script src="/assets/docs.js?v=d011e453a4f6" defer=""></script></head>
+<body class="inner-page manual-page theme-builder">
+<a class="skip-link" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="container header-inner"><a class="wordmark" href="/" aria-label="NEXTLAB 홈"><svg class="brand-logo" width="122" height="21" viewBox="0 0 243 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<path d="M13.097 39.3061H0L10.4577 10.0386H23.5504L13.097 39.3061Z" fill="#EA5504"></path>
+<mask id="nxlm" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="20" y="0" width="29" height="40">
+<path d="M48.2758 10.0383L41.0707 0.689453L27.7879 10.0383H31.425L20.9241 39.3101L34.0125 39.3058L44.5091 10.0383H48.2758Z" fill="white"></path>
+</mask>
+<g mask="url(#nxlm)">
+<path d="M51.8438 10.0245H17.4598L17.2697 8.16943H51.6537L51.8438 10.0245Z" fill="#EA5504"></path>
+<path d="M51.8438 13.757H17.4598L17.2697 11.9019H51.6537L51.8438 13.757Z" fill="#EA5504"></path>
+<path d="M51.8438 17.4885H17.4598L17.2697 15.6377H51.6537L51.8438 17.4885Z" fill="#EA5504"></path>
+<path d="M51.8438 21.2247H17.4598L17.2697 19.3696H51.6537L51.8438 21.2247Z" fill="#EA5504"></path>
+<path d="M51.8438 24.9562H17.4598L17.2697 23.1011H51.6537L51.8438 24.9562Z" fill="#EA5504"></path>
+<path d="M51.8438 28.6876H17.4598L17.2697 26.8325H51.6537L51.8438 28.6876Z" fill="#EA5504"></path>
+<path d="M51.8438 32.424H17.4598L17.2697 30.5688H51.6537L51.8438 32.424Z" fill="#EA5504"></path>
+<path d="M51.8438 36.1564H17.4598L17.2697 34.3013H51.6537L51.8438 36.1564Z" fill="#EA5504"></path>
+<path d="M51.8438 39.8878H17.4598L17.2697 38.0327H51.6537L51.8438 39.8878Z" fill="#EA5504"></path>
+<path d="M51.8438 6.2843H17.4598L17.2697 4.4292H51.6537L51.8438 6.2843Z" fill="#EA5504"></path>
+<path d="M51.8438 2.53976H17.4598L17.2697 0.688965H51.6537L51.8438 2.53976Z" fill="#EA5504"></path>
+</g>
+<path d="M20.9198 39.3061H34.0082L23.5505 10.0386H10.4621L20.9198 39.3061Z" fill="#EE7800"></path>
+<path d="M80.2996 39.3108H73.3324L64.5316 23.7936V39.3108H57.9311V13.4487H64.8983L73.699 28.966V13.4487H80.2996V39.3108Z" fill="currentColor"></path>
+<path d="M147.362 39.3108H140.762V18.6211H133.061V13.4487H155.063V18.6211H147.362V39.3108Z" fill="currentColor"></path>
+<path d="M174.37 34.1384H187.754V39.3108H167.769V13.4487H174.37V34.1384Z" fill="currentColor"></path>
+<path d="M197.838 39.3108H190.688L200.405 13.4487H207.739L217.457 39.3108H210.306L208.656 34.6926H199.489L197.838 39.3108ZM201.139 29.8896H207.006L204.072 21.2074L201.139 29.8896Z" fill="currentColor"></path>
+<path d="M220.023 13.4487H234.691C237.087 13.4487 238.847 13.9968 239.972 15.0928C241.096 16.1889 241.659 17.8576 241.659 20.099C241.659 21.5768 241.341 22.7775 240.705 23.7012C240.07 24.6248 239.287 25.2714 238.358 25.6408C240.338 26.1827 241.683 27.5128 242.392 29.631C242.636 30.3945 242.759 31.2812 242.759 32.2911C242.759 34.7049 242.196 36.4783 241.072 37.6113C239.947 38.7443 238.187 39.3108 235.791 39.3108H220.023V13.4487ZM235.058 20.8379C235.058 19.3601 234.325 18.6211 232.858 18.6211H226.624V23.7936H232.858C234.325 23.7936 235.058 23.0546 235.058 21.5768V20.8379ZM236.158 31.1827C236.158 29.7049 235.425 28.966 233.958 28.966H226.624V34.1384H233.958C235.425 34.1384 236.158 33.3995 236.158 31.9216V31.1827Z" fill="currentColor"></path>
+<path d="M90.5671 28.7812V23.6088V23.1778V18.6211H104.318V13.4487H83.9666V39.3108H104.318V34.1384H90.5671V31.1642V28.7812Z" fill="currentColor"></path>
+<path d="M114.017 13.4487H106.72L113.198 23.6088H90.567V28.7812H113.235L106.72 39.0029H114.017L122.164 26.2258L114.017 13.4487Z" fill="#EE7800"></path>
+<path d="M123.442 24.2307L130.317 13.4487H123.02L119.793 18.5103L123.442 24.2307Z" fill="currentColor"></path>
+<path d="M123.442 28.2275L119.793 33.948L123.02 39.0034H130.317L123.442 28.2275Z" fill="currentColor"></path>
+</svg></a><nav class="site-nav" id="site-nav" aria-label="주요 메뉴"><a href="/#builder">Builder</a><a href="/#studio">Studio</a><a href="/guide.html" aria-current="page">사용 가이드</a><a href="/updates.html">업데이트</a></nav><div class="header-actions"><button class="theme-toggle" type="button" aria-label="다크 모드로 전환" title="화면 테마 변경"><svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 14A8.7 8.7 0 0 1 10 3.5 8.7 8.7 0 1 0 20.5 14Z"></path></svg><svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"></path></svg></button><a class="button button-dark button-small header-download" href="/download.html">다운로드 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5"></path></svg></a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="site-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div></div><div class="doc-progress" data-reading-progress hidden>
+  <div class="container doc-progress-meta"><span>Builder 가이드</span><span aria-hidden="true">읽은 위치 <b data-reading-percent>0%</b></span></div>
+  <div class="doc-progress-track" role="progressbar" aria-label="가이드 읽기 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0% 읽음" aria-controls="main"><span class="doc-progress-fill"></span></div>
+</div></header>
 
 <div class="shell">
 
 <!-- ══ 목차 ══════════════════════════════════════════════════ -->
-<aside class="toc">
-  <a class="toc-brand" href="#top">
-    <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#15171C"/><path d="M9 24V8h3.4l7.2 10.4V8H23v16h-3.4L12.4 13.6V24H9z" fill="#EA5504"/></svg>
-    <b>NEXTLAB Builder</b>
-  </a>
-  <p class="toc-ver">사용자 메뉴얼 v1.0 · 확장 v1.0.3</p>
+<aside class="toc"><a class="toc-home" href="/guide.html">← 전체 사용 가이드</a><nav class="doc-product-switch" aria-label="제품 가이드"><a href="/studio-manual.html">Studio</a><a href="/manual.html" aria-current="page">Builder</a></nav><details class="doc-toc" open=""><summary>이 페이지 목차 <span aria-hidden="true">+</span></summary><div class="toc-search" hidden=""><label for="toc-search">목차 검색</label><div><input id="toc-search" type="search" placeholder="찾고 싶은 기능" autocomplete="off" aria-controls="toc"><button type="button" data-clear-search="" hidden="" aria-label="목차 검색 지우기">×</button></div><p data-search-status="" role="status"></p></div><nav id="toc" aria-label="문서 목차"><a class="toc-overview" href="#top">가이드 소개</a>
+    <p class="toc-sec">시작하기</p>
+    <a href="#ch1">설치와 계정 연결</a>
+    <a class="sub" href="#s1-1">확장 설치</a>
+    <a href="#claude-setup" data-keywords="클로드 CLI 세팅 준비 구독">Claude 설치와 로그인</a>
+    <a class="sub" href="#cli-mac" data-keywords="Mac 맥 터미널">Claude CLI · macOS</a>
+    <a class="sub" href="#cli-windows" data-keywords="윈도우 PowerShell Git Bash">Claude CLI · Windows</a>
+    <a class="sub" href="#cli-check" data-keywords="인증 auth status 로그인">설치 · 로그인 확인</a>
+    <a class="sub" href="#s1-2">AI 계정 연결</a>
+    <a class="sub" href="#cli-troubleshooting" data-keywords="PATH 경로 미설치 미연동 doctor command not found">Claude 연결 문제 해결</a>
+    <a class="sub" href="#s1-3">작업 패널 열기</a>
 
-  <nav id="toc">
-    <p class="toc-sec">시작</p>
-    <a href="#ch1">1. 설치와 첫 실행</a>
-    <a class="sub" href="#s1-1">1.1 설치</a>
-    <a class="sub" href="#s1-2">1.2 AI 계정 연동</a>
-    <a class="sub" href="#s1-3">1.3 패널 열기</a>
+    <p class="toc-sec">작업 기능</p>
+    <a href="#ch2">Figma에서 코드 생성</a>
+    <a class="sub" href="#s2-0">작업 순서</a>
+    <a class="sub" href="#s2-1">Figma 연결</a>
+    <a class="sub" href="#s2-2">디자인 링크 복사</a>
+    <a class="sub" href="#s2-3">생성할 화면 지정</a>
+    <a class="sub" href="#s2-4">코드 생성</a>
+    <a class="sub" href="#s2-5">검증 결과 확인</a>
+    <a class="sub" href="#s2-6">미리보기</a>
+    <a class="sub" href="#s2-7">화면 수정</a>
+    <a class="sub" href="#s2-8">프로젝트에 적용</a>
+    <a href="#ch3">AI 채팅과 코드 편집</a>
+    <a href="#ch4">코드 리뷰와 커밋</a>
+    <a href="#ch5">개발표준과 보안</a>
 
-    <p class="toc-sec">주 기능</p>
-    <a href="#ch2">2. Figma → Code</a>
-    <a class="sub" href="#s2-0">2.0 전체 흐름</a>
-    <a class="sub" href="#s2-1">2.1 MCP 연결 (최초 1회)</a>
-    <a class="sub" href="#s2-2">2.2 Figma 링크 복사</a>
-    <a class="sub" href="#s2-3">2.3 입력</a>
-    <a class="sub" href="#s2-4">2.4 실행</a>
-    <a class="sub" href="#s2-5">2.5 검증</a>
-    <a class="sub" href="#s2-6">2.6 결과 확인</a>
-    <a class="sub" href="#s2-7">2.7 리터치</a>
-    <a class="sub" href="#s2-8">2.8 산출물 적용</a>
-    <a href="#ch3">3. AI 채팅 · 인라인 편집</a>
-    <a href="#ch4">4. 코드 리뷰 · 커밋</a>
-    <a href="#ch5">5. 표준 · 보안</a>
-
-    <p class="toc-sec">옵션</p>
-    <a href="#ch6">6. 옵션과 설정</a>
-    <a class="sub" href="#s6-1">6.1 패널 옵션</a>
-    <a class="sub" href="#s6-2">6.2 설정 전체</a>
-    <a class="sub" href="#s6-3">6.3 단축키</a>
-    <a class="sub" href="#s6-4">6.4 명령 · 슬래시</a>
-    <a href="#ch7">7. 문제 해결</a>
-  </nav>
-</aside>
+    <p class="toc-sec">설정과 도움말</p>
+    <a href="#ch6">환경 설정</a>
+    <a class="sub" href="#s6-1">패널 설정</a>
+    <a class="sub" href="#s6-2">전체 설정</a>
+    <a class="sub" href="#s6-3">단축키</a>
+    <a class="sub" href="#s6-4">명령어</a>
+    <a href="#ch7">문제 해결</a>
+  </nav></details><a class="toc-download" href="/download.html#builder">Builder 다운로드 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></aside>
 
 <!-- ══ 본문 ══════════════════════════════════════════════════ -->
-<main class="doc" id="top">
+<main class="doc" id="main"><span id="top"></span>
 <div class="doc-in">
 
-<header class="cover">
-  <span class="cover-tag">User Manual · v1.0</span>
-  <h1>NEXTLAB Builder<br>사용자 메뉴얼</h1>
-  <p>
-    Figma 디자인을 한화 DS 코드로 바꾸고, 표준과 보안을 자동으로 지키는 VSCode 확장의 사용 설명서입니다.
-    <b>2장 Figma → Code</b> 가 이 도구의 주 기능이며, 이 문서의 절반을 차지합니다.
-    설정과 옵션은 6장에 모아 두었습니다 — 처음에는 읽지 않아도 됩니다.
-  </p>
-  <div class="cover-meta">
-    <span class="chip chip--brand">확장 v1.0.3</span>
-    <span class="chip">VSCode · Cursor · Antigravity</span>
-    <span class="chip">Claude · CodeX</span>
-    <span class="chip">MUI · DS2 · DS3</span>
-  </div>
-</header>
+<header class="cover"><p class="page-crumb"><a href="/">홈</a><span aria-hidden="true">/</span><a href="/guide.html">사용 가이드</a><span aria-hidden="true">/</span>Builder 가이드</p><h1>디자인을 코드로.<br><span>Builder 사용 가이드.</span></h1><p>Figma 디자인을 구현하고, AI와 코드를 작성하고 검토합니다.<br>익숙한 에디터에서 첫 작업을 시작하세요.</p><div class="cover-meta"><span data-version="builder">버전 확인 중</span><span>VS Code · Cursor</span></div><nav class="manual-shortcuts" aria-label="빠른 안내"><a href="#ch1"><small>처음 사용한다면</small><strong>설치와 계정 연결 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></strong></a><a href="#ch2"><small>준비가 끝났다면</small><strong>Figma에서 코드 생성 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></strong></a><a href="#ch7"><small>도움이 필요하다면</small><strong>문제 해결 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></strong></a></nav></header>
 
-<div class="note">
-  <span class="tag">표기</span>
-  <div>
-    <b>이 문서의 표기 규칙</b>
+<details class="notation"><summary>단축키와 표기 안내</summary><div>
+
     <kbd>Cmd</kbd> 는 macOS 기준이며 Windows·Linux 에서는 <kbd>Ctrl</kbd> 로 읽습니다.
     <code>이런 글자</code> 는 화면에 그대로 보이는 값·경로·명령입니다.
     <b>[필수]</b> 표시가 붙은 단계는 건너뛰면 기능이 동작하지 않습니다.
-  </div>
-</div>
+  </div></details>
 
 <!-- ═══════════ 1장 ═══════════ -->
 <section class="chap" id="ch1">
-  <p class="chap-n">CHAPTER 01</p>
+
   <h2>설치와 첫 실행</h2>
-  <p class="intro">
-    설치는 파일 하나로 끝납니다. 생성 엔진 · 디자인시스템 3종 · 개발표준 문서 · 아이콘 415종이
-    VSIX 안에 전부 들어 있어 별도 서버나 인프라가 필요 없습니다.
-  </p>
+  <p class="intro">확장 설치 → Claude CLI 설치 → 계정 로그인 → Builder 연결 순서로 준비합니다. 이미 Claude를 사용하고 있다면 <a href="#cli-check">설치·로그인 확인</a>부터 시작하세요.</p>
 
-  <h3 class="head" id="s1-1"><span class="num">1.1</span>설치</h3>
+  <h3 class="head" id="s1-1">설치</h3>
 
-  <h4 class="sub">쓰던 에디터 그대로 — VSIX 하나로 세 에디터</h4>
+  <h4 class="sub">설치할 에디터 선택</h4>
   <p>
-    Builder 는 <b>VSCode 계열 에디터</b>에서 동작합니다. 에디터마다 따로 받을 것 없이
+    Builder 는 <b>VS Code 계열 에디터</b>에서 동작합니다. 에디터마다 따로 받을 것 없이
     <b>같은 <code>.vsix</code> 파일 하나</b>를 씁니다. 설치 경로와 단축키도 모두 같습니다.
   </p>
-  <div class="tablewrap">
+  <div class="tablewrap" tabindex="0" role="region" aria-label="설치할 에디터 선택 표. 좁은 화면에서는 좌우로 스크롤할 수 있습니다.">
     <table>
       <thead><tr><th>에디터</th><th>동작</th><th class="m">비고</th></tr></thead>
       <tbody>
@@ -373,7 +140,7 @@ td .d{display:block;color:var(--ink-3);font-size:.82rem;margin-top:2px}
         </tr>
         <tr>
           <td><b>Antigravity</b></td>
-          <td>Google 의 AI 에디터 — VSCode 계열이면 그대로</td>
+          <td>Google 의 AI 에디터 — VS Code 계열이면 그대로</td>
           <td class="m">동일 VSIX</td>
         </tr>
       </tbody>
@@ -388,21 +155,42 @@ td .d{display:block;color:var(--ink-3);font-size:.82rem;margin-top:2px}
   </ol>
 
   <figure>
-    <img src="images/intro.png" alt="설치 직후 VSCode 첫 화면에 등록된 NEXTLAB Builder 시작하기 워크스루" loading="lazy" decoding="async">
-    <figcaption>설치 직후 — VSCode 첫 화면(Welcome)의 Walkthroughs 에 "NEXTLAB Builder 시작하기" 가 자동 등록됩니다</figcaption>
+    <img src="images/intro.png?v=e3d25fbdcd10" alt="설치 직후 VS Code 첫 화면에 등록된 NEXTLAB Builder 시작하기 워크스루" loading="lazy" decoding="async" width="1800" height="1179">
+    <figcaption>설치 직후 — VS Code 첫 화면(Welcome)의 Walkthroughs 에 "NEXTLAB Builder 시작하기" 가 자동 등록됩니다<button type="button" class="figure-zoom" hidden="" data-doc-zoom="" aria-label="설치 직후 VS Code 첫 화면에 등록된 NEXTLAB Builder 시작하기 워크스루 확대 보기">확대 보기 ↗</button></figcaption>
   </figure>
 
-  <div class="note">
-    <span class="tag">사전 조건</span>
-    <div>
-      <b>AI CLI 가 PC 에 설치되어 있어야 합니다.</b>
-      Claude 를 쓰려면 <code>claude</code>, CodeX 를 쓰려면 <code>codex</code> 명령이 필요합니다.
-      Claude 미설치 시 <code>npm install -g @anthropic-ai/claude-code</code> 로 설치합니다.
-      확장이 CLI 를 못 찾으면 6.2 의 <code>nxlCode.claude.path</code> 에 절대경로를 지정할 수 있습니다.
-    </div>
-  </div>
+  <h3 class="head" id="claude-setup">Claude 설치와 로그인</h3>
+  <p>Builder는 컴퓨터에 설치된 <b>Claude Code CLI</b>를 실행합니다. CLI는 터미널에서 명령으로 사용하는 도구입니다. Claude 웹사이트나 에디터의 Claude 확장에 로그인했더라도 아래 CLI 설치와 로그인을 확인하세요.</p>
+  <div class="doc-route" aria-label="Claude 설정 순서"><a href="#cli-mac"><span>macOS 사용자</span><b>터미널에서 설치</b></a><a href="#cli-windows"><span>Windows 사용자</span><b>PowerShell에서 설치</b></a><a href="#cli-check"><span>설치가 끝났다면</span><b>로그인 · 상태 확인</b></a><a href="#s1-2"><span>마지막 단계</span><b>Builder에서 연결 확인</b></a></div>
+  <h4>사용할 Claude 계정 준비</h4>
+  <p><a href="https://claude.ai/">Claude 공식 사이트</a>에서 사용할 계정과 <b>Claude Code 이용 권한</b>을 확인합니다. 조직 계정이라면 초대와 이용 권한을 먼저 확인하세요. 개인 구독·조직 계정·Console 인증의 차이는 <a href="https://code.claude.com/docs/en/authentication">공식 인증 안내</a>를 참고하세요.</p>
+  <div class="note"><span class="tag">입력 위치</span><div><b>명령은 Mac 터미널 또는 Windows PowerShell에서 실행합니다.</b>Builder 채팅창에 붙여넣지 마세요. 운영체제에 맞는 설치 방법 하나를 선택하면 됩니다.</div></div>
 
-  <h3 class="head" id="s1-2"><span class="num">1.2</span>AI 계정 연동 <span class="chip chip--brand">필수</span></h3>
+  <h3 class="head" id="cli-mac">macOS에 Claude CLI 설치</h3>
+  <p class="doc-location">입력 위치 · Mac의 터미널 앱</p>
+  <ol class="steps"><li><kbd>Cmd</kbd> + <kbd>Space</kbd>를 누르고 <b>터미널</b>을 검색해 엽니다.</li><li>아래 명령을 복사해 붙여넣고 <kbd>Enter</kbd>를 누릅니다. 공식 설치 프로그램을 내려받아 실행합니다.</li></ol>
+  <div class="doc-command"><div class="doc-command-bar"><span>macOS · Claude Code 설치</span><button type="button" data-copy-command hidden aria-label="macOS · Claude Code 설치 명령 복사">복사</button></div><pre tabindex="0" aria-label="macOS · Claude Code 설치"><code>curl -fsSL https://claude.ai/install.sh | bash</code></pre><p class="doc-copy-status" role="status"></p></div>
+  <p>설치가 끝나면 터미널 창을 새로 열고 <a href="#cli-check">설치·로그인 확인</a>으로 이어갑니다. 에디터도 완전히 종료했다 다시 열어 설치된 CLI를 찾을 수 있게 합니다.</p>
+
+  <h3 class="head" id="cli-windows">Windows에 Claude CLI 설치</h3>
+  <p class="doc-location">입력 위치 · Windows PowerShell</p>
+  <ol class="steps"><li>시작 메뉴에서 <b>PowerShell</b>을 검색해 엽니다.</li><li>입력 줄이 <code>PS C:\…&gt;</code>로 시작하는지 확인하고 아래 명령을 실행합니다.</li></ol>
+  <div class="doc-command"><div class="doc-command-bar"><span>Windows PowerShell · Claude Code 설치</span><button type="button" data-copy-command hidden aria-label="Windows PowerShell · Claude Code 설치 명령 복사">복사</button></div><pre tabindex="0" aria-label="Windows PowerShell · Claude Code 설치"><code>irm https://claude.ai/install.ps1 | iex</code></pre><p class="doc-copy-status" role="status"></p></div>
+  <p>설치 후 PowerShell과 에디터를 닫았다 다시 열고 아래 단계를 진행합니다. <code>irm</code>을 인식하지 못하면 CMD 창인지 확인하고 PowerShell에서 다시 실행하세요.</p>
+  <details class="doc-disclosure"><summary>Git Bash나 WSL을 사용하고 있다면</summary><div><p>현재 Claude Code는 PowerShell에서도 동작합니다. Bash 실행이 필요하면 <a href="https://git-scm.com/downloads/win">Git for Windows</a>를 설치할 수 있습니다.</p><p>WSL과 Windows는 CLI 설치 위치가 다릅니다. Windows에서 Builder를 사용한다면 먼저 Windows PowerShell에서 <code>claude --version</code>이 실행되는지 확인하세요.</p></div></details>
+  <p class="doc-source">설치 기준 · <a href="https://code.claude.com/docs/en/setup">Claude Code 공식 설치 안내</a> · 2026.09.23 확인</p>
+
+  <h3 class="head" id="cli-check">설치 · 로그인 확인</h3>
+  <p>새로 연 터미널 또는 PowerShell에서 버전을 확인합니다.</p>
+  <div class="doc-command"><div class="doc-command-bar"><span>터미널 · 설치 확인</span><button type="button" data-copy-command hidden aria-label="Claude 설치 확인 명령 복사">복사</button></div><pre tabindex="0" aria-label="Claude 설치 확인"><code>claude --version</code></pre><p class="doc-copy-status" role="status"></p></div>
+  <p>버전이 표시되면 로그인 명령을 실행하고, 열린 브라우저에서 사용할 계정으로 연결을 완료합니다.</p>
+  <div class="doc-command"><div class="doc-command-bar"><span>터미널 · Claude 계정 로그인</span><button type="button" data-copy-command hidden aria-label="Claude 계정 로그인 명령 복사">복사</button></div><pre tabindex="0" aria-label="Claude 계정 로그인"><code>claude auth login</code></pre><p class="doc-copy-status" role="status"></p></div>
+  <p>브라우저에서 연결을 마쳤다면 터미널로 돌아와 로그인 상태를 확인합니다. 이미 로그인한 경우에도 이 명령으로 확인할 수 있습니다.</p>
+  <div class="doc-command"><div class="doc-command-bar"><span>터미널 · 로그인 상태 확인</span><button type="button" data-copy-command hidden aria-label="Claude 로그인 상태 확인 명령 복사">복사</button></div><pre tabindex="0" aria-label="Claude 로그인 상태 확인"><code>claude auth status</code></pre><p class="doc-copy-status" role="status"></p></div>
+  <p class="doc-result"><b>완료 확인</b> 결과에 <code>"loggedIn": true</code>가 표시되고 계정 정보가 맞으면 <a href="#s1-2">Builder 연결 확인</a>으로 이동합니다. <code>false</code>라면 로그인 단계를 다시 진행하세요.</p>
+  <p class="doc-source">명령어 기준 · <a href="https://code.claude.com/docs/en/cli-reference">Claude Code 공식 CLI 명령어</a> · 2026.09.23 확인</p>
+
+  <h3 class="head" id="s1-2">AI 계정 연동 <span class="chip chip--brand">필수</span></h3>
   <p>
     Builder 는 <b>각자의 AI 계정</b>으로 실행됩니다. 공용 API 키를 쓰지 않으므로 최초 1회 로그인이 필요합니다.
   </p>
@@ -410,16 +198,31 @@ td .d{display:block;color:var(--ink-3);font-size:.82rem;margin-top:2px}
     <li>패널을 엽니다 (<kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd>)</li>
     <li>패널 상단의 연동 배지를 확인합니다 — <code>claude ✓</code> 는 연동됨, <code>codex !</code> 는 미연동입니다</li>
     <li><b>미연동 배지를 클릭</b>하면 터미널이 열리며 로그인 절차가 시작됩니다
-      (Claude 는 <code>claude /login</code>, CodeX 는 <code>codex login</code>)</li>
+      (Claude 는 <code>claude /login</code>, Codex 는 <code>codex login</code>)</li>
     <li>로그인을 마치고 패널로 돌아오면 배지가 <code>✓</code> 로 바뀝니다</li>
   </ol>
   <p>
     명령 팔레트에서 <code>NEXTLAB Builder: 계정 연동</code> 으로도 같은 절차를 실행할 수 있습니다.
     두 Provider 를 모두 연동해 두면 작업 성격에 따라 클릭으로 전환할 수 있습니다.
   </p>
+  <p class="doc-result"><b>완료 확인</b> 패널 옵션의 <b>Provider를 Claude</b>로 선택하고 <code>claude ✓</code> 배지를 확인합니다. Codex를 사용할 때는 Codex CLI를 별도로 설치하고 계정을 연결합니다.</p>
 
-  <h3 class="head" id="s1-3"><span class="num">1.3</span>패널 열기 — 세 가지 경로</h3>
-  <div class="tablewrap">
+  <h3 class="head" id="cli-troubleshooting">Claude 연결이 안 될 때</h3>
+  <div class="tablewrap" tabindex="0" role="region" aria-label="Claude 설치와 연결 문제 해결"><table><thead><tr><th scope="col">증상</th><th scope="col">확인할 내용</th></tr></thead><tbody>
+    <tr><th scope="row">명령을 찾을 수 없음</th><td>터미널을 새로 열고 다시 확인합니다. 계속 실패하면 <a href="https://code.claude.com/docs/en/troubleshooting">공식 설치 문제 해결</a>의 PATH 안내를 따라 설치 폴더를 확인하세요.</td></tr>
+    <tr><th scope="row">터미널에서는 되는데 Builder는 미설치</th><td>에디터를 완전히 종료했다 다시 엽니다. 계속 실패하면 아래 방법으로 CLI 절대경로를 지정하세요.</td></tr>
+    <tr><th scope="row">배지가 계속 <code>!</code> 또는 로그인 만료</th><td><code>claude auth status</code>를 확인하고 배지를 눌러 다시 로그인합니다. 이용 권한·네트워크 오류가 표시되면 해당 안내를 먼저 해결하세요.</td></tr>
+  </tbody></table></div>
+  <details class="doc-disclosure"><summary>Builder에 Claude 실행 경로 직접 지정하기</summary><div>
+    <p>CLI가 실행되는 터미널에서 운영체제에 맞는 명령으로 경로를 확인합니다.</p>
+    <div class="doc-command"><div class="doc-command-bar"><span>macOS · CLI 경로 확인</span><button type="button" data-copy-command hidden aria-label="macOS Claude 경로 확인 명령 복사">복사</button></div><pre tabindex="0" aria-label="macOS Claude 경로 확인"><code>which claude</code></pre><p class="doc-copy-status" role="status"></p></div>
+    <div class="doc-command"><div class="doc-command-bar"><span>Windows PowerShell · CLI 경로 확인</span><button type="button" data-copy-command hidden aria-label="Windows Claude 경로 확인 명령 복사">복사</button></div><pre tabindex="0" aria-label="Windows Claude 경로 확인"><code>(Get-Command claude).Source</code></pre><p class="doc-copy-status" role="status"></p></div>
+    <ol class="steps"><li>출력된 실행 파일의 <b>전체 경로</b>를 복사합니다.</li><li>에디터 설정(<kbd>Cmd</kbd> / <kbd>Ctrl</kbd> + <kbd>,</kbd>)에서 <code>nxlCode.claude.path</code>를 검색합니다.</li><li><b>사용자</b> 설정의 경로 입력란에 복사한 값을 넣습니다. 폴더 대신 실행 파일까지 지정합니다.</li><li>에디터를 다시 열고 계정 연동 배지를 확인합니다.</li></ol>
+  </div></details>
+  <p>설치 상태를 더 확인하려면 터미널에서 <code>claude doctor</code>를 실행합니다. 다른 설정은 <a href="#s6-2">전체 설정</a>, 작업 중 오류는 <a href="#ch7">문제 해결</a>을 참고하세요.</p>
+
+  <h3 class="head" id="s1-3">패널 열기 — 세 가지 경로</h3>
+  <div class="tablewrap" tabindex="0" role="region" aria-label="패널 열기 — 세 가지 경로 표. 좁은 화면에서는 좌우로 스크롤할 수 있습니다.">
     <table>
       <thead><tr><th>경로</th><th>방법</th><th class="m">비고</th></tr></thead>
       <tbody>
@@ -431,8 +234,8 @@ td .d{display:block;color:var(--ink-3);font-size:.82rem;margin-top:2px}
   </div>
 
   <figure>
-    <img src="images/01-commands.png" alt="명령 팔레트에 NEXTLAB Builder 를 입력한 전체 명령 목록과 우측 패널" loading="lazy" decoding="async">
-    <figcaption>명령 팔레트에 "NEXTLAB" 만 입력하면 모든 기능이 나열됩니다 — 우측이 상시 패널</figcaption>
+    <img src="images/01-commands.png?v=a669c55967b9" alt="명령 팔레트에 NEXTLAB Builder 를 입력한 전체 명령 목록과 우측 패널" loading="lazy" decoding="async" width="2000" height="1206">
+    <figcaption>명령 팔레트에 "NEXTLAB" 만 입력하면 모든 기능이 나열됩니다 — 우측이 상시 패널<button type="button" class="figure-zoom" hidden="" data-doc-zoom="" aria-label="명령 팔레트에 NEXTLAB Builder 를 입력한 전체 명령 목록과 우측 패널 확대 보기">확대 보기 ↗</button></figcaption>
   </figure>
 
   <h4 class="sub">패널 각부</h4>
@@ -447,7 +250,7 @@ td .d{display:block;color:var(--ink-3);font-size:.82rem;margin-top:2px}
 
 <!-- ═══════════ 2장 ═══════════ -->
 <section class="chap" id="ch2">
-  <p class="chap-n">CHAPTER 02 · 주 기능</p>
+
   <h2>Figma → Code</h2>
   <p class="intro">
     Figma 디자인 링크 하나로 한화 DS 스타일 React 코드를 생성합니다.
@@ -455,7 +258,7 @@ td .d{display:block;color:var(--ink-3);font-size:.82rem;margin-top:2px}
     그래서 최초 1회 <b>MCP 연결</b>이 필요하고, 매번 <b>node-id 가 포함된 링크</b>가 필요합니다.
   </p>
 
-  <h3 class="head" id="s2-0"><span class="num">2.0</span>전체 흐름 한눈에</h3>
+  <h3 class="head" id="s2-0">전체 흐름 한눈에</h3>
   <div class="pipe">
     <div class="pipe-row"><span class="s">최초 1회</span><span class="t"><b>MCP 연결</b> — Figma 데스크톱 앱에서 Dev Mode MCP 서버를 켜고, 확장의 환경 셋업을 실행 (2.1)</span></div>
     <div class="pipe-row"><span class="s">STEP 1</span><span class="t"><b>링크 복사</b> — Figma 에서 프레임 우클릭 → Copy link to selection (2.2)</span></div>
@@ -468,7 +271,7 @@ td .d{display:block;color:var(--ink-3);font-size:.82rem;margin-top:2px}
   </div>
 
   <!-- 2.1 MCP -->
-  <h3 class="head" id="s2-1"><span class="num">2.1</span>MCP 연결 — 최초 1회 <span class="chip chip--brand">필수</span></h3>
+  <h3 class="head" id="s2-1">Figma 연결하기</h3>
   <p>
     Builder 가 Figma 를 읽으려면 두 가지가 연결되어야 합니다.
     <b>(A) Figma 데스크톱 앱의 MCP 서버</b>를 켜는 일은 사람이 해야 하고,
@@ -497,7 +300,7 @@ td .d{display:block;color:var(--ink-3);font-size:.82rem;margin-top:2px}
     <div class="stage-h"><span class="n">B</span><h4>확장에서 환경 셋업 실행 (자동)</h4></div>
     <p class="stage-lead">명령 팔레트 → <code>NEXTLAB Builder: Figma → Code 환경 셋업 (자동)</code></p>
     <p>실행하면 다음을 순서대로 점검하고, 가능한 항목은 스스로 고칩니다.</p>
-    <div class="tablewrap">
+    <div class="tablewrap" tabindex="0" role="region" aria-label="참고 정보 표. 좁은 화면에서는 좌우로 스크롤할 수 있습니다.">
       <table>
         <thead><tr><th>점검 항목</th><th>내용</th><th class="m">자동</th></tr></thead>
         <tbody>
@@ -517,7 +320,7 @@ td .d{display:block;color:var(--ink-3);font-size:.82rem;margin-top:2px}
     <div class="note">
       <span class="tag">참고</span>
       <div>
-        <b>Provider 를 CodeX 로 바꿔 쓸 계획이라면 셋업을 한 번 더 확인하세요.</b>
+        <b>Provider 를 Codex 로 바꿔 쓸 계획이라면 셋업을 한 번 더 확인하세요.</b>
         figma MCP 는 Provider 별로 따로 등록됩니다. 셋업은 codex 가 설치되어 있을 때만 codex 쪽 등록을 시도합니다.
       </div>
     </div>
@@ -529,7 +332,7 @@ td .d{display:block;color:var(--ink-3);font-size:.82rem;margin-top:2px}
   </p>
 
   <!-- 2.2 링크 -->
-  <h3 class="head" id="s2-2"><span class="num">2.2</span>Figma 링크 복사 — node-id 가 핵심</h3>
+  <h3 class="head" id="s2-2">디자인 링크 복사하기</h3>
   <p>
     Builder 는 링크에 담긴 <b>node-id</b> 로 "어느 프레임을 그릴지" 를 판단합니다.
     파일 주소만 있고 node-id 가 없으면 <b>엉뚱한 화면이 생성되거나 생성이 중단</b>됩니다.
@@ -564,18 +367,18 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
   </div>
 
   <!-- 2.3 입력 -->
-  <h3 class="head" id="s2-3"><span class="num">2.3</span>입력 — 네 칸</h3>
+  <h3 class="head" id="s2-3">생성할 화면 지정하기</h3>
   <p>
     패널 상단 <b>작업 선택</b>에서 <code>Figma to Code</code> 를 고르면 전용 입력 영역이 나타납니다.
     단축키 <kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>F</kbd> 또는 입력창에 <code>/figma</code> 로도 전환됩니다.
   </p>
 
   <figure>
-    <img src="images/03-input.png" alt="Figma to Code 입력 화면 — 컴포넌트명, UI 킷, Figma URL, 요구사항" loading="lazy" decoding="async">
-    <figcaption>Figma → Code 입력 화면 (UI 킷 드롭다운 펼침 상태)</figcaption>
+    <img src="images/03-input.png?v=4b3caa6e2f75" alt="Figma to Code 입력 화면 — 컴포넌트명, UI 킷, Figma URL, 요구사항" loading="lazy" decoding="async" width="985" height="1600">
+    <figcaption>Figma → Code 입력 화면 (UI 킷 드롭다운 펼침 상태)<button type="button" class="figure-zoom" hidden="" data-doc-zoom="" aria-label="Figma to Code 입력 화면 — 컴포넌트명, UI 킷, Figma URL, 요구사항 확대 보기">확대 보기 ↗</button></figcaption>
   </figure>
 
-  <div class="tablewrap">
+  <div class="tablewrap" tabindex="0" role="region" aria-label="입력 — 네 칸 표. 좁은 화면에서는 좌우로 스크롤할 수 있습니다.">
     <table>
       <thead><tr><th>칸</th><th>무엇을 넣나</th><th>비고</th></tr></thead>
       <tbody>
@@ -620,10 +423,10 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
   </div>
 
   <!-- 2.4 실행 -->
-  <h3 class="head" id="s2-4"><span class="num">2.4</span>실행 — 진행 상황 읽기</h3>
+  <h3 class="head" id="s2-4">코드 생성 진행하기</h3>
   <figure>
-    <img src="images/04-running.png" alt="실행 중 화면 — 요청 요약 카드와 실시간 진행 로그" loading="lazy" decoding="async">
-    <figcaption>실행 중 — 요청 요약 카드 + 도구 호출 단위의 실시간 진행 로그</figcaption>
+    <img src="images/04-running.png?v=333fc8e1d217" alt="실행 중 화면 — 요청 요약 카드와 실시간 진행 로그" loading="lazy" decoding="async" width="822" height="1600">
+    <figcaption>실행 중 — 요청 요약 카드 + 도구 호출 단위의 실시간 진행 로그<button type="button" class="figure-zoom" hidden="" data-doc-zoom="" aria-label="실행 중 화면 — 요청 요약 카드와 실시간 진행 로그 확대 보기">확대 보기 ↗</button></figcaption>
   </figure>
   <ul class="list">
     <li><b>요청 요약 카드</b> — 컴포넌트명 · UI 킷 · Figma node · 출력 폴더까지, 무엇이 실행되는지 먼저 보여줍니다</li>
@@ -637,7 +440,7 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
   </p>
 
   <!-- 2.5 검증 -->
-  <h3 class="head" id="s2-5"><span class="num">2.5</span>검증 — 기준을 넘은 것만 도착</h3>
+  <h3 class="head" id="s2-5">검증 결과 확인하기</h3>
   <p>생성 직후 세 겹의 검증이 순서대로 동작합니다. 앞의 둘은 기본으로 켜져 있습니다.</p>
 
   <div class="stage">
@@ -664,7 +467,7 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
       채점하고, 모든 검증 항목이 통과하고 시각 점수가 게이트에 도달할 때까지 보정을 반복합니다.
       최고점 산출물이 최종본이 됩니다.
     </p>
-    <div class="tablewrap">
+    <div class="tablewrap" tabindex="0" role="region" aria-label="참고 정보 표. 좁은 화면에서는 좌우로 스크롤할 수 있습니다.">
       <table>
         <thead><tr><th>기준</th><th class="m">기본값</th><th>의미</th></tr></thead>
         <tbody>
@@ -675,8 +478,8 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
       </table>
     </div>
     <figure>
-      <img src="images/05-loop.png" alt="AI 설정의 검증 루프 옵션 드롭다운" loading="lazy" decoding="async">
-      <figcaption>패널 옵션의 검증 루프 — 끄기(보정 1회) / 켜기(반복 보정)</figcaption>
+      <img src="images/05-loop.png?v=dbe7ac6e7965" alt="AI 설정의 검증 루프 옵션 드롭다운" loading="lazy" decoding="async" width="1224" height="1600">
+      <figcaption>패널 옵션의 검증 루프 — 끄기(보정 1회) / 켜기(반복 보정)<button type="button" class="figure-zoom" hidden="" data-doc-zoom="" aria-label="AI 설정의 검증 루프 옵션 드롭다운 확대 보기">확대 보기 ↗</button></figcaption>
     </figure>
     <div class="note">
       <span class="tag">언제 켜나</span>
@@ -688,10 +491,10 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
   </div>
 
   <!-- 2.6 결과 -->
-  <h3 class="head" id="s2-6"><span class="num">2.6</span>결과 확인</h3>
+  <h3 class="head" id="s2-6">미리보기 확인하기</h3>
   <figure>
-    <img src="images/06-complete-preview.png" alt="검증 루프 통과 후 점수 로그와 렌더 미리보기, Storybook 알림" loading="lazy" decoding="async">
-    <figcaption>완료 — 점수 로그 · 렌더 미리보기 임베드 · Storybook 제안</figcaption>
+    <img src="images/06-complete-preview.png?v=e68bef50c1e7" alt="검증 루프 통과 후 점수 로그와 렌더 미리보기, Storybook 알림" loading="lazy" decoding="async" width="938" height="1700">
+    <figcaption>완료 — 점수 로그 · 렌더 미리보기 임베드 · Storybook 제안<button type="button" class="figure-zoom" hidden="" data-doc-zoom="" aria-label="검증 루프 통과 후 점수 로그와 렌더 미리보기, Storybook 알림 확대 보기">확대 보기 ↗</button></figcaption>
   </figure>
   <ul class="list">
     <li><b>렌더 미리보기</b> — 통과 직후 방금 만들어진 화면의 실제 스크린샷이 채팅에 바로 임베드됩니다. 파일을 열지 않고 눈으로 확인합니다</li>
@@ -700,13 +503,13 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
     <li><b>산출물 위치</b> — <code>.nextlab/generated/&lt;컴포넌트명&gt;/</code> 에 생성됩니다. 결과 카드에서 복사 · 새 파일로 열기 · 재생성 · 프로젝트 적용으로 바로 이어집니다</li>
   </ul>
 
-  <div class="tablewrap">
+  <div class="tablewrap" tabindex="0" role="region" aria-label="결과 확인 표. 좁은 화면에서는 좌우로 스크롤할 수 있습니다.">
     <table>
       <thead><tr><th>원본 (Figma)</th><th>생성 결과 (Storybook)</th></tr></thead>
       <tbody>
         <tr>
-          <td><img src="images/rc1-figma.png" alt="Figma 원본 — 계정 복구 신청 화면" loading="lazy" decoding="async"></td>
-          <td><img src="images/rc3-light.png" alt="생성된 코드의 Storybook 실제 렌더" loading="lazy" decoding="async"></td>
+          <td><img src="images/rc1-figma.png?v=c49a5fae6579" alt="Figma 원본 — 계정 복구 신청 화면" loading="lazy" decoding="async" width="1700" height="1255"></td>
+          <td><img src="images/rc3-light.png?v=3895e6a0868a" alt="생성된 코드의 Storybook 실제 렌더" loading="lazy" decoding="async" width="1700" height="1109"></td>
         </tr>
       </tbody>
     </table>
@@ -716,7 +519,7 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
   </p>
 
   <!-- 2.7 리터치 -->
-  <h3 class="head" id="s2-7"><span class="num">2.7</span>리터치 — 자연어로 보정</h3>
+  <h3 class="head" id="s2-7">생성된 화면 수정하기</h3>
   <p>
     결과가 대체로 맞는데 일부만 어긋났다면, 재생성하지 말고 <b>리터치</b>로 고치는 편이 빠릅니다.
     Figma 입력 영역의 <b>리터치</b> 버튼 또는 슬래시 명령 <code>/retouch</code> 로 실행합니다.
@@ -727,7 +530,7 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
 하단 버튼을 오른쪽 정렬로 옮겨줘</pre>
 
   <!-- 2.8 적용 -->
-  <h3 class="head" id="s2-8"><span class="num">2.8</span>산출물 적용 — 프로젝트로 옮기기</h3>
+  <h3 class="head" id="s2-8">프로젝트에 적용하기</h3>
   <p>
     검수를 마쳤으면 <code>NEXTLAB Builder: 산출물 적용 (프로젝트로 복사)</code> 를 실행합니다.
     생성 폴더의 결과물이 프로젝트 안으로 복사되며, 컴포넌트별 하위 폴더로 정리됩니다.
@@ -754,14 +557,14 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
 
 <!-- ═══════════ 3장 ═══════════ -->
 <section class="chap" id="ch3">
-  <p class="chap-n">CHAPTER 03</p>
+
   <h2>AI 채팅 · 인라인 편집</h2>
   <p class="intro">
     어느 AI 를 고르든 한화 개발표준이 자동으로 주입됩니다. 표준에 어긋나는 요청은 실행되지 않고,
     규칙 번호와 함께 대안으로 대체됩니다.
   </p>
 
-  <h3 class="head"><span class="num">3.1</span>채팅 기본</h3>
+  <h3 class="head">채팅 기본</h3>
   <ul class="list">
     <li><b>파일 첨부</b> — 입력창에서 <code>@</code> 를 치면 워크스페이스 파일 검색이 열립니다. 📎 버튼으로 파일·이미지도 첨부할 수 있습니다</li>
     <li><b>선택 코드 첨부</b> — 에디터에서 코드를 선택하고 <kbd>Cmd</kbd>+<kbd>I</kbd></li>
@@ -778,13 +581,13 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
     </div>
   </div>
 
-  <h3 class="head"><span class="num">3.2</span>인라인 편집 — <kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>K</kbd></h3>
+  <h3 class="head">인라인 편집 — <kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>K</kbd></h3>
   <p>에디터를 떠나지 않고 선택한 코드를 자연어로 고칩니다. 적용 전에 diff 로 확인합니다.</p>
   <h4 class="sub">1. 지시</h4>
   <p>위반이 있는 코드를 선택하고 <kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>K</kbd> → <code>NXL 표준에 맞게 리팩터링해줘</code> 한 줄이면 됩니다.</p>
   <figure>
-    <img src="images/ie1-ask.png" alt="코드를 선택하고 자연어로 지시하는 화면" loading="lazy" decoding="async">
-    <figcaption>에디터를 떠나지 않고 자연어로 지시합니다</figcaption>
+    <img src="images/ie1-ask.png?v=c8f5949be8aa" alt="코드를 선택하고 자연어로 지시하는 화면" loading="lazy" decoding="async" width="1500" height="393">
+    <figcaption>에디터를 떠나지 않고 자연어로 지시합니다<button type="button" class="figure-zoom" hidden="" data-doc-zoom="" aria-label="코드를 선택하고 자연어로 지시하는 화면 확대 보기">확대 보기 ↗</button></figcaption>
   </figure>
 
   <h4 class="sub">2. 제안 — 적용 전에 diff 로</h4>
@@ -793,26 +596,26 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
     <code>unknown</code> + 타입 가드 구조로 바뀐 것이 한눈에 보입니다.
   </p>
   <figure>
-    <img src="images/ie2-diff.png" alt="원본과 AI 제안을 나란히 비교하는 diff 화면" loading="lazy" decoding="async">
-    <figcaption>원본 ↔ 제안 diff — 적용 전에 확인합니다</figcaption>
+    <img src="images/ie2-diff.png?v=7d61ce05dd2b" alt="원본과 AI 제안을 나란히 비교하는 diff 화면" loading="lazy" decoding="async" width="1650" height="704">
+    <figcaption>원본 ↔ 제안 diff — 적용 전에 확인합니다<button type="button" class="figure-zoom" hidden="" data-doc-zoom="" aria-label="원본과 AI 제안을 나란히 비교하는 diff 화면 확대 보기">확대 보기 ↗</button></figcaption>
   </figure>
 
-  <h4 class="sub">3. 적용 — 오류 0</h4>
+  <h4 class="sub">변경 내용 적용하기</h4>
   <p>진단 경고가 모두 사라지고, 반환 타입까지 명시된 표준 코드만 남습니다.</p>
   <figure>
-    <img src="images/ie3-clean.png" alt="적용 후 진단 경고가 모두 사라진 화면" loading="lazy" decoding="async">
-    <figcaption>적용 후 — 진단 경고 없음</figcaption>
+    <img src="images/ie3-clean.png?v=bb2d5a0f3ff3" alt="적용 후 진단 경고가 모두 사라진 화면" loading="lazy" decoding="async" width="1650" height="534">
+    <figcaption>적용 후 — 진단 경고 없음<button type="button" class="figure-zoom" hidden="" data-doc-zoom="" aria-label="적용 후 진단 경고가 모두 사라진 화면 확대 보기">확대 보기 ↗</button></figcaption>
   </figure>
 
-  <h3 class="head"><span class="num">3.3</span>AI Quick Fix</h3>
+  <h3 class="head">AI Quick Fix</h3>
   <p>
     표준 위반 진단에 커서를 두고 전구 아이콘(<kbd>Cmd</kbd>+<kbd>.</kbd>)을 클릭하면
     <b>AI 가 그 규칙에 맞게 그 자리에서 수정</b>합니다. 진단이 무엇을, 왜, 대신 무엇을 쓰라는지 함께 알려주므로
     규칙을 외울 필요가 없습니다.
   </p>
 
-  <h3 class="head"><span class="num">3.4</span>그 밖의 생성 기능</h3>
-  <div class="tablewrap">
+  <h3 class="head">그 밖의 생성 기능</h3>
+  <div class="tablewrap" tabindex="0" role="region" aria-label="그 밖의 생성 기능 표. 좁은 화면에서는 좌우로 스크롤할 수 있습니다.">
     <table>
       <thead><tr><th>기능</th><th>실행</th><th>설명</th></tr></thead>
       <tbody>
@@ -829,17 +632,17 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
 
 <!-- ═══════════ 4장 ═══════════ -->
 <section class="chap" id="ch4">
-  <p class="chap-n">CHAPTER 04</p>
+
   <h2>코드 리뷰 · 커밋</h2>
 
-  <h3 class="head"><span class="num">4.1</span>코드 리뷰 — <kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>R</kbd></h3>
+  <h3 class="head">코드 리뷰 — <kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>R</kbd></h3>
   <p>
     현재 변경사항(git diff)을 한화 개발표준 기준으로 점검합니다.
     지적은 <b>규칙 번호와 파일:라인</b>으로 근거를 남기므로, 리뷰어와의 논쟁이 아니라 확인 작업이 됩니다.
     커밋 전에 한 번 돌리면 리뷰 반려를 크게 줄일 수 있습니다.
   </p>
 
-  <h3 class="head"><span class="num">4.2</span>커밋 생성 — <kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd></h3>
+  <h3 class="head">커밋 생성 — <kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>C</kbd></h3>
   <p>
     변경 내용을 분석해 표준 형식의 커밋 메시지를 작성하고, 확인 후 실제 커밋까지 진행합니다.
     diff 가 크면 반복되는 잡음 줄(타임스탬프·해시·로그)을 <code>[xN]</code> 으로 접어 토큰을 아낍니다
@@ -849,22 +652,22 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
 
 <!-- ═══════════ 5장 ═══════════ -->
 <section class="chap" id="ch5">
-  <p class="chap-n">CHAPTER 05</p>
-  <h2>표준 · 보안 — 자동으로 지켜지는 것</h2>
+
+  <h2>개발표준과 보안 점검</h2>
   <p class="intro">
     이 장의 기능은 <b>따로 실행하지 않아도 항상 켜져 있습니다.</b> 무엇이 자동으로 지켜지는지만 알아 두면 됩니다.
   </p>
 
-  <h3 class="head"><span class="num">5.1</span>실시간 표준 진단 — 18개 규칙</h3>
+  <h3 class="head">실시간 표준 진단 — 18개 규칙</h3>
   <p>
     AI 가 짠 코드든 사람이 짠 코드든, <code>.ts</code> · <code>.tsx</code> 를 편집·저장하는 즉시 위반을 표시합니다
     (<code>nxlCode.liveDiagnostics</code>).
   </p>
   <figure>
-    <img src="images/dx1-t01.png" alt="에디터에서 T-01 any 타입 금지 규칙 위반이 표시된 화면" loading="lazy" decoding="async">
-    <figcaption>툴팁 한 줄에 규칙 번호 + 금지 이유 + 대안이 함께 표시됩니다</figcaption>
+    <img src="images/dx1-t01.png?v=7ea7f089fb16" alt="에디터에서 T-01 any 타입 금지 규칙 위반이 표시된 화면" loading="lazy" decoding="async" width="1600" height="377">
+    <figcaption>툴팁 한 줄에 규칙 번호 + 금지 이유 + 대안이 함께 표시됩니다<button type="button" class="figure-zoom" hidden="" data-doc-zoom="" aria-label="에디터에서 T-01 any 타입 금지 규칙 위반이 표시된 화면 확대 보기">확대 보기 ↗</button></figcaption>
   </figure>
-  <div class="tablewrap">
+  <div class="tablewrap" tabindex="0" role="region" aria-label="실시간 표준 진단 — 18개 규칙 표. 좁은 화면에서는 좌우로 스크롤할 수 있습니다.">
     <table>
       <thead><tr><th class="m">규칙</th><th>내용</th></tr></thead>
       <tbody>
@@ -890,14 +693,14 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
     </table>
   </div>
 
-  <h3 class="head"><span class="num">5.2</span>민감정보 전송 차단 — 8종</h3>
+  <h3 class="head">민감정보 전송 차단 — 8종</h3>
   <p>
     입력창의 내용과 첨부 파일 본문을 <b>전송 직전에</b> 검사합니다. 검사는 PC 안에서 끝나므로
     민감정보가 AI 서버에 도달하지 않습니다 (<code>nxlCode.security.enabled</code>).
   </p>
   <figure class="crop">
-    <img src="images/sec2-block-key.png" alt=".env 첨부 시 AWS 키를 감지해 전송을 중단한 화면" loading="lazy" decoding="async">
-    <figcaption>.env 첨부 → AWS 액세스 키 감지 → 전송 중단. 감지 값은 마스킹해 보여줍니다</figcaption>
+    <img src="images/sec2-block-key.png?v=327510ff456e" alt=".env 첨부 시 AWS 키를 감지해 전송을 중단한 화면" loading="lazy" decoding="async" width="703" height="1500">
+    <figcaption>.env 첨부 → AWS 액세스 키 감지 → 전송 중단. 감지 값은 마스킹해 보여줍니다<button type="button" class="figure-zoom" hidden="" data-doc-zoom="" aria-label=".env 첨부 시 AWS 키를 감지해 전송을 중단한 화면 확대 보기">확대 보기 ↗</button></figcaption>
   </figure>
   <div class="chips">
     <span class="chip chip--brand">주민등록번호</span>
@@ -911,7 +714,7 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
   </div>
   <p>차단되면 해당 값을 제거하거나 마스킹한 뒤 다시 보내면 됩니다.</p>
 
-  <h3 class="head"><span class="num">5.3</span>개발표준 하네스 — 21개 모듈</h3>
+  <h3 class="head">개발표준 하네스 — 21개 모듈</h3>
   <ul class="list">
     <li><b>자동 주입</b> — 작업 성격에 맞는 모듈을 골라 AI 프롬프트에 강제합니다. 채팅·생성·리뷰 어디서나, 어느 Provider 를 골라도 동일합니다</li>
     <li><b>트랙 자동 감지</b> — 워크스페이스의 <code>package.json</code> 에 <code>next</code> 가 있으면 Next 트랙, <code>vite</code> 면 Vite 트랙으로 판정해 해당 규칙만 적용합니다. 감지가 틀릴 때만 <code>nxlCode.stack</code> 으로 고정하세요</li>
@@ -922,18 +725,18 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
 
 <!-- ═══════════ 6장 ═══════════ -->
 <section class="chap" id="ch6">
-  <p class="chap-n">CHAPTER 06 · 참조</p>
+
   <h2>옵션과 설정</h2>
   <p class="intro">
     기본값 그대로 써도 됩니다. 이 장은 <b>바꾸고 싶어졌을 때</b> 찾아보는 참조 문서입니다.
   </p>
 
-  <h3 class="head" id="s6-1"><span class="num">6.1</span>패널 옵션 — 대화마다 바꾸는 것</h3>
+  <h3 class="head" id="s6-1">패널 옵션 — 대화마다 바꾸는 것</h3>
   <figure>
-    <img src="images/02-options.png" alt="패널의 작업·Provider·권한·강도·모델 선택 드롭다운" loading="lazy" decoding="async">
-    <figcaption>패널 한 곳에서 작업 · AI · 모델 · 강도 · 권한을 전부 제어합니다</figcaption>
+    <img src="images/02-options.png?v=4be5e339c72b" alt="패널의 작업·Provider·권한·강도·모델 선택 드롭다운" loading="lazy" decoding="async" width="1700" height="1389">
+    <figcaption>패널 한 곳에서 작업 · AI · 모델 · 강도 · 권한을 전부 제어합니다<button type="button" class="figure-zoom" hidden="" data-doc-zoom="" aria-label="패널의 작업·Provider·권한·강도·모델 선택 드롭다운 확대 보기">확대 보기 ↗</button></figcaption>
   </figure>
-  <div class="tablewrap">
+  <div class="tablewrap" tabindex="0" role="region" aria-label="패널 옵션 — 대화마다 바꾸는 것 표. 좁은 화면에서는 좌우로 스크롤할 수 있습니다.">
     <table>
       <thead><tr><th>옵션</th><th>선택지</th><th>기준</th></tr></thead>
       <tbody>
@@ -944,7 +747,7 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
         </tr>
         <tr>
           <td><b>Provider</b></td>
-          <td class="m">Claude · CodeX</td>
+          <td class="m">Claude · Codex</td>
           <td>어느 쪽이든 같은 한화 표준이 주입됩니다</td>
         </tr>
         <tr>
@@ -971,14 +774,14 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
     </table>
   </div>
 
-  <h3 class="head" id="s6-2"><span class="num">6.2</span>설정 전체 — <code>settings.json</code></h3>
+  <h3 class="head" id="s6-2">설정 전체 — <code>settings.json</code></h3>
   <p>
-    VSCode 설정에서 <code>nxlCode</code> 로 검색하면 모두 보입니다.
+    VS Code 설정에서 <code>nxlCode</code> 로 검색하면 모두 보입니다.
     아래는 실제로 손댈 일이 있는 것들만 목적별로 묶은 것입니다.
   </p>
 
   <h4 class="sub">생성 · 검증</h4>
-  <div class="tablewrap">
+  <div class="tablewrap" tabindex="0" role="region" aria-label="생성 · 검증 표. 좁은 화면에서는 좌우로 스크롤할 수 있습니다.">
     <table>
       <thead><tr><th class="m">설정</th><th class="m">기본값</th><th>설명</th></tr></thead>
       <tbody>
@@ -996,7 +799,7 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
   </div>
 
   <h4 class="sub">Figma · 미리보기</h4>
-  <div class="tablewrap">
+  <div class="tablewrap" tabindex="0" role="region" aria-label="Figma · 미리보기 표. 좁은 화면에서는 좌우로 스크롤할 수 있습니다.">
     <table>
       <thead><tr><th class="m">설정</th><th class="m">기본값</th><th>설명</th></tr></thead>
       <tbody>
@@ -1009,7 +812,7 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
   </div>
 
   <h4 class="sub">AI · 실행</h4>
-  <div class="tablewrap">
+  <div class="tablewrap" tabindex="0" role="region" aria-label="AI · 실행 표. 좁은 화면에서는 좌우로 스크롤할 수 있습니다.">
     <table>
       <thead><tr><th class="m">설정</th><th class="m">기본값</th><th>설명</th></tr></thead>
       <tbody>
@@ -1026,7 +829,7 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
   </div>
 
   <h4 class="sub">표준 · 보안 · 환경</h4>
-  <div class="tablewrap">
+  <div class="tablewrap" tabindex="0" role="region" aria-label="표준 · 보안 · 환경 표. 좁은 화면에서는 좌우로 스크롤할 수 있습니다.">
     <table>
       <thead><tr><th class="m">설정</th><th class="m">기본값</th><th>설명</th></tr></thead>
       <tbody>
@@ -1050,8 +853,8 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
     </div>
   </div>
 
-  <h3 class="head" id="s6-3"><span class="num">6.3</span>단축키</h3>
-  <div class="tablewrap">
+  <h3 class="head" id="s6-3">단축키</h3>
+  <div class="tablewrap" tabindex="0" role="region" aria-label="단축키 표. 좁은 화면에서는 좌우로 스크롤할 수 있습니다.">
     <table>
       <thead><tr><th class="m">macOS</th><th class="m">Windows · Linux</th><th>동작</th></tr></thead>
       <tbody>
@@ -1067,7 +870,7 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
     </table>
   </div>
 
-  <h3 class="head" id="s6-4"><span class="num">6.4</span>슬래시 명령과 명령 팔레트</h3>
+  <h3 class="head" id="s6-4">슬래시 명령과 명령 팔레트</h3>
   <h4 class="sub">입력창 슬래시 명령 — 줄 맨 앞에서 <code>/</code></h4>
   <div class="chips">
     <span class="chip chip--brand">/figma</span><span class="chip">/review</span><span class="chip">/commit</span>
@@ -1076,7 +879,7 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
   </div>
 
   <h4 class="sub">명령 팔레트 — <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> → <code>NEXTLAB</code></h4>
-  <div class="tablewrap">
+  <div class="tablewrap" tabindex="0" role="region" aria-label="명령 팔레트 — Cmd+Shift+P → NEXTLAB 표. 좁은 화면에서는 좌우로 스크롤할 수 있습니다.">
     <table>
       <thead><tr><th>분류</th><th>명령</th></tr></thead>
       <tbody>
@@ -1094,10 +897,10 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
 
 <!-- ═══════════ 7장 ═══════════ -->
 <section class="chap" id="ch7">
-  <p class="chap-n">CHAPTER 07</p>
+
   <h2>문제 해결</h2>
 
-  <div class="tablewrap">
+  <div class="tablewrap" tabindex="0" role="region" aria-label="문제 해결 표. 좁은 화면에서는 좌우로 스크롤할 수 있습니다.">
     <table>
       <thead><tr><th>증상</th><th>원인과 해결</th></tr></thead>
       <tbody>
@@ -1110,12 +913,12 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
           <td>링크에 <code>node-id</code> 가 없습니다. 프레임을 선택하고 <b>우클릭 → Copy link to selection</b> 으로 다시 복사하세요. (2.2)</td>
         </tr>
         <tr>
-          <td><b>CodeX 로 바꾸니 Figma 가 안 됨</b></td>
+          <td><b>Codex 로 바꾸니 Figma 가 안 됨</b></td>
           <td>MCP 는 Provider 별로 등록됩니다. codex 를 설치한 뒤 환경 셋업을 다시 실행하면 codex 쪽에도 등록됩니다. (2.1-B)</td>
         </tr>
         <tr>
           <td><b>연동 배지가 계속 <code>!</code></b></td>
-          <td>CLI 로그인이 만료되었거나 CLI 를 찾지 못하는 경우입니다. 배지를 클릭해 다시 로그인하고, 그래도 안 되면 <code>claude.path</code> 에 절대경로를 지정하세요. (1.2 · 6.2)</td>
+          <td>CLI 로그인과 설치 경로를 확인합니다. <a href="#cli-troubleshooting">Claude 연결 문제 해결</a>에서 상태 확인, 재로그인, 실행 경로 지정 순서로 진행하세요.</td>
         </tr>
         <tr>
           <td><b>색·여백이 원본과 조금 다름</b></td>
@@ -1147,57 +950,57 @@ https://www.figma.com/design/&lt;fileKey&gt;/파일이름</pre>
   </div>
 </section>
 
-<section class="qr" aria-label="배포 채널 안내">
-  <svg class="qr-img" viewBox="-2 -2 29 29" role="img" aria-label="nxl-ai-tools.reala.pro QR 코드" shape-rendering="crispEdges">
-    <rect x="-2" y="-2" width="29" height="29" fill="#fff"/>
-    <path d="M0 0h7v1h-7zM8 0h3v1h-3zM13 0h4v1h-4zM18 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM9 1h5v1h-5zM18 1h1v1h-1zM24 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM11 2h1v1h-1zM14 2h1v1h-1zM18 2h1v1h-1zM20 2h3v1h-3zM24 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM8 3h1v1h-1zM11 3h5v1h-5zM18 3h1v1h-1zM20 3h3v1h-3zM24 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h1v1h-1zM11 4h3v1h-3zM15 4h2v1h-2zM18 4h1v1h-1zM20 4h3v1h-3zM24 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h2v1h-2zM14 5h1v1h-1zM18 5h1v1h-1zM24 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h7v1h-7zM8 7h1v1h-1zM10 7h2v1h-2zM0 8h1v1h-1zM4 8h1v1h-1zM6 8h5v1h-5zM15 8h1v1h-1zM17 8h5v1h-5zM24 8h1v1h-1zM2 9h1v1h-1zM5 9h1v1h-1zM7 9h1v1h-1zM9 9h1v1h-1zM11 9h1v1h-1zM13 9h3v1h-3zM17 9h1v1h-1zM20 9h2v1h-2zM23 9h1v1h-1zM3 10h4v1h-4zM8 10h1v1h-1zM10 10h4v1h-4zM15 10h4v1h-4zM20 10h3v1h-3zM1 11h1v1h-1zM5 11h1v1h-1zM7 11h1v1h-1zM9 11h1v1h-1zM14 11h1v1h-1zM16 11h2v1h-2zM19 11h2v1h-2zM22 11h2v1h-2zM1 12h3v1h-3zM5 12h2v1h-2zM8 12h2v1h-2zM11 12h2v1h-2zM17 12h3v1h-3zM21 12h4v1h-4zM0 13h1v1h-1zM2 13h1v1h-1zM5 13h1v1h-1zM9 13h2v1h-2zM12 13h5v1h-5zM20 13h1v1h-1zM23 13h1v1h-1zM2 14h6v1h-6zM11 14h1v1h-1zM14 14h2v1h-2zM18 14h5v1h-5zM3 15h1v1h-1zM5 15h1v1h-1zM8 15h1v1h-1zM10 15h2v1h-2zM14 15h2v1h-2zM17 15h1v1h-1zM19 15h2v1h-2zM22 15h2v1h-2zM0 16h2v1h-2zM4 16h1v1h-1zM6 16h4v1h-4zM16 16h7v1h-7zM8 17h4v1h-4zM14 17h1v1h-1zM16 17h1v1h-1zM20 17h1v1h-1zM0 18h7v1h-7zM8 18h2v1h-2zM11 18h1v1h-1zM14 18h1v1h-1zM16 18h1v1h-1zM18 18h1v1h-1zM20 18h1v1h-1zM0 19h1v1h-1zM6 19h1v1h-1zM9 19h3v1h-3zM16 19h1v1h-1zM20 19h5v1h-5zM0 20h1v1h-1zM2 20h3v1h-3zM6 20h1v1h-1zM8 20h3v1h-3zM14 20h1v1h-1zM16 20h7v1h-7zM0 21h1v1h-1zM2 21h3v1h-3zM6 21h1v1h-1zM11 21h1v1h-1zM14 21h3v1h-3zM18 21h2v1h-2zM22 21h3v1h-3zM0 22h1v1h-1zM2 22h3v1h-3zM6 22h1v1h-1zM11 22h4v1h-4zM16 22h3v1h-3zM21 22h1v1h-1zM23 22h1v1h-1zM0 23h1v1h-1zM6 23h1v1h-1zM9 23h3v1h-3zM18 23h6v1h-6zM0 24h7v1h-7zM8 24h1v1h-1zM12 24h1v1h-1zM15 24h1v1h-1zM17 24h2v1h-2zM22 24h3v1h-3z" fill="#16181D"/>
-  </svg>
-  <div class="qr-t">
-    <b>자세한 안내 및 설치파일 링크</b>
-    <p>
-      휴대폰으로 QR 을 찍거나 <code>https://nxl-ai-tools.reala.pro</code> 으로 접속하면
-      최신 설치 파일과 소개 자료를 받을 수 있습니다.
-    </p>
-  </div>
-</section>
 
-<footer class="foot">
-  <span>NEXTLAB Builder 사용자 메뉴얼 v1.0 · 확장 v1.0.3</span>
-  <span>사내 전용 — 외부 공유 금지 · 2026</span>
-</footer>
 
-</div>
+
+
+<nav class="doc-next" aria-label="다음 안내"><a href="/guide.html"><small>다른 작업이 궁금하다면</small><strong>전체 사용 가이드 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></strong></a><a href="/studio-manual.html"><small>함께 쓰는 제품</small><strong>Studio 가이드 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></strong></a></nav></div>
 </main>
 </div>
 
-<script>
-(function(){
-  /* 목차 현재 위치 표시 */
-  var links = Array.prototype.slice.call(document.querySelectorAll('#toc a'));
-  var map = {};
-  var targets = [];
-  links.forEach(function(a){
-    var id = a.getAttribute('href').slice(1);
-    var el = document.getElementById(id);
-    if (el) { map[id] = a; targets.push(el); }
-  });
-  if (!targets.length || !('IntersectionObserver' in window)) return;
 
-  var visible = {};
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ visible[e.target.id] = e.isIntersecting; });
-    var current = null;
-    for (var i = 0; i < targets.length; i++) {
-      if (visible[targets[i].id]) { current = targets[i].id; break; }
-    }
-    if (!current) return;
-    links.forEach(function(a){ a.classList.remove('is-active'); });
-    if (map[current]) map[current].classList.add('is-active');
-  }, { rootMargin: '-8% 0px -70% 0px', threshold: 0 });
 
-  targets.forEach(function(el){ io.observe(el); });
-})();
-</script>
+<footer class="site-footer" id="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-intro"><a class="wordmark" href="/" aria-label="NEXTLAB 홈"><svg class="brand-logo" width="122" height="21" viewBox="0 0 243 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<path d="M13.097 39.3061H0L10.4577 10.0386H23.5504L13.097 39.3061Z" fill="#EA5504"></path>
+<mask id="nxlm-footer" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="20" y="0" width="29" height="40">
+<path d="M48.2758 10.0383L41.0707 0.689453L27.7879 10.0383H31.425L20.9241 39.3101L34.0125 39.3058L44.5091 10.0383H48.2758Z" fill="white"></path>
+</mask>
+<g mask="url(#nxlm-footer)">
+<path d="M51.8438 10.0245H17.4598L17.2697 8.16943H51.6537L51.8438 10.0245Z" fill="#EA5504"></path>
+<path d="M51.8438 13.757H17.4598L17.2697 11.9019H51.6537L51.8438 13.757Z" fill="#EA5504"></path>
+<path d="M51.8438 17.4885H17.4598L17.2697 15.6377H51.6537L51.8438 17.4885Z" fill="#EA5504"></path>
+<path d="M51.8438 21.2247H17.4598L17.2697 19.3696H51.6537L51.8438 21.2247Z" fill="#EA5504"></path>
+<path d="M51.8438 24.9562H17.4598L17.2697 23.1011H51.6537L51.8438 24.9562Z" fill="#EA5504"></path>
+<path d="M51.8438 28.6876H17.4598L17.2697 26.8325H51.6537L51.8438 28.6876Z" fill="#EA5504"></path>
+<path d="M51.8438 32.424H17.4598L17.2697 30.5688H51.6537L51.8438 32.424Z" fill="#EA5504"></path>
+<path d="M51.8438 36.1564H17.4598L17.2697 34.3013H51.6537L51.8438 36.1564Z" fill="#EA5504"></path>
+<path d="M51.8438 39.8878H17.4598L17.2697 38.0327H51.6537L51.8438 39.8878Z" fill="#EA5504"></path>
+<path d="M51.8438 6.2843H17.4598L17.2697 4.4292H51.6537L51.8438 6.2843Z" fill="#EA5504"></path>
+<path d="M51.8438 2.53976H17.4598L17.2697 0.688965H51.6537L51.8438 2.53976Z" fill="#EA5504"></path>
+</g>
+<path d="M20.9198 39.3061H34.0082L23.5505 10.0386H10.4621L20.9198 39.3061Z" fill="#EE7800"></path>
+<path d="M80.2996 39.3108H73.3324L64.5316 23.7936V39.3108H57.9311V13.4487H64.8983L73.699 28.966V13.4487H80.2996V39.3108Z" fill="currentColor"></path>
+<path d="M147.362 39.3108H140.762V18.6211H133.061V13.4487H155.063V18.6211H147.362V39.3108Z" fill="currentColor"></path>
+<path d="M174.37 34.1384H187.754V39.3108H167.769V13.4487H174.37V34.1384Z" fill="currentColor"></path>
+<path d="M197.838 39.3108H190.688L200.405 13.4487H207.739L217.457 39.3108H210.306L208.656 34.6926H199.489L197.838 39.3108ZM201.139 29.8896H207.006L204.072 21.2074L201.139 29.8896Z" fill="currentColor"></path>
+<path d="M220.023 13.4487H234.691C237.087 13.4487 238.847 13.9968 239.972 15.0928C241.096 16.1889 241.659 17.8576 241.659 20.099C241.659 21.5768 241.341 22.7775 240.705 23.7012C240.07 24.6248 239.287 25.2714 238.358 25.6408C240.338 26.1827 241.683 27.5128 242.392 29.631C242.636 30.3945 242.759 31.2812 242.759 32.2911C242.759 34.7049 242.196 36.4783 241.072 37.6113C239.947 38.7443 238.187 39.3108 235.791 39.3108H220.023V13.4487ZM235.058 20.8379C235.058 19.3601 234.325 18.6211 232.858 18.6211H226.624V23.7936H232.858C234.325 23.7936 235.058 23.0546 235.058 21.5768V20.8379ZM236.158 31.1827C236.158 29.7049 235.425 28.966 233.958 28.966H226.624V34.1384H233.958C235.425 34.1384 236.158 33.3995 236.158 31.9216V31.1827Z" fill="currentColor"></path>
+<path d="M90.5671 28.7812V23.6088V23.1778V18.6211H104.318V13.4487H83.9666V39.3108H104.318V34.1384H90.5671V31.1642V28.7812Z" fill="currentColor"></path>
+<path d="M114.017 13.4487H106.72L113.198 23.6088H90.567V28.7812H113.235L106.72 39.0029H114.017L122.164 26.2258L114.017 13.4487Z" fill="#EE7800"></path>
+<path d="M123.442 24.2307L130.317 13.4487H123.02L119.793 18.5103L123.442 24.2307Z" fill="currentColor"></path>
+<path d="M123.442 28.2275L119.793 33.948L123.02 39.0034H130.317L123.442 28.2275Z" fill="currentColor"></path>
+</svg></a><p>기획과 개발을 잇는<br>우리 팀의 작업 도구.</p><span>Builder &amp; Studio</span></div>
+      <nav class="footer-directory" aria-label="하단 메뉴">
+        <div><h2>제품</h2><a href="/#builder">NEXTLAB Builder</a><a href="/#studio">NEXTLAB Studio</a><a href="/#tools">Studio 개별 도구</a></div>
+        <div><h2>시작하기</h2><a href="/download.html">다운로드</a><a href="/guide.html">시작 가이드</a><a href="/updates.html">업데이트 내역</a></div>
+        <div><h2>사용 안내</h2><a href="/manual.html">Builder 가이드</a><a href="/studio-manual.html">Studio 가이드</a><a href="/download.html#usage">이용 안내</a></div>
+      </nav>
+    </div>
+    <div class="footer-bottom"><p>© 2026 NEXTLAB</p><p>기획부터 코드까지.</p><span>사내 전용</span></div>
+  </div>
+</footer>
 
-</body>
-</html>
+
+<dialog class="doc-image-dialog" aria-labelledby="doc-image-title"><div class="doc-image-header"><h2 id="doc-image-title">안내 화면</h2><button class="button button-small" type="button" data-doc-close="">닫기 ×</button></div><p class="doc-image-help">좌우로 스크롤해 화면을 자세히 살펴보세요.</p><div class="doc-image-scroll" tabindex="0" aria-label="확대한 안내 화면. 방향키 또는 스크롤로 이동할 수 있습니다."><img alt=""></div></dialog></body></html>

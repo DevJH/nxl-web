@@ -1,377 +1,61 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
+<!doctype html>
+<html lang="ko"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>업데이트 내역 — NEXTLAB Builder &amp; Studio</title>
-<meta name="description" content="NEXTLAB Builder 와 NextLab Studio 의 버전별 업데이트 내역.">
+<meta name="description" content="NEXTLAB Builder 와 NEXTLAB Studio 의 버전별 업데이트 내역.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="NEXTLAB">
 <meta property="og:title" content="업데이트 내역 — NEXTLAB Builder &amp; Studio">
-<meta property="og:description" content="NEXTLAB Builder 와 NextLab Studio 의 버전별 업데이트 내역">
-<meta property="og:url" content="https://nxl-web.vercel.app/updates.html">
-<meta property="og:image" content="https://nxl-web.vercel.app/images/og.png">
+<meta property="og:description" content="NEXTLAB Builder 와 NEXTLAB Studio 의 버전별 업데이트 내역">
+<meta property="og:url" content="https://nxl-ai-tools.reala.pro/updates.html">
+<meta property="og:image" content="https://nxl-ai-tools.reala.pro/images/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin="">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="icon" href="favicon.ico" sizes="any">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=74b8c85dbe36">
 
-<style>
-:root{
-  --ink-900:#07080B;
-  --ink-850:#0A0C11;
-  --ink-800:#0C0E13;
-  --ink-700:#14171F;
-  --hair:rgba(255,255,255,.075);
-  --hair-strong:rgba(255,255,255,.14);
-  --fg:#E8EAF0;
-  --fg-dim:#9AA2B4;
-  --fg-faint:#5D6577;
-  --brand:#EA5504;
-  --brand-hi:#FF7A1F;
-  --studio:#7C6BFF;
-  --studio-hi:#9B8DFF;
-  --accent:var(--brand);
-  --accent-hi:var(--brand-hi);
-  --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
-  --sans:Pretendard Variable,Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
-  --wrap:920px;
-  --r:14px;
-}
-
-*,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;background:var(--ink-900);color:var(--fg);
-  font-family:var(--sans);font-size:16px;line-height:1.72;
-  -webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word;
-}
-a{color:inherit}
-h1,h2,h3,h4{margin:0;font-weight:800;letter-spacing:-.028em;line-height:1.2;text-wrap:balance}
-p{margin:0}
-ul{margin:0;padding:0;list-style:none}
-.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 28px}
-:focus-visible{outline:2px solid var(--accent-hi);outline-offset:3px;border-radius:4px}
-
-.eyebrow{
-  display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.7rem;
-  letter-spacing:.2em;text-transform:uppercase;color:var(--accent-hi);
-}
-.eyebrow::before{content:"";width:22px;height:1px;background:var(--accent);opacity:.85}
-
-/* ── 내비 ─────────────────────────────────────────────────────────── */
-.nav{position:sticky;top:0;z-index:50;background:rgba(7,8,11,.82);backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--hair)}
-.nav-in{display:flex;align-items:center;justify-content:space-between;height:56px}
-.brand-mark{display:block;height:18px;width:auto}
-.nav-links{display:flex;gap:22px;font-size:.85rem;color:var(--fg-dim)}
-.nav-links a{text-decoration:none}
-.nav-links a:hover{color:var(--fg)}
-
-/* ── 헤더 ─────────────────────────────────────────────────────────── */
-.head{padding:76px 0 30px;border-bottom:1px solid var(--hair)}
-.head h1{font-size:clamp(1.7rem,4vw,2.4rem);margin:16px 0 12px}
-.head p{color:var(--fg-dim);max-width:64ch}
-
-/* ── 제품 섹션 ────────────────────────────────────────────────────── */
-.prod{padding:54px 0 10px;scroll-margin-top:70px}
-.prod--studio{--accent:var(--studio);--accent-hi:var(--studio-hi)}
-.prod-h{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:12px 0 6px}
-.prod-h h2{font-size:clamp(1.3rem,2.6vw,1.7rem)}
-.prod-h .cur{font-family:var(--mono);font-size:.72rem;color:var(--fg-faint)}
-.prod-h .cur b{color:var(--accent-hi);font-weight:600}
-.prod-sub{color:var(--fg-faint);font-size:.9rem;margin-bottom:8px}
-
-/* ── 릴리스 행 ────────────────────────────────────────────────────── */
-.rel{display:grid;grid-template-columns:128px minmax(0,1fr);gap:20px;
-  padding:20px 0;border-bottom:1px solid var(--hair)}
-.rel:last-child{border-bottom:0}
-.rel-meta{font-family:var(--mono)}
-.rel-v{font-size:.92rem;font-weight:600;color:var(--fg)}
-.rel-d{display:block;font-size:.7rem;color:var(--fg-faint);margin-top:3px}
-.rel-tag{display:inline-block;margin-top:8px;padding:2px 8px;border-radius:999px;
-  font-size:.6rem;letter-spacing:.08em;color:var(--accent-hi);
-  border:1px solid var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent)}
-.rel-body h3{font-size:1rem;font-weight:700;line-height:1.45}
-.rel-body p{margin-top:6px;font-size:.88rem;color:var(--fg-dim);line-height:1.8}
-.rel-body ul{margin-top:8px;display:grid;gap:6px}
-.rel-body li{position:relative;padding-left:16px;font-size:.88rem;color:var(--fg-dim);line-height:1.75}
-.rel-body li::before{content:"";position:absolute;left:1px;top:.7em;width:5px;height:5px;
-  border-radius:50%;background:var(--accent)}
-
-/* ── 푸터 ─────────────────────────────────────────────────────────── */
-.foot{border-top:1px solid var(--hair);background:var(--ink-850);margin-top:50px;padding:28px 0}
-.foot-bar{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
-  font-family:var(--mono);font-size:.7rem;color:var(--fg-faint)}
-
-@media (max-width:640px){
-  .rel{grid-template-columns:1fr;gap:6px}
-  .head{padding-top:56px}
-}
-</style>
-</head>
-<body>
-
-<nav class="nav">
-  <div class="wrap nav-in">
-    <a class="brand" href="index.html">
-      <img class="brand-mark" src="images/logos/nextlab.svg" alt="NEXTLAB" width="110" height="18" decoding="async">
-    </a>
-    <div class="nav-links">
-      <a href="#builder">Builder</a>
-      <a href="#studio">Studio</a>
-      <a href="index.html#download">설치 · 메뉴얼</a>
-    </div>
-  </div>
-</nav>
-
-<header class="head">
-  <div class="wrap">
-    <p class="eyebrow">Release Notes</p>
-    <h1>업데이트 내역</h1>
-    <p>NEXTLAB Builder 와 NextLab Studio 의 버전별 변경 사항입니다.
-      설치 파일과 사용자 메뉴얼은 <a href="index.html#download">설치 페이지</a>에서 받을 수 있습니다.</p>
-  </div>
-</header>
-
-<!-- ══ Builder ═════════════════════════════════════════════════════ -->
-<section class="prod" id="builder">
-  <div class="wrap">
-    <p class="eyebrow">NEXTLAB Builder</p>
-    <div class="prod-h">
-      <h2>Builder — VSCode 확장</h2>
-      <span class="cur">현재 버전 <b>v<span data-ver>0.4.1</span></b></span>
-    </div>
-    <p class="prod-sub">Figma 디자인을 한화 DS 코드로 바꾸는 VSCode · Cursor 확장</p>
-
-    <div class="rel">
-      <div class="rel-meta">
-        <span class="rel-v">v1.0.3</span>
-        <span class="rel-d">2026-09-04</span>
-        <span class="rel-tag">현재 버전</span>
-      </div>
-      <div class="rel-body">
-        <h3>NXLDS 0.2.3 동봉 — 하단 탭 정본 · 고정 버튼 안전여백 자동화</h3>
-        <ul>
-          <li><b>하단 탭 바가 정본으로</b>: 탭에 아이콘 이름만 주면 선택된 탭은 채운 아이콘 + 진한 라벨, 나머지는 라인 아이콘 + 회색 라벨로 자동 전환됩니다. 상단 구분선 대신 위쪽 그림자를 써 본문 위에 얹힌 바로 읽히고, 알림 점 · 숫자 배지 · 떠 있는 알약형 바도 지원합니다 — 글자만 나열되던 탭 바가 사라집니다</li>
-          <li><b>고정 버튼이 마지막 내용을 가리지 않습니다</b>: 화면 아래 고정된 버튼 바가 자기 높이를 스스로 재서 그만큼 여백을 만듭니다. 여백 값을 화면마다 손으로 적던 시절 마지막 안내문이 버튼에 잘리던 문제가 구조적으로 사라집니다</li>
-          <li><b>업무 패턴 화면 27종</b>: 「결과 저장·공유」 패턴이 더해졌습니다</li>
-          <li><b>보안 규칙 공유 정본화</b>: 시크릿 · 위험 명령 차단 규칙과 개발표준 하네스가 Builder · Studio 공용 정본에서 기계 동기화됩니다 — 한쪽만 규칙이 낡는 일이 없어집니다</li>
-        </ul>
-      </div>
-    </div>
-    <div class="rel">
-      <div class="rel-meta">
-        <span class="rel-v">v1.0.2</span>
-        <span class="rel-d">2026-08-25</span>
-      </div>
-      <div class="rel-body">
-        <h3>사용 조건 동의 게이트 · 생성 엔진 갱신(Storybook 실행 잠금 해소)</h3>
-        <ul>
-          <li><b>사용 조건(보안 서약) 동의</b>: 최초 사용 시 사용 조건 — 연구·개발 목적 한정(실서비스 데이터 사용 불가) · 연구개발망 단말 한정 설치 · 고객 실데이터/주민등록번호/계좌/인증서/API 키 입력·계정 공유·설치 파일 외부 공유 금지 · 생성 결과는 초안이며 서비스 적용 시 기존 배포 승인 절차 준용 — 에 동의해야 Builder 를 사용할 수 있습니다. 전문은 명령 「사용 조건(보안 서약) 보기」로 언제든 열람할 수 있습니다</li>
-          <li><b>Storybook 실행 잠금 해소</b>: 동봉 생성 엔진(ju-hong-e)이 0.9.0 으로 올라갔습니다. 구버전 엔진이 강제 업데이트 안내와 함께 종료되어 Figma → Code 후 「Storybook 실행」이 <code>/server-start</code> 오류로 막히던 문제가 해소됩니다</li>
-          <li><b>엔진 부팅 안정화</b>: 엔진 터미널 부팅 점검을 간소화하고 명령 주입 대기를 실측(8~10초)에 맞춰 조정해, 미리보기 명령이 부팅 중에 유실되지 않습니다</li>
-        </ul>
-      </div>
-    </div>
-    <div class="rel">
-      <div class="rel-meta">
-        <span class="rel-v">v1.0.1</span>
-        <span class="rel-d">2026-08-25</span>
-      </div>
-      <div class="rel-body">
-        <h3>NXLDS 0.2.1 동봉 — 관리자 화면 골격 정본 · 색 매핑 복원</h3>
-        <ul>
-          <li><b>관리자 앱 셸 정본(AdminConsole)</b>: 좌측 사이드바가 2계층 하위 메뉴 · 접힘 레일(88px) · 상단 GNB 변형까지 갖춘 정본으로 개편됐습니다. 전용 사용 가이드 문서가 함께 실려 관리자 화면 생성 시 골격을 추측하지 않습니다</li>
-          <li><b>DS3 색 매핑 복원</b>: 접근성 대비를 이유로 어둡게 조정됐던 시맨틱 색(브랜드 글자 · 보조 회색 위계 · 상태색)이 영업지원DS 실측값으로 돌아왔습니다</li>
-          <li><b>NXLDS Storybook 문서 확장</b>: 공개 Storybook(MCP)에서 AdminConsole 셸 계약과 컴포넌트 가이드를 조회할 수 있습니다</li>
-        </ul>
-      </div>
-    </div>
-    <div class="rel">
-      <div class="rel-meta">
-        <span class="rel-v">v1.0.0</span>
-        <span class="rel-d">2026-08-20</span>
-      </div>
-      <div class="rel-body">
-        <h3>1.0 — 새 프로젝트 구성 위저드 · 4개 디자인시스템 외부망 설치 · DS 3.0 차세대(@nxl-dsp) 전환</h3>
-        <ul>
-          <li><b>새 프로젝트 구성</b>: 채팅 첫 화면의 「새 프로젝트 구성」(또는 <code>/init</code>)에서 질문 3개(무엇을 · 누가 쓰나 · 디자인시스템)에 답하면 — 프로젝트 생성부터 개발표준 골격, 디자인시스템 설치·테마 배선, 폰트, 브랜드 스타터 화면까지 한 번에 준비됩니다. 4개 킷(DS 2.0 · DS 3.0 · MUI · NXLDS) 전부 <code>pnpm dev</code> 즉시 동작을 확인했습니다</li>
-          <li><b>외부망 설치 완비</b>: 사내 레지스트리 없이도 DS 2.0(동봉 패키지), DS 3.0, MUI, NXLDS 를 프로젝트에 설치합니다. 채팅에 "DS2 세팅해줘"라고 하면 직접 수행합니다</li>
-          <li><b>DS 3.0 차세대(@nxl-dsp)</b>: 공식 dsp 레지스트리의 최신 세트를 동봉하고, 화면 생성 규칙도 차세대 기준으로 전환했습니다(기존 sales-frontend 프로젝트는 기존 규칙 유지). 명령 「사내 DS 3.0(@nxl-dsp) 동봉 세트 설치」로 프로젝트에 공급합니다</li>
-          <li>MUI 프로젝트에는 사내 관리자(nlm) 정본 테마(팔레트·타이포·컴포넌트 overrides 전부)가 <code>src/theme/</code> 으로 함께 들어갑니다</li>
-          <li>알려진 제약: 새 프로젝트 구성의 Windows 실기기 검증은 진행 중입니다 — 문제가 보이면 "NEXTLAB 프로젝트 구성" 출력 채널 로그와 함께 제보해 주세요</li>
-        </ul>
-      </div>
-    </div>
-    <div class="rel">
-      <div class="rel-meta">
-        <span class="rel-v">v0.4.13</span>
-        <span class="rel-d">2026-08-19</span>
-      </div>
-      <div class="rel-body">
-        <h3>Studio→Code 인터랙션 완결성 · NXLDS 브랜드 아이콘 정본 · DS 3.0 컴포지션 확장</h3>
-        <ul>
-          <li>Studio 에서 넘어온 화면을 코드로 재생성할 때 「다음」의 목적지 라우트가 비고 버튼이 장식으로 남던 문제를 고쳤습니다 — 화면 단위 전이·인터랙션 인벤토리·화면 간 상태·모킹 리모컨 계약이 함께 실리고, 생성 뒤 배선을 감사해 경고로 알립니다</li>
-          <li>카카오 · 네이버 · PASS · PAYCO · 토스 · 페이스북 · 은행 로고는 디자인시스템 공식 아이콘(<code>@nextlab/ds/icons/ds2</code>)을 쓰도록 안내가 들어갔고, 아이콘 진입점의 공개 이름 목록이 실제 export 와 일치하도록 정정됐습니다</li>
-          <li>DS 3.0 동봉 카탈로그가 실서비스 캡처 기반 패턴과 공식 Components 층으로 재편됐습니다</li>
-        </ul>
-      </div>
-    </div>
-    <div class="rel">
-      <div class="rel-meta">
-        <span class="rel-v">v0.4.12</span>
-        <span class="rel-d">2026-08-18</span>
-      </div>
-      <div class="rel-body">
-        <h3>NXLDS 0.2 동봉 · 채팅 패널 리디자인</h3>
-        <ul>
-          <li>채팅 패널을 새 디자인으로 개편했습니다(다크/라이트). 상단 상태 카드(Provider 연결·코드리뷰·커밋), 라벨 달린 컴포저, 입력 카드와 원형 전송·중지 버튼, 웰컴 화면과 브랜드 아이콘, 테마를 따르는 헤더</li>
-          <li>모델 선택을 Fable 5(최신) · Opus 5 · Sonnet 5 · Haiku 4.5 로 갱신했습니다. 예전 별칭 선택은 같은 등급의 최신 세대로 자동 이관되며, AI 설정은 기본 숨김입니다</li>
-          <li>환경 셋업에서 Figma 연결 제안이 사라지던 조건을 고쳤습니다</li>
-          <li>디자인시스템 NXLDS 0.2 를 동봉합니다 — 패키지 구조가 재편됐지만 생성 코드의 import 는 그대로이고, 동봉 tgz 한 파일로 설치되며 Tailwind 설정 한 줄(<code>@nextlab/ds/tokens.css</code>)로 끝납니다. 표·목록 밀도(density) 축이 새로 생겼습니다</li>
-        </ul>
-      </div>
-    </div>
-    <div class="rel">
-      <div class="rel-meta">
-        <span class="rel-v">v0.4.6 · v0.4.7</span>
-        <span class="rel-d">2026-08-15</span>
-      </div>
-      <div class="rel-body">
-        <h3>환경 셋업 — Figma 연결 제안 안정화</h3>
-        <ul>
-          <li>환경 셋업에서 일시적 상태 판정 실패로 Figma 연결 제안이 사라지던 문제를 수정했습니다(0.4.7)</li>
-        </ul>
-      </div>
-    </div>
-    <div class="rel">
-      <div class="rel-meta">
-        <span class="rel-v">v0.4.2</span>
-        <span class="rel-d">2026-08-14</span>
-      </div>
-      <div class="rel-body">
-        <h3>모바일 화면 여백 정본화와 디자인 문서 정확도</h3>
-        <ul>
-          <li>만들어진 모바일 화면의 글자와 입력창이 화면 가장자리에 붙던 문제를 근본 수정했습니다. 좌우 여백을 화면마다 따로 지정하지 않고 디자인시스템 골격이 기본으로 갖도록 바꿨습니다</li>
-          <li>여백이 빠질 수 있는 두 경우를 생성 중에 자동으로 잡아 고칩니다</li>
-          <li>디자인시스템 컴포넌트의 속성·기본값 문서가 비어 있던 문제를 해결해, 화면 생성이 실제 컴포넌트 사양을 보고 조립합니다</li>
-        </ul>
-      </div>
-    </div>
-    <div class="rel">
-      <div class="rel-meta">
-        <span class="rel-v">v0.4.1</span>
-        <span class="rel-d">2026-08-13</span>
-      </div>
-      <div class="rel-body">
-        <h3>Launchpad 품질 계약과 NXLDS 소비 안정화</h3>
-        <ul>
-          <li>인증수단별 화면처럼 요구사항에 명시된 사용자 화면을 빠뜨리지 않고, 세션 관리 같은 시스템 동작을 독립 화면으로 오인하지 않도록 흐름 계약을 강화했습니다</li>
-          <li>개인정보 마스킹·반응형 웹 같은 공통 요구사항을 관련 화면과 연결하고, 누락된 화면·메모·UI 기능을 품질 점검 전에 보완합니다</li>
-          <li>NXLDS 오프라인 카탈로그를 81개 공개 export와 33개 패턴 화면으로 확장하고 Studio와 같은 정본을 사용합니다</li>
-        </ul>
-      </div>
-    </div>
-    <div class="rel">
-      <div class="rel-meta">
-        <span class="rel-v">v0.4.0</span>
-        <span class="rel-d">2026-08-12</span>
-      </div>
-      <div class="rel-body">
-        <h3>NXLDS 정식 UI Kit</h3>
-        <ul>
-          <li>새 디자인시스템 NXLDS가 네 번째 UI Kit으로 들어왔습니다 — Figma → Code와 Studio 핸드오프에서 DS 2.0 · DS 3.0 · MUI와 같은 방식으로 선택해 쓸 수 있습니다</li>
-          <li>컴포넌트 177종 · 토큰 312개 · 패턴 화면 30종 카탈로그를 확장에 동봉해, 존재하지 않는 컴포넌트를 지어내는 문제를 원천 차단합니다</li>
-          <li>Studio에서 만든 NXLDS 화면을 프로젝트로 가져오는 Registry 설치기가 추가됐습니다 — 화면 소스와 디자인시스템 코어를 함께 복사하고, 프로젝트에서 이미 수정한 파일은 덮어쓰지 않습니다</li>
-          <li>생성 직후 확인할 수 있는 전용 Storybook 샌드박스가 함께 설치됩니다 — customer · fp · backoffice 대상, 글자 확대, 라이트/다크를 툴바에서 전환하며 검증합니다</li>
-        </ul>
-      </div>
-    </div>
-    <div class="rel">
-      <div class="rel-meta">
-        <span class="rel-v">v0.3.12</span>
-        <span class="rel-d">2026-08-05</span>
-              </div>
-      <div class="rel-body">
-        <h3>Windows 터미널 호환 수정 — 계정 연동·Storybook 미리보기</h3>
-        <ul>
-          <li>Windows 에서 claude 계정 연동 터미널이 "'&amp;&amp;' 토큰은 올바른 문 구분 기호가 아닙니다" 오류로 멈추던 문제를 수정했습니다 (기본 PowerShell 5.1 환경)</li>
-          <li>Storybook 미리보기가 "파일 이름, 디렉터리 이름 또는 볼륨 레이블 구분이 잘못되었습니다" 오류로 뜨지 않던 문제를 수정했습니다 (기본 cmd 환경)</li>
-          <li>터미널 명령을 어떤 셸(PowerShell 5.1/7 · cmd · bash)에서도 동작하는 방식으로 전면 교체 — 같은 계열 오류의 재발을 차단했습니다</li>
-        </ul>
-      </div>
-    </div>
-    <div class="rel">
-      <div class="rel-meta">
-        <span class="rel-v">v0.3.11</span>
-        <span class="rel-d">2026-08-04</span>
-      </div>
-      <div class="rel-body">
-        <h3>Windows 첫 설치 안정화 — 잔여 함정 5종 보강</h3>
-        <ul>
-          <li>셋업 점검에 claude 계정 로그인 확인을 추가 — 미로그인으로 실행만 조용히 실패하던 첫 설치 흔한 원인을 잡고, 미로그인 시 로그인 터미널을 바로 열어줍니다</li>
-          <li>Figma 연동 등록이 낡은 주소로 남아 '이미 등록됨'으로 위장하던 경우를 감지해 자동 재등록합니다</li>
-          <li>사용자 폴더 경로에 공백이 있는 환경(OneDrive 프로필 등)에서 실행이 실패하던 문제를 수정했습니다</li>
-          <li>백신 검사로 첫 실행이 지연될 때 간헐적으로 '미설치'로 오판하던 것을 방지했습니다 (점검 대기 상향)</li>
-          <li>claude 실행 경로 설정이 잘못 남아 있는 경우 원인을 명시해 안내합니다</li>
-        </ul>
-      </div>
-    </div>
-    <div class="rel">
-      <div class="rel-meta">
-        <span class="rel-v">v0.3.10</span>
-        <span class="rel-d">2026-08-04</span>
-      </div>
-      <div class="rel-body">
-        <h3>Windows 안정화 — claude CLI 인식 문제 근본 수정</h3>
-        <ul>
-          <li>Windows 에서 claude CLI 가 설치돼 있는데도 계속 '미설치' 로 안내되고, Figma → Code 연동이 멈추던 문제를 근본 수정했습니다</li>
-          <li>설치 직후나 네이티브 설치본처럼 PATH 에 아직 안 잡힌 경우도 주요 설치 경로를 보강해 자동으로 찾습니다</li>
-          <li>세션 도중 CLI 설치를 마치면 에디터 재시작 없이 바로 인식됩니다</li>
-          <li>아주 긴 프롬프트가 Windows 명령줄 길이 제한에 걸리던 경로를 차단했습니다</li>
-        </ul>
-      </div>
-    </div>
-    <div class="rel">
-      <div class="rel-meta">
-        <span class="rel-v">v0.3.9</span>
-        <span class="rel-d">2026-07-29</span>
-      </div>
-      <div class="rel-body">
-        <h3>전사 배포 시작</h3>
-        <ul>
-          <li>배포 채널(이 사이트)을 통한 설치 파일·사용자 메뉴얼 제공 시작</li>
-          <li>사용량 집계에 제품 구분을 추가해 Builder · Studio 사용량을 분리 집계</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ Studio ══════════════════════════════════════════════════════ -->
-<section class="prod prod--studio" id="studio">
-  <div class="wrap">
-    <p class="eyebrow">NextLab Studio</p>
-    <div class="prod-h">
-      <h2>Studio — 데스크톱 앱</h2>
-      <span class="cur">현재 버전 <b>v<span data-studio-ver>0.6.0</span></b></span>
-    </div>
-    <p class="prod-sub">기획 · 디자인부터 코드까지 잇는 데스크톱 워크스페이스</p>
-
-    <div class="rel">
+<script src="/assets/theme.js?v=ee72fdb8de2e"></script><link rel="stylesheet" href="/assets/site.css?v=6700099899ab"><link rel="stylesheet" href="/assets/pages.css?v=a9b52fc37c92"><link rel="stylesheet" href="/assets/updates.css?v=d75d2994f379"><script src="/assets/site.js?v=e8a05842a2ea" defer=""></script><noscript><style>.site-nav{display:flex!important}.menu-toggle,.theme-toggle,.preview-tabs,[data-zoom]{display:none!important}</style></noscript></head><body class="inner-page updates-page"><a class="skip-link" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="container header-inner"><a class="wordmark" href="/" aria-label="NEXTLAB 홈"><svg class="brand-logo" width="122" height="21" viewBox="0 0 243 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<path d="M13.097 39.3061H0L10.4577 10.0386H23.5504L13.097 39.3061Z" fill="#EA5504"></path>
+<mask id="nxlm" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="20" y="0" width="29" height="40">
+<path d="M48.2758 10.0383L41.0707 0.689453L27.7879 10.0383H31.425L20.9241 39.3101L34.0125 39.3058L44.5091 10.0383H48.2758Z" fill="white"></path>
+</mask>
+<g mask="url(#nxlm)">
+<path d="M51.8438 10.0245H17.4598L17.2697 8.16943H51.6537L51.8438 10.0245Z" fill="#EA5504"></path>
+<path d="M51.8438 13.757H17.4598L17.2697 11.9019H51.6537L51.8438 13.757Z" fill="#EA5504"></path>
+<path d="M51.8438 17.4885H17.4598L17.2697 15.6377H51.6537L51.8438 17.4885Z" fill="#EA5504"></path>
+<path d="M51.8438 21.2247H17.4598L17.2697 19.3696H51.6537L51.8438 21.2247Z" fill="#EA5504"></path>
+<path d="M51.8438 24.9562H17.4598L17.2697 23.1011H51.6537L51.8438 24.9562Z" fill="#EA5504"></path>
+<path d="M51.8438 28.6876H17.4598L17.2697 26.8325H51.6537L51.8438 28.6876Z" fill="#EA5504"></path>
+<path d="M51.8438 32.424H17.4598L17.2697 30.5688H51.6537L51.8438 32.424Z" fill="#EA5504"></path>
+<path d="M51.8438 36.1564H17.4598L17.2697 34.3013H51.6537L51.8438 36.1564Z" fill="#EA5504"></path>
+<path d="M51.8438 39.8878H17.4598L17.2697 38.0327H51.6537L51.8438 39.8878Z" fill="#EA5504"></path>
+<path d="M51.8438 6.2843H17.4598L17.2697 4.4292H51.6537L51.8438 6.2843Z" fill="#EA5504"></path>
+<path d="M51.8438 2.53976H17.4598L17.2697 0.688965H51.6537L51.8438 2.53976Z" fill="#EA5504"></path>
+</g>
+<path d="M20.9198 39.3061H34.0082L23.5505 10.0386H10.4621L20.9198 39.3061Z" fill="#EE7800"></path>
+<path d="M80.2996 39.3108H73.3324L64.5316 23.7936V39.3108H57.9311V13.4487H64.8983L73.699 28.966V13.4487H80.2996V39.3108Z" fill="currentColor"></path>
+<path d="M147.362 39.3108H140.762V18.6211H133.061V13.4487H155.063V18.6211H147.362V39.3108Z" fill="currentColor"></path>
+<path d="M174.37 34.1384H187.754V39.3108H167.769V13.4487H174.37V34.1384Z" fill="currentColor"></path>
+<path d="M197.838 39.3108H190.688L200.405 13.4487H207.739L217.457 39.3108H210.306L208.656 34.6926H199.489L197.838 39.3108ZM201.139 29.8896H207.006L204.072 21.2074L201.139 29.8896Z" fill="currentColor"></path>
+<path d="M220.023 13.4487H234.691C237.087 13.4487 238.847 13.9968 239.972 15.0928C241.096 16.1889 241.659 17.8576 241.659 20.099C241.659 21.5768 241.341 22.7775 240.705 23.7012C240.07 24.6248 239.287 25.2714 238.358 25.6408C240.338 26.1827 241.683 27.5128 242.392 29.631C242.636 30.3945 242.759 31.2812 242.759 32.2911C242.759 34.7049 242.196 36.4783 241.072 37.6113C239.947 38.7443 238.187 39.3108 235.791 39.3108H220.023V13.4487ZM235.058 20.8379C235.058 19.3601 234.325 18.6211 232.858 18.6211H226.624V23.7936H232.858C234.325 23.7936 235.058 23.0546 235.058 21.5768V20.8379ZM236.158 31.1827C236.158 29.7049 235.425 28.966 233.958 28.966H226.624V34.1384H233.958C235.425 34.1384 236.158 33.3995 236.158 31.9216V31.1827Z" fill="currentColor"></path>
+<path d="M90.5671 28.7812V23.6088V23.1778V18.6211H104.318V13.4487H83.9666V39.3108H104.318V34.1384H90.5671V31.1642V28.7812Z" fill="currentColor"></path>
+<path d="M114.017 13.4487H106.72L113.198 23.6088H90.567V28.7812H113.235L106.72 39.0029H114.017L122.164 26.2258L114.017 13.4487Z" fill="#EE7800"></path>
+<path d="M123.442 24.2307L130.317 13.4487H123.02L119.793 18.5103L123.442 24.2307Z" fill="currentColor"></path>
+<path d="M123.442 28.2275L119.793 33.948L123.02 39.0034H130.317L123.442 28.2275Z" fill="currentColor"></path>
+</svg></a><nav class="site-nav" id="site-nav" aria-label="주요 메뉴"><a href="/#builder">Builder</a><a href="/#studio">Studio</a><a href="/guide.html">사용 가이드</a><a href="/updates.html" aria-current="page">업데이트</a></nav><div class="header-actions"><button class="theme-toggle" type="button" aria-label="다크 모드로 전환" title="화면 테마 변경"><svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 14A8.7 8.7 0 0 1 10 3.5 8.7 8.7 0 1 0 20.5 14Z"></path></svg><svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"></path></svg></button><a class="button button-dark button-small header-download" href="/download.html">다운로드 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5"></path></svg></a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="site-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div></div></header><main id="main" class="container"><header class="page-hero"><p class="page-crumb"><a href="/">홈</a><span aria-hidden="true">/</span>업데이트</p><div class="page-hero-row"><h1>NEXTLAB의<br><span>새로운 변화.</span></h1><div class="page-hero-aside"><p>추가된 기능과 더 편해진 작업 방식.<br>제품별 업데이트를 확인하세요.</p><a class="text-link" href="/download.html">최신 버전 다운로드 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div></div></header><div class="updates-layout"><aside class="release-nav"><p class="page-eyebrow">제품별 업데이트</p><nav aria-label="제품별 업데이트"><a class="theme-studio" href="#studio"><strong>NEXTLAB Studio</strong><span data-version="studio">버전 확인 중</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a><a class="theme-builder" href="#builder"><strong>NEXTLAB Builder</strong><span data-version="builder">버전 확인 중</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></nav><p>최신 변경 사항부터<br>지난 버전의 기록까지.</p></aside><div class="release-entries"><section class="release-product theme-studio" id="studio"><h2><span class="product-logo"><img src="/images/logos/studio-black.jpg?v=e5464246146e" data-light-src="/images/logos/studio-white.jpg?v=ef3bbb02406c" data-dark-src="/images/logos/studio-black.jpg?v=e5464246146e" alt="NEXTLAB Studio" width="1280" height="434"></span></h2><div class="rel rel-latest">
       <div class="rel-meta">
         <span class="rel-v">v0.6.0</span>
         <span class="rel-d">2026-09-17</span>
         <span class="rel-tag">현재 버전</span>
       </div>
       <div class="rel-body">
-        <h3>프로젝트 내보내기·가져오기 · 프로토타입 안정화 · 개발 모드 검증 완화 · 전역 알림</h3>
+        <h3>프로젝트 이동과<br>프로토타입 안정성 개선</h3>
         <ul>
           <li><b>프로젝트 내보내기·가져오기(.nxlproj)</b>: 기획·User Flow·디자인·대화·개발 워크스페이스를 파일 하나로 다른 컴퓨터에 옮깁니다. 같은 설치본에 가져오면 프로젝트 복제가 됩니다.</li>
           <li><b>프로토타입이 멈추지 않습니다</b>: 흐름과 어긋난 시나리오만 빼고 사유를 보여 줍니다. 로그인 경로가 "이동할 수 없음"으로 잘못 막히던 문제를 고쳤고, 화면은 스텝마다 맨 위에서 시작합니다.</li>
@@ -382,14 +66,13 @@ ul{margin:0;padding:0;list-style:none}
           <li><b>UI 정리</b>: 알림·검토 도크 등의 왼쪽 색 막대 장식을 없앴습니다.</li>
         </ul>
       </div>
-    </div>
-    <div class="rel">
+    </div><div class="rel">
       <div class="rel-meta">
         <span class="rel-v">v0.5.6</span>
         <span class="rel-d">2026-09-04</span>
       </div>
       <div class="rel-body">
-        <h3>인스펙터 대폭 강화 · 반응형 편집 · 하단 탭/고정 버튼 정본 · 진행 복원</h3>
+        <h3>인스펙터 편집 개선 · 반응형 편집 · 하단 탭/고정 버튼 정본 · 진행 복원</h3>
         <ul>
           <li><b>인스펙터에서 더 많이 다듬습니다</b>: 색·간격을 디자인시스템 토큰 목록에서 고르고, 숫자 칸은 드래그로 밀거나 <code>+8</code> 같은 수식으로 조정할 수 있습니다. 속성 이름이 한글로 표시되고, 여백은 상하좌우 박스로 한눈에 봅니다</li>
           <li><b>태블릿·데스크톱 반응형 편집</b>: 한 화면 안에서 폭에 따라 달라지는 부분만 따로 지정할 수 있습니다 — 폭마다 화면을 따로 만들지 않아도 됩니다</li>
@@ -403,8 +86,7 @@ ul{margin:0;padding:0;list-style:none}
           <li><b>Windows</b>: 설치 위치가 다양한 claude CLI 를 더 넓게 찾습니다</li>
         </ul>
       </div>
-    </div>
-    <div class="rel">
+    </div><div class="rel">
       <div class="rel-meta">
         <span class="rel-v">v0.5.5</span>
         <span class="rel-d">2026-09-02</span>
@@ -416,8 +98,7 @@ ul{margin:0;padding:0;list-style:none}
           <li><b>Windows 기획 단계 실행 오류 수정</b>: 임시 폴더 경로가 Windows 에 없는 값으로 잡혀 AI 실행이 "실행 실패" 로 끝나던 문제를 고쳤습니다</li>
         </ul>
       </div>
-    </div>
-    <div class="rel">
+    </div><details class="older-updates"><summary>이전 업데이트 18개 보기</summary><div class="rel">
       <div class="rel-meta">
         <span class="rel-v">v0.5.4</span>
         <span class="rel-d">2026-08-28</span>
@@ -434,25 +115,23 @@ ul{margin:0;padding:0;list-style:none}
           <li>화면 로딩 스켈레톤, 대화별 모델 선택 저장 등 편의 개선</li>
         </ul>
       </div>
-    </div>
-    <div class="rel">
+    </div><div class="rel">
       <div class="rel-meta">
         <span class="rel-v">v0.5.3</span>
         <span class="rel-d">2026-08-28</span>
       </div>
       <div class="rel-body">
-        <h3>디자인 문서 품질 대수술 · 디자인 탭 일괄 재실행 · Studio Beta 리브랜딩</h3>
+        <h3>디자인 문서 품질 개선 · 디자인 탭 일괄 재실행 · Studio Beta 리브랜딩</h3>
         <ul>
           <li><b>생성 품질 게이트 개편</b>: 화면 생성을 막던 검사가 "차단"과 "자동 보정"으로 분리됐습니다 — 스스로 고칠 수 있는 문제로 생성 전체가 실패하던 과차단이 사라지고, 성공률이 구조적으로 올라갑니다</li>
           <li><b>골든 예제층</b>: 잘 만들어진 화면 예제가 생성 계약에 함께 실려, 첫 생성부터 배치 · 밀도 · 위계가 예제 수준으로 수렴합니다. 생성 지침도 핵심만 남게 다이어트해 지침 간 충돌을 줄였습니다</li>
           <li><b>디자인 탭 일괄 재실행</b>: 프로젝트의 모든 화면을 한 번에 다시 디자인할 수 있습니다 — 디자인시스템 · 지침이 바뀐 뒤 화면 전체를 새 기준으로 맞출 때 화면마다 반복하지 않아도 됩니다</li>
           <li><b>디자인 문서 화면의 프로토타입 · 개발 모드 연결</b>: 문서 기반으로 생성된 화면도 프로토타입 재생과 개발 모드 핸드오프에 그대로 이어집니다</li>
           <li><b>NXLDS 패턴 정비</b>: HeroCard 가 캠페인 전용으로 격리되어 일반 화면에 잘못 등장하지 않고, 결과 저장 · 공유 패턴이 추가됐습니다</li>
-          <li><b>NextLab Studio Beta</b>: 제품 표기가 Beta 로 정리됐습니다</li>
+          <li><b>NEXTLAB Studio Beta</b>: 제품 표기가 Beta 로 정리됐습니다</li>
         </ul>
       </div>
-    </div>
-    <div class="rel">
+    </div><div class="rel">
       <div class="rel-meta">
         <span class="rel-v">v0.5.2</span>
         <span class="rel-d">2026-08-26</span>
@@ -467,8 +146,7 @@ ul{margin:0;padding:0;list-style:none}
           <li><b>캔버스가 넓어졌습니다</b>: 디자인 작업 화면의 보조 내비(좌측 메뉴 · 화면 레일 · 레이어 패널)가 기본 접힘으로 바뀌어, 들어온 첫 순간부터 그림이 가장 넓게 보입니다. 필요할 때 화살표로 펴고, 펼친 선택은 다음 진입에도 유지됩니다</li>
         </ul>
       </div>
-    </div>
-    <div class="rel">
+    </div><div class="rel">
       <div class="rel-meta">
         <span class="rel-v">v0.5.1</span>
         <span class="rel-d">2026-08-25</span>
@@ -482,8 +160,7 @@ ul{margin:0;padding:0;list-style:none}
           <li>플로우 생성 요청 경계를 보강해 선택값 누락으로 실패하던 422 오류를 방지했습니다</li>
         </ul>
       </div>
-    </div>
-    <div class="rel">
+    </div><div class="rel">
       <div class="rel-meta">
         <span class="rel-v">v0.5.0</span>
         <span class="rel-d">2026-08-20</span>
@@ -497,8 +174,7 @@ ul{margin:0;padding:0;list-style:none}
           <li>NXLDS 버튼 스타일이 DS 3.0 전역 스타일에 지워지던 문제와, 흐름 버튼이 비활성일 때 프로토타입 검사가 실패로 오판하던 문제를 고쳤습니다</li>
         </ul>
       </div>
-    </div>
-    <div class="rel">
+    </div><div class="rel">
       <div class="rel-meta">
         <span class="rel-v">v0.4.3</span>
         <span class="rel-d">2026-08-18</span>
@@ -511,8 +187,7 @@ ul{margin:0;padding:0;list-style:none}
           <li>기능명세가 커지면 유저플로우 생성이 "잘못된 요청"으로 막히던 문제를 수정했습니다 — 요청 크기 상한을 산출물 최대치에 맞추고, 이름이 비어 있는 기능이 생성 전체를 막지 않게 했습니다</li>
         </ul>
       </div>
-    </div>
-    <div class="rel">
+    </div><div class="rel">
       <div class="rel-meta">
         <span class="rel-v">v0.4.2</span>
         <span class="rel-d">2026-08-14</span>
@@ -526,8 +201,7 @@ ul{margin:0;padding:0;list-style:none}
           <li>모바일 화면의 좌우 여백이 비던 문제를 디자인시스템 차원에서 바로잡았습니다</li>
         </ul>
       </div>
-    </div>
-    <div class="rel">
+    </div><div class="rel">
       <div class="rel-meta">
         <span class="rel-v">v0.4.1</span>
         <span class="rel-d">2026-08-13</span>
@@ -540,8 +214,7 @@ ul{margin:0;padding:0;list-style:none}
           <li>프로토타입이 input 대신 label을 클릭하거나 렌더 전에 확인 버튼 탐색을 끝내던 문제를 보완해 실제 접근성 이름과 안정된 렌더 시점으로 대상을 찾습니다</li>
         </ul>
       </div>
-    </div>
-    <div class="rel">
+    </div><div class="rel">
       <div class="rel-meta">
         <span class="rel-v">v0.4.0</span>
         <span class="rel-d">2026-08-12</span>
@@ -555,8 +228,7 @@ ul{margin:0;padding:0;list-style:none}
           <li>Studio에서 만든 화면을 Builder로 넘기는 핸드오프 상태 관리가 추가됐습니다 — 어떤 화면이 어디까지 반영됐는지 양쪽에서 같은 상태를 봅니다</li>
         </ul>
       </div>
-    </div>
-    <div class="rel">
+    </div><div class="rel">
       <div class="rel-meta">
         <span class="rel-v">v0.3.7</span>
         <span class="rel-d">2026-08-06</span>
@@ -570,8 +242,7 @@ ul{margin:0;padding:0;list-style:none}
           <li>관리자 디자인시스템 아이콘이 중립적인 자리(아이콘 버튼 · 이동 경로 · 비활성 상태)에서도 주황색으로 보이던 문제를 고쳤습니다</li>
         </ul>
       </div>
-    </div>
-    <div class="rel">
+    </div><div class="rel">
       <div class="rel-meta">
         <span class="rel-v">v0.3.6</span>
         <span class="rel-d">2026-08-06</span>
@@ -584,8 +255,7 @@ ul{margin:0;padding:0;list-style:none}
           <li>일괄 디자인이 화면별 실패 사유를 알려주지 않던 문제를 고쳤습니다 — 어떤 화면이 왜 실패했는지 한 줄로 표시됩니다</li>
         </ul>
       </div>
-    </div>
-    <div class="rel">
+    </div><div class="rel">
       <div class="rel-meta">
         <span class="rel-v">v0.3.5</span>
         <span class="rel-d">2026-08-05</span>
@@ -599,8 +269,7 @@ ul{margin:0;padding:0;list-style:none}
           <li>Windows 설치본에서도 사용량이 조회됩니다 — 그동안 macOS 키체인만 읽어, 로그인해도 구조적으로 값이 나오지 않았습니다</li>
         </ul>
       </div>
-    </div>
-    <div class="rel">
+    </div><div class="rel">
       <div class="rel-meta">
         <span class="rel-v">v0.3.4</span>
         <span class="rel-d">2026-08-05</span>
@@ -613,8 +282,7 @@ ul{margin:0;padding:0;list-style:none}
           <li>일러스트 인물 문법 정밀화 — 2인 구도도 전신이 기본, 눈 간격 등 얼굴 비율 보정</li>
         </ul>
       </div>
-    </div>
-    <div class="rel">
+    </div><div class="rel">
       <div class="rel-meta">
         <span class="rel-v">v0.3.2</span>
         <span class="rel-d">2026-08-05</span>
@@ -628,14 +296,13 @@ ul{margin:0;padding:0;list-style:none}
           <li>Launchpad 프로젝트 상단에 커버리지 지표 — 전체/현재 화면 범위 필터, 지표별 문제 위치·해결 방법 안내와 해당 화면으로 바로 이동</li>
         </ul>
       </div>
-    </div>
-    <div class="rel">
+    </div><div class="rel">
       <div class="rel-meta">
         <span class="rel-v">v0.3.1</span>
         <span class="rel-d">2026-08-04</span>
       </div>
       <div class="rel-body">
-        <h3>Talk to Spec 대개편</h3>
+        <h3>Talk to Spec 작업 흐름 개선</h3>
         <ul>
           <li>PRD 문서 구조를 5개 섹션으로 개편 — 제품 정의(Overview) · 문제 정의와 솔루션 · 프로젝트 범위(Scope) · 기능 요구사항 요약 · 리스크와 향후 과제. 흐름이 섞이고 중복되던 서술을 정리했고, 기존 문서도 새 구조로 표시됩니다</li>
           <li>AI 검토 개편 — 검토 패널이 PRD·기능명세 어느 단계에서든 열리고, 본문을 가리지 않는 사이드 패널로 나란히 비교하며 봅니다. 지적마다 자동 수정 외에 해당 위치로 이동하는 직접 수정을 지원하고, 수정안은 항목별로 골라 반영합니다</li>
@@ -645,15 +312,14 @@ ul{margin:0;padding:0;list-style:none}
           <li>기획서 저장 안전망 — 저장 실패 시 자동 재시도와 브라우저 보관·복원 안내로 작성 내용이 유실되지 않습니다</li>
         </ul>
       </div>
-    </div>
-    <div class="rel">
+    </div><div class="rel">
       <div class="rel-meta">
         <span class="rel-v">v0.3.0</span>
         <span class="rel-d">2026-08-04</span>
         <span class="rel-tag">v0.3.1 에 포함 배포</span>
       </div>
       <div class="rel-body">
-        <h3>Talk to Design 편집 대개편</h3>
+        <h3>Talk to Design 편집 개선</h3>
         <ul>
           <li>캔버스 직접 조작 — 요소를 다른 영역으로 끌어다 넣기, 8방향 리사이즈, 묶기(⌘G)·복제(⌘D), 자유 줌·스페이스 팬</li>
           <li>텍스트·스타일 편집이 소스 코드에 확실히 반영됩니다 — 편집이 조용히 사라지던 문제 근본 수정, 편집으로 화면이 깨지는 경로 차단</li>
@@ -661,8 +327,7 @@ ul{margin:0;padding:0;list-style:none}
           <li>HanwhaGothic 실물 폰트를 캔버스·미리보기 전 표면에 적용</li>
         </ul>
       </div>
-    </div>
-    <div class="rel">
+    </div><div class="rel">
       <div class="rel-meta">
         <span class="rel-v">v0.2.2</span>
         <span class="rel-d">2026-07-31</span>
@@ -671,8 +336,7 @@ ul{margin:0;padding:0;list-style:none}
         <h3>Talk to Spec 안정화</h3>
         <p>기획서 생성이 오래 걸리는 경우 120초 제한에 걸려 작업이 중단되던 문제를 수정했습니다 — AI 응답 대기 시간을 20분으로 늘렸습니다.</p>
       </div>
-    </div>
-    <div class="rel">
+    </div><div class="rel">
       <div class="rel-meta">
         <span class="rel-v">v0.2.1</span>
         <span class="rel-d">2026-07-30</span>
@@ -686,33 +350,232 @@ ul{margin:0;padding:0;list-style:none}
           <li>macOS 자동 업데이트 지원 — 이후 버전부터 재설치 없이 앱 안에서 업데이트됩니다</li>
         </ul>
       </div>
+    </div></details></section><section class="release-product theme-builder" id="builder"><h2><span class="product-logo"><img src="/images/logos/builder-black.jpg?v=8e5114cf6c38" data-light-src="/images/logos/builder-white.jpg?v=f59b74d02b7e" data-dark-src="/images/logos/builder-black.jpg?v=8e5114cf6c38" alt="NEXTLAB Builder" width="1280" height="434"></span></h2><div class="rel rel-latest">
+      <div class="rel-meta">
+        <span class="rel-v">v1.0.3</span>
+        <span class="rel-d">2026-09-04</span>
+        <span class="rel-tag">현재 버전</span>
+      </div>
+      <div class="rel-body">
+        <h3>디자인시스템 업데이트와<br>모바일 레이아웃 개선</h3>
+        <ul>
+          <li><b>하단 탭 바가 정본으로</b>: 탭에 아이콘 이름만 주면 선택된 탭은 채운 아이콘 + 진한 라벨, 나머지는 라인 아이콘 + 회색 라벨로 자동 전환됩니다. 상단 구분선 대신 위쪽 그림자를 써 본문 위에 얹힌 바로 읽히고, 알림 점 · 숫자 배지 · 떠 있는 알약형 바도 지원합니다 — 글자만 나열되던 탭 바가 사라집니다</li>
+          <li><b>고정 버튼이 마지막 내용을 가리지 않습니다</b>: 화면 아래 고정된 버튼 바가 자기 높이를 스스로 재서 그만큼 여백을 만듭니다. 여백 값을 화면마다 손으로 적던 시절 마지막 안내문이 버튼에 잘리던 문제가 구조적으로 사라집니다</li>
+          <li><b>업무 패턴 화면 27종</b>: 「결과 저장·공유」 패턴이 더해졌습니다</li>
+          <li><b>보안 규칙 공유 정본화</b>: 시크릿 · 위험 명령 차단 규칙과 개발표준 하네스가 Builder · Studio 공용 정본에서 기계 동기화됩니다 — 한쪽만 규칙이 낡는 일이 없어집니다</li>
+        </ul>
+      </div>
+    </div><div class="rel">
+      <div class="rel-meta">
+        <span class="rel-v">v1.0.2</span>
+        <span class="rel-d">2026-08-25</span>
+      </div>
+      <div class="rel-body">
+        <h3>사용 조건 동의 게이트 · 생성 엔진 갱신(Storybook 실행 잠금 해소)</h3>
+        <ul>
+          <li><b>사용 조건(보안 서약) 동의</b>: 최초 사용 시 사용 조건 — 연구·개발 목적 한정(실서비스 데이터 사용 불가) · 연구개발망 단말 한정 설치 · 고객 실데이터/주민등록번호/계좌/인증서/API 키 입력·계정 공유·설치 파일 외부 공유 금지 · 생성 결과는 초안이며 서비스 적용 시 기존 배포 승인 절차 준용 — 에 동의해야 Builder 를 사용할 수 있습니다. 전문은 명령 「사용 조건(보안 서약) 보기」로 언제든 열람할 수 있습니다</li>
+          <li><b>Storybook 실행 잠금 해소</b>: 동봉 생성 엔진(ju-hong-e)이 0.9.0 으로 올라갔습니다. 구버전 엔진이 강제 업데이트 안내와 함께 종료되어 Figma → Code 후 「Storybook 실행」이 <code>/server-start</code> 오류로 막히던 문제가 해소됩니다</li>
+          <li><b>엔진 부팅 안정화</b>: 엔진 터미널 부팅 점검을 간소화하고 명령 주입 대기를 실측(8~10초)에 맞춰 조정해, 미리보기 명령이 부팅 중에 유실되지 않습니다</li>
+        </ul>
+      </div>
+    </div><div class="rel">
+      <div class="rel-meta">
+        <span class="rel-v">v1.0.1</span>
+        <span class="rel-d">2026-08-25</span>
+      </div>
+      <div class="rel-body">
+        <h3>NXLDS 0.2.1 동봉 — 관리자 화면 골격 정본 · 색 매핑 복원</h3>
+        <ul>
+          <li><b>관리자 앱 셸 정본(AdminConsole)</b>: 좌측 사이드바가 2계층 하위 메뉴 · 접힘 레일(88px) · 상단 GNB 변형까지 갖춘 정본으로 개편됐습니다. 전용 사용 가이드 문서가 함께 실려 관리자 화면 생성 시 골격을 추측하지 않습니다</li>
+          <li><b>DS3 색 매핑 복원</b>: 접근성 대비를 이유로 어둡게 조정됐던 시맨틱 색(브랜드 글자 · 보조 회색 위계 · 상태색)이 영업지원DS 실측값으로 돌아왔습니다</li>
+          <li><b>NXLDS Storybook 문서 확장</b>: 공개 Storybook(MCP)에서 AdminConsole 셸 계약과 컴포넌트 가이드를 조회할 수 있습니다</li>
+        </ul>
+      </div>
+    </div><details class="older-updates"><summary>이전 업데이트 11개 보기</summary><div class="rel">
+      <div class="rel-meta">
+        <span class="rel-v">v1.0.0</span>
+        <span class="rel-d">2026-08-20</span>
+      </div>
+      <div class="rel-body">
+        <h3>1.0 — 새 프로젝트 구성 위저드 · 4개 디자인시스템 외부망 설치 · DS 3.0 차세대(@nxl-dsp) 전환</h3>
+        <ul>
+          <li><b>새 프로젝트 구성</b>: 채팅 첫 화면의 「새 프로젝트 구성」(또는 <code>/init</code>)에서 질문 3개(무엇을 · 누가 쓰나 · 디자인시스템)에 답하면 — 프로젝트 생성부터 개발표준 골격, 디자인시스템 설치·테마 배선, 폰트, 브랜드 스타터 화면까지 한 번에 준비됩니다. 4개 킷(DS 2.0 · DS 3.0 · MUI · NXLDS) 전부 <code>pnpm dev</code> 즉시 동작을 확인했습니다</li>
+          <li><b>외부망 설치 완비</b>: 사내 레지스트리 없이도 DS 2.0(동봉 패키지), DS 3.0, MUI, NXLDS 를 프로젝트에 설치합니다. 채팅에 "DS2 세팅해줘"라고 하면 직접 수행합니다</li>
+          <li><b>DS 3.0 차세대(@nxl-dsp)</b>: 공식 dsp 레지스트리의 최신 세트를 동봉하고, 화면 생성 규칙도 차세대 기준으로 전환했습니다(기존 sales-frontend 프로젝트는 기존 규칙 유지). 명령 「사내 DS 3.0(@nxl-dsp) 동봉 세트 설치」로 프로젝트에 공급합니다</li>
+          <li>MUI 프로젝트에는 사내 관리자(nlm) 정본 테마(팔레트·타이포·컴포넌트 overrides 전부)가 <code>src/theme/</code> 으로 함께 들어갑니다</li>
+          <li>알려진 제약: 새 프로젝트 구성의 Windows 실기기 검증은 진행 중입니다 — 문제가 보이면 "NEXTLAB 프로젝트 구성" 출력 채널 로그와 함께 제보해 주세요</li>
+        </ul>
+      </div>
+    </div><div class="rel">
+      <div class="rel-meta">
+        <span class="rel-v">v0.4.13</span>
+        <span class="rel-d">2026-08-19</span>
+      </div>
+      <div class="rel-body">
+        <h3>Studio→Code 인터랙션 완결성 · NXLDS 브랜드 아이콘 정본 · DS 3.0 컴포지션 확장</h3>
+        <ul>
+          <li>Studio 에서 넘어온 화면을 코드로 재생성할 때 「다음」의 목적지 라우트가 비고 버튼이 장식으로 남던 문제를 고쳤습니다 — 화면 단위 전이·인터랙션 인벤토리·화면 간 상태·모킹 리모컨 계약이 함께 실리고, 생성 뒤 배선을 감사해 경고로 알립니다</li>
+          <li>카카오 · 네이버 · PASS · PAYCO · 토스 · 페이스북 · 은행 로고는 디자인시스템 공식 아이콘(<code>@nextlab/ds/icons/ds2</code>)을 쓰도록 안내가 들어갔고, 아이콘 진입점의 공개 이름 목록이 실제 export 와 일치하도록 정정됐습니다</li>
+          <li>DS 3.0 동봉 카탈로그가 실서비스 캡처 기반 패턴과 공식 Components 층으로 재편됐습니다</li>
+        </ul>
+      </div>
+    </div><div class="rel">
+      <div class="rel-meta">
+        <span class="rel-v">v0.4.12</span>
+        <span class="rel-d">2026-08-18</span>
+      </div>
+      <div class="rel-body">
+        <h3>NXLDS 0.2 동봉 · 채팅 패널 리디자인</h3>
+        <ul>
+          <li>채팅 패널을 새 디자인으로 개편했습니다(다크/라이트). 상단 상태 카드(Provider 연결·코드리뷰·커밋), 라벨 달린 컴포저, 입력 카드와 원형 전송·중지 버튼, 웰컴 화면과 브랜드 아이콘, 테마를 따르는 헤더</li>
+          <li>모델 선택을 Fable 5(최신) · Opus 5 · Sonnet 5 · Haiku 4.5 로 갱신했습니다. 예전 별칭 선택은 같은 등급의 최신 세대로 자동 이관되며, AI 설정은 기본 숨김입니다</li>
+          <li>환경 셋업에서 Figma 연결 제안이 사라지던 조건을 고쳤습니다</li>
+          <li>디자인시스템 NXLDS 0.2 를 동봉합니다 — 패키지 구조가 재편됐지만 생성 코드의 import 는 그대로이고, 동봉 tgz 한 파일로 설치되며 Tailwind 설정 한 줄(<code>@nextlab/ds/tokens.css</code>)로 끝납니다. 표·목록 밀도(density) 축이 새로 생겼습니다</li>
+        </ul>
+      </div>
+    </div><div class="rel">
+      <div class="rel-meta">
+        <span class="rel-v">v0.4.6 · v0.4.7</span>
+        <span class="rel-d">2026-08-15</span>
+      </div>
+      <div class="rel-body">
+        <h3>환경 셋업 — Figma 연결 제안 안정화</h3>
+        <ul>
+          <li>환경 셋업에서 일시적 상태 판정 실패로 Figma 연결 제안이 사라지던 문제를 수정했습니다(0.4.7)</li>
+        </ul>
+      </div>
+    </div><div class="rel">
+      <div class="rel-meta">
+        <span class="rel-v">v0.4.2</span>
+        <span class="rel-d">2026-08-14</span>
+      </div>
+      <div class="rel-body">
+        <h3>모바일 화면 여백 정본화와 디자인 문서 정확도</h3>
+        <ul>
+          <li>만들어진 모바일 화면의 글자와 입력창이 화면 가장자리에 붙던 문제를 근본 수정했습니다. 좌우 여백을 화면마다 따로 지정하지 않고 디자인시스템 골격이 기본으로 갖도록 바꿨습니다</li>
+          <li>여백이 빠질 수 있는 두 경우를 생성 중에 자동으로 잡아 고칩니다</li>
+          <li>디자인시스템 컴포넌트의 속성·기본값 문서가 비어 있던 문제를 해결해, 화면 생성이 실제 컴포넌트 사양을 보고 조립합니다</li>
+        </ul>
+      </div>
+    </div><div class="rel">
+      <div class="rel-meta">
+        <span class="rel-v">v0.4.1</span>
+        <span class="rel-d">2026-08-13</span>
+      </div>
+      <div class="rel-body">
+        <h3>Launchpad 품질 계약과 NXLDS 소비 안정화</h3>
+        <ul>
+          <li>인증수단별 화면처럼 요구사항에 명시된 사용자 화면을 빠뜨리지 않고, 세션 관리 같은 시스템 동작을 독립 화면으로 오인하지 않도록 흐름 계약을 강화했습니다</li>
+          <li>개인정보 마스킹·반응형 웹 같은 공통 요구사항을 관련 화면과 연결하고, 누락된 화면·메모·UI 기능을 품질 점검 전에 보완합니다</li>
+          <li>NXLDS 오프라인 카탈로그를 81개 공개 export와 33개 패턴 화면으로 확장하고 Studio와 같은 정본을 사용합니다</li>
+        </ul>
+      </div>
+    </div><div class="rel">
+      <div class="rel-meta">
+        <span class="rel-v">v0.4.0</span>
+        <span class="rel-d">2026-08-12</span>
+      </div>
+      <div class="rel-body">
+        <h3>NXLDS 정식 UI Kit</h3>
+        <ul>
+          <li>새 디자인시스템 NXLDS가 네 번째 UI Kit으로 들어왔습니다 — Figma → Code와 Studio 핸드오프에서 DS 2.0 · DS 3.0 · MUI와 같은 방식으로 선택해 쓸 수 있습니다</li>
+          <li>컴포넌트 177종 · 토큰 312개 · 패턴 화면 30종 카탈로그를 확장에 동봉해, 존재하지 않는 컴포넌트를 지어내는 문제를 원천 차단합니다</li>
+          <li>Studio에서 만든 NXLDS 화면을 프로젝트로 가져오는 Registry 설치기가 추가됐습니다 — 화면 소스와 디자인시스템 코어를 함께 복사하고, 프로젝트에서 이미 수정한 파일은 덮어쓰지 않습니다</li>
+          <li>생성 직후 확인할 수 있는 전용 Storybook 샌드박스가 함께 설치됩니다 — customer · fp · backoffice 대상, 글자 확대, 라이트/다크를 툴바에서 전환하며 검증합니다</li>
+        </ul>
+      </div>
+    </div><div class="rel">
+      <div class="rel-meta">
+        <span class="rel-v">v0.3.12</span>
+        <span class="rel-d">2026-08-05</span>
+              </div>
+      <div class="rel-body">
+        <h3>Windows 터미널 호환 수정 — 계정 연동·Storybook 미리보기</h3>
+        <ul>
+          <li>Windows 에서 claude 계정 연동 터미널이 "'&amp;&amp;' 토큰은 올바른 문 구분 기호가 아닙니다" 오류로 멈추던 문제를 수정했습니다 (기본 PowerShell 5.1 환경)</li>
+          <li>Storybook 미리보기가 "파일 이름, 디렉터리 이름 또는 볼륨 레이블 구분이 잘못되었습니다" 오류로 뜨지 않던 문제를 수정했습니다 (기본 cmd 환경)</li>
+          <li>터미널 명령을 어떤 셸(PowerShell 5.1/7 · cmd · bash)에서도 동작하는 방식으로 전면 교체 — 같은 계열 오류의 재발을 차단했습니다</li>
+        </ul>
+      </div>
+    </div><div class="rel">
+      <div class="rel-meta">
+        <span class="rel-v">v0.3.11</span>
+        <span class="rel-d">2026-08-04</span>
+      </div>
+      <div class="rel-body">
+        <h3>Windows 첫 설치 안정화 — 잔여 함정 5종 보강</h3>
+        <ul>
+          <li>셋업 점검에 claude 계정 로그인 확인을 추가 — 미로그인으로 실행만 조용히 실패하던 첫 설치 흔한 원인을 잡고, 미로그인 시 로그인 터미널을 바로 열어줍니다</li>
+          <li>Figma 연동 등록이 낡은 주소로 남아 '이미 등록됨'으로 위장하던 경우를 감지해 자동 재등록합니다</li>
+          <li>사용자 폴더 경로에 공백이 있는 환경(OneDrive 프로필 등)에서 실행이 실패하던 문제를 수정했습니다</li>
+          <li>백신 검사로 첫 실행이 지연될 때 간헐적으로 '미설치'로 오판하던 것을 방지했습니다 (점검 대기 상향)</li>
+          <li>claude 실행 경로 설정이 잘못 남아 있는 경우 원인을 명시해 안내합니다</li>
+        </ul>
+      </div>
+    </div><div class="rel">
+      <div class="rel-meta">
+        <span class="rel-v">v0.3.10</span>
+        <span class="rel-d">2026-08-04</span>
+      </div>
+      <div class="rel-body">
+        <h3>Windows 안정화 — claude CLI 인식 문제 근본 수정</h3>
+        <ul>
+          <li>Windows 에서 claude CLI 가 설치돼 있는데도 계속 '미설치' 로 안내되고, Figma → Code 연동이 멈추던 문제를 근본 수정했습니다</li>
+          <li>설치 직후나 네이티브 설치본처럼 PATH 에 아직 안 잡힌 경우도 주요 설치 경로를 보강해 자동으로 찾습니다</li>
+          <li>세션 도중 CLI 설치를 마치면 에디터 재시작 없이 바로 인식됩니다</li>
+          <li>아주 긴 프롬프트가 Windows 명령줄 길이 제한에 걸리던 경로를 차단했습니다</li>
+        </ul>
+      </div>
+    </div><div class="rel">
+      <div class="rel-meta">
+        <span class="rel-v">v0.3.9</span>
+        <span class="rel-d">2026-07-29</span>
+      </div>
+      <div class="rel-body">
+        <h3>전사 배포 시작</h3>
+        <ul>
+          <li>배포 채널(이 사이트)을 통한 설치 파일·사용자 메뉴얼 제공 시작</li>
+          <li>사용량 집계에 제품 구분을 추가해 Builder · Studio 사용량을 분리 집계</li>
+        </ul>
+      </div>
+    </div></details></section></div></div></main><footer class="site-footer" id="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-intro"><a class="wordmark" href="/" aria-label="NEXTLAB 홈"><svg class="brand-logo" width="122" height="21" viewBox="0 0 243 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<path d="M13.097 39.3061H0L10.4577 10.0386H23.5504L13.097 39.3061Z" fill="#EA5504"></path>
+<mask id="nxlm-footer" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="20" y="0" width="29" height="40">
+<path d="M48.2758 10.0383L41.0707 0.689453L27.7879 10.0383H31.425L20.9241 39.3101L34.0125 39.3058L44.5091 10.0383H48.2758Z" fill="white"></path>
+</mask>
+<g mask="url(#nxlm-footer)">
+<path d="M51.8438 10.0245H17.4598L17.2697 8.16943H51.6537L51.8438 10.0245Z" fill="#EA5504"></path>
+<path d="M51.8438 13.757H17.4598L17.2697 11.9019H51.6537L51.8438 13.757Z" fill="#EA5504"></path>
+<path d="M51.8438 17.4885H17.4598L17.2697 15.6377H51.6537L51.8438 17.4885Z" fill="#EA5504"></path>
+<path d="M51.8438 21.2247H17.4598L17.2697 19.3696H51.6537L51.8438 21.2247Z" fill="#EA5504"></path>
+<path d="M51.8438 24.9562H17.4598L17.2697 23.1011H51.6537L51.8438 24.9562Z" fill="#EA5504"></path>
+<path d="M51.8438 28.6876H17.4598L17.2697 26.8325H51.6537L51.8438 28.6876Z" fill="#EA5504"></path>
+<path d="M51.8438 32.424H17.4598L17.2697 30.5688H51.6537L51.8438 32.424Z" fill="#EA5504"></path>
+<path d="M51.8438 36.1564H17.4598L17.2697 34.3013H51.6537L51.8438 36.1564Z" fill="#EA5504"></path>
+<path d="M51.8438 39.8878H17.4598L17.2697 38.0327H51.6537L51.8438 39.8878Z" fill="#EA5504"></path>
+<path d="M51.8438 6.2843H17.4598L17.2697 4.4292H51.6537L51.8438 6.2843Z" fill="#EA5504"></path>
+<path d="M51.8438 2.53976H17.4598L17.2697 0.688965H51.6537L51.8438 2.53976Z" fill="#EA5504"></path>
+</g>
+<path d="M20.9198 39.3061H34.0082L23.5505 10.0386H10.4621L20.9198 39.3061Z" fill="#EE7800"></path>
+<path d="M80.2996 39.3108H73.3324L64.5316 23.7936V39.3108H57.9311V13.4487H64.8983L73.699 28.966V13.4487H80.2996V39.3108Z" fill="currentColor"></path>
+<path d="M147.362 39.3108H140.762V18.6211H133.061V13.4487H155.063V18.6211H147.362V39.3108Z" fill="currentColor"></path>
+<path d="M174.37 34.1384H187.754V39.3108H167.769V13.4487H174.37V34.1384Z" fill="currentColor"></path>
+<path d="M197.838 39.3108H190.688L200.405 13.4487H207.739L217.457 39.3108H210.306L208.656 34.6926H199.489L197.838 39.3108ZM201.139 29.8896H207.006L204.072 21.2074L201.139 29.8896Z" fill="currentColor"></path>
+<path d="M220.023 13.4487H234.691C237.087 13.4487 238.847 13.9968 239.972 15.0928C241.096 16.1889 241.659 17.8576 241.659 20.099C241.659 21.5768 241.341 22.7775 240.705 23.7012C240.07 24.6248 239.287 25.2714 238.358 25.6408C240.338 26.1827 241.683 27.5128 242.392 29.631C242.636 30.3945 242.759 31.2812 242.759 32.2911C242.759 34.7049 242.196 36.4783 241.072 37.6113C239.947 38.7443 238.187 39.3108 235.791 39.3108H220.023V13.4487ZM235.058 20.8379C235.058 19.3601 234.325 18.6211 232.858 18.6211H226.624V23.7936H232.858C234.325 23.7936 235.058 23.0546 235.058 21.5768V20.8379ZM236.158 31.1827C236.158 29.7049 235.425 28.966 233.958 28.966H226.624V34.1384H233.958C235.425 34.1384 236.158 33.3995 236.158 31.9216V31.1827Z" fill="currentColor"></path>
+<path d="M90.5671 28.7812V23.6088V23.1778V18.6211H104.318V13.4487H83.9666V39.3108H104.318V34.1384H90.5671V31.1642V28.7812Z" fill="currentColor"></path>
+<path d="M114.017 13.4487H106.72L113.198 23.6088H90.567V28.7812H113.235L106.72 39.0029H114.017L122.164 26.2258L114.017 13.4487Z" fill="#EE7800"></path>
+<path d="M123.442 24.2307L130.317 13.4487H123.02L119.793 18.5103L123.442 24.2307Z" fill="currentColor"></path>
+<path d="M123.442 28.2275L119.793 33.948L123.02 39.0034H130.317L123.442 28.2275Z" fill="currentColor"></path>
+</svg></a><p>기획과 개발을 잇는<br>우리 팀의 작업 도구.</p><span>Builder &amp; Studio</span></div>
+      <nav class="footer-directory" aria-label="하단 메뉴">
+        <div><h2>제품</h2><a href="/#builder">NEXTLAB Builder</a><a href="/#studio">NEXTLAB Studio</a><a href="/#tools">Studio 개별 도구</a></div>
+        <div><h2>시작하기</h2><a href="/download.html">다운로드</a><a href="/guide.html">시작 가이드</a><a href="/updates.html">업데이트 내역</a></div>
+        <div><h2>사용 안내</h2><a href="/manual.html">Builder 가이드</a><a href="/studio-manual.html">Studio 가이드</a><a href="/download.html#usage">이용 안내</a></div>
+      </nav>
     </div>
+    <div class="footer-bottom"><p>© 2026 NEXTLAB</p><p>기획부터 코드까지.</p><span>사내 전용</span></div>
   </div>
-</section>
-
-<footer class="foot">
-  <div class="wrap foot-bar">
-    <span>NEXTLAB · Builder v<span data-ver>0.3.12</span> · Studio v<span data-studio-ver>0.3.2</span></span>
-    <span>사내 전용 — 외부 공유 금지 · 2026</span>
-  </div>
-</footer>
-
-<script>
-/* 현재 버전 표기를 배포 메타에서 채운다 — 릴리스마다 이 파일을 고치지 않도록.
-   못 읽으면(로컬에서 그냥 연 경우) 정적 텍스트를 그대로 쓴다. */
-fetch('release-manifest.json', { cache: 'no-store' })
-  .then(function(r){ if (!r.ok) throw 0; return r.json(); })
-  .then(function(m){
-    var latest = m.releases && m.releases[0];
-    if (!latest) return;
-    document.querySelectorAll('[data-ver]').forEach(function(el){ el.textContent = latest.version; });
-  }).catch(function(){});
-fetch('studio/version.json', { cache: 'no-store' })
-  .then(function(r){ if (!r.ok) throw 0; return r.json(); })
-  .then(function(m){
-    if (!m.version) return;
-    document.querySelectorAll('[data-studio-ver]').forEach(function(el){ el.textContent = m.version; });
-  }).catch(function(){});
-</script>
-</body>
-</html>
+</footer></body></html>
