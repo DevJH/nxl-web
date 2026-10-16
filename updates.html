@@ -50,9 +50,40 @@
 <path d="M123.442 28.2275L119.793 33.948L123.02 39.0034H130.317L123.442 28.2275Z" fill="currentColor"></path>
 </svg></a><nav class="site-nav" id="site-nav" aria-label="주요 메뉴"><a href="/#builder">Builder</a><a href="/#studio">Studio</a><a href="/guide.html">사용 가이드</a><a href="/updates.html" aria-current="page">업데이트</a></nav><div class="header-actions"><button class="theme-toggle" type="button" aria-label="다크 모드로 전환" title="화면 테마 변경"><svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 14A8.7 8.7 0 0 1 10 3.5 8.7 8.7 0 1 0 20.5 14Z"></path></svg><svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"></path></svg></button><a class="button button-dark button-small header-download" href="/download.html">다운로드 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5"></path></svg></a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="site-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button></div></div></header><main id="main" class="container"><header class="page-hero"><p class="page-crumb"><a href="/">홈</a><span aria-hidden="true">/</span>업데이트</p><div class="page-hero-row"><h1>NEXTLAB의<br><span>새로운 변화.</span></h1><div class="page-hero-aside"><p>추가된 기능과 더 편해진 작업 방식.<br>제품별 업데이트를 확인하세요.</p><a class="text-link" href="/download.html">최신 버전 다운로드 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></div></div></header><div class="updates-layout"><aside class="release-nav"><p class="page-eyebrow">제품별 업데이트</p><nav aria-label="제품별 업데이트"><a class="theme-studio" href="#studio"><strong>NEXTLAB Studio</strong><span data-version="studio">버전 확인 중</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a><a class="theme-builder" href="#builder"><strong>NEXTLAB Builder</strong><span data-version="builder">버전 확인 중</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a></nav><p>최신 변경 사항부터<br>지난 버전의 기록까지.</p></aside><div class="release-entries"><section class="release-product theme-studio" id="studio"><h2><span class="product-logo"><img src="/images/logos/studio-black.jpg?v=e5464246146e" data-light-src="/images/logos/studio-white.jpg?v=ef3bbb02406c" data-dark-src="/images/logos/studio-black.jpg?v=e5464246146e" alt="NEXTLAB Studio" width="1280" height="434"></span></h2><div class="rel rel-latest">
       <div class="rel-meta">
+        <span class="rel-v">v0.7.3</span>
+        <span class="rel-d">2026-10-19</span>
+        <span class="rel-tag">현재 버전</span>
+      </div>
+      <div class="rel-body">
+        <h3>User Flow 대화로 화면까지 그리고,<br>탭을 옮겨도 작업이 이어집니다</h3>
+        <ul>
+          <li><b>User Flow 대화로 화면을 그립니다</b>: 왼쪽 AI 대화에 「이 화면 그려줘」라고 하면 디자인 기준(디자인 시스템, 브랜드, 사용자, 화면 크기)을 먼저 확인하고 화면을 그립니다. 화면을 나누거나 역할을 옮기면 이미 그린 디자인도 옮겨 간 부분만 함께 고칩니다. 고치는 동안 진행 과정을 보여 주고, 대화 내용은 복사할 수 있습니다.</li>
+          <li><b>탭을 옮겨도 작업이 이어집니다</b>: 화면 정의서 준비, 화면 디자인, AI 요청이 다른 탭에 가 있는 동안에도 계속 진행되고 결과도 남습니다. 진행 중인 작업은 알림 벨에서 보고 멈출 수 있고, 알림의 「보기」는 같은 프로젝트의 해당 탭으로 데려갑니다. 알림은 오른쪽 위에 떠 입력창을 가리지 않습니다.</li>
+          <li><b>연결이 잠깐 끊겨도 실패하지 않습니다</b>: Studio 서버와 연결이 잠깐 끊기면 기다렸다가 다시 보내, 화면 정의서 준비가 「Failed to fetch」로 끝나던 문제를 고쳤습니다.</li>
+          <li><b>디자인이 멈추거나 실패해도 화면에 남습니다</b>: 화면 한 장이 응답 없이 멈추면 일정 시간 뒤 실패로 정리해 여러 화면 생성이 끝까지 진행됩니다. 그리지 못한 화면은 카드에 「생성 실패」와 사유, 「다시 그리기」로 보이고, 디자인 탭 머리와 홈 카드도 실패한 화면 수를 알려 줍니다.</li>
+          <li><b>여러 화면 생성을 확인하고, 멈추고, 이어서 그립니다</b>: 3장 이상을 한 번에 그리거나 이미 그린 화면을 다시 그릴 때는 화면 가운데 확인 창에서 그릴 화면 목록과 예상 시간, 사용량을 먼저 보여 줍니다. 생성 도중 「일괄 중지」로 멈출 수 있고, 멈춘 화면은 남은 화면으로 남아 「이어서 그리기」로 계속합니다.</li>
+          <li><b>추론 강도를 높여도 화면이 그려집니다</b>: 추론 강도를 높게 고르면 시간·턴 한도에 걸려 화면 없이 끝나던 문제를 고쳤습니다.</li>
+          <li><b>디자인 화면이 빨리 열립니다</b>: 화면이 실제로 쓰는 디자인 시스템 모듈만 불러오고 목록 썸네일은 보이는 것만 받아, Talk to Design 첫 화면을 기다리는 시간이 줄었습니다. 모바일 서비스의 디자인 목록 썸네일은 모바일 배치로 보입니다.</li>
+          <li><b>디자인 패널에서 더 많이 옮기고 고칩니다</b>: 요소 하나만 감싼 빈 묶음은 레이어 한 줄로 접고, 화면 안 부품과 목록 안 요소도 옮기거나 지울 수 있습니다. 옮길 수 없는 요소는 이유를 함께 보여 줍니다. 「요소 추가」는 기본 요소와 그 화면이 쓰는 디자인 시스템 부품을 한 목록으로 보여 줍니다.</li>
+          <li><b>Mono 금융·데이터 화면</b>: 자산, 시세, 거래 내역처럼 사진이 없는 화면도 이니셜 원, 차트, 금액 위계를 갖춘 실제 앱 수준으로 그립니다. 하단 탭 아이콘이 서로 겹치지 않고, 분류 이름과 카드 제목이 잘리지 않습니다.</li>
+          <li><b>DS 3.0·MUI·한화 운영 화면</b>: 모바일로 만든 DS 3.0 화면을 열면 PC 폭으로 늘어나 보이던 문제를 고쳐, 화면이 쓴 Layout 그대로 보고 고칩니다. DS 3.0에서 Layout, Select 같은 부품 정보가 빠지던 문제와 MUI 보조 글자의 낮은 대비를 고쳤고, 표 열이 잘리거나 가로로 넘치면 생성 중에 바로 고칩니다. 한화 완료 화면은 접수 뒤 처리 단계를 결과 바로 아래 한 줄 흐름으로 그립니다.</li>
+          <li><b>새로 정돈한 Studio 화면</b>: 설정 창, 알림 센터, 스킬, 홈을 같은 모양으로 다시 정리했습니다. 스킬은 표에서 고르고 그 자리에서 고칩니다. 앱 창은 모니터의 작업 영역 크기로 열립니다.</li>
+          <li><b>요구사항 문서 가져오기</b>: 우선순위를 「필수」로 적었거나 연결 조건이 긴 문서가 분석 전체에서 실패하던 문제를 고쳤습니다. 정리에 실패해도 문서 원문은 프로젝트에 남고, 프로젝트 이름은 문서 제목으로 붙으며, 문서를 첨부하면 바로 분석을 시작합니다.</li>
+          <li><b>직접 고친 글이 사라지지 않습니다</b>: AI가 결정을 문서에 반영하는 동안 고친 글과, 같은 프로젝트를 두 창에서 열었을 때의 수정이 서로를 덮지 않습니다.</li>
+          <li><b>고친 값을 AI가 되돌리지 않습니다</b>: AI 검토·수정안·기능 다시 도출이 직접 고친 값을 따르고, 그 값을 바꾸는 수정안은 기본으로 고르지 않습니다. 기한·금액 같은 값을 고치면 옛 값이 남은 곳을 찾아 「같은 규칙 N곳 바꾸기」로 함께 바꿀 수 있습니다.</li>
+          <li><b>다시 도출은 바뀐 곳만</b>: 「PRD에서 다시 도출」이 기능 목록 전체를 새로 짜지 않고 PRD에서 바뀐 줄에 관련된 기능만 고치자고 제안합니다. 결정을 문서에 반영할 때도 완료 조건의 「규칙:」·「예:」 줄을 지키고 바뀐 줄만 고칩니다.</li>
+          <li><b>「재생성 필요」 표시가 정확해졌습니다</b>: 다른 저장 때문에 표시가 사라지거나, 고쳤다가 되돌린 흐름 때문에 표시가 남던 문제를 고쳤습니다. 이미 직접 반영했다면 「반영했어요」로 닫습니다.</li>
+          <li><b>User Flow를 Figma 기획서처럼</b>: 왼쪽 AI 대화 패널에서 흐름을 고치고(문서 첨부 가능), 오른쪽 탭(속성·설명·상태·코멘트)에서 화면을 다룹니다. 화면 아래 설명 판과 코멘트 핀이 생겼고, 화면 속 요소를 골라 눌렀을 때 갈 화면을 정하거나 상태별 모습을 미리 봅니다. 화면 이름은 설명 판 제목 옆 연필이나 화면 위 제목을 두 번 눌러 바로 바꾸고, 화면 크기를 바꾸거나 요소를 지워도 화면 정의 박스가 가리킨 요소를 따라갑니다.</li>
+          <li><b>프로토타입</b>: 가로로 넘기는 날짜 줄처럼 보이는 영역 밖의 대상도 「위치 보기」가 데려옵니다. 시나리오를 만드는 동안 지금 단계와 확인한 시나리오 수를 보여 주고, 시나리오 확인을 동시에 진행해 더 빨라졌습니다. 프로토타입 체험은 시나리오별 진행 기록을 남기고, 기기 크기를 바꿔 볼 수 있습니다.</li>
+          <li><b>개발로 넘어갈 때 타입 오류가 줄었습니다</b>: 디자인 단계에서 개발 앱과 같은 타입 규칙으로 검사해 미리 고칩니다. 개발 대화의 응답은 첫 문장부터 한국어로, 고쳐 달라는 오류만 고칩니다.</li>
+          <li><b>화면 상태와 검사</b>: 「진행 중 예약 있음」·「혜택 없음」 같은 업무 상태를 로딩·빈 상태로 잘못 묶던 문제를 고쳤고, 화면에 보이지 않는 글이나 「본인확인 중이에요」 같은 진행 안내를 결함으로 잡던 검사 오탐을 줄였습니다.</li>
+          <li><b>문구와 산출물</b>: 결정 패널의 내부 기호와 깨진 결정 제목, 디자인 카드의 내부 용어를 걷어 냈습니다. 내려받는 파일은 잘린 문장 대신 프로젝트 이름으로 붙고, 기획서에는 아직 남은 검토 의견만 싣습니다.</li>
+        </ul>
+      </div>
+    </div><div class="rel">
+      <div class="rel-meta">
         <span class="rel-v">v0.7.1</span>
         <span class="rel-d">2026-10-15</span>
-        <span class="rel-tag">현재 버전</span>
       </div>
       <div class="rel-body">
         <h3>오류·예외 화면까지 챙기는 디자인과<br>새로 정돈한 작업 화면</h3>
