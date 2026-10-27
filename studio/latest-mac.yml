@@ -1,17 +1,17 @@
-version: 0.7.41
+version: 0.7.42
 files:
-  - url: https://github.com/DevJH/nxl-web/releases/download/studio-v0.7.41/NextLab.Studio-0.7.41-arm64-mac.zip
-    sha512: 39AwwPUqQRdV7y2aSC4kg2RG/5Yd5fzqogfyYFun+QzEo0O+gTLsC2vXa56RT2McOhJp4XpRc81YzZBkchljRg==
-    size: 310269532
-  - url: https://github.com/DevJH/nxl-web/releases/download/studio-v0.7.41/NextLab.Studio-0.7.41-mac.zip
-    sha512: ZP7WCAXJtX4/fqW8AvX7dhzEdj/x+HRh2j7r1oJ7pipucyxPd5SzETY6pY4mJc3JEP02wKKy5SMGszzU33gfKA==
-    size: 319571919
-  - url: https://github.com/DevJH/nxl-web/releases/download/studio-v0.7.41/NextLab.Studio-0.7.41-arm64.dmg
-    sha512: h73+5I1RwRKDLLdEYGYJ98wq5ez6NMOEVVqL+i455eE5755S9cyAZGwyr2WzMpBs7hPjMiUTxYA+wktVBNlEBg==
-    size: 317970429
-  - url: https://github.com/DevJH/nxl-web/releases/download/studio-v0.7.41/NextLab.Studio-0.7.41.dmg
-    sha512: ZIWMi2TNDea4LNCWEE3Ww9md9taVfsK5mgu+POPxHKKcwXkKsN5NWntN9jj3viS3NWwX3xU+kLPepr00otTCQw==
-    size: 327339421
-path: https://github.com/DevJH/nxl-web/releases/download/studio-v0.7.41/NextLab.Studio-0.7.41-arm64-mac.zip
-sha512: 39AwwPUqQRdV7y2aSC4kg2RG/5Yd5fzqogfyYFun+QzEo0O+gTLsC2vXa56RT2McOhJp4XpRc81YzZBkchljRg==
-releaseDate: '2026-10-27T07:27:20.474Z'
+  - url: https://github.com/DevJH/nxl-web/releases/download/studio-v0.7.42/NextLab.Studio-0.7.42-arm64-mac.zip
+    sha512: DjQ2uGWinYDjTvsSM5bDvpHW1WVxhkgUK1iMgJsyD3vDwTInFmXefsi5l9calosPIvY4KwgPiKFP2FCIDINXnA==
+    size: 430322222
+  - url: https://github.com/DevJH/nxl-web/releases/download/studio-v0.7.42/NextLab.Studio-0.7.42-mac.zip
+    sha512: Jn8hNZnHQqO0FnrcKHdbeGEx/EudZElTcssrsWgcooWzCDd9kW0Kotb9KiClR4uT1tY9inWe+93TpZybuSFuXw==
+    size: 453400753
+  - url: https://github.com/DevJH/nxl-web/releases/download/studio-v0.7.42/NextLab.Studio-0.7.42-arm64.dmg
+    sha512: uxgvL5nkEekj/lPxmXljREpHzD4pSuSzV1aeD+7ItGnOplZWSUgzZGtiHAgA43Vd21/5Xa+ZQ3n77z0VUU0MRg==
+    size: 441333950
+  - url: https://github.com/DevJH/nxl-web/releases/download/studio-v0.7.42/NextLab.Studio-0.7.42.dmg
+    sha512: 1FOvI1NpjpAV/xagrNZTI2RhL177wMMHQV8Hf+V3E5ZY1KRhKQQnNVAXL3ajwm8/D6bKnLDZyhN1cRLinsFCtw==
+    size: 464888273
+path: https://github.com/DevJH/nxl-web/releases/download/studio-v0.7.42/NextLab.Studio-0.7.42-arm64-mac.zip
+sha512: DjQ2uGWinYDjTvsSM5bDvpHW1WVxhkgUK1iMgJsyD3vDwTInFmXefsi5l9calosPIvY4KwgPiKFP2FCIDINXnA==
+releaseDate: '2026-10-27T14:38:21.093Z'
