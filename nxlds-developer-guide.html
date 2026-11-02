@@ -1,0 +1,1319 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>NXL-DS Hanwha 0.9 개발자 가이드</title>
+<meta name="description" content="NXL-DS Hanwha 0.9 개발자 가이드 — 설치, 스타일 아키텍처, 디자인 토큰, 컴포넌트 API, 접근성, AI 도구 연동, 문제 해결.">
+<style>
+:root {
+  --bg: #ffffff;
+  --surface: #f6f7f8;
+  --ink: #1b1d20;
+  --body: #3a3d42;
+  --muted: #74787f;
+  --line: #e6e8eb;
+  --line-strong: #cdd0d5;
+  --accent: #b34700;
+  --inline-code-bg: #f1f2f4;
+  --code-bg: #f7f8fa;
+  --code-head: #eff1f4;
+  --code-ink: #1f2328;
+  --code-muted: #6e7681;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #131416; --surface: #1b1d20; --ink: #eeeff1; --body: #c9ccd1; --muted: #9a9ea5;
+    --line: #2a2d32; --line-strong: #41454b; --accent: #ff9a5c; --inline-code-bg: #23262a;
+    --code-bg: #17191c; --code-head: #1e2024; --code-ink: #e4e6ea; --code-muted: #8b9098;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #131416; --surface: #1b1d20; --ink: #eeeff1; --body: #c9ccd1; --muted: #9a9ea5;
+  --line: #2a2d32; --line-strong: #41454b; --accent: #ff9a5c; --inline-code-bg: #23262a;
+  --code-bg: #17191c; --code-head: #1e2024; --code-ink: #e4e6ea; --code-muted: #8b9098;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--body);
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", Pretendard, "Malgun Gothic", "Noto Sans KR", sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, "D2Coding", monospace; }
+
+/* 머리 */
+.top { border-bottom: 1px solid var(--line); }
+.top-inner { max-width: 1200px; margin: 0 auto; padding: 56px 32px 40px; }
+.top .product { margin: 0 0 10px; font-size: 14px; font-weight: 600; color: var(--muted); }
+.top h1 { margin: 0; color: var(--ink); font-size: 36px; line-height: 1.3; font-weight: 700; letter-spacing: -0.015em; }
+.top .meta { margin: 12px 0 0; font-size: 15px; color: var(--muted); }
+
+/* 틀 */
+.layout { max-width: 1200px; margin: 0 auto; padding: 0 32px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 72px; }
+.content { min-width: 0; max-width: 760px; padding: 40px 0 120px; }
+
+/* 목차 — 지금 읽는 장의 소절만 펼친다 */
+.toc { position: sticky; top: 0; align-self: start; max-height: 100vh; overflow-y: auto; padding: 40px 0 48px; font-size: 14px; line-height: 1.5; }
+.toc-title { margin: 0 0 14px; font-size: 13px; font-weight: 600; color: var(--muted); }
+.toc ol { list-style: none; margin: 0; padding: 0; }
+.toc-l1 > li > a { display: block; padding: 6px 0; color: var(--body); font-weight: 600; text-decoration: none; }
+.toc .toc-l2 { display: none; padding: 2px 0 8px 12px; }
+.toc li.open > .toc-l2 { display: block; }
+.toc-l2 a { display: block; padding: 4px 0; color: var(--muted); font-size: 13.5px; text-decoration: none; }
+.toc a:hover { color: var(--ink); }
+.toc a[aria-current="true"] { color: var(--accent); }
+.toc-mobile { display: none; }
+
+/* 빠른 시작 */
+.quick { margin: 0 0 8px; }
+.quick h2 { margin: 0 0 6px; padding: 0; border: 0; font-size: 22px; }
+.content .quick h2 + p { margin: 0 0 16px; color: var(--muted); font-size: 15px; line-height: 1.7; }
+.steps { list-style: none; margin: 0; padding: 0; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.steps li { margin: 0; border-top: 1px solid var(--line); }
+.steps li:first-child { border-top: 0; }
+.steps a { display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; align-items: baseline; gap: 4px 12px; padding: 16px 20px; color: inherit; text-decoration: none; transition: background-color 120ms ease; }
+.steps a:hover { background: var(--surface); }
+.step-num { font-size: 20px; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+.step-title { color: var(--ink); font-weight: 700; font-size: 16.5px; }
+.step-detail { grid-column: 2 / 3; font-size: 14.5px; color: var(--muted); }
+.step-detail code { font-size: 13.5px; color: var(--body); overflow-wrap: anywhere; }
+.step-go { grid-row: 1; grid-column: 3; font-size: 13.5px; color: var(--accent); white-space: nowrap; }
+
+/* 제목 */
+h2, h3 { color: var(--ink); line-height: 1.4; letter-spacing: -0.01em; }
+h2 { margin: 88px 0 12px; padding-top: 48px; border-top: 1px solid var(--line); font-size: 28px; font-weight: 700; }
+h3 { margin: 52px 0 14px; font-size: 20px; font-weight: 700; }
+.num { color: var(--muted); font-weight: 600; margin-right: 12px; font-variant-numeric: tabular-nums; }
+h3 .num { margin-right: 10px; }
+.content h2 + p { margin: 0 0 32px; font-size: 17.5px; line-height: 1.75; color: var(--ink); }
+p { margin: 14px 0; }
+ul, ol { margin: 14px 0; padding-left: 22px; }
+li { margin: 6px 0; }
+strong { color: var(--ink); font-weight: 700; }
+:not(pre) > code { font-size: 0.86em; padding: 0.1em 0.36em; border-radius: 4px; background: var(--inline-code-bg); color: var(--ink); word-break: break-word; }
+
+/* 표 — 안의 코드는 칩 없이 글꼴로만 구분한다 */
+.table { margin: 18px 0 24px; overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+table { width: 100%; border-collapse: collapse; font-size: 14.5px; line-height: 1.65; }
+th, td { padding: 12px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+th { background: var(--surface); color: var(--muted); font-size: 13px; font-weight: 600; white-space: nowrap; }
+tbody tr:last-child td { border-bottom: 0; }
+td:first-child { color: var(--ink); font-weight: 600; min-width: 8.5em; }
+td code, th code { background: none; padding: 0; color: var(--ink); font-size: 0.92em; white-space: nowrap; }
+td:first-child code { font-weight: 600; }
+
+/* 코드 블록 — 밝은 면, 긴 코드는 접는다 */
+.code { margin: 18px 0 26px; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--code-bg); }
+.code-head { display: flex; align-items: center; justify-content: space-between; padding: 6px 8px 6px 16px; background: var(--code-head); border-bottom: 1px solid var(--line); font-size: 12.5px; color: var(--code-muted); font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+.copy {
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; font-size: 12.5px;
+  color: var(--body); background: var(--bg); border: 1px solid var(--line-strong); border-radius: 6px; padding: 3px 10px; cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+.copy:hover { background: var(--surface); }
+.copy[data-done="true"] { border-color: var(--accent); color: var(--accent); }
+pre { margin: 0; padding: 16px 18px; overflow-x: auto; color: var(--code-ink); font-size: 13.5px; line-height: 1.65; tab-size: 2; word-break: normal; overflow-wrap: normal; }
+pre .c { color: var(--code-muted); }
+.code.is-collapsed pre { max-height: calc(13.5px * 1.65 * 16 + 16px); overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent); mask-image: linear-gradient(to bottom, #000 72%, transparent); }
+.code-more { display: block; width: 100%; padding: 10px; border: 0; border-top: 1px solid var(--line); background: var(--code-head); color: var(--body); font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer; }
+.code-more:hover { color: var(--ink); }
+
+/* 그림 */
+.diagram { margin: 24px 0 28px; padding: 16px; border: 1px solid var(--line); border-radius: 10px; }
+.diagram svg { display: block; width: 100%; height: auto; font-family: inherit; }
+.diagram figcaption { margin-top: 8px; font-size: 13px; color: var(--muted); text-align: center; }
+.d-ink { fill: var(--ink); }
+.d-muted { fill: var(--muted); }
+.d-frame, .d-box { fill: none; stroke: var(--line-strong); stroke-width: 1.25; }
+.d-hot { fill: var(--surface); stroke: var(--ink); stroke-width: 1.75; }
+.d-dash { stroke-dasharray: 4 4; }
+.d-line { fill: none; stroke: var(--muted); stroke-width: 1.25; }
+.d-fill-line { fill: var(--muted); }
+
+.foot { max-width: 1200px; margin: 0 auto; padding: 24px 32px 48px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+
+/* 좁은 화면 */
+@media (max-width: 1023px) {
+  .layout { display: block; padding: 0 24px; }
+  .toc { display: none; }
+  .toc-mobile { display: block; margin: 0 0 32px; border: 1px solid var(--line); border-radius: 10px; font-size: 14.5px; }
+  .toc-mobile summary { padding: 12px 16px; cursor: pointer; color: var(--ink); font-weight: 600; }
+  .toc-mobile > nav { padding: 0 16px 12px; }
+  .toc-mobile ol { list-style: none; margin: 0; padding: 0; }
+  .toc-mobile .toc-l1 > li > a { display: block; padding: 6px 0; color: var(--ink); font-weight: 600; text-decoration: none; }
+  .toc-mobile .toc-l2 { display: none; }
+  .content { max-width: none; padding-top: 28px; }
+  .top-inner { padding: 40px 24px 28px; }
+}
+@media (max-width: 599px) {
+  .layout, .top-inner, .foot { padding-left: 16px; padding-right: 16px; }
+  .top h1 { font-size: 27px; }
+  h2 { font-size: 23px; margin-top: 64px; padding-top: 36px; }
+  h3 { font-size: 18px; margin-top: 40px; }
+  .content h2 + p { font-size: 16.5px; }
+  .steps a { grid-template-columns: 28px minmax(0, 1fr); padding: 14px 16px; }
+  .step-go { display: none; }
+  pre { font-size: 12.5px; }
+  table { font-size: 13.5px; min-width: 620px; }
+  th, td { padding: 10px 12px; }
+  td:first-child, th:first-child { min-width: 7em; }
+  .diagram { padding: 8px; overflow-x: auto; }
+  .diagram svg { min-width: 640px; }
+  .diagram figcaption { position: sticky; left: 0; width: min(100%, calc(100vw - 50px)); }
+}
+
+@media print {
+  .toc, .toc-mobile, .copy, .code-more { display: none !important; }
+  .layout { display: block; }
+  body { font-size: 11pt; }
+  .code.is-collapsed pre { max-height: none; -webkit-mask-image: none; mask-image: none; }
+  pre { white-space: pre-wrap; }
+  .code, tr, .diagram, .steps li { break-inside: avoid; }
+  h2, h3 { break-after: avoid; }
+  a { color: inherit; }
+}
+
+/* 공개판 — 사용 가이드로 · PDF 내려받기 · 인쇄 */
+.doc-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.doc-action { display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--bg); color: var(--ink); font: inherit; font-size: 14px; font-weight: 600; line-height: 1; text-decoration: none; cursor: pointer; transition: border-color .15s ease, background-color .15s ease; }
+.doc-action.is-primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.doc-action:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (hover: hover) { .doc-action:hover { border-color: var(--accent); } .doc-action.is-primary:hover { filter: brightness(1.08); } }
+@media print { .doc-actions { display: none !important; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <p class="product">NXL-DS Hanwha</p>
+    <h1>NXL-DS Hanwha 0.9 개발자 가이드</h1>
+    <p class="meta">0.9.0 기준 · 2026-11-02</p>
+    <div class="doc-actions">
+      <a class="doc-action" href="/guide.html">사용 가이드로</a>
+      <a class="doc-action is-primary" href="/downloads/nxlds-hanwha-0.9-developer-guide.pdf" download>PDF 내려받기</a>
+      <button class="doc-action" type="button" data-print>인쇄 · PDF 로 저장</button>
+    </div>
+  </div>
+</header>
+<div class="layout">
+  <nav class="toc" aria-label="목차">
+    <p class="toc-title">목차</p>
+    <ol class="toc-l1"><li><a href="#s-1">1. 개요</a><ol class="toc-l2"><li><a href="#s-1-1">1.1 구성</a></li><li><a href="#s-1-2">1.2 진입점</a></li><li><a href="#s-1-3">1.3 요구 사항</a></li><li><a href="#s-1-4">1.4 참고 자료</a></li><li><a href="#s-1-5">1.5 전체 구조</a></li></ol></li><li><a href="#s-2">2. 설치와 초기 설정</a><ol class="toc-l2"><li><a href="#s-2-1">2.1 패키지 설치</a></li><li><a href="#s-2-2">2.2 CSS</a></li><li><a href="#s-2-3">2.3 폰트</a></li><li><a href="#s-2-4">2.4 Provider</a></li><li><a href="#s-2-5">2.5 Next.js App Router</a></li><li><a href="#s-2-6">2.6 테스트 환경</a></li></ol></li><li><a href="#s-3">3. 스타일 아키텍처</a><ol class="toc-l2"><li><a href="#s-3-1">3.1 범위 선택자</a></li><li><a href="#s-3-2">3.2 Cascade layer 와 우선순위</a></li><li><a href="#s-3-3">3.3 Portal 과 syncRoot</a></li><li><a href="#s-3-4">3.4 미리 컴파일된 유틸리티와 앱 Tailwind</a></li><li><a href="#s-3-5">3.5 토큰 클래스와 변형 접두사</a></li><li><a href="#s-3-6">3.6 앱 변형 클래스가 무시되는 경우</a></li></ol></li><li><a href="#s-4">4. 디자인 토큰</a><ol class="toc-l2"><li><a href="#s-4-1">4.1 계층</a></li><li><a href="#s-4-2">4.2 색</a></li><li><a href="#s-4-3">4.3 타이포그래피</a></li><li><a href="#s-4-4">4.4 간격</a></li><li><a href="#s-4-5">4.5 라운드·그림자</a></li><li><a href="#s-4-6">4.6 모션</a></li><li><a href="#s-4-7">4.7 쌓임 순서</a></li></ol></li><li><a href="#s-5">5. 레이아웃과 반응형</a><ol class="toc-l2"><li><a href="#s-5-1">5.1 분기점과 그리드</a></li><li><a href="#s-5-2">5.2 Mobile·Tablet 구조</a></li><li><a href="#s-5-3">5.3 PC 구조</a></li></ol></li><li><a href="#s-6">6. 컴포넌트 API 규약</a><ol class="toc-l2"><li><a href="#s-6-1">6.1 구조</a></li><li><a href="#s-6-2">6.2 props 규칙</a></li><li><a href="#s-6-3">6.3 컴포넌트 목록</a></li><li><a href="#s-6-4">6.4 선택 기준</a></li><li><a href="#s-6-5">6.5 비동기 화면</a></li><li><a href="#s-6-6">6.6 오버레이와 알림</a></li><li><a href="#s-6-7">6.7 내비게이션</a></li><li><a href="#s-6-8">6.8 DS 에 없는 컴포넌트 만들기</a></li></ol></li><li><a href="#s-7">7. 폼</a><ol class="toc-l2"></ol></li><li><a href="#s-8">8. 아이콘·그래픽</a><ol class="toc-l2"><li><a href="#s-8-1">8.1 Icon</a></li><li><a href="#s-8-2">8.2 Graphic</a></li></ol></li><li><a href="#s-9">9. 접근성</a><ol class="toc-l2"><li><a href="#s-9-1">9.1 컴포넌트가 처리하는 범위</a></li><li><a href="#s-9-2">9.2 화면 코드의 책임</a></li><li><a href="#s-9-3">9.3 본문 글자색</a></li><li><a href="#s-9-4">9.4 자동 검사</a></li></ol></li><li><a href="#s-10">10. 성능</a><ol class="toc-l2"><li><a href="#s-10-1">10.1 CSS</a></li><li><a href="#s-10-2">10.2 JS 초기 번들</a></li><li><a href="#s-10-3">10.3 정적 그래픽 묶음</a></li><li><a href="#s-10-4">10.4 폰트</a></li></ol></li><li><a href="#s-11">11. 품질 보증</a><ol class="toc-l2"></ol></li><li><a href="#s-12">12. 설계 결정과 비용</a><ol class="toc-l2"></ol></li><li><a href="#s-13">13. AI 도구 연동</a><ol class="toc-l2"><li><a href="#s-13-1">13.1 등록</a></li><li><a href="#s-13-2">13.2 규칙 파일</a></li></ol></li><li><a href="#s-14">14. 알려진 제약 (0.9.0)</a><ol class="toc-l2"></ol></li><li><a href="#s-15">15. 버전 정책과 지원</a><ol class="toc-l2"><li><a href="#s-15-1">15.1 버전 규칙</a></li><li><a href="#s-15-2">15.2 업데이트</a></li><li><a href="#s-15-3">15.3 버그 제보</a></li></ol></li><li><a href="#s-16">16. 문제 해결</a><ol class="toc-l2"></ol></li></ol>
+  </nav>
+  <main class="content">
+    <details class="toc-mobile">
+      <summary>목차</summary>
+      <nav aria-label="목차"><ol class="toc-l1"><li><a href="#s-1">1. 개요</a><ol class="toc-l2"><li><a href="#s-1-1">1.1 구성</a></li><li><a href="#s-1-2">1.2 진입점</a></li><li><a href="#s-1-3">1.3 요구 사항</a></li><li><a href="#s-1-4">1.4 참고 자료</a></li><li><a href="#s-1-5">1.5 전체 구조</a></li></ol></li><li><a href="#s-2">2. 설치와 초기 설정</a><ol class="toc-l2"><li><a href="#s-2-1">2.1 패키지 설치</a></li><li><a href="#s-2-2">2.2 CSS</a></li><li><a href="#s-2-3">2.3 폰트</a></li><li><a href="#s-2-4">2.4 Provider</a></li><li><a href="#s-2-5">2.5 Next.js App Router</a></li><li><a href="#s-2-6">2.6 테스트 환경</a></li></ol></li><li><a href="#s-3">3. 스타일 아키텍처</a><ol class="toc-l2"><li><a href="#s-3-1">3.1 범위 선택자</a></li><li><a href="#s-3-2">3.2 Cascade layer 와 우선순위</a></li><li><a href="#s-3-3">3.3 Portal 과 syncRoot</a></li><li><a href="#s-3-4">3.4 미리 컴파일된 유틸리티와 앱 Tailwind</a></li><li><a href="#s-3-5">3.5 토큰 클래스와 변형 접두사</a></li><li><a href="#s-3-6">3.6 앱 변형 클래스가 무시되는 경우</a></li></ol></li><li><a href="#s-4">4. 디자인 토큰</a><ol class="toc-l2"><li><a href="#s-4-1">4.1 계층</a></li><li><a href="#s-4-2">4.2 색</a></li><li><a href="#s-4-3">4.3 타이포그래피</a></li><li><a href="#s-4-4">4.4 간격</a></li><li><a href="#s-4-5">4.5 라운드·그림자</a></li><li><a href="#s-4-6">4.6 모션</a></li><li><a href="#s-4-7">4.7 쌓임 순서</a></li></ol></li><li><a href="#s-5">5. 레이아웃과 반응형</a><ol class="toc-l2"><li><a href="#s-5-1">5.1 분기점과 그리드</a></li><li><a href="#s-5-2">5.2 Mobile·Tablet 구조</a></li><li><a href="#s-5-3">5.3 PC 구조</a></li></ol></li><li><a href="#s-6">6. 컴포넌트 API 규약</a><ol class="toc-l2"><li><a href="#s-6-1">6.1 구조</a></li><li><a href="#s-6-2">6.2 props 규칙</a></li><li><a href="#s-6-3">6.3 컴포넌트 목록</a></li><li><a href="#s-6-4">6.4 선택 기준</a></li><li><a href="#s-6-5">6.5 비동기 화면</a></li><li><a href="#s-6-6">6.6 오버레이와 알림</a></li><li><a href="#s-6-7">6.7 내비게이션</a></li><li><a href="#s-6-8">6.8 DS 에 없는 컴포넌트 만들기</a></li></ol></li><li><a href="#s-7">7. 폼</a><ol class="toc-l2"></ol></li><li><a href="#s-8">8. 아이콘·그래픽</a><ol class="toc-l2"><li><a href="#s-8-1">8.1 Icon</a></li><li><a href="#s-8-2">8.2 Graphic</a></li></ol></li><li><a href="#s-9">9. 접근성</a><ol class="toc-l2"><li><a href="#s-9-1">9.1 컴포넌트가 처리하는 범위</a></li><li><a href="#s-9-2">9.2 화면 코드의 책임</a></li><li><a href="#s-9-3">9.3 본문 글자색</a></li><li><a href="#s-9-4">9.4 자동 검사</a></li></ol></li><li><a href="#s-10">10. 성능</a><ol class="toc-l2"><li><a href="#s-10-1">10.1 CSS</a></li><li><a href="#s-10-2">10.2 JS 초기 번들</a></li><li><a href="#s-10-3">10.3 정적 그래픽 묶음</a></li><li><a href="#s-10-4">10.4 폰트</a></li></ol></li><li><a href="#s-11">11. 품질 보증</a><ol class="toc-l2"></ol></li><li><a href="#s-12">12. 설계 결정과 비용</a><ol class="toc-l2"></ol></li><li><a href="#s-13">13. AI 도구 연동</a><ol class="toc-l2"><li><a href="#s-13-1">13.1 등록</a></li><li><a href="#s-13-2">13.2 규칙 파일</a></li></ol></li><li><a href="#s-14">14. 알려진 제약 (0.9.0)</a><ol class="toc-l2"></ol></li><li><a href="#s-15">15. 버전 정책과 지원</a><ol class="toc-l2"><li><a href="#s-15-1">15.1 버전 규칙</a></li><li><a href="#s-15-2">15.2 업데이트</a></li><li><a href="#s-15-3">15.3 버그 제보</a></li></ol></li><li><a href="#s-16">16. 문제 해결</a><ol class="toc-l2"></ol></li></ol></nav>
+    </details>
+
+    <section class="quick" aria-labelledby="quick-title">
+      <h2 id="quick-title">빠른 시작</h2>
+      <p>처음이라면 이 순서대로 한다. 각 단계를 누르면 해당 절로 이동한다.</p>
+      <ol class="steps">
+        <li><a href="#s-2-1"><span class="step-num">1</span><span class="step-title">패키지 설치</span><span class="step-go">2.1</span><span class="step-detail"><code>pnpm add ./vendor/nextlab-ds-0.9.0.tgz</code></span></a></li>
+        <li><a href="#s-2-2"><span class="step-num">2</span><span class="step-title">CSS 연결</span><span class="step-go">2.2</span><span class="step-detail"><code>@import '@nextlab/ds/hanwha/styles.css';</code></span></a></li>
+        <li><a href="#s-2-3"><span class="step-num">3</span><span class="step-title">폰트 파일 넣기</span><span class="step-go">2.3</span><span class="step-detail"><code>public/fonts/</code> 에 한화고딕 3개</span></a></li>
+        <li><a href="#s-2-4"><span class="step-num">4</span><span class="step-title">Provider 로 감싸기</span><span class="step-go">2.4</span><span class="step-detail"><code>&lt;HanwhaProvider syncRoot linkComponent={Link}&gt;</code></span></a></li>
+        <li><a href="#s-6-4"><span class="step-num">5</span><span class="step-title">화면 만들기</span><span class="step-go">6.4</span><span class="step-detail">레이아웃은 5장, 컴포넌트는 6.4 선택 기준에서 고른다</span></a></li>
+      </ol>
+    </section>
+
+    <h2 id="s-1"><span class="num">1</span>개요</h2>
+<p>NXL-DS Hanwha 는 한화생명 고객 서비스 화면용 React 컴포넌트 라이브러리다. 디자이너의 Figma Component Library(NXL-DS)를 정본으로 삼아 컴포넌트·토큰·아이콘·그래픽을 제공하고, 화면 폭에 따른 전환(Mobile·Tablet·PC)을 컴포넌트와 토큰 수준에서 처리한다. 이 문서는 0.9.0 기준이다.</p>
+<p>문서의 수치(파일 크기, 번들 크기, 색 대비, 시험 개수)는 0.9.0 배포물을 직접 재서 적었고, 측정 방법을 표 아래에 함께 둔다. 예시 코드는 모두 0.9.0 타입 선언에 strict 모드로 컴파일해 확인했다. 구조를 이렇게 정한 이유와 그 비용은 12장에 모았다.</p>
+<h3 id="s-1-1"><span class="num">1.1</span>구성</h3>
+<div class="table"><table><thead><tr><th>구분</th><th>내용</th></tr></thead><tbody><tr><td>컴포넌트</td><td>입력·선택·데이터 표시·탐색·오버레이·로딩 80여 종 (하위 컴포넌트를 포함해 151개 export)</td></tr>
+<tr><td>업무 컴포넌트</td><td>약관 동의 <code>TermsAgreement</code>, 서명 <code>SignaturePad</code>, 주소 검색 <code>AddressSearch</code>, 기관 선택 <code>InstitutionPicker</code>, 등급 표시 <code>LevelMeter</code></td></tr>
+<tr><td>레이아웃</td><td>Mobile: <code>Header</code> <code>BottomNavigation</code> <code>ButtonGroup fixed</code> / PC: <code>Header type=&quot;menu&quot;</code> <code>PageContainer</code> <code>PageTitle</code> <code>PageColumns</code> <code>SideNavigation</code> <code>SiteFooter</code></td></tr>
+<tr><td>차트</td><td><code>BarChart</code> <code>LineChart</code> <code>AreaChart</code> <code>DonutChart</code> (ApexCharts 기반)</td></tr>
+<tr><td>아이콘</td><td>UI 아이콘 54종 (헤더용 27, 콘텐츠용 29. <code>close</code> <code>search</code> 는 양쪽에 있다)</td></tr>
+<tr><td>그래픽</td><td>일러스트·피드백·아바타·로고·증권사 마크·인증 마크 213개, AI 생성 본문·배너 이미지 900개</td></tr>
+<tr><td>디자인 토큰</td><td>색·타이포그래피·간격·라운드·그림자·모션. CSS 변수 504개(<code>--cds-*</code>), Tailwind 유틸리티, TS 상수(<code>CDS_*</code>)로 제공</td></tr></tbody></table></div>
+<h3 id="s-1-2"><span class="num">1.2</span>진입점</h3>
+<div class="table"><table><thead><tr><th>import 경로</th><th>내용</th></tr></thead><tbody><tr><td><code>@nextlab/ds/hanwha</code></td><td>컴포넌트, <code>HanwhaProvider</code>, 토큰 상수, <code>Icon</code>, <code>Graphic</code></td></tr>
+<tr><td><code>@nextlab/ds/hanwha/icons</code></td><td><code>Icon</code> 과 아이콘 이름 목록</td></tr>
+<tr><td><code>@nextlab/ds/hanwha/graphics</code></td><td><code>Graphic</code> 과 그래픽 이름 목록</td></tr>
+<tr><td><code>@nextlab/ds/hanwha/styles.css</code></td><td>컴포넌트 스타일, 토큰, 유틸리티를 미리 빌드한 CSS. 전송 크기는 brotli 38KB · gzip 70KB (<a href="#s-10-1">10.1</a>)</td></tr></tbody></table></div>
+<h3 id="s-1-3"><span class="num">1.3</span>요구 사항</h3>
+<div class="table"><table><thead><tr><th>항목</th><th>조건</th></tr></thead><tbody><tr><td>React, React DOM</td><td>19 이상 (peerDependencies)</td></tr>
+<tr><td>TypeScript</td><td><code>moduleResolution</code> 이 <code>bundler</code> · <code>node16</code> · <code>nodenext</code> 중 하나. <code>node</code> 는 하위 경로 exports 를 읽지 못해 <code>@nextlab/ds/hanwha</code> 의 타입을 찾지 못한다</td></tr>
+<tr><td>모듈 형식</td><td>ESM 전용. CommonJS <code>require()</code> 로는 불러올 수 없다</td></tr>
+<tr><td>Next.js</td><td>App Router. 16.4 에서 검증. 상태·이벤트가 있는 화면은 Client Component 로 작성 (<a href="#s-2-5">2.5</a>)</td></tr>
+<tr><td>Vite</td><td>React 플러그인 프로젝트</td></tr>
+<tr><td>Tailwind CSS</td><td>v4 권장. 화면 배치용 유틸리티에 사용 (<a href="#s-3-4">3.4</a>)</td></tr>
+<tr><td>브라우저</td><td>iOS Safari 16.4, Chrome 111, Android Chrome 111, Edge 111 이상. CSS 가 <code>@property</code> · <code>@container</code> · <code>:has()</code> 를 쓴다</td></tr>
+<tr><td>패키지 매니저</td><td>pnpm, npm, yarn 2 이상. yarn 1 은 tgz 설치가 실패한다</td></tr></tbody></table></div>
+<p>Radix UI primitives, class-variance-authority, tailwind-merge, clsx, ApexCharts 는 패키지 의존성으로 함께 설치된다.</p>
+<h3 id="s-1-4"><span class="num">1.4</span>참고 자료</h3>
+<div class="table"><table><thead><tr><th>자료</th><th>주소</th></tr></thead><tbody><tr><td>Storybook (Chromatic)</td><td><a href="https://main--6a794efb546779fb68f18bd0.chromatic.com" target="_blank" rel="noopener">https://main--6a794efb546779fb68f18bd0.chromatic.com</a></td></tr>
+<tr><td>Storybook MCP</td><td><code>https://main--6a794efb546779fb68f18bd0.chromatic.com/mcp</code></td></tr>
+<tr><td>한화 폰트 CDN</td><td><code>https://nxl-nlc.hanwhalife.com/cnts-files/fonts/</code></td></tr></tbody></table></div>
+<h3 id="s-1-5"><span class="num">1.5</span>전체 구조</h3>
+<p>토큰과 컴포넌트는 Figma 에서 출발해 두 경로로 앱에 닿는다. CSS 경로는 Figma Variables 를 CSS 변수로 생성하고 Tailwind 로 한 번 컴파일해 <code>styles.css</code> 한 파일로 만든다. JS 경로는 Figma 컴포넌트 속성을 props 로 옮긴 소스를 모듈별 ESM 으로 빌드한다. 생성된 파일은 손으로 고치지 않으며, 값이 바뀌면 생성기를 다시 돌린다.</p>
+<figure class="diagram"><svg viewBox="0 0 760 520" role="img" aria-label="Figma 의 변수와 컴포넌트 속성이 CSS 경로와 JS 경로를 거쳐 앱의 HanwhaProvider 에 닿는 구조" font-size="13">
+  <defs>
+    <marker id="arch-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="d-fill-line" d="M0 0L10 5L0 10z"/></marker>
+  </defs>
+  <text class="d-ink" x="24" y="34" font-size="15" font-weight="700">정본은 Figma 하나이고, 생성물은 손으로 고치지 않는다</text>
+  <text class="d-muted" x="24" y="64" font-size="12" font-weight="600">CSS 경로</text>
+  <text class="d-muted" x="416" y="64" font-size="12" font-weight="600">JS 경로</text>
+
+  <rect class="d-box" x="24" y="76" width="320" height="52" rx="8"/>
+  <text class="d-ink" x="40" y="98" font-weight="700">Figma Variables</text>
+  <text class="d-muted" x="40" y="117" font-size="11.5">색 · 글자 · 간격 · Mobile·Tablet·PC 모드</text>
+  <rect class="d-box" x="416" y="76" width="320" height="52" rx="8"/>
+  <text class="d-ink" x="432" y="98" font-weight="700">Figma 컴포넌트 속성</text>
+  <text class="d-muted" x="432" y="117" font-size="11.5">Variant · Boolean → props 이름과 값</text>
+
+  <path class="d-line" d="M184 128V148" marker-end="url(#arch-arrow)"/>
+  <path class="d-line" d="M576 128V148" marker-end="url(#arch-arrow)"/>
+
+  <rect class="d-box" x="24" y="152" width="320" height="52" rx="8"/>
+  <text class="d-ink" x="40" y="174" font-weight="700">토큰 생성기</text>
+  <text class="d-muted" x="40" y="193" font-size="11.5">CSS 변수 504개 · --check 로 생성물 변경 검출</text>
+  <rect class="d-box" x="416" y="152" width="320" height="52" rx="8"/>
+  <text class="d-ink" x="432" y="174" font-weight="700">컴포넌트 소스</text>
+  <text class="d-muted" x="432" y="193" font-size="11.5">Radix primitives · cva · 토큰 클래스</text>
+
+  <path class="d-line" d="M184 204V224" marker-end="url(#arch-arrow)"/>
+  <path class="d-line" d="M576 204V224" marker-end="url(#arch-arrow)"/>
+  <path class="d-line" d="M416 186H380V254H348" marker-end="url(#arch-arrow)"/>
+  <text class="d-muted" x="386" y="219" font-size="11">쓰는 클래스</text>
+
+  <rect class="d-box" x="24" y="228" width="320" height="52" rx="8"/>
+  <text class="d-ink" x="40" y="250" font-weight="700">Tailwind v4 컴파일</text>
+  <text class="d-muted" x="40" y="269" font-size="11.5">범위 선택자 부착 · 리셋만 @layer base</text>
+  <rect class="d-box" x="416" y="228" width="320" height="52" rx="8"/>
+  <text class="d-ink" x="432" y="250" font-weight="700">ESM 빌드</text>
+  <text class="d-muted" x="432" y="269" font-size="11.5">모듈별 파일 · 'use client' 자동 부착</text>
+
+  <path class="d-line" d="M184 280V300" marker-end="url(#arch-arrow)"/>
+  <path class="d-line" d="M576 280V300" marker-end="url(#arch-arrow)"/>
+
+  <rect class="d-hot" x="24" y="304" width="320" height="52" rx="8"/>
+  <text class="d-ink" x="40" y="326" font-weight="700">styles.css</text>
+  <text class="d-muted" x="40" y="345" font-size="11.5">토큰 · 리셋 · 유틸리티 · 컴포넌트, brotli 38KB</text>
+  <rect class="d-hot" x="416" y="304" width="320" height="52" rx="8"/>
+  <text class="d-ink" x="432" y="326" font-weight="700">dist</text>
+  <text class="d-muted" x="432" y="345" font-size="11.5">ESM · 타입 선언 · sideEffects 는 CSS 만</text>
+
+  <path class="d-line" d="M184 356V398" marker-end="url(#arch-arrow)"/>
+  <path class="d-line" d="M576 356V398" marker-end="url(#arch-arrow)"/>
+
+  <rect class="d-frame d-dash" x="16" y="376" width="728" height="108" rx="12"/>
+  <text class="d-muted" x="32" y="394" font-size="12" font-weight="600">앱</text>
+  <rect class="d-box" x="24" y="402" width="320" height="34" rx="8"/>
+  <text class="d-ink" x="40" y="424" font-size="12.5">@import 'tailwindcss' 뒤에 styles.css</text>
+  <rect class="d-box" x="416" y="402" width="320" height="34" rx="8"/>
+  <text class="d-ink" x="432" y="424" font-size="12.5">import { … } from '@nextlab/ds/hanwha'</text>
+  <text class="d-ink" x="32" y="464" font-size="12.5" font-weight="700">HanwhaProvider</text>
+  <text class="d-muted" x="146" y="464" font-size="11.5">&lt;div data-nxl-surface="hanwha-customer"&gt; 아래에서만 규칙이 적용된다. syncRoot 면 &lt;html&gt; 에도 붙는다</text>
+
+  <text class="d-muted" x="24" y="508" font-size="11.5">강조 테두리는 배포물, 점선 안은 앱 코드다</text>
+</svg>
+<figcaption>전체 구조 · 정본에서 앱까지</figcaption></figure>
+<h2 id="s-2"><span class="num">2</span>설치와 초기 설정</h2>
+<p>패키지 설치부터 첫 화면까지의 설정이다. 2.1~2.4 를 순서대로 하면 DS 컴포넌트가 화면에 나온다. Next.js 는 2.5, 테스트는 2.6 을 함께 본다.</p>
+<h3 id="s-2-1"><span class="num">2.1</span>패키지 설치</h3>
+<p>0.9.0 은 tgz 로 배포한다. 사내 Nexus 등록 후에는 레지스트리 설치로 바뀌지만 import 경로는 같다.</p>
+<div class="code"><div class="code-head"><span>Shell</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code><span class="c"># tgz 배포본 (npm install, yarn add 도 같은 형식)</span>
+pnpm add ./vendor/nextlab-ds-0.9.0.tgz
+
+<span class="c"># 사내 Nexus 등록 후</span>
+pnpm add @nextlab/ds
+
+<span class="c"># Tailwind CSS v4</span>
+pnpm add -D tailwindcss @tailwindcss/postcss   # Next.js
+pnpm add -D tailwindcss @tailwindcss/vite      # Vite</code></pre></div>
+<p>tgz 파일과 잠금 파일을 함께 커밋해 설치 결과를 고정한다. Tailwind 설정 파일은 <a href="https://tailwindcss.com/docs/installation" target="_blank" rel="noopener">Tailwind 공식 설치 문서</a>를 따른다.</p>
+<h3 id="s-2-2"><span class="num">2.2</span>CSS</h3>
+<div class="code"><div class="code-head"><span>CSS</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code><span class="c">/* src/app/globals.css (Vite: src/index.css) */</span>
+@import 'tailwindcss';
+@import '@nextlab/ds/hanwha/styles.css';</code></pre></div>
+<p><code>styles.css</code> 는 컴포넌트 스타일, 디자인 토큰, 토큰 유틸리티를 한 파일로 미리 빌드한 것이다. 앱의 Tailwind 설정에 DS 토큰을 등록하지 않아도 <code>bg-bg-layer-base</code>, <code>type-body-medium</code> 같은 클래스가 동작한다. 구조는 3장에서 설명한다.</p>
+<h3 id="s-2-3"><span class="num">2.3</span>폰트</h3>
+<p>DS CSS 는 HanwhaGothic(300·400·700)을 <code>/fonts/HanwhaGothic{L,R,B}.woff2</code> 경로로 선언한다. 한화 폰트 CDN 의 파일을 이 경로에 둔다.</p>
+<div class="code"><div class="code-head"><span>Shell</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code>mkdir -p public/fonts
+CDN=https://nxl-nlc.hanwhalife.com/cnts-files/fonts/HanwhaGothic
+curl -o public/fonts/HanwhaGothicL.woff2 $CDN/06HanwhaGothicL.woff2   # 300
+curl -o public/fonts/HanwhaGothicR.woff2 $CDN/05HanwhaGothicR.woff2   # 400
+curl -o public/fonts/HanwhaGothicB.woff2 $CDN/04HanwhaGothicB.woff2   # 700</code></pre></div>
+<p>CDN 의 <code>index.css</code> 를 <code>&lt;link&gt;</code> 로 직접 참조하면 폰트 요청이 CORS 정책에 막힌다. CDN 이 <code>Access-Control-Allow-Origin</code> 헤더를 보내지 않기 때문이다.</p>
+<p>파일은 굵기마다 약 1.2~1.3MB 다. <code>font-display: swap</code> 으로 선언되어 있어 폰트를 받는 동안에는 시스템 글꼴로 먼저 그리고, 파일이 없으면 font-family 순서에 따라 Pretendard, 시스템 글꼴로 대체된다. 본문(<code>type-body-*</code>)은 300, 제목은 700 을 쓴다.</p>
+<h3 id="s-2-4"><span class="num">2.4</span>Provider</h3>
+<div class="code"><div class="code-head"><span>TSX</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code><span class="c">// src/app/providers.tsx (Next.js)</span>
+'use client';
+
+import Link from 'next/link';
+import type { ReactElement, ReactNode } from 'react';
+import { HanwhaProvider, ToastProvider, TooltipProvider } from '@nextlab/ds/hanwha';
+
+export function Providers({ children }: { children: ReactNode }): ReactElement {
+  return (
+    &lt;HanwhaProvider syncRoot linkComponent={Link}&gt;
+      &lt;TooltipProvider&gt;
+        &lt;ToastProvider&gt;{children}&lt;/ToastProvider&gt;
+      &lt;/TooltipProvider&gt;
+    &lt;/HanwhaProvider&gt;
+  );
+}</code></pre></div>
+<div class="code"><div class="code-head"><span>TSX</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code><span class="c">// src/app/layout.tsx</span>
+import type { Viewport } from 'next';
+import type { ReactElement, ReactNode } from 'react';
+import './globals.css';
+import { Providers } from './providers';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+};
+
+export default function RootLayout({ children }: { children: ReactNode }): ReactElement {
+  return (
+    &lt;html lang="ko"&gt;
+      &lt;body&gt;
+        &lt;Providers&gt;{children}&lt;/Providers&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+  );
+}</code></pre></div>
+<p><code>viewportFit: &#39;cover&#39;</code> 가 있어야 iOS 에서 <code>env(safe-area-inset-bottom)</code> 값이 잡힌다. <code>ButtonGroup fixed</code>, <code>BottomNavigation</code>, <code>BottomSheet</code> 는 이 값만큼 홈 인디케이터 위로 띄워 그린다. Vite 는 <code>index.html</code> 에 <code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;</code> 를 둔다.</p>
+<p>Vite 는 React Router 의 <code>Link</code> 를 <code>href</code> 를 받는 컴포넌트로 감싸 넘긴다.</p>
+<div class="code"><div class="code-head"><span>TSX</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code><span class="c">// src/providers.tsx (Vite + React Router)</span>
+import type { ReactElement, ReactNode } from 'react';
+import { Link } from 'react-router';
+import { HanwhaProvider, ToastProvider, TooltipProvider, type HanwhaProviderProps } from '@nextlab/ds/hanwha';
+
+const RouterLink: NonNullable&lt;HanwhaProviderProps['linkComponent']&gt; = ({ href, ...rest }) =&gt; &lt;Link to={href} {...rest} /&gt;;
+
+export function Providers({ children }: { children: ReactNode }): ReactElement {
+  return (
+    &lt;HanwhaProvider syncRoot linkComponent={RouterLink}&gt;
+      &lt;TooltipProvider&gt;
+        &lt;ToastProvider&gt;{children}&lt;/ToastProvider&gt;
+      &lt;/TooltipProvider&gt;
+    &lt;/HanwhaProvider&gt;
+  );
+}</code></pre></div>
+<div class="code"><div class="code-head"><span>TSX</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code><span class="c">// src/main.tsx (Vite)</span>
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import './index.css';
+import { App } from './app';
+import { Providers } from './providers';
+
+const container = document.getElementById('root');
+if (container === null) throw new Error('#root 요소가 없다');
+
+createRoot(container).render(
+  &lt;StrictMode&gt;
+    &lt;Providers&gt;
+      &lt;App /&gt;
+    &lt;/Providers&gt;
+  &lt;/StrictMode&gt;,
+);</code></pre></div>
+<p><strong>HanwhaProvider props</strong></p>
+<div class="table"><table><thead><tr><th>prop</th><th>값</th><th>기본값</th><th>설명</th></tr></thead><tbody><tr><td><code>syncRoot</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Provider 의 data 속성을 <code>&lt;html&gt;</code> 에도 적용한다. Portal 로 렌더링되는 오버레이에 필요하다. 켜면 DS 리셋이 문서 전체에 적용된다 (<a href="#s-3-3">3.3</a>)</td></tr>
+<tr><td><code>linkComponent</code></td><td>컴포넌트</td><td><code>&lt;a&gt;</code></td><td><code>Header</code> 메뉴, <code>SiteMenu</code>, <code>SideNavigation</code>, <code>PageTitle</code> 경로, <code>SiteFooter</code> 링크를 그릴 컴포넌트. 라우터의 Link 를 넘기면 페이지를 다시 받지 않고 이동한다</td></tr>
+<tr><td><code>textScale</code></td><td><code>&quot;standard&quot;</code> · <code>&quot;large&quot;</code></td><td><code>&quot;standard&quot;</code></td><td><code>large</code> 는 <code>type-*</code> 글자 크기와 줄 높이를 1.125배로 키운다</td></tr>
+<tr><td><code>colorMode</code></td><td><code>&quot;light&quot;</code> · <code>&quot;dark&quot;</code></td><td><code>&quot;light&quot;</code></td><td><code>data-theme</code> 으로 색 토큰 모드를 바꾼다. 다크 토큰은 검토 중 (14장)</td></tr>
+<tr><td><code>audience</code></td><td><code>&quot;customer&quot;</code> · <code>&quot;sales&quot;</code></td><td><code>&quot;customer&quot;</code></td><td>화면 대상. 하위에서 <code>useHanwhaAudience()</code> 로 읽는다</td></tr></tbody></table></div>
+<p><code>TooltipProvider</code> 는 <code>Tooltip</code> 을, <code>ToastProvider</code> 는 <code>useToast()</code> 를 쓸 때 필수다. 없으면 런타임 오류가 난다.</p>
+<h3 id="s-2-5"><span class="num">2.5</span>Next.js App Router</h3>
+<p>0.9.0 빌드는 React 훅, Context, 이벤트 핸들러, Radix 를 쓰는 모듈에 <code>&#39;use client&#39;</code> 를 자동으로 붙인다. 그래서 Server Component 에서도 DS 컴포넌트를 import 해 렌더링할 수 있다(Next.js 16.4 에서 확인). <code>Graphic</code>, <code>Feedback</code>, <code>Amount</code>, <code>Avatar</code> 처럼 상태가 없는 모듈은 지시어가 없어 서버에서만 그려진다. 다만 <code>&#39;use client&#39;</code> 모듈은 import 하는 모듈 전체를 클라이언트 번들로 가져가므로, <code>Header</code> 나 <code>List</code> 를 쓰는 앱에서는 그래픽 묶음도 클라이언트 번들에 들어간다 (<a href="#s-10-3">10.3</a>).</p>
+<p>Next.js 는 Server Component 가 Client Component 에 함수를 props 로 넘기는 것을 허용하지 않는다. 작성 위치는 아래 기준으로 나눈다.</p>
+<div class="table"><table><thead><tr><th>작성 위치</th><th>코드</th></tr></thead><tbody><tr><td>Server Component</td><td>데이터 조회, 정적 표시(<code>Card</code> <code>List</code> <code>Amount</code> <code>Badge</code> <code>Tag</code> <code>Feedback</code> <code>Graphic</code> 등), <code>href</code> 로 이동하는 링크(<code>&lt;Button asChild&gt;&lt;Link href=&quot;…&quot;&gt;</code>)</td></tr>
+<tr><td>Client Component (<code>&#39;use client&#39;</code>)</td><td><code>onClick</code> · <code>onValueChange</code> 같은 이벤트 핸들러, 상태, 폼, <code>useToast()</code>, 오버레이 열기·닫기 제어</td></tr></tbody></table></div>
+<p><code>buttonVariants</code> 처럼 <code>Variants</code> 로 끝나는 export 는 클라이언트 모듈에 있어 Server Component 에서 호출할 수 없다. 차트(<code>BarChart</code> 등)는 그리기 엔진을 브라우저에서 동적으로 불러오므로, 서버 HTML 에는 같은 크기의 빈 자리만 그려진다.</p>
+<div class="code"><div class="code-head"><span>TSX</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code><span class="c">// src/app/transfer/page.tsx (Server Component)</span>
+import type { ReactElement } from 'react';
+import { Amount } from '@nextlab/ds/hanwha';
+import { getAccounts, getBalance } from '@/features/transfer/api';
+import { TransferForm } from './transfer-form';
+
+export default async function TransferPage(): Promise&lt;ReactElement&gt; {
+  const [accounts, balance] = await Promise.all([getAccounts(), getBalance()]);
+  return (
+    &lt;main className="flex flex-col gap-6 px-layout-margin pt-8 pb-12"&gt;
+      &lt;Amount value={balance} size="large" prefix="출금 가능" /&gt;
+      &lt;TransferForm accounts={accounts} /&gt;
+    &lt;/main&gt;
+  );
+}</code></pre></div>
+<div class="code"><div class="code-head"><span>TSX</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code><span class="c">// src/app/transfer/transfer-form.tsx (Client Component)</span>
+'use client';
+
+import { useState, type ReactElement } from 'react';
+import { Button, ButtonGroup, SelectField, TextField } from '@nextlab/ds/hanwha';
+import type { Account } from '@/features/transfer/types';
+
+interface TransferFormProps {
+  accounts: readonly Account[];
+}
+
+export function TransferForm({ accounts }: TransferFormProps): ReactElement {
+  const [accountId, setAccountId] = useState&lt;string&gt;();
+
+  return (
+    &lt;&gt;
+      &lt;SelectField
+        label="출금 계좌"
+        options={accounts.map((a) =&gt; ({ value: a.id, label: a.name }))}
+        value={accountId}
+        onValueChange={setAccountId}
+      /&gt;
+      &lt;TextField label="보낼 금액" format="amount" suffix="원" /&gt;
+      &lt;ButtonGroup fixed primary={&lt;Button disabled={accountId === undefined}&gt;다음&lt;/Button&gt;} /&gt;
+    &lt;/&gt;
+  );
+}</code></pre></div>
+<h3 id="s-2-6"><span class="num">2.6</span>테스트 환경</h3>
+<p>컴포넌트 테스트는 Vitest, Testing Library, jsdom 을 기준으로 한다. 패키지가 ESM 전용이라 Jest 는 별도 변환 설정이 필요하다.</p>
+<p>jsdom 에 없는 브라우저 API 는 setup 파일에서 채운다. 오버레이·탭·목록은 <code>ResizeObserver</code> 와 <code>scrollIntoView</code> 를, 서명 패드는 pointer capture 를, 차트는 <code>matchMedia</code> 를 쓴다.</p>
+<div class="code"><div class="code-head"><span>TS</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code><span class="c">// vitest.config.ts</span>
+import { defineConfig } from 'vitest/config';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
+  test: { environment: 'jsdom', setupFiles: ['./vitest.setup.ts'] },
+});</code></pre></div>
+<div class="code"><div class="code-head"><span>TS</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code><span class="c">// vitest.setup.ts</span>
+import '@testing-library/jest-dom/vitest';
+
+class ResizeObserverStub implements ResizeObserver {
+  observe(): void {}
+  unobserve(): void {}
+  disconnect(): void {}
+}
+globalThis.ResizeObserver ??= ResizeObserverStub;
+
+Element.prototype.scrollIntoView ??= function scrollIntoView(): void {};
+Element.prototype.hasPointerCapture ??= () =&gt; false;
+Element.prototype.setPointerCapture ??= () =&gt; {};
+Element.prototype.releasePointerCapture ??= () =&gt; {};
+
+window.matchMedia ??= (query: string): MediaQueryList =&gt; ({
+  matches: false,
+  media: query,
+  onchange: null,
+  addListener: () =&gt; {},
+  removeListener: () =&gt; {},
+  addEventListener: () =&gt; {},
+  removeEventListener: () =&gt; {},
+  dispatchEvent: () =&gt; false,
+});</code></pre></div>
+<div class="code"><div class="code-head"><span>TSX</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code><span class="c">// src/test/render.tsx</span>
+import { render, type RenderOptions, type RenderResult } from '@testing-library/react';
+import type { ReactElement, ReactNode } from 'react';
+import { HanwhaProvider, ToastProvider, TooltipProvider } from '@nextlab/ds/hanwha';
+
+function Wrapper({ children }: { children: ReactNode }): ReactElement {
+  return (
+    &lt;HanwhaProvider&gt;
+      &lt;TooltipProvider&gt;
+        &lt;ToastProvider&gt;{children}&lt;/ToastProvider&gt;
+      &lt;/TooltipProvider&gt;
+    &lt;/HanwhaProvider&gt;
+  );
+}
+
+export function renderWithDs(ui: ReactElement, options?: Omit&lt;RenderOptions, 'wrapper'&gt;): RenderResult {
+  return render(ui, { wrapper: Wrapper, ...options });
+}</code></pre></div>
+<p>동작·접근성 테스트에는 CSS 를 불러오지 않아도 된다. 요소는 역할과 이름으로 찾는다(<code>screen.getByRole(&#39;button&#39;, { name: &#39;다음&#39; })</code>). 다이얼로그·바텀시트 내용은 <code>document.body</code> 에 그려지므로 <code>screen</code> 으로 찾는다.</p>
+<h2 id="s-3"><span class="num">3</span>스타일 아키텍처</h2>
+<p><code>styles.css</code> 는 Tailwind v4 로 미리 컴파일한 CSS 를 하나의 범위 선택자 아래에 가둔 파일이다. 앱 CSS 와 충돌하지 않는 이유, 그리고 앱에서 지켜야 하는 조건이 이 구조에서 나온다.</p>
+<h3 id="s-3-1"><span class="num">3.1</span>범위 선택자</h3>
+<p>모든 규칙은 <code>[data-nxl-surface=&quot;hanwha-customer&quot;]</code> 아래에서만 적용된다. 이 속성은 <code>HanwhaProvider</code> 가 렌더링하는 래퍼 <code>&lt;div&gt;</code> 에 붙는다. Provider 바깥 요소에는 DS 의 리셋·토큰·유틸리티가 적용되지 않는다.</p>
+<div class="code"><div class="code-head"><span>HTML</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code>&lt;div data-nxl-surface="hanwha-customer" data-nxl-audience="customer" data-theme="light" data-nxl-text-scale="standard"&gt;
+  &lt;!-- 앱 화면 --&gt;
+&lt;/div&gt;</code></pre></div>
+<div class="table"><table><thead><tr><th>속성</th><th>값</th><th>역할</th></tr></thead><tbody><tr><td><code>data-nxl-surface</code></td><td><code>hanwha-customer</code></td><td>CSS 범위</td></tr>
+<tr><td><code>data-theme</code></td><td><code>light</code> · <code>dark</code></td><td>색 토큰 모드</td></tr>
+<tr><td><code>data-nxl-text-scale</code></td><td><code>standard</code> · <code>large</code></td><td>글자 확대 배율 <code>--cds-text-zoom</code> (1 · 1.125)</td></tr>
+<tr><td><code>data-cds-scale</code></td><td><code>mobile</code> · <code>tablet</code> · <code>pc</code></td><td>타이포·간격 스케일 강제. 지정하지 않으면 미디어 쿼리(768·1200px)로 결정된다</td></tr></tbody></table></div>
+<h3 id="s-3-2"><span class="num">3.2</span>Cascade layer 와 우선순위</h3>
+<p>DS CSS 에서 레이어 안에 있는 것은 리셋(Tailwind preflight) 하나다. 토큰, 유틸리티, 컴포넌트 규칙은 모두 레이어 밖에 있다. CSS 는 레이어 밖 규칙을 레이어 안 규칙보다 명시도와 무관하게 우선한다. 앱 CSS 와 만났을 때의 결과는 아래와 같다.</p>
+<div class="table"><table><thead><tr><th>DS 규칙</th><th>위치</th><th>앱 CSS 와 만나면</th></tr></thead><tbody><tr><td>리셋 (preflight)</td><td><code>@layer base</code></td><td>앱 Tailwind 유틸리티(<code>@layer utilities</code>)가 이긴다. 앱이 준 <code>p-4</code> 가 리셋의 <code>padding: 0</code> 에 덮이지 않는다</td></tr>
+<tr><td>토큰·유틸리티·컴포넌트</td><td>레이어 밖. <code>[data-nxl-surface=&quot;hanwha-customer&quot;] .flex</code> 처럼 범위 선택자가 붙어 명시도가 (0,2,0) 이상이다</td><td>앱 Tailwind 유틸리티는 레이어 안이라 이 규칙을 이기지 못한다. 앱의 레이어 밖 일반 CSS 는 명시도로 겨루며, <code>.card { … }</code>(0,1,0)는 진다</td></tr></tbody></table></div>
+<p>컴포넌트의 <code>className</code> 이 동작하는 것은 <code>cn()</code>(clsx + tailwind-merge)이 같은 속성의 내부 클래스를 빼 주기 때문이다. <code>h-14</code> 를 넘기면 내부의 <code>h-(--cds-dimension-x12)</code> 가 빠지고 <code>h-14</code> 만 남는다. 상태 변형(<code>data-[state=error]:…</code>)이나 하위 요소 선택자(<code>[&amp;_svg]:…</code>)로 걸린 내부 규칙은 빠지지 않고, 레이어 밖이라 넘긴 클래스보다 우선한다.</p>
+<p>그래서 <code>className</code> 은 배치(margin, width, flex·grid 항목 속성)에만 쓴다. 높이·색·내부 간격을 <code>className</code> 으로 바꾸면 일부 상태에서만 적용되고, 토큰이 바뀌어도 그 화면에는 반영되지 않는다.</p>
+<h3 id="s-3-3"><span class="num">3.3</span>Portal 과 syncRoot</h3>
+<p><code>Dialog</code>, <code>BottomSheet</code>, <code>Tooltip</code>, <code>Menu</code>, <code>SelectField</code> 펼침 목록 같은 오버레이는 Radix Portal 로 <code>document.body</code> 아래에 렌더링된다. 이 위치는 Provider 래퍼 밖이라 범위 선택자에 걸리지 않는다. <code>syncRoot</code> 를 켜면 Provider 가 <code>&lt;html&gt;</code> 에 같은 data 속성을 설정해 Portal 내용에도 토큰과 스타일이 적용된다. 앱 루트의 Provider 에는 항상 켠다.</p>
+<p><code>syncRoot</code> 는 <code>useLayoutEffect</code> 에서 <code>&lt;html&gt;</code> 의 속성을 바꾸고, Provider 가 사라지면 이전 값으로 되돌린다. 서버 HTML 에는 래퍼 <code>&lt;div&gt;</code> 의 속성이 이미 들어 있으므로 첫 화면은 속성 적용 전에도 스타일이 맞다. <code>&lt;html&gt;</code> 이 범위가 되므로 그 뒤로는 Provider 바깥 요소에도 DS 리셋과 3.6 의 규칙이 적용된다.</p>
+<h3 id="s-3-4"><span class="num">3.4</span>미리 컴파일된 유틸리티와 앱 Tailwind</h3>
+<p><code>styles.css</code> 에는 아래 클래스가 미리 들어 있다.</p>
+<div class="table"><table><thead><tr><th>종류</th><th>예</th></tr></thead><tbody><tr><td>색 토큰</td><td><code>text-fg-*</code> <code>bg-bg-*</code> <code>border-stroke-*</code></td></tr>
+<tr><td>타이포그래피</td><td><code>type-*</code></td></tr>
+<tr><td>형태</td><td><code>rounded-*</code> <code>shadow-elevation-*</code></td></tr>
+<tr><td>레이아웃 간격 토큰</td><td><code>px-layout-margin</code> <code>gap-layout-gutter</code> 등 (반응형 변형 포함)</td></tr>
+<tr><td>DS 소스가 쓰는 Tailwind 기본 유틸리티</td><td><code>flex</code> <code>items-center</code> <code>w-full</code> 등</td></tr></tbody></table></div>
+<p>DS 가 미리 만들지 않은 클래스(예: <code>grid-cols-3</code>)는 앱 Tailwind 가 생성한다. 앱 Tailwind 는 DS 토큰 이름을 모르므로 토큰 클래스는 DS CSS 가, 그 외 배치 클래스는 앱 Tailwind 가 맡는다. <code>gap-(--cds-size-base-md)</code> 처럼 CSS 변수를 직접 참조하는 클래스는 앱 Tailwind 가 생성하고, 값은 DS 범위의 CSS 변수에서 온다.</p>
+<h3 id="s-3-5"><span class="num">3.5</span>토큰 클래스와 변형 접두사</h3>
+<p>앱 Tailwind 는 DS 토큰 이름을 모르므로, 토큰 클래스에 변형 접두사를 붙인 조합은 앱에서 생성되지 않는다. DS CSS 에는 DS 소스가 직접 쓰는 조합과 간격 토큰의 <code>md:</code> · <code>lg:</code> 변형만 들어 있다. 그 밖의 조합은 CSS 변수를 참조하는 문법으로 쓴다.</p>
+<div class="table"><table><thead><tr><th>의도</th><th>생성되지 않는 클래스</th><th>대신 쓰는 클래스</th></tr></thead><tbody><tr><td>hover 시 회색 면</td><td><code>hover:bg-bg-neutral-tint</code></td><td><code>hover:bg-(--cds-bg-neutral-tint)</code></td></tr>
+<tr><td>hover 시 브랜드 글자</td><td><code>hover:text-fg-brand-strong</code></td><td><code>hover:text-(--cds-fg-brand-strong)</code></td></tr>
+<tr><td>포커스 시 테두리</td><td><code>focus:border-stroke-focus-default</code></td><td><code>focus:border-(--cds-stroke-focus-default)</code></td></tr>
+<tr><td>부모 hover 시 글자색</td><td><code>group-hover:text-fg-brand-default</code></td><td><code>group-hover:text-(--cds-fg-brand-default)</code></td></tr></tbody></table></div>
+<p>변수 이름은 클래스에서 CSS 속성 접두사를 떼고 <code>--cds-</code> 를 붙인 것이다(<code>bg-bg-neutral-tint</code> → <code>--cds-bg-neutral-tint</code>, <code>px-layout-margin</code> → <code>--cds-layout-margin</code>). <code>type-*</code> 는 여러 속성을 묶은 클래스라 변형 접두사와 함께 쓰지 않는다. 글자 크기는 분기점에서 이미 자동으로 바뀐다. 누름·hover 덮개는 색을 직접 칠하지 않고 <code>state-layer interaction-overlay</code> 를 쓴다(<a href="#s-6-8">6.8</a>).</p>
+<h3 id="s-3-6"><span class="num">3.6</span>앱 변형 클래스가 무시되는 경우</h3>
+<p>3.2 의 결과로, DS CSS 에 들어 있는 클래스와 같은 속성을 바꾸는 앱의 변형 클래스를 한 요소에 함께 쓰면 Provider 안에서는 앱 쪽이 무시된다. 오류나 경고 없이 화면만 다르게 나온다. 아래는 Chromium 에서 계산된 <code>display</code> 값이다.</p>
+<div class="table"><table><thead><tr><th>클래스</th><th>화면 폭</th><th>Provider 밖</th><th>Provider 안</th></tr></thead><tbody><tr><td><code>flex min-[768px]:hidden</code></td><td>800px</td><td><code>none</code></td><td><code>flex</code> (숨겨지지 않음)</td></tr>
+<tr><td><code>block min-[768px]:flex</code></td><td>800px</td><td><code>flex</code></td><td><code>block</code></td></tr>
+<tr><td><code>flex lg:hidden</code></td><td>1100px</td><td><code>none</code></td><td><code>flex</code></td></tr>
+<tr><td><code>max-[767px]:flex min-[768px]:hidden</code></td><td>400 · 800px</td><td><code>flex</code> · <code>none</code></td><td><code>flex</code> · <code>none</code></td></tr></tbody></table></div>
+<p><code>flex</code> <code>block</code> <code>hidden</code> 은 DS 소스가 쓰므로 DS CSS 에 레이어 밖 규칙으로 들어 있다. <code>min-[768px]:hidden</code> 은 DS CSS 에 없어 앱 Tailwind 가 레이어 안에 만들고, 레이어 밖의 <code>flex</code> 에 진다. <code>flex min-[1200px]:hidden</code> 처럼 DS CSS 에 마침 변형까지 들어 있는 조합은 동작하지만, 어떤 클래스가 들어 있는지는 버전마다 달라진다.</p>
+<p>Provider 안에서 화면 폭이나 상태에 따라 같은 속성을 바꿀 때는 조건 없는 기본값 클래스를 두지 않는다. 모든 구간을 범위 변형으로 쓰면(<code>max-[767px]:flex min-[768px]:hidden</code>) DS CSS 의 내용과 무관하게 의도대로 적용된다. 레이아웃 전환이 목적이면 이미 화면 폭에 따라 바뀌는 <code>PageColumns</code> <code>Header</code> 같은 컴포넌트를 먼저 쓴다.</p>
+<h2 id="s-4"><span class="num">4</span>디자인 토큰</h2>
+<p>화면 코드의 색·글자·간격·모서리는 이 장의 토큰 클래스로만 쓴다. 값을 직접 쓰면 디자인 변경과 큰 글자 모드가 반영되지 않는다.</p>
+<h3 id="s-4-1"><span class="num">4.1</span>계층</h3>
+<p>토큰은 디자이너의 Figma Variables 에서 생성된다. Variables 를 내보낸 JSON 을 생성기가 읽어 원색, 시맨틱(light·dark), 반응형 CSS 를 만든다. 반응형 토큰은 <code>:root</code> 기본값(Mobile)에 768px · 1200px 미디어 쿼리 값과 <code>[data-cds-scale]</code> 강제 값을 더한 형태다. 생성기의 <code>--check</code> 모드는 커밋된 CSS 가 생성 결과와 한 글자라도 다르면 실패하므로, 손으로 고친 값이 섞이지 않는다. 값 변경은 Figma Variables 에서 시작한다.</p>
+<div class="table"><table><thead><tr><th>층</th><th>예</th><th>쓰임</th></tr></thead><tbody><tr><td>Figma Variables</td><td><code>fg/neutral/default</code></td><td>디자인 정본</td></tr>
+<tr><td>원색 팔레트</td><td><code>--cds-orange-500</code> <code>--cds-gray-900</code></td><td>토큰 정의에만 쓴다. 화면 코드에서 참조하지 않는다</td></tr>
+<tr><td>시맨틱 토큰</td><td><code>--cds-fg-neutral-default</code></td><td><code>data-theme</code> 에 따라 light·dark 값이 바뀐다</td></tr>
+<tr><td>유틸리티 클래스</td><td><code>text-fg-neutral-default</code></td><td>화면 코드가 쓰는 층</td></tr>
+<tr><td>TS 상수</td><td><code>CDS_TYPOGRAPHY</code> <code>CDS_LAYOUT</code> <code>CDS_BREAKPOINTS</code></td><td>JS 에서 값이 필요할 때 (차트, 캔버스 등)</td></tr></tbody></table></div>
+<h3 id="s-4-2"><span class="num">4.2</span>색</h3>
+<p>클래스 이름은 <code>{CSS 속성}-{그룹}-{톤}-{세기}</code> 순서다. 그룹은 <code>fg</code>(글자·아이콘), <code>bg</code>(면), <code>stroke</code>(선)이고, 톤은 <code>neutral</code> <code>brand</code> <code>critical</code> <code>warning</code> <code>positive</code> <code>info</code> <code>disabled</code> 다. <code>fg</code> 토큰은 <code>text-</code> <code>fill-</code> <code>stroke-</code>, <code>stroke</code> 토큰은 <code>border-</code> <code>outline-</code> <code>ring-</code> <code>divide-</code> 접두사로 쓸 수 있다.</p>
+<p><code>bg-bg-layer-base</code> 의 겹친 <code>bg</code> 는 Tailwind 속성 접두사 뒤에 Figma 변수 경로(<code>bg/layer/base</code>)를 그대로 붙여서 생긴다. 줄여 쓰지 않은 대신 클래스만 보고 Figma 변수를 찾을 수 있고, 디자인 명세의 변수 이름을 그대로 옮기면 클래스가 된다.</p>
+<div class="table"><table><thead><tr><th>용도</th><th>클래스</th></tr></thead><tbody><tr><td>페이지 배경</td><td><code>bg-bg-layer-base</code></td></tr>
+<tr><td>카드·패널</td><td><code>bg-bg-layer-default</code></td></tr>
+<tr><td>바텀시트·팝오버</td><td><code>bg-bg-layer-floating</code></td></tr>
+<tr><td>회색 구역</td><td><code>bg-bg-neutral-tint</code> · <code>bg-bg-neutral-tint-strong</code></td></tr>
+<tr><td>브랜드 면</td><td><code>bg-bg-brand-solid</code> · <code>bg-bg-brand-tint</code></td></tr>
+<tr><td>반전 면(토스트·툴팁)</td><td><code>bg-bg-inverse-default</code> + <code>text-fg-inverse-default</code></td></tr>
+<tr><td>제목·본문</td><td><code>text-fg-neutral-default</code> · <code>text-fg-neutral-strong</code></td></tr>
+<tr><td>보조 텍스트</td><td><code>text-fg-neutral-muted</code> → <code>subtle</code> → <code>tertiary</code> (뒤로 갈수록 연함. 본문 크기는 <code>muted</code>, 9.3)</td></tr>
+<tr><td>브랜드 텍스트</td><td><code>text-fg-brand-default</code> · 본문 크기는 <code>text-fg-brand-strong</code> (<a href="#s-9-3">9.3</a>)</td></tr>
+<tr><td>상태 텍스트</td><td><code>text-fg-critical-default</code> · <code>warning</code> · <code>positive</code> · <code>info</code></td></tr>
+<tr><td>금액 등락</td><td><code>text-fg-trend-up</code>(상승, 빨강) · <code>text-fg-trend-down</code>(하락, 파랑) · <code>text-fg-trend-flat</code></td></tr>
+<tr><td>진한 면 위 텍스트</td><td><code>text-fg-neutral-inverse</code></td></tr>
+<tr><td>비활성</td><td><code>text-fg-disabled-default</code> · <code>bg-bg-disabled-default</code></td></tr>
+<tr><td>구분선·테두리</td><td><code>border-stroke-neutral-subtle</code> · <code>default</code> · <code>strong</code></td></tr>
+<tr><td>포커스</td><td><code>outline-stroke-focus-default</code></td></tr></tbody></table></div>
+<p>hex 값과 원색 팔레트 클래스(<code>bg-orange-500</code>)는 화면 코드에 쓰지 않는다. 다크 모드와 토큰 값 변경이 반영되지 않는다.</p>
+<h3 id="s-4-3"><span class="num">4.3</span>타이포그래피</h3>
+<p><code>type-{역할}-{크기}</code> 클래스 하나가 font-size, line-height, letter-spacing, font-weight 를 정한다. 색은 <code>text-fg-*</code> 로 따로 지정한다. 크기는 화면 폭에 따라 아래 값으로 바뀌고, <code>textScale=&quot;large&quot;</code> 일 때 1.125배가 된다.</p>
+<div class="table"><table><thead><tr><th>클래스</th><th>굵기</th><th>Mobile</th><th>Tablet</th><th>PC</th></tr></thead><tbody><tr><td><code>type-display-large</code></td><td>700</td><td>48/60</td><td>48/60</td><td>56/70</td></tr>
+<tr><td><code>type-display-medium</code></td><td>700</td><td>40/50</td><td>42/54</td><td>48/60</td></tr>
+<tr><td><code>type-display-small</code></td><td>700</td><td>36/46</td><td>36/46</td><td>40/52</td></tr>
+<tr><td><code>type-heading-large</code></td><td>700</td><td>32/40</td><td>32/40</td><td>36/46</td></tr>
+<tr><td><code>type-heading-medium</code></td><td>700</td><td>28/36</td><td>28/36</td><td>32/42</td></tr>
+<tr><td><code>type-heading-small</code></td><td>700</td><td>24/34</td><td>24/34</td><td>28/40</td></tr>
+<tr><td><code>type-title-large</code></td><td>700</td><td>22/32</td><td>22/32</td><td>24/36</td></tr>
+<tr><td><code>type-title-medium</code></td><td>700</td><td>20/28</td><td>20/28</td><td>22/32</td></tr>
+<tr><td><code>type-title-small</code></td><td>700</td><td>18/26</td><td>18/26</td><td>20/30</td></tr>
+<tr><td><code>type-body-large</code></td><td>300</td><td>16/24</td><td>16/24</td><td>18/28</td></tr>
+<tr><td><code>type-body-medium</code></td><td>300</td><td>14/22</td><td>14/22</td><td>16/26</td></tr>
+<tr><td><code>type-body-small</code></td><td>300</td><td>13/18</td><td>13/18</td><td>14/20</td></tr>
+<tr><td><code>type-caption-medium</code></td><td>300</td><td>12/18</td><td>12/18</td><td>12/18</td></tr>
+<tr><td><code>type-caption-small</code></td><td>300</td><td>11/18</td><td>11/18</td><td>11/18</td></tr></tbody></table></div>
+<p>값은 font-size/line-height(px)다. <code>title-*-subtle</code> 은 굵기 400, <code>body-*-strong</code> · <code>caption-*-strong</code> 은 굵기 700 변형이다. 밑줄 링크 글자는 클래스가 아니라 <code>Link</code> 컴포넌트로 쓴다. Tailwind 의 <code>text-sm</code>, <code>font-bold</code>, <code>leading-*</code> 는 <code>--cds-text-zoom</code> 과 반응형 전환을 따르지 않으므로 텍스트에 쓰지 않는다.</p>
+<h3 id="s-4-4"><span class="num">4.4</span>간격</h3>
+<div class="table"><table><thead><tr><th>스케일</th><th>정의</th><th>쓰는 법</th></tr></thead><tbody><tr><td>dimension (고정)</td><td><code>--cds-dimension-x{n}</code> = n × 4px (x1 … x18)</td><td>Tailwind 숫자 유틸리티와 같은 값 (<code>p-4</code> = 16px = x4)</td></tr>
+<tr><td>size-base (반응형)</td><td><code>--cds-size-base-{xs,sm,md,lg,xl,xxl}</code></td><td>화면 폭에 따라 값이 바뀜. <code>gap-(--cds-size-base-md)</code></td></tr>
+<tr><td>화면 여백·거터</td><td><code>layout-margin</code> <code>layout-gutter</code> (16 · 24 · 32px)</td><td><code>px-layout-margin</code> <code>gap-layout-gutter</code></td></tr>
+<tr><td>섹션 간격</td><td><code>layout-section-gap</code> (24 · 32 · 40px)</td><td><code>gap-layout-section-gap</code></td></tr>
+<tr><td>카드 안쪽 여백</td><td><code>layout-card-padding</code> (16 · 20 · 24px)</td><td><code>p-layout-card-padding</code></td></tr></tbody></table></div>
+<p>화면 여백부터 카드 여백까지 괄호 안 값은 Mobile · Tablet · PC 순서다.</p>
+<h3 id="s-4-5"><span class="num">4.5</span>라운드·그림자</h3>
+<div class="table"><table><thead><tr><th>토큰</th><th>값</th></tr></thead><tbody><tr><td><code>rounded-r1</code> · <code>r2</code> · <code>r3</code> · <code>r4</code> · <code>r5</code> · <code>r6</code></td><td>4 · 8 · 12 · 16 · 20 · 24px (중간값 <code>r0-5</code> 2, <code>r1-5</code> 6, <code>r2-5</code> 10, <code>r3-5</code> 14)</td></tr>
+<tr><td><code>rounded-full</code></td><td>알약형</td></tr>
+<tr><td><code>shadow-elevation-small</code> · <code>medium</code> · <code>large</code></td><td>카드 · 세그먼트 · 다이얼로그·바텀시트</td></tr></tbody></table></div>
+<h3 id="s-4-6"><span class="num">4.6</span>모션</h3>
+<div class="table"><table><thead><tr><th>토큰</th><th>값</th><th>쓰는 법</th></tr></thead><tbody><tr><td><code>--cds-duration-short</code> · <code>base</code> · <code>long</code></td><td>120 · 200 · 300ms</td><td><code>duration-(--cds-duration-base)</code></td></tr>
+<tr><td><code>--cds-easing-standard</code></td><td><code>cubic-bezier(0.2, 0, 0, 1)</code></td><td><code>ease-(--cds-easing-standard)</code></td></tr>
+<tr><td><code>--cds-easing-decelerate</code></td><td><code>cubic-bezier(0, 0, 0, 1)</code></td><td>등장 애니메이션. <code>ease-(--cds-easing-decelerate)</code></td></tr></tbody></table></div>
+<p>컴포넌트 애니메이션은 <code>prefers-reduced-motion</code> 에서 멈추거나 줄어든다. 화면에서 직접 넣는 애니메이션도 <code>motion-safe:</code> 로 감싼다.</p>
+<h3 id="s-4-7"><span class="num">4.7</span>쌓임 순서</h3>
+<div class="table"><table><thead><tr><th>클래스</th><th>z-index</th><th>쓰는 곳</th></tr></thead><tbody><tr><td><code>z-sticky</code></td><td>10</td><td>고정 머리(<code>Header sticky</code>), 하단 고정 버튼</td></tr>
+<tr><td><code>z-overlay</code></td><td>100</td><td>다이얼로그, 바텀시트, 메뉴, 펼침 목록, 툴팁</td></tr>
+<tr><td><code>z-toast</code></td><td>200</td><td>토스트</td></tr></tbody></table></div>
+<p>앱에서 직접 만드는 고정 요소는 <code>z-sticky</code> 를 쓰거나 100 보다 낮게 둔다. 100 이상을 쓰면 DS 오버레이 위로 올라온다.</p>
+<h2 id="s-5"><span class="num">5</span>레이아웃과 반응형</h2>
+<p>화면은 768px 과 1200px 에서 바뀐다. 모바일은 <code>Header</code> 와 하단 고정 버튼, PC 는 메뉴형 <code>Header</code> 와 <code>PageContainer</code> 로 짠다.</p>
+<h3 id="s-5-1"><span class="num">5.1</span>분기점과 그리드</h3>
+<div class="table"><table><thead><tr><th>구간</th><th>화면 폭</th><th>좌우 여백</th><th>거터</th><th>열</th><th>본문 최대 폭</th></tr></thead><tbody><tr><td>Mobile</td><td>0–767px</td><td>16px</td><td>16px</td><td>4</td><td>제한 없음</td></tr>
+<tr><td>Tablet</td><td>768–1199px</td><td>24px</td><td>24px</td><td>8</td><td>제한 없음</td></tr>
+<tr><td>PC</td><td>1200px 이상</td><td>32px</td><td>32px</td><td>12 (density middle) · 8 (low)</td><td>1176px (middle) · 720px (low)</td></tr></tbody></table></div>
+<p>좌우 여백과 거터는 <code>px-layout-margin</code>, <code>gap-layout-gutter</code> 로 쓰며 값은 분기점에서 바뀐다. 타이포그래피와 <code>size-base</code> 간격도 같은 분기점에서 자동으로 바뀐다. 버튼·입력 필드 높이는 화면 폭과 무관하게 고정이다.</p>
+<p>코드에서 분기할 때는 Tailwind 기본 <code>lg:</code>(1024px) · <code>xl:</code>(1280px) 대신 <code>min-[768px]:</code> · <code>min-[1200px]:</code> 을 쓴다. Provider 안에서는 기본값 클래스 없이 구간마다 범위 변형으로 쓴다(<a href="#s-3-6">3.6</a>). JS 에서는 <code>CDS_BREAKPOINTS</code>(<code>{ tablet: 768, desktop: 1200 }</code>)를 읽는다.</p>
+<p>토큰은 화면 폭(미디어 쿼리)을 따르고, <code>PageColumns</code> 와 PC <code>Header</code> 는 자기 폭(컨테이너 쿼리)을 따른다. 그래서 PC 화면이라도 좁은 영역 안에 넣은 <code>PageColumns</code> 는 한 칸으로 그려진다.</p>
+<figure class="diagram"><svg viewBox="0 0 760 508" role="img" aria-label="1200px 에서 상단과 하단 컴포넌트가 바뀐다" font-size="13">
+  <defs>
+    <marker id="frame-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="d-fill-line" d="M0 0L10 5L0 10z"/></marker>
+  </defs>
+  <text class="d-ink" x="24" y="34" font-size="15" font-weight="700">1200px 에서 상단과 하단 컴포넌트가 바뀐다</text>
+  <text class="d-ink" x="24" y="68" font-weight="700">Mobile · Tablet · ~1199px</text>
+  <text class="d-ink" x="280" y="68" font-weight="700">PC · 1200px 이상</text>
+
+  <rect class="d-frame" x="24" y="80" width="200" height="380" rx="16"/>
+  <rect class="d-hot" x="36" y="92" width="176" height="40" rx="8"/>
+  <text class="d-ink" x="124" y="117" text-anchor="middle" font-weight="700">Header</text>
+  <rect class="d-box" x="36" y="144" width="176" height="176" rx="8"/>
+  <text class="d-ink" x="124" y="226" text-anchor="middle">본문</text>
+  <text class="d-muted" x="124" y="244" text-anchor="middle" font-size="11.5">px-layout-margin</text>
+  <rect class="d-hot" x="36" y="332" width="176" height="48" rx="8"/>
+  <text class="d-ink" x="124" y="360" text-anchor="middle" font-weight="700">ButtonGroup fixed</text>
+  <rect class="d-box d-dash" x="36" y="392" width="176" height="56" rx="8"/>
+  <text class="d-ink" x="124" y="416" text-anchor="middle" font-weight="700">BottomNavigation</text>
+  <text class="d-muted" x="124" y="434" text-anchor="middle" font-size="11.5">첫 단계 화면만</text>
+
+  <path class="d-line" d="M228 270H276" marker-end="url(#frame-arrow)"/>
+  <text class="d-muted" x="252" y="258" text-anchor="middle" font-size="11.5">1200px</text>
+
+  <rect class="d-frame" x="280" y="80" width="456" height="380" rx="8"/>
+  <rect class="d-hot" x="292" y="92" width="432" height="40" rx="8"/>
+  <text class="d-ink" x="508" y="117" text-anchor="middle" font-weight="700">Header (type menu)</text>
+  <rect class="d-box" x="292" y="144" width="432" height="236" rx="8"/>
+  <text class="d-muted" x="308" y="166" font-size="11.5">PageContainer (본문 최대 폭)</text>
+  <rect class="d-box" x="308" y="178" width="400" height="40" rx="8"/>
+  <text class="d-ink" x="508" y="203" text-anchor="middle" font-weight="700">PageTitle</text>
+  <rect class="d-box" x="308" y="230" width="264" height="134" rx="8"/>
+  <text class="d-ink" x="440" y="292" text-anchor="middle" font-weight="700">PageColumns</text>
+  <text class="d-muted" x="440" y="310" text-anchor="middle" font-size="11.5">본문 · 8열</text>
+  <rect class="d-box" x="584" y="230" width="124" height="134" rx="8"/>
+  <text class="d-ink" x="646" y="292" text-anchor="middle" font-weight="700">aside</text>
+  <text class="d-muted" x="646" y="310" text-anchor="middle" font-size="11.5">4열 · 요약 카드</text>
+  <rect class="d-hot" x="292" y="392" width="432" height="56" rx="8"/>
+  <text class="d-ink" x="508" y="425" text-anchor="middle" font-weight="700">SiteFooter</text>
+
+  <text class="d-muted" x="24" y="490" font-size="11.5">강조 테두리는 1200px 에서 바뀌는 컴포넌트, 점선은 화면에 따라 넣는 컴포넌트다</text>
+</svg>
+<figcaption>화면 틀 · Mobile·Tablet 과 PC</figcaption></figure>
+<h3 id="s-5-2"><span class="num">5.2</span>Mobile·Tablet 구조</h3>
+<div class="code"><div class="code-head"><span>TSX</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code>&lt;div className="flex min-h-dvh flex-col bg-bg-layer-base"&gt;
+  &lt;Header title="내 보험" onLeftClick={goBack} /&gt;
+  &lt;main className="flex-1 px-layout-margin pt-8 pb-12"&gt;{/* 본문 */}&lt;/main&gt;
+  &lt;ButtonGroup fixed primary={&lt;Button&gt;확인&lt;/Button&gt;} /&gt;
+&lt;/div&gt;</code></pre></div>
+<div class="table"><table><thead><tr><th>영역</th><th>규칙</th></tr></thead><tbody><tr><td><code>Header</code></td><td>기본 <code>layout=&quot;compact&quot;</code>(56px). 왼쪽 뒤로가기, 오른쪽 아이콘 0–3개, 제목 한 줄(넘치면 말줄임). 제목은 기본 <code>h1</code> 이며 본문에 별도 페이지 제목이 있으면 <code>titleAs=&quot;p&quot;</code></td></tr>
+<tr><td><code>ButtonGroup fixed</code></td><td>화면 하단 고정 버튼 영역. <code>primary</code> 하나, 또는 <code>secondary</code> + <code>primary</code> 두 개를 둔다</td></tr>
+<tr><td><code>BottomNavigation</code></td><td>항목 3–5개. 최상위(1depth) 화면에만 두고 PC 에서는 쓰지 않는다. 선택 항목은 BottomNavigationItem 의 <code>selectedIcon</code>(채운 아이콘)</td></tr></tbody></table></div>
+<h3 id="s-5-3"><span class="num">5.3</span>PC 구조</h3>
+<div class="code"><div class="code-head"><span>TSX</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code><span class="c">// src/app/product/calc/calc-screen.tsx</span>
+'use client';
+
+import { useRouter } from 'next/navigation';
+import type { ReactElement } from 'react';
+import {
+  Header,
+  PageColumns,
+  PageContainer,
+  PageTitle,
+  SiteFooter,
+  type HeaderMenuItem,
+} from '@nextlab/ds/hanwha';
+import { PremiumSummary } from './premium-summary';
+
+const MENU = [
+  { id: 'product', label: '보험상품', href: '/product' },
+  { id: 'claim', label: '보험금 청구', href: '/claim' },
+  { id: 'my', label: '마이페이지', href: '/my' },
+] satisfies HeaderMenuItem[];
+
+export function CalcScreen(): ReactElement {
+  const router = useRouter();
+  return (
+    &lt;div className="flex min-h-dvh flex-col bg-bg-layer-base"&gt;
+      &lt;Header type="menu" items={MENU} activeId="product" compactTitle="보험료 계산" onLeftClick={() =&gt; router.back()} /&gt;
+      &lt;PageContainer as="main" className="flex-1"&gt;
+        &lt;PageTitle title="보험료 계산" description="나이와 성별을 넣으면 월 보험료를 계산해 드려요." /&gt;
+        &lt;PageColumns aside={&lt;PremiumSummary /&gt;}&gt;{/* 입력·설명 */}&lt;/PageColumns&gt;
+      &lt;/PageContainer&gt;
+      &lt;SiteFooter links={[{ label: '개인정보처리방침', href: '/privacy', emphasis: true }]} /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre></div>
+<div class="table"><table><thead><tr><th>컴포넌트</th><th>동작</th><th>주요 props</th></tr></thead><tbody><tr><td><code>Header type=&quot;menu&quot;</code></td><td>1200px 이상에서 메뉴형 PC 헤더. 헤더 폭이 1200px 미만이면 모바일 헤더와 전체 메뉴(<code>SiteMenu</code>)로 바뀐다</td><td><code>items</code> <code>activeId</code> <code>onNavigate</code> <code>actions</code> <code>compactTitle</code> <code>onLeftClick</code> <code>menu</code> <code>menuLayout</code></td></tr>
+<tr><td><code>Header layout=&quot;wide&quot;</code> · <code>&quot;contained&quot;</code></td><td>가입·청구 같은 집중 과업 화면의 PC 헤더(64px). 뒤로가기, 과업 이름, 닫기를 둔다. 진행 단계(Stepper)는 헤더가 아니라 본문 첫머리에 둔다</td><td><code>title</code> <code>onLeftClick</code> <code>rightActions</code></td></tr>
+<tr><td><code>PageContainer</code></td><td>좌우 여백과 본문 최대 폭</td><td><code>density</code>(<code>middle</code> · <code>low</code>), <code>as</code></td></tr>
+<tr><td><code>PageTitle</code></td><td>본문 첫 제목과 머리-제목-본문 간격</td><td><code>title</code> <code>description</code> <code>breadcrumb</code> <code>actions</code> <code>pcOnly</code></td></tr>
+<tr><td><code>PageColumns</code></td><td>본문 + 보조 패널(<code>aside</code>). 자기 폭 960px 이상에서 두 칸</td><td><code>aside</code> <code>split</code>(<code>8:4</code> · <code>9:3</code> · <code>7:5</code>) <code>stickyAside</code> <code>mobileAside</code>(<code>stack</code> · <code>hidden</code>)</td></tr>
+<tr><td><code>SideNavigation</code></td><td>마이페이지·고객센터 같은 구역의 왼쪽 메뉴</td><td><code>title</code> <code>items</code> <code>activeId</code> <code>onNavigate</code></td></tr>
+<tr><td><code>SiteFooter</code></td><td>약관·정책 링크와 회사 정보</td><td><code>links</code> <code>info</code> <code>copyright</code> <code>color</code></td></tr></tbody></table></div>
+<p><code>PageContainer</code>, <code>PageTitle</code>, <code>PageColumns</code>, <code>SiteFooter</code>, <code>SiteMenu</code> 는 Figma 정의 전의 확장 컴포넌트로 디자이너 검토 중이다. props 이름이 1.0.0 전에 바뀔 수 있다 (14장).</p>
+<h2 id="s-6"><span class="num">6</span>컴포넌트 API 규약</h2>
+<p>모든 컴포넌트가 따르는 props 규칙과 상황별 선택 기준이다. 어떤 컴포넌트를 쓸지 모르겠으면 6.4 의 표부터 본다.</p>
+<h3 id="s-6-1"><span class="num">6.1</span>구조</h3>
+<p>상호작용 컴포넌트는 Radix UI primitives(Dialog, Select, Tabs, Checkbox, RadioGroup, Switch, Accordion, Tooltip, Popover, Progress) 위에 구현했다. 키보드 조작, 포커스 관리, ARIA 속성은 Radix 의 동작을 따른다. 변형은 class-variance-authority 로 정의하고, 클래스 병합은 <code>cn()</code>(clsx + tailwind-merge)으로 한다.</p>
+<h3 id="s-6-2"><span class="num">6.2</span>props 규칙</h3>
+<div class="table"><table><thead><tr><th>항목</th><th>규칙</th></tr></thead><tbody><tr><td>Figma 속성 대응</td><td>props 이름과 값은 Figma 컴포넌트 속성을 따른다. 각 prop 의 JSDoc 에 대응하는 Figma 속성이 적혀 있다 (예: <code>Button</code> 의 <code>variant</code> = Figma Type, <code>size</code> = Figma Size)</td></tr>
+<tr><td>HTML 속성</td><td>루트 요소의 HTML 속성을 그대로 받는다. <code>TextField</code> 는 <code>&lt;input&gt;</code> 속성을 받는다</td></tr>
+<tr><td>ref</td><td><code>forwardRef</code> 로 실제 DOM 요소를 전달한다. <code>TextField</code> 의 ref 는 <code>HTMLInputElement</code> 다</td></tr>
+<tr><td><code>className</code></td><td>루트 요소에 병합된다. 배치용으로만 쓴다 (<a href="#s-3-2">3.2</a>)</td></tr>
+<tr><td><code>asChild</code></td><td><code>Button</code>, <code>BottomNavigationItem</code> 은 Radix Slot 으로 자식 요소에 스타일과 동작을 넘긴다</td></tr>
+<tr><td>영역 props</td><td>Figma 에서 영역 구성이 정해진 컴포넌트(<code>DialogContent</code> <code>BottomSheetContent</code> <code>FieldArea</code> <code>Feedback</code>)는 하위 컴포넌트 조합 대신 <code>title</code> <code>footer</code> <code>label</code> <code>errorText</code> 같은 영역 props 로 받는다. 영역의 순서·간격·낭독 연결은 컴포넌트가 정한다</td></tr>
+<tr><td><code>status</code> 와 <code>critical</code></td><td>결과·상황을 뜻하는 <code>status</code> 값은 <code>error</code> 를 쓰고(<code>Feedback</code> <code>useToast</code>), 색 토큰은 <code>critical</code> 을 쓴다(<code>text-fg-critical-default</code>). <code>Button color=&quot;critical&quot;</code> 은 0.9.0 에서 사용 중단됐다(Figma 에 없음, 1.0.0 에서 제거)</td></tr>
+<tr><td>제어·비제어</td><td>선택형 컴포넌트는 <code>value</code> · <code>defaultValue</code> · <code>onValueChange</code>(Radix 규칙), 입력형은 HTML 의 <code>value</code> · <code>onChange</code> 를 따른다</td></tr>
+<tr><td><code>state</code></td><td>Storybook 용 정지 상태 표시다. 실제 상태는 <code>disabled</code> · <code>readOnly</code> · <code>invalid</code> · 포커스로 결정되므로 화면 코드에서 쓰지 않는다</td></tr>
+<tr><td><code>inline</code></td><td><code>Dialog</code> 등을 Portal 없이 문서 흐름에 그리는 문서용 옵션이다. 화면 코드에서 쓰지 않는다</td></tr>
+<tr><td><code>@deprecated</code> 표시</td><td>에디터 자동완성에서 취소선으로 보이는 이름은 이전 화면 호환용이다. 쓰지 않고, 툴팁 설명에 적힌 대체 이름을 쓴다</td></tr></tbody></table></div>
+<div class="code"><div class="code-head"><span>TSX</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code><span class="c">// Next.js Link 를 버튼 모양으로</span>
+import Link from 'next/link';
+import { Button } from '@nextlab/ds/hanwha';
+
+&lt;Button asChild&gt;
+  &lt;Link href="/apply"&gt;가입하기&lt;/Link&gt;
+&lt;/Button&gt;</code></pre></div>
+<h3 id="s-6-3"><span class="num">6.3</span>컴포넌트 목록</h3>
+<div class="table"><table><thead><tr><th>분류</th><th>컴포넌트</th></tr></thead><tbody><tr><td>버튼</td><td><code>Button</code> <code>ButtonGroup</code> <code>TextButton</code> <code>IconButton</code> <code>IconLabelButton</code> <code>Link</code></td></tr>
+<tr><td>입력</td><td><code>TextField</code> <code>PasswordField</code> <code>TextArea</code> <code>SearchField</code> <code>SelectField</code> <code>DateField</code> <code>DateRangeField</code> <code>FieldSet</code></td></tr>
+<tr><td>선택</td><td><code>Checkbox</code> <code>Radio</code> <code>RadioGroup</code> <code>Switch</code> <code>Chip</code> <code>ChipGroup</code> <code>Segment</code> <code>SelectionCard</code> <code>SelectionCardGroup</code></td></tr>
+<tr><td>데이터 표시</td><td><code>Card</code> <code>List</code> <code>ListItem</code> <code>ListAmount</code> <code>CardAmount</code> <code>Table</code> <code>DataTable</code> <code>Pagination</code> <code>Tabs</code> <code>Accordion</code> <code>AccordionGroup</code> <code>Badge</code> <code>Tag</code> <code>Avatar</code> <code>Divider</code> <code>Text</code> <code>TextBullet</code> <code>Amount</code> <code>AmountChange</code> <code>TermsAccordion</code> <code>Banner</code> <code>ImageBanner</code> <code>Carousel</code> <code>Panel</code></td></tr>
+<tr><td>진행·상태</td><td><code>Stepper</code> <code>ProgressBar</code> <code>ProgressCircle</code> <code>PageIndicator</code> <code>Spinner</code> <code>Skeleton</code> <code>SkeletonGroup</code> <code>Loading</code> <code>Feedback</code> <code>Rating</code> <code>LevelMeter</code></td></tr>
+<tr><td>차트</td><td><code>BarChart</code> <code>LineChart</code> <code>AreaChart</code> <code>DonutChart</code> <code>CompareBars</code> <code>RatioBar</code> <code>ChartLegend</code></td></tr>
+<tr><td>오버레이</td><td><code>Dialog</code> <code>AlertDialog</code> <code>BottomSheet</code> <code>Menu</code> <code>Toast</code>(<code>useToast</code>) <code>Tooltip</code></td></tr>
+<tr><td>날짜</td><td><code>DatePicker</code> <code>Calendar</code></td></tr>
+<tr><td>업무</td><td><code>TermsAgreement</code> <code>TermsDesign</code> <code>TermsMarketing</code> <code>TermsSignature</code> <code>SignaturePad</code> <code>AddressSearch</code> <code>InstitutionPicker</code></td></tr>
+<tr><td>레이아웃</td><td><code>Header</code> <code>BottomNavigation</code> <code>PageContainer</code> <code>PageTitle</code> <code>PageColumns</code> <code>SideNavigation</code> <code>SiteFooter</code> <code>SiteMenu</code></td></tr></tbody></table></div>
+<h3 id="s-6-4"><span class="num">6.4</span>선택 기준</h3>
+<div class="table"><table><thead><tr><th>요구</th><th>컴포넌트</th><th>기준</th></tr></thead><tbody><tr><td>텍스트·숫자 입력</td><td><code>TextField</code></td><td>단위는 <code>suffix</code>, 금액은 <code>format=&quot;amount&quot;</code>(쉼표와 한글 금액 표시), 지우기는 <code>clearable</code></td></tr>
+<tr><td>단일 선택 2–4개</td><td><code>Segment</code></td><td>라벨이 짧아 한 줄에 들어갈 때. 상한은 <code>SEGMENT_MAX_ITEMS</code>(4)</td></tr>
+<tr><td>단일 선택</td><td><code>RadioGroup</code></td><td>라벨이 길거나 설명이 붙을 때</td></tr>
+<tr><td>카드형 선택</td><td><code>SelectionCardGroup</code></td><td>상품·플랜처럼 항목마다 설명이 있을 때</td></tr>
+<tr><td>단일 선택, 항목이 많을 때</td><td><code>SelectField</code></td><td>목록이 화면 폭에 따라 자동으로 바뀐다. Mobile 은 아래 시트, Tablet·PC 는 가운데 창(Dialog). PC 에서 항목이 6개 이하면 칸 바로 아래 펼침 목록. 검색이 필요한 목록에는 쓰지 않는다</td></tr>
+<tr><td>다중 선택</td><td><code>Checkbox</code> · <code>ChipGroup</code></td><td></td></tr>
+<tr><td>날짜·기간</td><td><code>DateField</code> · <code>DateRangeField</code></td><td>달력(<code>DatePicker</code>) 내장</td></tr>
+<tr><td>부가 작업·긴 목록 선택</td><td><code>BottomSheet</code></td><td>태블릿(768px~)부터 Dialog 로 그린다. 끄려면 <code>BottomSheetContent</code> 에 <code>dialogFromTablet={false}</code></td></tr>
+<tr><td>확인·취소</td><td><code>Dialog</code> · <code>AlertDialog</code></td><td>되돌릴 수 없는 작업은 AlertDialog. 확인 버튼은 맨 오른쪽 (<a href="#s-6-6">6.6</a>)</td></tr>
+<tr><td>더보기(⋯) 행동</td><td><code>Menu</code></td><td></td></tr>
+<tr><td>일시 알림</td><td><code>useToast().show()</code></td><td>기본 4초 후 닫힘. <code>action</code> 이 있으면 자동으로 닫히지 않음. <code>status</code> 로 상태 아이콘</td></tr>
+<tr><td>하단 주 행동</td><td><code>ButtonGroup fixed</code></td><td></td></tr>
+<tr><td>단계 진행</td><td><code>ProgressBar step</code> · <code>Stepper</code></td><td></td></tr>
+<tr><td>목록·카드 로딩</td><td><code>Skeleton</code> · <code>SkeletonGroup</code></td><td>내용 자리를 미리 그릴 때</td></tr>
+<tr><td>짧은 대기</td><td><code>Spinner</code></td><td></td></tr>
+<tr><td>화면 전체 처리 중</td><td><code>Loading</code></td><td><code>type</code> <code>overlay</code> · <code>screen</code></td></tr>
+<tr><td>빈 상태·오류·완료</td><td><code>Feedback</code></td><td><code>type</code> <code>screen</code> · <code>area</code> × <code>status</code> <code>success</code> · <code>empty</code> · <code>error</code></td></tr>
+<tr><td>금액 표시</td><td><code>Amount</code> · <code>AmountChange</code> · <code>ListAmount</code> · <code>CardAmount</code></td><td>값이 없으면 0원이 아니라 &quot;미확인&quot;으로 표시</td></tr></tbody></table></div>
+<h3 id="s-6-5"><span class="num">6.5</span>비동기 화면</h3>
+<p>데이터를 조회하는 화면은 로딩, 빈 상태, 오류를 모두 구현한다.</p>
+<div class="code"><div class="code-head"><span>TSX</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code>const { data, isPending, isError, refetch } = useQuery(contractsQuery);
+
+if (isPending) {
+  return (
+    &lt;SkeletonGroup label="계약 목록을 불러오는 중" className="flex flex-col gap-4"&gt;
+      &lt;Skeleton size="title" /&gt;
+      &lt;Skeleton size="body-medium" /&gt;
+      &lt;Skeleton size="body-medium" /&gt;
+    &lt;/SkeletonGroup&gt;
+  );
+}
+if (isError) {
+  return (
+    &lt;div className="flex flex-col items-center gap-2"&gt;
+      &lt;Feedback type="area" status="error" title="계약 목록을 불러오지 못했어요" /&gt;
+      &lt;TextButton color="neutral" size="small" onClick={() =&gt; refetch()}&gt;
+        다시 불러오기
+      &lt;/TextButton&gt;
+    &lt;/div&gt;
+  );
+}
+if (data.length === 0) return &lt;Feedback type="area" status="empty" title="가입한 보험이 없어요" /&gt;;</code></pre></div>
+<h3 id="s-6-6"><span class="num">6.6</span>오버레이와 알림</h3>
+<p><code>Dialog</code> 와 <code>BottomSheet</code> 는 Radix Dialog 기반이라 <code>open</code> · <code>onOpenChange</code> 로 제어한다. Esc 와 바깥 누름으로 닫히고, 닫히면 열었던 요소로 포커스가 돌아간다.</p>
+<div class="code"><div class="code-head"><span>TSX</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code><span class="c">// src/features/consult/consult-booking.tsx</span>
+'use client';
+
+import { useState, type ReactElement } from 'react';
+import { BottomSheet, BottomSheetContent, Button, Dialog, DialogContent, useToast } from '@nextlab/ds/hanwha';
+
+export function ConsultBooking(): ReactElement {
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [noticeOpen, setNoticeOpen] = useState(false);
+  const toast = useToast();
+
+  const book = (): void =&gt; {
+    setConfirmOpen(false);
+    toast.show('상담을 예약했어요', { status: 'success' });
+  };
+
+  return (
+    &lt;&gt;
+      &lt;Button onClick={() =&gt; setConfirmOpen(true)}&gt;상담 예약&lt;/Button&gt;
+      &lt;Button color="neutral" variant="outline" onClick={() =&gt; setNoticeOpen(true)}&gt;유의사항&lt;/Button&gt;
+
+      &lt;Dialog open={confirmOpen} onOpenChange={setConfirmOpen}&gt;
+        &lt;DialogContent
+          title="상담을 예약할까요?"
+          footer={
+            &lt;&gt;
+              &lt;Button variant="outline" color="neutral" onClick={() =&gt; setConfirmOpen(false)}&gt;취소&lt;/Button&gt;
+              &lt;Button onClick={book}&gt;예약하기&lt;/Button&gt;
+            &lt;/&gt;
+          }
+        &gt;
+          예약한 시간에 상담사가 전화를 드려요.
+        &lt;/DialogContent&gt;
+      &lt;/Dialog&gt;
+
+      &lt;BottomSheet open={noticeOpen} onOpenChange={setNoticeOpen}&gt;
+        &lt;BottomSheetContent title="유의사항" footer={&lt;Button onClick={() =&gt; setNoticeOpen(false)}&gt;확인&lt;/Button&gt;}&gt;
+          가입 전에 상품설명서와 약관을 확인해 주세요.
+        &lt;/BottomSheetContent&gt;
+      &lt;/BottomSheet&gt;
+    &lt;/&gt;
+  );
+}</code></pre></div>
+<div class="table"><table><thead><tr><th>컴포넌트</th><th>규칙</th></tr></thead><tbody><tr><td><code>DialogContent</code></td><td><code>footer</code> 에 Button 1~3개. 확인(Brand Solid)을 맨 오른쪽, 나머지는 <code>variant=&quot;outline&quot; color=&quot;neutral&quot;</code>. footer 의 Button 은 <code>size</code> 를 주지 않으면 Large(48px). 창 폭은 <code>variant</code> 로 정한다: <code>default</code> 최대 552px, <code>fullPopup</code> 최대 744px, 둘 다 화면 폭에서 좌우 여백을 뺀 값을 넘지 않는다</td></tr>
+<tr><td><code>BottomSheetContent</code></td><td>버튼 2개는 <code>footer={&lt;ButtonGroup size=&quot;large&quot; secondary={…} primary={…} /&gt;}</code>. 목록을 꽉 채우려면 <code>flushBody</code></td></tr>
+<tr><td><code>useToast().show()</code></td><td>두 번째 인자 <code>{ status, action, duration }</code>. <code>status</code> 는 <code>success</code> · <code>info</code> · <code>warning</code> · <code>error</code></td></tr>
+<tr><td><code>Tooltip</code></td><td><code>TooltipProvider</code> 아래에서 <code>Tooltip</code> &gt; <code>TooltipTrigger asChild</code> + <code>TooltipContent</code> 로 쓴다</td></tr></tbody></table></div>
+<h3 id="s-6-7"><span class="num">6.7</span>내비게이션</h3>
+<div class="code"><div class="code-head"><span>TSX</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code><span class="c">// src/app/(main)/main-nav.tsx</span>
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import type { ReactElement } from 'react';
+import { BottomNavigation, BottomNavigationItem, Icon } from '@nextlab/ds/hanwha';
+
+const TABS = [
+  { href: '/', label: '홈', icon: 'house' },
+  { href: '/contracts', label: '내 보험', icon: 'document' },
+  { href: '/my', label: '마이', icon: 'profile' },
+] as const;
+
+export function MainNav(): ReactElement {
+  const pathname = usePathname();
+  return (
+    &lt;BottomNavigation fixed&gt;
+      {TABS.map((tab) =&gt; (
+        &lt;BottomNavigationItem key={tab.href} asChild label={tab.label} icon={&lt;Icon name={tab.icon} /&gt;} selected={pathname === tab.href}&gt;
+          &lt;Link href={tab.href} /&gt;
+        &lt;/BottomNavigationItem&gt;
+      ))}
+    &lt;/BottomNavigation&gt;
+  );
+}</code></pre></div>
+<p><code>asChild</code> 를 주면 자식 요소(여기서는 <code>Link</code>)가 실제 요소가 되고, 아이콘과 라벨은 그 안에 그려진다. 선택된 항목에는 <code>aria-current=&quot;page&quot;</code> 가 붙는다. Header 오른쪽 버튼은 <code>rightActions={&lt;HeaderIconButton aria-label=&quot;알림&quot; onClick={openAlarms}&gt;&lt;Icon name=&quot;alarm&quot; /&gt;&lt;/HeaderIconButton&gt;}</code> 처럼 <code>HeaderIconButton</code> 으로 넣는다.</p>
+<h3 id="s-6-8"><span class="num">6.8</span>DS 에 없는 컴포넌트 만들기</h3>
+<p>먼저 6.3 과 6.4 에서 기존 컴포넌트 조합으로 되는지 확인한다. 직접 만들어야 하면 아래 규칙을 지켜 DS 컴포넌트와 같은 모양과 동작을 맞춘다. 여러 프로젝트에서 같은 요구가 나오면 DS 에 요청한다.</p>
+<div class="table"><table><thead><tr><th>항목</th><th>사용</th></tr></thead><tbody><tr><td>색·글자·간격·모서리·그림자</td><td>4장의 토큰 클래스</td></tr>
+<tr><td>hover·누름 덮개</td><td><code>state-layer interaction-overlay</code>. 비활성(<code>disabled</code> · <code>aria-disabled=&quot;true&quot;</code>) 요소에는 그려지지 않는다</td></tr>
+<tr><td>포커스 링</td><td><code>focus-visible:outline-2 focus-visible:outline-stroke-focus-default</code></td></tr>
+<tr><td>비활성</td><td><code>text-fg-disabled-default</code> · <code>bg-bg-disabled-default</code></td></tr>
+<tr><td>클래스 병합</td><td><code>cn()</code> (clsx + tailwind-merge)</td></tr>
+<tr><td>입력 필드 틀</td><td><code>FieldArea</code> 로 감싸면 라벨·도움말·오류 문구가 DS 필드와 같은 자리에 그려진다</td></tr></tbody></table></div>
+<div class="code"><div class="code-head"><span>TSX</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code><span class="c">// src/features/plan/plan-option.tsx — 규칙을 보여 주는 예시</span>
+import type { ReactElement } from 'react';
+import { cn, Icon } from '@nextlab/ds/hanwha';
+
+interface PlanOptionProps {
+  title: string;
+  description: string;
+  onSelect: () =&gt; void;
+  className?: string;
+}
+
+export function PlanOption({ title, description, onSelect, className }: PlanOptionProps): ReactElement {
+  return (
+    &lt;button
+      type="button"
+      onClick={onSelect}
+      className={cn(
+        'state-layer interaction-overlay flex w-full items-center gap-3 rounded-r3 bg-bg-layer-default p-layout-card-padding text-start shadow-elevation-small',
+        'focus-visible:outline-2 focus-visible:outline-stroke-focus-default',
+        className,
+      )}
+    &gt;
+      &lt;span className="flex min-w-0 flex-1 flex-col gap-1"&gt;
+        &lt;span className="type-body-large-strong text-fg-neutral-default"&gt;{title}&lt;/span&gt;
+        &lt;span className="type-body-medium text-fg-neutral-muted"&gt;{description}&lt;/span&gt;
+      &lt;/span&gt;
+      &lt;Icon name="arrow-right" size="sm" className="text-fg-neutral-tertiary" /&gt;
+    &lt;/button&gt;
+  );
+}</code></pre></div>
+<p><code>FieldArea</code> 는 <code>htmlFor</code> 를 기준으로 도움말에 <code>{id}-help</code>, 오류 문구에 <code>{id}-error</code> id 를 붙인다. 입력 요소의 <code>aria-describedby</code> 와 <code>aria-invalid</code> 는 직접 연결한다.</p>
+<div class="code"><div class="code-head"><span>TSX</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code>&lt;FieldArea label="계좌 번호" htmlFor="account" helpText="숫자만 입력해 주세요" errorText={error}&gt;
+  &lt;AccountNumberInput
+    id="account"
+    aria-invalid={error !== undefined}
+    aria-describedby={error !== undefined ? 'account-error' : 'account-help'}
+  /&gt;
+&lt;/FieldArea&gt;</code></pre></div>
+<h2 id="s-7"><span class="num">7</span>폼</h2>
+<p>폼은 React Hook Form 과 Zod 로 구성한다. 연결 방식은 컴포넌트가 값을 다루는 방식에 따라 두 가지다.</p>
+<div class="table"><table><thead><tr><th>종류</th><th>컴포넌트</th><th>연결</th></tr></thead><tbody><tr><td>입력형</td><td><code>TextField</code> <code>PasswordField</code> <code>TextArea</code> <code>DateField</code></td><td>ref, <code>name</code>, <code>onChange</code>, <code>onBlur</code> 를 <code>&lt;input&gt;</code> 에 전달하므로 <code>{...register(&#39;name&#39;)}</code> 를 그대로 펼친다</td></tr>
+<tr><td>선택형</td><td><code>SelectField</code> <code>Segment</code> <code>RadioGroup</code></td><td><code>value</code> · <code>onValueChange</code> 를 <code>Controller</code> 로 연결한다</td></tr>
+<tr><td>체크형</td><td><code>Checkbox</code> <code>Switch</code></td><td><code>checked</code> · <code>onCheckedChange</code> 를 <code>Controller</code> 로 연결한다</td></tr></tbody></table></div>
+<p><code>errorText</code> 를 넘기면 필드가 오류 상태가 되고, <code>aria-invalid</code> 와 <code>aria-describedby</code> 가 자동으로 연결된다. 오류가 있는 동안 <code>helpText</code> 는 숨겨진다.</p>
+<p>입력값은 화면에 보이는 문자열 그대로 넘어온다. <code>format=&quot;amount&quot;</code> 는 <code>&quot;1,000,000&quot;</code> 처럼 쉼표가 들어가고, <code>DateField</code> 는 <code>&quot;2026.10.30&quot;</code> 처럼 <code>YYYY.MM.DD</code> 형식이다. 숫자나 날짜로 바꾸는 일은 스키마에서 한다.</p>
+<div class="code"><div class="code-head"><span>TS</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code>const paymentSchema = z.object({
+  amount: z
+    .string()
+    .transform((value) =&gt; Number(value.replaceAll(',', '')))
+    .pipe(z.number().min(10_000, '1만 원 이상 입력해 주세요')),
+  birthDate: z.string().regex(/^\d{4}\.\d{2}\.\d{2}$/, '생년월일을 YYYY.MM.DD 로 입력해 주세요'),
+});</code></pre></div>
+<div class="code"><div class="code-head"><span>TSX</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code><span class="c">// src/features/apply/apply-form.tsx</span>
+'use client';
+
+import type { ReactElement } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { Button, ButtonGroup, SelectField, TextField } from '@nextlab/ds/hanwha';
+
+const applySchema = z.object({
+  name: z.string().min(1, '이름을 입력해 주세요'),
+  job: z.string().min(1, '직업을 선택해 주세요'),
+});
+
+export type ApplyInput = z.infer&lt;typeof applySchema&gt;;
+
+const JOB_OPTIONS = [
+  { value: 'office', label: '사무직' },
+  { value: 'field', label: '현장직' },
+];
+
+interface ApplyFormProps {
+  onSubmit: (input: ApplyInput) =&gt; void;
+}
+
+export function ApplyForm({ onSubmit }: ApplyFormProps): ReactElement {
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm&lt;ApplyInput&gt;({ resolver: zodResolver(applySchema) });
+
+  return (
+    &lt;form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col gap-6"&gt;
+      &lt;TextField label="이름" {...register('name')} errorText={errors.name?.message} /&gt;
+      &lt;Controller
+        name="job"
+        control={control}
+        render={({ field }) =&gt; (
+          &lt;SelectField
+            label="직업"
+            options={JOB_OPTIONS}
+            value={field.value}
+            onValueChange={field.onChange}
+            errorText={errors.job?.message}
+          /&gt;
+        )}
+      /&gt;
+      &lt;ButtonGroup fixed primary={&lt;Button type="submit"&gt;다음&lt;/Button&gt;} /&gt;
+    &lt;/form&gt;
+  );
+}</code></pre></div>
+<h2 id="s-8"><span class="num">8</span>아이콘·그래픽</h2>
+<p>아이콘은 <code>Icon</code>, 그림은 <code>Graphic</code> 에 이름을 넘겨 쓴다. 이름은 타입으로 검사되므로 에디터 자동완성에서 고른다.</p>
+<h3 id="s-8-1"><span class="num">8.1</span>Icon</h3>
+<div class="code"><div class="code-head"><span>TSX</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code>import { Icon, IconButton } from '@nextlab/ds/hanwha';
+
+&lt;&gt;
+  &lt;Icon name="search" /&gt;                  {/* md 24px (기본) */}
+  &lt;Icon name="arrow-right" size="sm" /&gt;   {/* 20px */}
+  &lt;Icon name="alarm" size="lg" /&gt;         {/* 28px */}
+  &lt;Icon name="help" label="도움말" /&gt;     {/* 의미를 전달하는 아이콘 */}
+  &lt;IconButton aria-label="닫기" icon={&lt;Icon name="close" /&gt;} /&gt;
+&lt;/&gt;</code></pre></div>
+<div class="table"><table><thead><tr><th>prop</th><th>값</th><th>설명</th></tr></thead><tbody><tr><td><code>name</code></td><td><code>IconName</code></td><td>문자열 리터럴 유니언. 없는 이름은 타입 오류다. 전체 목록은 <code>ICON_NAMES</code></td></tr>
+<tr><td><code>size</code></td><td><code>&quot;sm&quot;</code> · <code>&quot;md&quot;</code> · <code>&quot;lg&quot;</code> · number</td><td>20 · 24 · 28px. 기본 <code>md</code>. 24px 이상은 헤더용 글리프, 미만은 콘텐츠용 글리프를 쓴다</td></tr>
+<tr><td><code>label</code></td><td>string</td><td>주면 <code>role=&quot;img&quot;</code> 와 <code>aria-label</code> 을, 없으면 <code>aria-hidden</code> 을 붙인다</td></tr></tbody></table></div>
+<p>색은 <code>currentColor</code> 다. 부모나 아이콘에 <code>text-fg-*</code> 클래스를 주어 바꾼다.</p>
+<h3 id="s-8-2"><span class="num">8.2</span>Graphic</h3>
+<div class="code"><div class="code-head"><span>TSX</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code>import { Graphic } from '@nextlab/ds/hanwha';
+
+&lt;&gt;
+  &lt;Graphic name="illust/umbrella" /&gt;                    {/* 그룹 기본 크기 44px */}
+  &lt;Graphic name="feedback/empty" size={80} /&gt;
+  &lt;Graphic name="stock/kb" size={40} label="KB증권" /&gt;
+&lt;/&gt;</code></pre></div>
+<p><code>name</code> 은 <code>그룹/이름</code> 형식의 <code>GraphicName</code> 타입이다. <code>size</code> 는 표시 폭(px)이고 높이는 원본 비율을 따른다. 그래픽은 고정색 SVG 라 색을 바꿀 수 없고 다크 모드에서도 같은 색으로 표시된다.</p>
+<div class="table"><table><thead><tr><th>그룹</th><th>개수</th><th>기본 크기</th><th>용도</th></tr></thead><tbody><tr><td><code>illust/</code></td><td>145</td><td>44px</td><td>카테고리·기능 강조</td></tr>
+<tr><td><code>feedback/</code></td><td>17</td><td>64 · 80px</td><td>빈 상태, 오류, 완료, 인증 상태</td></tr>
+<tr><td><code>avatar/</code></td><td>20</td><td>72 · 56px</td><td>사람 아바타(연령·성별, 상담원·설계사)</td></tr>
+<tr><td><code>logo/</code></td><td>3</td><td>원본 크기</td><td>한화 로고(PC·태블릿·스플래시)</td></tr>
+<tr><td><code>stock/</code></td><td>24</td><td>40px</td><td>증권사 마크</td></tr>
+<tr><td><code>cert/</code></td><td>4</td><td>44px</td><td>간편인증 사업자 마크</td></tr></tbody></table></div>
+<p><code>content/</code>(본문 일러스트, 450개)와 <code>banner/</code>(배너 일러스트, 450개)는 AI 생성 이미지다. 이 두 그룹만 이름별 조각으로 나뉘어 쓸 때 받고, 나머지 그룹은 한 묶음으로 들어간다. 번들 영향은 10.3 에서 다룬다.</p>
+<h2 id="s-9"><span class="num">9</span>접근성</h2>
+<p>키보드 조작, 포커스, 낭독 연결은 컴포넌트가 처리한다. 화면 코드에서는 9.2 의 항목만 챙긴다.</p>
+<h3 id="s-9-1"><span class="num">9.1</span>컴포넌트가 처리하는 범위</h3>
+<div class="table"><table><thead><tr><th>항목</th><th>동작</th></tr></thead><tbody><tr><td>키보드·포커스</td><td>Radix 기반 컴포넌트는 방향키 이동, Esc 닫기, 오버레이 포커스 가두기와 복귀를 처리한다</td></tr>
+<tr><td>펼침 목록</td><td>PC 의 <code>SelectField</code> 펼침 목록은 WAI-ARIA select-only combobox 패턴이다. 포커스는 칸에 두고 <code>aria-activedescendant</code> 로 줄을 가리킨다. ↑↓ · Home · End · PageUp · PageDown 이동, Enter · Space 선택, Alt+↑ 선택 후 닫기, 글자 입력으로 해당 글자로 시작하는 줄 이동을 지원한다</td></tr>
+<tr><td>필드 연결</td><td><code>label</code> 과 입력 요소를 <code>id</code> 로 연결하고, <code>helpText</code> · <code>errorText</code> 를 <code>aria-describedby</code> 로, 오류 상태를 <code>aria-invalid</code> 로 노출한다</td></tr>
+<tr><td>다이얼로그</td><td><code>description</code> 이 없으면 제목을 화면낭독기용 설명으로 넣는다. 제목이 없는 <code>AlertDialog</code> 는 본문을 창 이름으로 쓴다</td></tr>
+<tr><td>상태 알림</td><td><code>Feedback status=&quot;error&quot;</code> 는 <code>role=&quot;alert&quot;</code> 로 낭독되고, <code>SkeletonGroup</code> 은 <code>label</code>(기본 &quot;불러오는 중&quot;)을 낭독한다</td></tr>
+<tr><td>금액 증감</td><td><code>AmountChange</code> 는 ▲▼ 기호를 낭독하지 않는다. 방향은 글자(예: &quot;1,200원 올랐어요&quot;)로 전한다</td></tr>
+<tr><td>아이콘·그래픽</td><td><code>label</code> 이 있으면 <code>role=&quot;img&quot;</code>, 없으면 <code>aria-hidden</code> 으로 처리한다</td></tr>
+<tr><td>글자 확대</td><td><code>textScale=&quot;large&quot;</code> 에서 <code>type-*</code> 텍스트가 1.125배로 커진다. Header 높이·아이콘은 고정되고 제목 글자만 커진다</td></tr>
+<tr><td>동작 줄이기</td><td><code>prefers-reduced-motion</code> 에서 Skeleton·Spinner·Carousel 애니메이션을 멈추거나 줄인다</td></tr></tbody></table></div>
+<h3 id="s-9-2"><span class="num">9.2</span>화면 코드의 책임</h3>
+<div class="table"><table><thead><tr><th>항목</th><th>기준</th></tr></thead><tbody><tr><td>아이콘 버튼</td><td><code>IconButton</code> 에 <code>aria-label</code> 필수</td></tr>
+<tr><td>페이지 제목</td><td>화면당 <code>h1</code> 하나. <code>Header</code> 제목이 <code>h1</code> 이므로 본문에 제목이 따로 있으면 <code>titleAs=&quot;p&quot;</code></td></tr>
+<tr><td>색</td><td>색만으로 의미를 구분하지 않는다. 오류는 문구나 아이콘을 함께 표시한다</td></tr>
+<tr><td>대비</td><td>본문 텍스트 4.5:1 이상. 본문 글자색은 9.3 의 토큰에서 고른다</td></tr>
+<tr><td>터치 영역</td><td>48px 이상</td></tr>
+<tr><td>그래픽</td><td>의미를 전달하면 <code>label</code>, 장식이면 생략</td></tr>
+<tr><td>문서 언어</td><td><code>&lt;html lang=&quot;ko&quot;&gt;</code></td></tr></tbody></table></div>
+<h3 id="s-9-3"><span class="num">9.3</span>본문 글자색</h3>
+<p>본문 크기 글자에는 아래 토큰을 쓴다. 페이지 바탕(<code>bg-layer-base</code>) 위에서 WCAG 2 상대 휘도 공식으로 잰 대비이며, 모두 본문 기준 4.5:1 을 넘는다.</p>
+<div class="table"><table><thead><tr><th>글자 토큰</th><th>light 값</th><th>light 대비</th><th>dark 대비</th></tr></thead><tbody><tr><td><code>fg-neutral-default</code></td><td><code>#272B2F</code></td><td>14.26</td><td>14.85</td></tr>
+<tr><td><code>fg-neutral-strong</code></td><td><code>#403F3E</code></td><td>10.51</td><td>14.85</td></tr>
+<tr><td><code>fg-neutral-muted</code></td><td><code>#5E5C5A</code></td><td>6.66</td><td>13.33</td></tr>
+<tr><td><code>fg-brand-strong</code></td><td><code>#9E3F00</code></td><td>6.64</td><td>9.42</td></tr>
+<tr><td><code>fg-warning-default</code></td><td><code>#774408</code></td><td>8.03</td><td>12.64</td></tr>
+<tr><td><code>fg-trend-up</code></td><td><code>#D22E3C</code></td><td>5.00</td><td>6.48</td></tr>
+<tr><td><code>fg-trend-down</code></td><td><code>#415CAC</code></td><td>6.27</td><td>8.64</td></tr></tbody></table></div>
+<p>회색 면(<code>bg-neutral-tint</code>) 위의 <code>fg-neutral-muted</code> 는 light 6.11, dark 10.59 다. 그 밖의 글자 토큰(<code>subtle</code> <code>tertiary</code> <code>brand-default</code> 와 상태 색)은 큰 글자, 같은 뜻의 글자가 옆에 있는 아이콘·보조 표시, 장식에 쓴다.</p>
+<h3 id="s-9-4"><span class="num">9.4</span>자동 검사</h3>
+<p>DS 저장소는 Storybook 스토리를 실제 Chromium 에서 렌더링한 뒤 axe 로 검사하고, 위반이 있으면 시험을 실패시킨다.</p>
+<p>화면 코드도 같은 방식으로 검사할 수 있다. jsdom 은 레이아웃과 색을 계산하지 않으므로, 대비까지 보려면 Playwright 같은 실제 브라우저에서 axe 를 돌린다.</p>
+<h2 id="s-10"><span class="num">10</span>성능</h2>
+<p>DS 를 넣었을 때 앱이 받는 CSS·JS 크기와, 그 크기가 나오는 이유다. 0.9.0 배포물을 esbuild 0.28 로 번들해(코드 분할, minify, React 제외) 쟀고, 압축은 Node zlib 기본 설정이다. 1KB 는 1,024바이트다.</p>
+<h3 id="s-10-1"><span class="num">10.1</span>CSS</h3>
+<div class="table"><table><thead><tr><th>단계</th><th>크기</th></tr></thead><tbody><tr><td><code>styles.css</code> 원본</td><td>1,034KB</td></tr>
+<tr><td>앱 빌드에서 minify 한 뒤</td><td>884KB</td></tr>
+<tr><td>전송 (gzip)</td><td>70KB</td></tr>
+<tr><td>전송 (brotli)</td><td>38KB</td></tr></tbody></table></div>
+<p><code>styles.css</code> 는 쓰는 컴포넌트와 무관하게 한 파일을 통째로 받는다. 원본의 24%(251KB)는 범위 선택자 <code>[data-nxl-surface=&quot;hanwha-customer&quot;]</code> 가 6,945번 반복된 것이고, 같은 문자열의 반복이라 압축하면 대부분 사라진다. 클래스는 약 6,800개, 토큰 변수는 504개다.</p>
+<h3 id="s-10-2"><span class="num">10.2</span>JS 초기 번들</h3>
+<p>컴포넌트 하나만 import 했을 때 초기 번들(gzip)이다. 초기 번들은 진입 모듈이 정적으로 불러오는 조각의 합이며, 동적으로 불러오는 차트 엔진과 큰 그림은 넣지 않았다.</p>
+<div class="table"><table><thead><tr><th>import</th><th>gzip</th></tr></thead><tbody><tr><td><code>HanwhaProvider</code></td><td>1KB</td></tr>
+<tr><td><code>Skeleton</code> · <code>Badge</code> · <code>Table</code> · <code>PageContainer</code></td><td>10KB</td></tr>
+<tr><td><code>Button</code></td><td>13KB</td></tr>
+<tr><td><code>Tabs</code> · <code>RadioGroup</code></td><td>20KB</td></tr>
+<tr><td><code>Icon</code></td><td>27KB</td></tr>
+<tr><td><code>TextField</code></td><td>31KB</td></tr>
+<tr><td><code>Checkbox</code></td><td>34KB</td></tr>
+<tr><td><code>Dialog</code> · <code>BottomSheet</code></td><td>44KB</td></tr>
+<tr><td><code>DateField</code></td><td>52KB</td></tr>
+<tr><td><code>Accordion</code></td><td>60KB</td></tr>
+<tr><td><code>Graphic</code> · <code>Feedback</code> · <code>Avatar</code></td><td>236–237KB</td></tr>
+<tr><td><code>List</code> · <code>ListItem</code></td><td>240–241KB</td></tr>
+<tr><td><code>Header</code></td><td>262KB</td></tr>
+<tr><td><code>SelectField</code></td><td>271KB</td></tr>
+<tr><td><code>Button</code> <code>TextField</code> <code>Checkbox</code> <code>Dialog</code> <code>Header</code> 함께</td><td>272KB</td></tr></tbody></table></div>
+<p>컴포넌트는 모듈별 ESM 파일이고 <code>sideEffects</code> 가 CSS 로 한정되어 있어, 쓰지 않는 컴포넌트는 번들에서 빠진다. 230KB 안팎으로 뛰는 줄은 모두 10.3 의 정적 그래픽 묶음을 포함한다. 묶음은 여러 컴포넌트가 함께 써도 한 번만 들어가므로 마지막 줄이 272KB 에 그친다.</p>
+<h3 id="s-10-3"><span class="num">10.3</span>정적 그래픽 묶음</h3>
+<p><code>Graphic</code> 은 이름 문자열을 받아 실행 중에 그림을 찾는다. 번들러는 어떤 이름이 쓰일지 알 수 없으므로 정적 그룹(<code>illust</code> <code>feedback</code> <code>avatar</code> <code>logo</code> <code>stock</code> <code>cert</code>, 213개)을 한 모듈에 묶어 통째로 넣는다. 크기는 gzip 약 230KB 다. <code>content</code> <code>banner</code>(900개)는 이름별 조각으로 나뉘어 화면에서 쓸 때만 받는다.</p>
+<p>이 묶음을 끌어오는 컴포넌트는 <code>Graphic</code> <code>Feedback</code> <code>Avatar</code> <code>List</code> <code>ListItem</code> <code>Loading</code> <code>Header</code> <code>SelectField</code> 와 차트다. <code>Header</code> 와 <code>List</code> 는 대부분의 화면이 쓰므로 이 묶음은 앱의 기본 비용으로 잡는다. Next.js 에서 <code>Graphic</code> 을 Server Component 에서만 쓰면 그림은 HTML 로만 가지만, 위 목록의 클라이언트 컴포넌트를 하나라도 쓰면 묶음 전체가 클라이언트 번들에 들어간다.</p>
+<p>큰 그림은 받는 동안 같은 크기의 빈 자리를 그린다. <code>Graphic</code> 은 큰 그림일 때만 자기 안에 <code>Suspense</code> 경계를 두는데, 경계를 둘지는 받았는지가 아니라 이름으로만 정한다. 서버(이미 받음)와 브라우저(처음 받음)의 트리 구조가 같아야 하이드레이션이 어긋나지 않기 때문이다.</p>
+<h3 id="s-10-4"><span class="num">10.4</span>폰트</h3>
+<p>한화고딕 woff2 는 굵기마다 약 1.2~1.3MB 이고 글자 일부만 담은 subset 판이 없다. 첫 화면에는 본문(300)과 제목(700) 두 굵기가 필요하다. <code>font-display: swap</code> 이라 글자는 시스템 글꼴로 먼저 그려지고 폰트를 받은 뒤 바뀌며, 이때 글자 폭이 달라져 줄바꿈이 움직일 수 있다.</p>
+<h2 id="s-11"><span class="num">11</span>품질 보증</h2>
+<p>DS 저장소가 갖춘 검사와 0.9.0 의 결과다. 화면 코드가 DS 에 맡겨도 되는 것과 직접 확인해야 하는 것을 가르는 기준이다.</p>
+<div class="table"><table><thead><tr><th>검사</th><th>내용</th></tr></thead><tbody><tr><td>단위 시험</td><td>Vitest · Testing Library · jsdom 으로 props 동작, 키보드 조작, ARIA 연결, Figma 수치(높이·간격)를 확인한다</td></tr>
+<tr><td>접근성</td><td>모든 Storybook 스토리를 Chromium 에서 렌더링하고 axe 로 검사한다. 위반이 있으면 실패한다 (<a href="#s-9-4">9.4</a>)</td></tr>
+<tr><td>토큰 생성물</td><td>생성기의 <code>--check</code> 모드. Figma Variables 에서 만든 결과와 커밋된 CSS 가 다르면 실패한다</td></tr>
+<tr><td>패키지 경계</td><td>패키지 사이의 순환 의존, 내부 경로 import, 선언하지 않은 의존을 막는다</td></tr>
+<tr><td>설치 확인</td><td>tgz 를 저장소 밖의 새 Vite 프로젝트(pnpm · Tailwind v4 · React 19)에 설치하고 import, Provider, 프로덕션 빌드를 확인한다</td></tr>
+<tr><td>화면 비교</td><td>Storybook 을 Chromatic 에 게시해 변경 전후 화면을 비교한다</td></tr>
+<tr><td>문서 예시</td><td>이 문서의 예시 코드를 배포 타입 선언에 strict 모드로 컴파일하고 <code>@deprecated</code> 사용을 찾는다</td></tr></tbody></table></div>
+<p>2026-11-02 에 0.9.0 으로 다시 돌린 결과는 단위 시험 83개 파일 646개 통과, 문서 예시 컴파일 오류 0건, <code>@deprecated</code> 사용 0건이다.</p>
+<p>화면 코드에서 직접 확인할 것은 세 가지다. 색 대비(<a href="#s-9-3">9.3</a>), 화면 단위의 접근성(제목 구조, 초점 순서, 대체 텍스트), 3.6 의 클래스 조합이다.</p>
+<h2 id="s-12"><span class="num">12</span>설계 결정과 비용</h2>
+<p>구조를 정한 주요 결정과, 그 결정 때문에 생기는 제약이다. 앞 장의 규칙 대부분이 여기서 나온다.</p>
+<div class="table"><table><thead><tr><th>결정</th><th>이유</th><th>비용</th></tr></thead><tbody><tr><td>스타일을 미리 컴파일한 CSS 한 파일로 배포한다. Tailwind 설정이나 CSS-in-JS 로 배포하지 않는다</td><td>앱의 Tailwind 버전·설정과 무관하게 같은 결과가 나온다. 실행 중 스타일 주입이 없어 Server Component 와 스트리밍 렌더링에 제약이 없다. 앱이 토큰을 Tailwind 에 등록하지 않아도 된다</td><td>쓰지 않는 컴포넌트의 CSS 도 받는다 (<a href="#s-10-1">10.1</a>). 앱 Tailwind 는 DS 토큰 이름을 몰라 토큰 클래스에 변형 접두사를 붙일 수 없다 (<a href="#s-3-5">3.5</a>)</td></tr>
+<tr><td>모든 규칙을 범위 선택자 아래에 둔다</td><td>기존 앱 CSS 와 한 문서에서 공존하고, 화면 일부에만 적용할 수 있다</td><td>Portal 은 <code>syncRoot</code> 가 있어야 범위에 든다 (<a href="#s-3-3">3.3</a>). 선택자 반복으로 원본 CSS 가 커진다 (<a href="#s-10-1">10.1</a>)</td></tr>
+<tr><td>리셋만 레이어에 넣고 나머지는 레이어 밖에 둔다</td><td>앱 CSS 가 무엇이든 컴포넌트 모양이 바뀌지 않는다. 리셋은 <code>@layer base</code> 로 내려 앱 유틸리티를 덮지 않게 했다</td><td>앱의 변형 클래스가 DS 의 같은 속성 클래스에 진다 (<a href="#s-3-6">3.6</a>)</td></tr>
+<tr><td>상호작용은 Radix primitives 위에 만든다</td><td>키보드·포커스·ARIA 동작을 검증된 구현에 맡기고, 스타일이 없는 primitives 라 Figma 모양을 그대로 입힐 수 있다</td><td>DOM 구조와 Portal 위치가 Radix 규칙을 따른다</td></tr>
+<tr><td>토큰은 Figma Variables 에서 생성한다</td><td>디자이너의 값 변경이 손을 거치지 않고 코드로 넘어오고, 손으로 고친 값은 <code>--check</code> 에 걸린다</td><td>앱에서 토큰 값을 덮어쓰는 테마 주입을 지원하지 않는다</td></tr>
+<tr><td>반응형은 토큰이 맡는다</td><td>글자 크기·간격이 Figma 의 Mobile·Tablet·PC 모드와 같은 분기점에서 바뀌어, 화면 코드에 분기 없이 세 폭이 맞는다</td><td>토큰은 화면 폭을 따르므로 좁은 영역에 넣어도 글자는 PC 크기다. 영역 폭이 중요한 <code>PageColumns</code> 와 PC <code>Header</code> 만 컨테이너 쿼리를 쓴다</td></tr>
+<tr><td>아이콘·그래픽은 이름으로 받는다</td><td>이름이 문자열 리터럴 유니언이라 오타가 타입 오류가 되고, 에디터 자동완성으로 고른다</td><td>번들러가 쓰는 그림만 골라낼 수 없어 정적 그래픽 묶음이 통째로 들어간다 (<a href="#s-10-3">10.3</a>)</td></tr>
+<tr><td>영역이 정해진 컴포넌트는 영역 props 로 받는다</td><td>영역 순서·간격과 낭독 연결(<code>aria-describedby</code> 등)을 컴포넌트가 보장한다</td><td>영역 안 배치를 바꾸려면 컴포넌트를 고쳐야 한다</td></tr>
+<tr><td><code>&#39;use client&#39;</code> 를 빌드에서 자동으로 붙인다</td><td>상태가 없는 컴포넌트는 Server Component 로 남고, 상태가 있는 컴포넌트도 Server Component 에서 바로 import 할 수 있다</td><td>함수 props(<code>onClick</code> 등)는 Server Component 에서 넘길 수 없다 (<a href="#s-2-5">2.5</a>)</td></tr></tbody></table></div>
+<h2 id="s-13"><span class="num">13</span>AI 도구 연동</h2>
+<p>Storybook 은 MCP(Model Context Protocol) 서버를 함께 제공한다. 등록하면 AI 코딩 도구가 컴포넌트 문서(props, 사용 예, 스토리)를 조회해 코드를 생성한다. 인증은 필요 없다.</p>
+<div class="table"><table><thead><tr><th>도구</th><th>동작</th></tr></thead><tbody><tr><td><code>docs-list</code></td><td>컴포넌트·문서 목록과 ID</td></tr>
+<tr><td><code>docs-show</code></td><td>컴포넌트의 props, 사용 예, 스토리</td></tr>
+<tr><td><code>docs-show-story</code></td><td>특정 스토리의 상세</td></tr></tbody></table></div>
+<h3 id="s-13-1"><span class="num">13.1</span>등록</h3>
+<div class="code"><div class="code-head"><span>Shell</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code><span class="c"># Claude Code</span>
+claude mcp add --transport http nxl-ds https://main--6a794efb546779fb68f18bd0.chromatic.com/mcp</code></pre></div>
+<p>Claude Code 는 프로젝트 루트의 <code>.mcp.json</code>, Cursor 는 <code>.cursor/mcp.json</code> 에 넣는다.</p>
+<div class="code"><div class="code-head"><span>JSON</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code>{
+  "mcpServers": {
+    "nxl-ds": {
+      "type": "http",
+      "url": "https://main--6a794efb546779fb68f18bd0.chromatic.com/mcp"
+    }
+  }
+}</code></pre></div>
+<p>VS Code(GitHub Copilot)는 <code>.vscode/mcp.json</code> 에 넣는다.</p>
+<div class="code"><div class="code-head"><span>JSON</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code>{
+  "servers": {
+    "nxl-ds": {
+      "type": "http",
+      "url": "https://main--6a794efb546779fb68f18bd0.chromatic.com/mcp"
+    }
+  }
+}</code></pre></div>
+<p>설정 파일을 저장소에 커밋하면 팀원이 같은 설정을 쓴다.</p>
+<h3 id="s-13-2"><span class="num">13.2</span>규칙 파일</h3>
+<p>AI 도구의 프로젝트 규칙 파일(<code>CLAUDE.md</code>, <code>.cursorrules</code>, <code>.github/copilot-instructions.md</code>)에 아래 내용을 넣는다.</p>
+<div class="code"><div class="code-head"><span>Markdown</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code><span class="c">## UI 규칙 (NXL-DS Hanwha)</span>
+- UI 는 @nextlab/ds/hanwha 컴포넌트로 만든다. 필요한 컴포넌트가 없으면 새로 만들지 말고 알린다.
+- props 는 nxl-ds MCP(docs-list → docs-show)로 확인한 것만 쓴다. 에디터에서 취소선이 그어지는 @deprecated 이름은 쓰지 않는다.
+- 색은 bg-bg-* · text-fg-* · border-stroke-*, 텍스트는 type-* 만 쓴다. hex 값, text-sm, font-bold 를 쓰지 않는다.
+- 본문 크기 글자색은 text-fg-neutral-default · strong · muted, text-fg-brand-strong, text-fg-warning-default 중에서 고른다.
+- className 은 배치(margin, width)에만 쓴다. 인라인 style 을 쓰지 않는다.
+- 화면 폭 분기는 min-[768px]: · min-[1200px]: 를 쓰고, 기본값 클래스 없이 구간마다 쓴다(max-[767px]:flex min-[768px]:hidden).
+- Next.js 에서 이벤트 핸들러·상태가 있는 컴포넌트는 'use client' 파일에 작성한다.
+- 하단 고정 버튼은 ButtonGroup fixed, 화면당 Primary 버튼은 하나다.
+- 비동기 화면은 Skeleton(로딩) · Feedback status="empty"(빈 상태) · Feedback status="error"(오류)를 모두 구현한다.
+- IconButton 에는 aria-label 을 준다.</code></pre></div>
+<h2 id="s-14"><span class="num">14</span>알려진 제약 (0.9.0)</h2>
+<p>0.9.0 을 쓸 때 미리 알아야 하는 제약과 대응 방법이다.</p>
+<div class="table"><table><thead><tr><th>항목</th><th>내용</th><th>대응</th></tr></thead><tbody><tr><td>폰트</td><td>패키지에 폰트 파일이 없고, 한화 폰트 CDN 은 CORS 헤더를 보내지 않는다</td><td>CDN 파일을 <code>public/fonts/</code> 에 둔다 (<a href="#s-2-3">2.3</a>)</td></tr>
+<tr><td>앱 변형 클래스</td><td>Provider 안에서 DS CSS 에 들어 있는 클래스와 같은 속성을 바꾸는 앱의 변형 클래스(<code>flex min-[768px]:hidden</code>)가 무시된다</td><td>구간마다 범위 변형으로 쓴다 (<a href="#s-3-6">3.6</a>)</td></tr>
+<tr><td>정적 그래픽 묶음</td><td><code>Header</code> <code>List</code> 등 대부분의 화면이 쓰는 컴포넌트가 그래픽 묶음 약 230KB(gzip)를 초기 번들에 넣는다</td><td>앱의 기본 비용으로 잡는다 (<a href="#s-10-3">10.3</a>)</td></tr>
+<tr><td>화면 안 안내 상자</td><td>전용 컴포넌트가 없다</td><td>DS 담당과 구성을 확인한다</td></tr>
+<tr><td>확장 컴포넌트</td><td><code>PageContainer</code> <code>PageTitle</code> <code>PageColumns</code> <code>SiteFooter</code> <code>SiteMenu</code> 는 디자이너 검토 중이다</td><td>props 가 1.0.0 전에 바뀔 수 있다. 바뀌면 CHANGELOG 에 수정 방법을 적는다</td></tr>
+<tr><td>확정 전 항목</td><td><code>InstitutionPicker</code> 는 디자이너 정의 전이고 은행 마크 자산이 없다. 상태 아이콘 <code>info</code> <code>warning</code> <code>error</code> 는 디자이너 확정 전이다</td><td>서비스 적용 전에 DS 담당과 확인한다</td></tr>
+<tr><td>다크 모드</td><td>다크 토큰은 있으나 디자이너 검토 중이다</td><td>서비스 적용 전에 DS 담당과 확인한다</td></tr>
+<tr><td>테마</td><td>앱에서 토큰 값을 덮어쓰는 테마 주입은 지원하지 않는다</td><td>값 변경은 DS 에 요청한다</td></tr>
+<tr><td>폰트 용량</td><td>한화고딕 woff2 가 굵기마다 약 1.2~1.3MB 이고 글자 subset 판이 없다</td><td>10.4</td></tr>
+<tr><td>토큰 클래스 변형</td><td>토큰 클래스에 <code>hover:</code> 같은 변형 접두사를 붙이면 생성되지 않는다</td><td>CSS 변수 문법을 쓴다 (<a href="#s-3-5">3.5</a>)</td></tr>
+<tr><td>모듈 형식</td><td>ESM 전용이라 CommonJS <code>require()</code>, 기본 설정의 Jest 로 불러올 수 없다</td><td>Vitest 를 쓴다 (<a href="#s-2-6">2.6</a>)</td></tr>
+<tr><td>브라우저</td><td>iOS Safari 16.4, Chrome 111 미만은 지원하지 않는다</td><td>1.3</td></tr>
+<tr><td>Tailwind CSS v3</td><td>검증하지 않았다</td><td>v4 를 쓴다</td></tr></tbody></table></div>
+<h2 id="s-15"><span class="num">15</span>버전 정책과 지원</h2>
+<p>버전 규칙, 새 버전으로 올리는 방법, 버그를 제보하는 방법이다.</p>
+<h3 id="s-15-1"><span class="num">15.1</span>버전 규칙</h3>
+<p>0.9.0 은 1.0.0 직전 버전이며, 1.0.0 에서는 화면 패턴이 추가된다. 0.9.x 에서도 컴포넌트 이름이나 props 가 바뀔 수 있고, 바뀌면 이전 이름을 <code>@deprecated</code> 별칭으로 남긴다. 1.0.0 부터는 Semantic Versioning 을 따른다.</p>
+<div class="table"><table><thead><tr><th>구분</th><th>예</th><th>변경 범위</th><th>업데이트 시 작업</th></tr></thead><tbody><tr><td>Patch</td><td>1.0.1</td><td>버그 수정, 시각 보정</td><td>없음</td></tr>
+<tr><td>Minor</td><td>1.1.0</td><td>컴포넌트·props·토큰·아이콘 추가 (하위 호환)</td><td>없음</td></tr>
+<tr><td>Major</td><td>2.0.0</td><td>export · props · 토큰의 제거나 이름 변경, <code>@deprecated</code> 별칭 제거</td><td>CHANGELOG 의 수정 방법에 따라 수정</td></tr></tbody></table></div>
+<h3 id="s-15-2"><span class="num">15.2</span>업데이트</h3>
+<div class="code"><div class="code-head"><span>Shell</span><button type="button" class="copy" aria-label="코드 복사">복사</button></div><pre><code>pnpm add ./vendor/nextlab-ds-&lt;버전&gt;.tgz</code></pre></div>
+<ul>
+<li>잠금 파일을 함께 커밋한다.</li>
+<li>한 앱에는 DS 한 버전만 둔다. 두 버전의 <code>styles.css</code> 는 같은 범위 선택자를 쓰므로 서로 덮는다.</li>
+<li>변경 내용은 배포본과 함께 전달하는 CHANGELOG 와 Storybook 에서 확인한다.</li>
+<li>토큰 클래스와 props 로만 스타일을 지정한 화면은 업데이트만으로 디자인 변경이 반영된다.</li>
+</ul>
+<h3 id="s-15-3"><span class="num">15.3</span>버그 제보</h3>
+<div class="table"><table><thead><tr><th>항목</th><th>내용</th></tr></thead><tbody><tr><td>버전</td><td><code>@nextlab/ds</code> 버전 (<code>package.json</code> 의 값)</td></tr>
+<tr><td>재현</td><td>컴포넌트 이름과 최소 재현 코드</td></tr>
+<tr><td>환경</td><td>화면 폭(px), 브라우저와 버전, <code>textScale</code> · <code>colorMode</code> 값</td></tr>
+<tr><td>결과</td><td>기대 결과와 실제 결과(캡처)</td></tr></tbody></table></div>
+<p>화면 폭에 따라 바뀌는 컴포넌트가 많으므로 화면 폭은 빠뜨리지 않는다.</p>
+<h2 id="s-16"><span class="num">16</span>문제 해결</h2>
+<p>자주 만나는 증상과 해결 방법이다. 오류 문구나 증상으로 찾는다.</p>
+<div class="table"><table><thead><tr><th>증상</th><th>원인</th><th>해결</th></tr></thead><tbody><tr><td>TypeScript 에서 <code>Cannot find module &#39;@nextlab/ds/hanwha&#39;</code></td><td><code>moduleResolution</code> 이 <code>node</code> 다</td><td><code>bundler</code> 로 바꾼다 (<a href="#s-1-3">1.3</a>)</td></tr>
+<tr><td>Jest 에서 <code>Cannot use import statement outside a module</code></td><td>패키지가 ESM 전용이다</td><td>Vitest 를 쓴다 (<a href="#s-2-6">2.6</a>)</td></tr>
+<tr><td>테스트에서 <code>ResizeObserver is not defined</code> · <code>matchMedia is not a function</code></td><td>jsdom 에 없는 브라우저 API 다</td><td>setup 파일에서 채운다 (<a href="#s-2-6">2.6</a>)</td></tr>
+<tr><td>iOS 에서 하단 고정 버튼·하단 메뉴가 홈 인디케이터와 겹친다</td><td>뷰포트에 <code>viewport-fit=cover</code> 가 없다</td><td>2.4</td></tr>
+<tr><td><code>hover:bg-bg-…</code> 같은 클래스가 적용되지 않는다</td><td>토큰 클래스와 변형 접두사 조합은 생성되지 않는다</td><td><code>hover:bg-(--cds-bg-…)</code> (<a href="#s-3-5">3.5</a>)</td></tr>
+<tr><td>앱의 고정 요소가 다이얼로그 위로 올라온다</td><td>z-index 가 100 이상이다</td><td><code>z-sticky</code> 를 쓴다 (<a href="#s-4-7">4.7</a>)</td></tr>
+<tr><td>컴포넌트가 스타일 없이 표시된다</td><td><code>styles.css</code> 를 import 하지 않았거나 요소가 <code>HanwhaProvider</code> 밖에 있다</td><td>2.2, 2.4</td></tr>
+<tr><td>다이얼로그·바텀시트·툴팁·펼침 목록만 스타일이 없다</td><td>Portal 내용이 범위 선택자 밖에 있다</td><td>루트 Provider 에 <code>syncRoot</code> (<a href="#s-3-3">3.3</a>)</td></tr>
+<tr><td>Next.js 에서 <code>Event handlers cannot be passed to Client Component props</code></td><td>Server Component 에서 <code>onClick</code> 등 함수를 넘겼다</td><td>해당 부분을 <code>&#39;use client&#39;</code> 파일로 옮긴다 (<a href="#s-2-5">2.5</a>)</td></tr>
+<tr><td><code>useToast</code> 또는 <code>Tooltip</code> 에서 런타임 오류</td><td><code>ToastProvider</code> · <code>TooltipProvider</code> 가 없다</td><td>2.4</td></tr>
+<tr><td>메뉴·푸터 링크를 누르면 페이지를 통째로 다시 받는다</td><td><code>linkComponent</code> 를 넘기지 않았다</td><td>2.4</td></tr>
+<tr><td>한화고딕이 적용되지 않는다</td><td><code>/fonts/</code> 에 파일이 없거나, 하위 경로(basePath) 배포로 <code>/fonts/</code> 가 404 이거나, CDN CSS 를 직접 참조했다</td><td>2.3. 하위 경로 배포는 웹 서버에서 루트 <code>/fonts/</code> 를 제공한다</td></tr>
+<tr><td>PC 에서 글자 크기가 바뀌지 않거나 큰 글자 모드가 적용되지 않는다</td><td><code>text-sm</code> · <code>leading-*</code> 등 Tailwind 기본 텍스트 클래스를 썼다</td><td><code>type-*</code> (<a href="#s-4-3">4.3</a>)</td></tr>
+<tr><td>1024–1199px 에서 레이아웃이 어긋난다</td><td>Tailwind <code>lg:</code>(1024px)로 분기했다</td><td><code>min-[1200px]:</code> (<a href="#s-5-1">5.1</a>)</td></tr>
+<tr><td>Provider 안에서만 <code>min-[768px]:hidden</code> 같은 반응형 클래스가 적용되지 않는다</td><td>같은 요소의 기본값 클래스(<code>flex</code> 등)가 DS CSS 의 레이어 밖 규칙이라 이긴다</td><td>구간마다 범위 변형으로 쓴다 (<a href="#s-3-6">3.6</a>)</td></tr>
+<tr><td><code>syncRoot</code> 를 켠 뒤 Provider 밖 영역의 여백·글꼴이 바뀌었다</td><td><code>&lt;html&gt;</code> 이 범위가 되어 DS 리셋이 문서 전체에 적용된다</td><td>앱 전체를 Provider 안에 두는 구성을 기본으로 한다 (<a href="#s-3-3">3.3</a>)</td></tr>
+<tr><td><code>dialogFromTablet</code> 에서 타입 오류가 난다</td><td><code>BottomSheet</code> 에 넘겼다</td><td><code>BottomSheetContent</code> 에 넘긴다 (<a href="#s-6-4">6.4</a>)</td></tr>
+<tr><td><code>Header</code> 하나를 넣었는데 초기 번들이 230KB 늘었다</td><td>정적 그래픽 묶음이 함께 들어온다</td><td>앱 전체에서 한 번만 들어간다 (<a href="#s-10-3">10.3</a>)</td></tr>
+<tr><td>토큰 클래스(<code>bg-bg-*</code> 등)가 적용되지 않는다</td><td>요소가 Provider 범위 밖에 있다</td><td>Provider 하위로 옮긴다 (<a href="#s-3-1">3.1</a>)</td></tr>
+<tr><td>에디터에서 컴포넌트 이름에 취소선이 그어진다</td><td>이전 화면 호환용으로 남긴 이름이다</td><td>툴팁 설명에 적힌 대체 이름을 쓴다 (<a href="#s-6-2">6.2</a>)</td></tr></tbody></table></div>
+
+  </main>
+</div>
+<footer class="foot">NXL-DS Hanwha 0.9.0 개발자 가이드 · 2026-11-02</footer>
+<script>
+(() => {
+  for (const button of document.querySelectorAll('.copy')) {
+    button.addEventListener('click', async () => {
+      const text = button.closest('.code').querySelector('pre').textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        const area = document.createElement('textarea');
+        area.value = text;
+        document.body.append(area);
+        area.select();
+        document.execCommand('copy');
+        area.remove();
+      }
+      button.textContent = '복사됨';
+      button.dataset.done = 'true';
+      setTimeout(() => { button.textContent = '복사'; delete button.dataset.done; }, 1600);
+    });
+  }
+
+  const FOLD_AFTER = 24;
+  for (const block of document.querySelectorAll('.content .code')) {
+    const lines = block.querySelector('pre').textContent.replace(/\n$/, '').split('\n').length;
+    if (lines <= FOLD_AFTER) continue;
+    block.classList.add('is-collapsed');
+    const more = document.createElement('button');
+    more.type = 'button';
+    more.className = 'code-more';
+    const label = () => (block.classList.contains('is-collapsed') ? `코드 전체 보기 (${lines}줄)` : '코드 접기');
+    more.textContent = label();
+    more.setAttribute('aria-expanded', 'false');
+    more.addEventListener('click', () => {
+      const collapsed = block.classList.toggle('is-collapsed');
+      more.textContent = label();
+      more.setAttribute('aria-expanded', String(!collapsed));
+    });
+    block.append(more);
+  }
+
+  const toc = document.querySelector('.toc');
+  const links = new Map();
+  for (const a of document.querySelectorAll('.toc a')) links.set(a.getAttribute('href').slice(1), a);
+  const headings = [...document.querySelectorAll('.content h2[id^="s-"], .content h3[id^="s-"]')];
+  let current = null;
+  const mark = (id) => {
+    if (id === current) return;
+    current = id;
+    for (const a of links.values()) a.removeAttribute('aria-current');
+    for (const li of document.querySelectorAll('.toc .toc-l1 > li.open')) li.classList.remove('open');
+    const link = links.get(id);
+    if (!link) return;
+    link.setAttribute('aria-current', 'true');
+    const chapter = link.closest('.toc-l1 > li');
+    chapter?.classList.add('open');
+    const parent = chapter?.querySelector(':scope > a');
+    if (parent && parent !== link) parent.setAttribute('aria-current', 'true');
+    if (toc) {
+      const top = link.offsetTop - toc.offsetTop;
+      if (top < toc.scrollTop + 48 || top > toc.scrollTop + toc.clientHeight - 96) toc.scrollTop = top - toc.clientHeight / 3;
+    }
+  };
+  const onScroll = () => {
+    let id = headings[0]?.id;
+    for (const h of headings) { if (h.getBoundingClientRect().top <= 96) id = h.id; else break; }
+    mark(id);
+  };
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const details = document.querySelector('.toc-mobile');
+  details?.addEventListener('click', (event) => { if (event.target.closest('a')) details.open = false; });
+})();
+</script>
+<script>document.querySelector("[data-print]")?.addEventListener("click", () => window.print());</script>
+</body>
+</html>
