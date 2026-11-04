@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>NEXTLAB STUDIO 설명회 · 스태프 브리핑</title>
+<style>
+:root{--ink:#141B2D;--sub:#536075;--mute:#8F97A6;--line:#DCE1E9;--soft:#F3F5F8;--soft2:#E9EDF3;--navy:#1F3A68;--navy-soft:#E6EDF7;--or:#F37321;--or-d:#B84D0C;--or-soft:#FDEBDD;--or-line:#F5B585;--ok:#1E9E6A;--ok-soft:#E3F5EC;--blue:#BFD7FF;
+--f:"Pretendard","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;--mono:ui-monospace,Menlo,Consolas,monospace;
+--zA:#F37321;--zB:#2B6CB0;--zC:#1E9E6A;--zD:#7B3FE4;--zE:#D13C3C;--zF:#B7791F}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--soft);font-family:var(--f);color:var(--ink);font-size:15px;line-height:1.55;word-break:keep-all;overflow-wrap:anywhere;-webkit-font-smoothing:antialiased}
+.q{background:#EEF1F5;border-radius:4px;padding:0 4px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+code{font-family:var(--mono);font-size:.85em;background:#EEF1F5;border-radius:4px;padding:0 4px;word-break:break-all}
+kbd{font-family:var(--mono);font-size:.85em;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 6px;background:#fff}
+.tbd{display:inline-block;font-size:.78em;font-weight:800;color:#8F3A06;background:#FFF1E0;border:1px dashed var(--or-line);border-radius:999px;padding:0 8px;margin-left:4px;vertical-align:1px;white-space:nowrap}
+em{font-style:normal;color:var(--or)}
+
+/* ===== 모바일 · 문서 모드 (기본) ===== */
+.mtop{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.mtop .tt{padding:10px 16px 4px;font-size:13px;font-weight:800;color:var(--navy)}
+.mtop .tt span{color:var(--or)}
+.mtop nav{display:flex;gap:6px;overflow-x:auto;padding:6px 12px 10px;scrollbar-width:none}
+.mtop nav a{flex:none;text-decoration:none;font-size:14px;font-weight:700;color:var(--sub);background:var(--soft);border-radius:999px;padding:6px 12px}
+#stage{max-width:760px;margin:0 auto;padding:10px 12px 40px}
+.slide{background:#fff;border-radius:18px;padding:20px 18px 16px;margin:12px 0;scroll-margin-top:96px;box-shadow:0 1px 2px rgba(20,27,45,.05)}
+.slide .foot{display:none}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:.1em;color:var(--or)}
+.t{margin:4px 0 14px;font-size:23px;line-height:1.3;font-weight:900;letter-spacing:-.02em}
+.note{margin:12px 0 0;font-size:13px;color:var(--sub)}
+.bar{margin-top:12px;border-radius:12px;background:var(--navy-soft);color:var(--navy);padding:12px 14px;font-size:14px}
+.bar.warn{background:#FFF6E5;color:#7A4B00}
+.card{position:relative;border-radius:14px;background:var(--soft);padding:14px 14px 12px 52px;margin-top:10px}
+.card .no{position:absolute;left:14px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--or);color:#fff;font-style:normal;font-weight:900;font-size:14px;display:grid;place-items:center}
+.card b{display:block;font-size:17px}
+.card p{margin:4px 0 0;color:var(--sub);font-size:14px}
+.card ul{margin:6px 0 0;padding-left:18px;color:var(--sub);font-size:14px}
+.card li+li{margin-top:3px}
+strong{color:var(--ink)}
+/* 표지 */
+.cover{background:radial-gradient(900px 520px at 85% 30%,#2B4C83,#1F3A68 55%,#14284B);color:#fff}
+.cover .eyebrow{display:none}
+.cv-k{font-size:12px;font-weight:800;letter-spacing:.2em;color:#FFB47F}
+.cv h1{margin:8px 0 0;font-size:28px;line-height:1.25;font-weight:900}
+.cv h1 span{color:#FFB47F}
+.cv-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.cv-meta>span{font-size:13px;background:rgba(255,255,255,.12);border-radius:999px;padding:5px 12px}
+.cv-meta b{color:#FFB47F;margin-right:6px}
+.cv-sub{margin:14px 0 0;font-size:13px;color:rgba(255,255,255,.75)}
+.cover .tbd{background:rgba(255,255,255,.15);color:#FFE2CC;border-color:rgba(255,255,255,.4)}
+/* 역할 */
+.rl{border-radius:14px;background:var(--soft);padding:14px;margin-top:10px}
+.rl.main{background:var(--navy);color:#fff}
+.rl.main small{color:#FFB47F}.rl.main li{color:#DCE5F4}
+.rl small{display:block;font-size:12px;font-weight:800;color:var(--or-d);letter-spacing:.04em}
+.rl>b{display:block;font-size:20px;margin-top:2px}
+.rl ul{margin:6px 0 0;padding-left:18px;font-size:14px;color:var(--sub)}
+.zl{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.zl>span{display:inline-flex;align-items:center;gap:6px;background:#fff;border-radius:10px;padding:5px 10px;font-weight:800;font-size:15px}
+.zl i,.zn i{font-style:normal;width:24px;height:24px;border-radius:7px;color:#fff;font-size:13px;font-weight:900;display:grid;place-items:center;flex:none}
+.zl span:nth-child(1) i,.zn.zA i{background:var(--zA)}.zl span:nth-child(2) i,.zn.zB i{background:var(--zB)}.zl span:nth-child(3) i,.zn.zC i{background:var(--zC)}
+.zl span:nth-child(4) i,.zn.zD i{background:var(--zD)}.zl span:nth-child(5) i,.zn.zE i{background:var(--zE)}.zn.zF i{background:var(--zF)}
+.zl em{font-size:12px;color:var(--sub);font-weight:600}
+/* 좌석 */
+.map{overflow-x:auto}
+.scr{margin:0 auto 10px;width:70%;text-align:center;background:var(--navy);color:#fff;font-weight:800;font-size:13px;border-radius:8px;padding:4px 0}
+.blks{display:flex;gap:5px;justify-content:center}
+.rowno{display:flex;flex-direction:column;gap:2px;padding-top:20px}
+.rowno i{font-style:normal;font-size:9px;color:var(--sub);height:13px;line-height:13px}
+.rowno u{text-decoration:none;display:none}
+html.deck .rowno u{display:inline}
+.blk>b{display:block;text-align:center;font-size:11px;background:var(--navy);color:#fff;border-radius:5px;margin-bottom:4px;padding:1px 0}
+.blk .grid{display:grid;grid-template-columns:repeat(var(--c),13px);gap:2px}
+.blk .grid i,.lg i{display:grid;place-items:center;width:13px;height:13px;border-radius:3px;font-style:normal;font-size:8px;font-weight:900;color:#fff}
+.se{background:#E3E6EB;border:1px solid #C9CED6}
+.sv{background:var(--blue);border:1px solid #8FB4F0}
+.so.zA{background:var(--zA)}.so.zB{background:var(--zB)}.so.zC{background:var(--zC)}.so.zD{background:var(--zD)}.so.zE{background:var(--zE)}.so.zF{background:var(--zF)}
+.lg{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:10px;font-size:12px;color:var(--sub)}
+.lg>span{display:inline-flex;align-items:center;gap:5px}
+.lg .door{color:var(--or-d);font-weight:800}
+.zones{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.zn{display:flex;align-items:center;gap:10px;background:var(--soft);border-radius:12px;padding:10px}
+.zn b{display:block;font-size:16px}.zn small{display:block;font-size:12px;color:var(--sub)}
+/* 막힘 · 교체 */
+.tp,.sw{border-radius:12px;background:var(--soft);padding:12px 14px;margin-top:8px}
+.tp b,.sw b{display:block;font-size:15px}
+.tp>span,.sw>span{display:block;font-size:14px;color:var(--sub);margin-top:2px}
+.ref{float:right;font-style:normal;font-family:var(--mono);font-size:12px;font-weight:700;color:var(--or-d);background:var(--or-soft);border-radius:6px;padding:1px 7px;margin-left:8px}
+.sw{border-left:4px solid #D13C3C}
+/* 체크리스트 */
+.ck{border-radius:14px;background:var(--soft);padding:12px 14px;margin-top:10px}
+.ck>b{display:block;font-size:16px;margin-bottom:4px}
+.ck label{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-top:1px solid var(--line);font-size:14px;cursor:pointer}
+.ck label:first-of-type{border-top:0}
+.ck input{width:20px;height:20px;margin:1px 0 0;flex:none;accent-color:var(--or)}
+.ck input:checked+span{color:var(--mute);text-decoration:line-through}
+/* 대응표 */
+.lead2{margin:0 0 8px;font-size:13px;color:var(--sub)}
+.eg{margin-top:10px;border-radius:14px;background:var(--soft);padding:4px 12px 8px}
+.eg summary{cursor:pointer;font-weight:900;font-size:16px;padding:10px 2px;color:var(--navy)}
+.eg summary small{color:var(--sub);font-weight:600;margin-left:6px}
+.er{background:#fff;border-radius:12px;padding:12px;margin-top:8px}
+.er-h{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.er-h i{font-style:normal;font-family:var(--mono);font-weight:700;font-size:13px;color:#fff;background:var(--navy);border-radius:6px;padding:0 7px}
+.er-h em{font-size:12px;font-weight:700;color:var(--sub)}
+.er>b{display:block;font-size:15px;line-height:1.5}
+.er>small{display:block;font-size:13px;color:var(--sub);margin-top:4px}
+.fx{margin-top:8px;padding-left:10px;border-left:3px solid var(--or);font-size:14px}
+.fx ol{margin:0;padding-left:18px}
+.fx .sub{display:block;margin-top:4px;font-size:12.5px;color:var(--sub)}
+.swap{display:inline-block;font-size:11px;font-weight:800;color:#B42318;border:1px solid #B42318;border-radius:4px;padding:0 5px;margin-left:auto}
+.faq{margin-top:14px}.faq>b{display:block;font-size:16px;margin-bottom:4px}
+.faq div{border-top:1px solid var(--line);padding:8px 0}.faq strong{font-size:14px}.faq p{margin:2px 0 0;font-size:14px;color:var(--sub)}
+.d-hint{display:none}
+@media (max-width:380px){#stage{padding:8px 8px 32px}.slide{padding:18px 12px 14px}.blks{gap:4px}}
+
+/* ===== PC 슬라이드 모드 (스크립트가 넓은 가로 화면에서만 켬) ===== */
+html.deck,html.deck body{height:100%;overflow:hidden;background:#0D1320}
+html.deck .mtop,html.deck .m-only{display:none!important}
+html.deck #stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;max-width:none;margin:0;padding:0;transform-origin:center;transform:translate(-50%,-50%)}
+html.deck .slide{position:absolute;inset:0;margin:0;border-radius:0;padding:62px 88px 84px;display:none;flex-direction:column;box-shadow:none;font-size:24px}
+html.deck .slide.on{display:flex;animation:sIn .3s ease both}
+@keyframes sIn{from{opacity:0}to{opacity:1}}
+html.deck .slide::before{content:"";position:absolute;left:0;top:0;width:100%;height:8px;background:linear-gradient(90deg,var(--navy) 0 72%,var(--or) 72% 100%)}
+html.deck .cover::before{display:none}
+html.deck .slide .foot{display:flex;position:absolute;left:88px;right:88px;bottom:28px;font-size:16px;color:var(--mute)}
+html.deck .slide .foot .pn{margin-left:auto;font-family:var(--mono)}
+html.deck .cover .foot{color:rgba(255,255,255,.5)}
+html.deck .eyebrow{font-size:20px}
+html.deck .t{font-size:54px;margin:8px 0 34px}
+html.deck .note{font-size:20px;margin-top:22px}
+html.deck .bar{font-size:24px;padding:20px 28px;border-radius:18px;margin-top:26px}
+html.deck .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;flex:1;min-height:0}
+html.deck .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;flex:1;min-height:0}
+html.deck .card{margin:0;border-radius:22px;padding:40px 36px 34px;display:flex;flex-direction:column;justify-content:center}
+html.deck .card .no{position:static;width:52px;height:52px;font-size:24px;margin-bottom:22px}
+html.deck .card b{font-size:38px;line-height:1.3}
+html.deck .card p{font-size:27px;margin-top:18px;line-height:1.6}
+html.deck .card ul{font-size:23px;margin-top:16px;padding-left:26px;line-height:1.5}
+html.deck .card li+li{margin-top:12px}
+html.deck .flow .card b{font-size:32px}
+html.deck .flow .card{justify-content:flex-start}
+html.deck .flow .card ul{font-size:23px}
+/* 표지 */
+html.deck .cv{margin:auto 0;padding-left:20px}
+html.deck .cv-k{font-size:26px}
+html.deck .cv h1{font-size:104px;line-height:1.15;margin-top:22px}
+html.deck .cv-meta{gap:14px;margin-top:54px}
+html.deck .cv-meta>span{font-size:26px;padding:10px 24px}
+html.deck .cv-sub{font-size:26px;margin-top:34px}
+/* 역할 */
+html.deck .roles{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr auto;gap:24px}
+html.deck .rl{margin:0;border-radius:22px;padding:28px 30px}
+html.deck .rl small{font-size:19px}
+html.deck .rl>b{font-size:42px;margin-top:6px}
+html.deck .rl ul{font-size:25px;margin-top:14px;padding-left:24px;line-height:1.55}
+html.deck .rl.wide{grid-column:1/-1}
+html.deck .zl{gap:14px;margin-top:14px}
+html.deck .zl>span{font-size:28px;padding:10px 20px;gap:12px}
+html.deck .zl i{width:38px;height:38px;font-size:20px;border-radius:10px}
+html.deck .zl em{font-size:18px}
+html.deck .rl.wide ul{display:flex;gap:40px;list-style:none;padding:0}
+/* 좌석 */
+html.deck .seat{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,2.3fr) minmax(0,1fr);gap:36px;align-items:center}
+html.deck .map{overflow:visible}
+html.deck .scr{font-size:22px;border-radius:12px;padding:8px 0;margin-bottom:24px}
+html.deck .blks{gap:18px}
+html.deck .rowno{gap:8px;padding-top:44px}
+html.deck .rowno i{font-size:17px;height:46px;line-height:46px}
+html.deck .blk>b{font-size:20px;border-radius:10px;padding:5px 0;margin-bottom:10px}
+html.deck .blk .grid{grid-template-columns:repeat(var(--c),46px);gap:8px}
+html.deck .blk .grid i{width:46px;height:46px;border-radius:10px;font-size:18px}
+html.deck .lg{font-size:19px;gap:10px 26px;margin-top:22px}
+html.deck .lg i{width:24px;height:24px;border-radius:6px}
+html.deck .zones{grid-template-columns:1fr;gap:14px;margin:0}
+html.deck .zn{padding:16px 20px;border-radius:16px;gap:18px}
+html.deck .zn i{width:46px;height:46px;font-size:22px;border-radius:12px}
+html.deck .zn b{font-size:28px}html.deck .zn small{font-size:18px}
+/* 막힘 · 교체 */
+html.deck .tops{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:1fr;gap:18px}
+html.deck .tp,html.deck .swaps .sw{margin:0;border-radius:18px;padding:22px 24px;display:flex;flex-direction:column;justify-content:center}
+html.deck .tp b,html.deck .sw b{font-size:27px;line-height:1.35}
+html.deck .tp>span,html.deck .sw>span{font-size:21px;margin-top:8px}
+html.deck .ref{font-size:17px;padding:3px 10px;border-radius:8px;align-self:flex-start;float:none;margin:0 0 10px}
+html.deck .swaps{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:1fr;gap:20px}
+html.deck .sw{border-left-width:8px}
+/* 체크리스트 */
+html.deck .cks{align-items:stretch}
+html.deck .ck{margin:0;border-radius:22px;padding:26px 30px}
+html.deck .ck>b{font-size:32px;margin-bottom:10px}
+html.deck .ck label{font-size:22px;padding:14px 0;gap:16px}
+html.deck .ck input{width:28px;height:28px}
+html.deck .steps4 .card{display:flex;flex-direction:column;justify-content:center}
+html.deck .d-hint{display:block;position:fixed;right:18px;bottom:12px;font:600 13px var(--mono);color:#8F97A6;opacity:.8;z-index:9}
+
+/* ===== v2 추가 ===== */
+.cv-qr{display:none}
+html.deck .cv-qr{display:flex;flex-direction:column;align-items:center;gap:10px;position:absolute;right:120px;top:50%;transform:translateY(-50%);background:#fff;color:var(--ink);text-decoration:none;border-radius:26px;padding:26px 26px 22px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+html.deck .cv-qrsvg{width:280px;height:280px;display:block}
+html.deck .cv-qr b{font-size:28px;font-weight:900;color:var(--navy);margin-top:4px}
+html.deck .cv-qr small{font:600 17px var(--mono);color:var(--sub)}
+.zi{font-style:normal;width:24px;height:24px;border-radius:7px;color:#fff;font-size:13px;font-weight:900;display:grid;place-items:center;flex:none}
+.zi.zA{background:var(--zA)}.zi.zB{background:var(--zB)}.zi.zC{background:var(--zC)}.zi.zD{background:var(--zD)}.zi.zE{background:var(--zE)}.zi.zF{background:var(--zF)}.zi.zL{background:#121826}
+.zgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.zc{display:flex;gap:10px;align-items:flex-start;background:#fff;border-radius:12px;padding:10px}
+.zc b{display:block;font-size:16px}.zc small{display:block;font-size:12px;color:var(--sub)}
+.zc .pr{display:inline-block;margin-top:4px;font-style:normal;font-size:11.5px;font-weight:800;color:var(--navy);background:var(--navy-soft);border-radius:999px;padding:1px 8px}
+.crew-ul{margin:10px 0 0;padding-left:18px;font-size:14px;color:var(--sub)}
+.blk .grid i.lp{box-shadow:inset 0 0 0 2px #fff;outline:2px solid #121826;outline-offset:-1px}
+.lg i.lp{box-shadow:inset 0 0 0 2px #fff;outline:2px solid #121826;outline-offset:-1px}
+.lpnote{margin:8px 0 0;font-size:12px;color:var(--sub)}
+.whos{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.who{font-style:normal;font-size:11.5px;font-weight:800;color:var(--navy);background:var(--navy-soft);border-radius:999px;padding:1px 8px}
+.ck input:checked+span .who{opacity:.5}
+.ck input:checked+span{text-decoration:line-through}
+.ck input:checked+span .whos{text-decoration:none}
+/* 검색 */
+.esearch{display:none;position:sticky;top:88px;z-index:4;background:#fff;padding:6px 0 10px;align-items:center;gap:10px}
+html.js .esearch{display:flex}
+.esearch input{flex:1;min-width:0;font:inherit;font-size:16px;border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--soft)}
+.esearch input:focus{outline:2px solid var(--or);border-color:var(--or);background:#fff}
+#ecount{flex:none;font-size:13px;font-weight:700;color:var(--sub)}
+.enone{display:none;margin:10px 0;font-size:14px;color:var(--or-d);font-weight:700}
+.enone.on{display:block}
+.er.hide,.eg.hide{display:none}
+mark{background:#FFE08A;color:inherit;border-radius:3px;padding:0 1px}
+/* PC */
+html.deck .roles2{flex:1;min-height:0;display:grid;grid-template-columns:.9fr 2.1fr;gap:26px}
+html.deck .rl.main{display:flex;flex-direction:column;justify-content:center}
+html.deck .rl.main ul li+li{margin-top:10px}
+html.deck .rl.crew{margin:0;display:flex;flex-direction:column}
+html.deck .zgrid{flex:1;grid-template-columns:repeat(4,1fr);grid-auto-rows:1fr;gap:14px;margin-top:16px}
+html.deck .zc{padding:18px 18px;border-radius:16px;gap:14px;align-items:center}
+html.deck .zi{width:46px;height:46px;font-size:22px;border-radius:12px}
+html.deck .zc b{font-size:30px}html.deck .zc small{font-size:17px;margin-top:2px}
+html.deck .zc .pr{font-size:15px;padding:2px 12px;margin-top:8px}
+html.deck .crew-ul{display:flex;gap:40px;list-style:none;padding:0;font-size:22px;margin-top:18px}
+html.deck .blk .grid i.lp{box-shadow:inset 0 0 0 4px #fff;outline-width:3px}
+html.deck .lpnote{font-size:18px;margin-top:12px}
+html.deck .whos{gap:6px;margin-top:6px}
+html.deck .who{font-size:15px;padding:2px 10px}
+html.deck .ck label{padding:10px 0;font-size:20px}
+html.deck .ck>b{font-size:30px}
+</style>
+</head>
+<body>
+<header class="mtop">
+  <div class="tt">NEXTLAB STUDIO 설명회 · <span>스태프 브리핑</span> · 사내 전용</div>
+  <nav><a href="#roles">역할</a><a href="#seats">좌석</a><a href="#flow">흐름</a><a href="#top">막힘</a><a href="#check">체크</a><a href="#errors">대응표 검색</a></nav>
+</header>
+<main id="stage">
+<section class="slide cover dark" id="cover" data-title="표지" data-notes="">
+  
+  
+  <div class="cv">
+    <div class="cv-k">STAFF BRIEFING</div>
+    <h1>NEXTLAB STUDIO 설명회<br><span>스태프 브리핑</span></h1>
+    <div class="cv-meta">
+      <span><b>일시</b>’26. 11. 5.(목) <span class="tbd">확인 필요</span></span>
+      <span><b>장소</b>세미나실</span>
+      <span><b>참가</b>60명 · 앞쪽 1~5열</span>
+      <span><b>스태프</b>8명</span>
+    </div>
+    <p class="cv-sub">역할 · 담당 구역 · 실습 지원 문제 해결 · 준비물 체크리스트</p>
+  </div>
+  <a class="cv-qr" href="https://nxl-ai-tools.reala.pro/edu/staff" target="_blank" rel="noopener"><svg class="cv-qrsvg" role="img" aria-label="스태프 자료 QR 코드" version="1.1" viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg"><path d="M2,2H3V3H2zM3,2H4V3H3zM4,2H5V3H4zM5,2H6V3H5zM6,2H7V3H6zM7,2H8V3H7zM8,2H9V3H8zM15,2H16V3H15zM19,2H20V3H19zM20,2H21V3H20zM24,2H25V3H24zM25,2H26V3H25zM26,2H27V3H26zM27,2H28V3H27zM28,2H29V3H28zM29,2H30V3H29zM30,2H31V3H30zM2,3H3V4H2zM8,3H9V4H8zM10,3H11V4H10zM13,3H14V4H13zM14,3H15V4H14zM16,3H17V4H16zM18,3H19V4H18zM24,3H25V4H24zM30,3H31V4H30zM2,4H3V5H2zM4,4H5V5H4zM5,4H6V5H5zM6,4H7V5H6zM8,4H9V5H8zM10,4H11V5H10zM11,4H12V5H11zM12,4H13V5H12zM13,4H14V5H13zM14,4H15V5H14zM21,4H22V5H21zM24,4H25V5H24zM26,4H27V5H26zM27,4H28V5H27zM28,4H29V5H28zM30,4H31V5H30zM2,5H3V6H2zM4,5H5V6H4zM5,5H6V6H5zM6,5H7V6H6zM8,5H9V6H8zM10,5H11V6H10zM12,5H13V6H12zM14,5H15V6H14zM15,5H16V6H15zM19,5H20V6H19zM24,5H25V6H24zM26,5H27V6H26zM27,5H28V6H27zM28,5H29V6H28zM30,5H31V6H30zM2,6H3V7H2zM4,6H5V7H4zM5,6H6V7H5zM6,6H7V7H6zM8,6H9V7H8zM11,6H12V7H11zM12,6H13V7H12zM13,6H14V7H13zM14,6H15V7H14zM18,6H19V7H18zM20,6H21V7H20zM21,6H22V7H21zM22,6H23V7H22zM24,6H25V7H24zM26,6H27V7H26zM27,6H28V7H27zM28,6H29V7H28zM30,6H31V7H30zM2,7H3V8H2zM8,7H9V8H8zM11,7H12V8H11zM13,7H14V8H13zM14,7H15V8H14zM18,7H19V8H18zM20,7H21V8H20zM24,7H25V8H24zM30,7H31V8H30zM2,8H3V9H2zM3,8H4V9H3zM4,8H5V9H4zM5,8H6V9H5zM6,8H7V9H6zM7,8H8V9H7zM8,8H9V9H8zM10,8H11V9H10zM12,8H13V9H12zM14,8H15V9H14zM16,8H17V9H16zM18,8H19V9H18zM20,8H21V9H20zM22,8H23V9H22zM24,8H25V9H24zM25,8H26V9H25zM26,8H27V9H26zM27,8H28V9H27zM28,8H29V9H28zM29,8H30V9H29zM30,8H31V9H30zM10,9H11V10H10zM12,9H13V10H12zM13,9H14V10H13zM16,9H17V10H16zM17,9H18V10H17zM18,9H19V10H18zM21,9H22V10H21zM22,9H23V10H22zM2,10H3V11H2zM8,10H9V11H8zM10,10H11V11H10zM12,10H13V11H12zM13,10H14V11H13zM15,10H16V11H15zM16,10H17V11H16zM19,10H20V11H19zM21,10H22V11H21zM23,10H24V11H23zM24,10H25V11H24zM27,10H28V11H27zM28,10H29V11H28zM29,10H30V11H29zM2,11H3V12H2zM3,11H4V12H3zM4,11H5V12H4zM6,11H7V12H6zM9,11H10V12H9zM16,11H17V12H16zM17,11H18V12H17zM18,11H19V12H18zM19,11H20V12H19zM20,11H21V12H20zM21,11H22V12H21zM22,11H23V12H22zM25,11H26V12H25zM26,11H27V12H26zM28,11H29V12H28zM29,11H30V12H29zM2,12H3V13H2zM3,12H4V13H3zM6,12H7V13H6zM8,12H9V13H8zM9,12H10V13H9zM10,12H11V13H10zM12,12H13V13H12zM13,12H14V13H13zM15,12H16V13H15zM16,12H17V13H16zM17,12H18V13H17zM18,12H19V13H18zM22,12H23V13H22zM23,12H24V13H23zM25,12H26V13H25zM26,12H27V13H26zM2,13H3V14H2zM5,13H6V14H5zM10,13H11V14H10zM11,13H12V14H11zM12,13H13V14H12zM18,13H19V14H18zM20,13H21V14H20zM21,13H22V14H21zM23,13H24V14H23zM25,13H26V14H25zM27,13H28V14H27zM3,14H4V15H3zM6,14H7V15H6zM8,14H9V15H8zM11,14H12V15H11zM14,14H15V15H14zM17,14H18V15H17zM21,14H22V15H21zM24,14H25V15H24zM25,14H26V15H25zM30,14H31V15H30zM4,15H5V16H4zM6,15H7V16H6zM11,15H12V16H11zM17,15H18V16H17zM18,15H19V16H18zM20,15H21V16H20zM21,15H22V16H21zM22,15H23V16H22zM24,15H25V16H24zM26,15H27V16H26zM29,15H30V16H29zM30,15H31V16H30zM2,16H3V17H2zM3,16H4V17H3zM5,16H6V17H5zM6,16H7V17H6zM7,16H8V17H7zM8,16H9V17H8zM10,16H11V17H10zM13,16H14V17H13zM15,16H16V17H15zM16,16H17V17H16zM17,16H18V17H17zM20,16H21V17H20zM23,16H24V17H23zM24,16H25V17H24zM26,16H27V17H26zM27,16H28V17H27zM28,16H29V17H28zM3,17H4V18H3zM5,17H6V18H5zM7,17H8V18H7zM9,17H10V18H9zM10,17H11V18H10zM14,17H15V18H14zM16,17H17V18H16zM23,17H24V18H23zM24,17H25V18H24zM25,17H26V18H25zM28,17H29V18H28zM30,17H31V18H30zM2,18H3V19H2zM4,18H5V19H4zM5,18H6V19H5zM7,18H8V19H7zM8,18H9V19H8zM11,18H12V19H11zM12,18H13V19H12zM13,18H14V19H13zM17,18H18V19H17zM19,18H20V19H19zM20,18H21V19H20zM21,18H22V19H21zM23,18H24V19H23zM27,18H28V19H27zM28,18H29V19H28zM2,19H3V20H2zM4,19H5V20H4zM6,19H7V20H6zM13,19H14V20H13zM15,19H16V20H15zM17,19H18V20H17zM18,19H19V20H18zM19,19H20V20H19zM20,19H21V20H20zM21,19H22V20H21zM22,19H23V20H22zM24,19H25V20H24zM25,19H26V20H25zM26,19H27V20H26zM28,19H29V20H28zM29,19H30V20H29zM30,19H31V20H30zM2,20H3V21H2zM3,20H4V21H3zM4,20H5V21H4zM5,20H6V21H5zM6,20H7V21H6zM8,20H9V21H8zM9,20H10V21H9zM10,20H11V21H10zM14,20H15V21H14zM17,20H18V21H17zM21,20H22V21H21zM25,20H26V21H25zM26,20H27V21H26zM27,20H28V21H27zM30,20H31V21H30zM2,21H3V22H2zM10,21H11V22H10zM11,21H12V22H11zM14,21H15V22H14zM15,21H16V22H15zM18,21H19V22H18zM20,21H21V22H20zM21,21H22V22H21zM22,21H23V22H22zM23,21H24V22H23zM2,22H3V23H2zM4,22H5V23H4zM5,22H6V23H5zM8,22H9V23H8zM10,22H11V23H10zM13,22H14V23H13zM14,22H15V23H14zM16,22H17V23H16zM17,22H18V23H17zM19,22H20V23H19zM21,22H22V23H21zM22,22H23V23H22zM23,22H24V23H23zM24,22H25V23H24zM25,22H26V23H25zM26,22H27V23H26zM28,22H29V23H28zM29,22H30V23H29zM30,22H31V23H30zM10,23H11V24H10zM13,23H14V24H13zM14,23H15V24H14zM16,23H17V24H16zM17,23H18V24H17zM22,23H23V24H22zM26,23H27V24H26zM27,23H28V24H27zM2,24H3V25H2zM3,24H4V25H3zM4,24H5V25H4zM5,24H6V25H5zM6,24H7V25H6zM7,24H8V25H7zM8,24H9V25H8zM11,24H12V25H11zM12,24H13V25H12zM17,24H18V25H17zM18,24H19V25H18zM20,24H21V25H20zM21,24H22V25H21zM22,24H23V25H22zM24,24H25V25H24zM26,24H27V25H26zM27,24H28V25H27zM28,24H29V25H28zM2,25H3V26H2zM8,25H9V26H8zM11,25H12V26H11zM12,25H13V26H12zM16,25H17V26H16zM17,25H18V26H17zM18,25H19V26H18zM20,25H21V26H20zM21,25H22V26H21zM22,25H23V26H22zM26,25H27V26H26zM2,26H3V27H2zM4,26H5V27H4zM5,26H6V27H5zM6,26H7V27H6zM8,26H9V27H8zM11,26H12V27H11zM12,26H13V27H12zM13,26H14V27H13zM14,26H15V27H14zM15,26H16V27H15zM16,26H17V27H16zM18,26H19V27H18zM21,26H22V27H21zM22,26H23V27H22zM23,26H24V27H23zM24,26H25V27H24zM25,26H26V27H25zM26,26H27V27H26zM27,26H28V27H27zM29,26H30V27H29zM2,27H3V28H2zM4,27H5V28H4zM5,27H6V28H5zM6,27H7V28H6zM8,27H9V28H8zM11,27H12V28H11zM12,27H13V28H12zM13,27H14V28H13zM14,27H15V28H14zM15,27H16V28H15zM16,27H17V28H16zM17,27H18V28H17zM21,27H22V28H21zM22,27H23V28H22zM23,27H24V28H23zM25,27H26V28H25zM27,27H28V28H27zM28,27H29V28H28zM30,27H31V28H30zM2,28H3V29H2zM4,28H5V29H4zM5,28H6V29H5zM6,28H7V29H6zM8,28H9V29H8zM11,28H12V29H11zM12,28H13V29H12zM13,28H14V29H13zM15,28H16V29H15zM16,28H17V29H16zM17,28H18V29H17zM18,28H19V29H18zM19,28H20V29H19zM20,28H21V29H20zM21,28H22V29H21zM22,28H23V29H22zM24,28H25V29H24zM25,28H26V29H25zM26,28H27V29H26zM27,28H28V29H27zM28,28H29V29H28zM29,28H30V29H29zM2,29H3V30H2zM8,29H9V30H8zM12,29H13V30H12zM15,29H16V30H15zM17,29H18V30H17zM20,29H21V30H20zM23,29H24V30H23zM24,29H25V30H24zM27,29H28V30H27zM28,29H29V30H28zM30,29H31V30H30zM2,30H3V31H2zM3,30H4V31H3zM4,30H5V31H4zM5,30H6V31H5zM6,30H7V31H6zM7,30H8V31H7zM8,30H9V31H8zM10,30H11V31H10zM11,30H12V31H11zM12,30H13V31H12zM14,30H15V31H14zM16,30H17V31H16zM19,30H20V31H19zM21,30H22V31H21zM23,30H24V31H23zM25,30H26V31H25zM28,30H29V31H28z" id="qr-path" fill="#000000" fill-opacity="1" fill-rule="nonzero" stroke="none"/></svg><b>휴대폰으로 열기</b><small>nxl-ai-tools.reala.pro/edu/staff</small></a>
+  <div class="foot"><span>NEXTLAB STUDIO 설명회 · 스태프 브리핑 · 사내 전용</span><span class="pn"></span></div>
+</section>
+<section class="slide " id="rules" data-title="오늘의 원칙" data-notes="">
+  <div class="eyebrow">RULES</div>
+  
+  <h2 class="t">오늘의 <em>원칙 세 가지</em></h2>
+  <div class="g3">
+    <div class="card"><i class="no">1</i><b>참가자가 직접 누르게</b><p>계정 비밀번호 · 토큰은 <strong>본인이 입력</strong>합니다. 스태프는 어디를 누를지 짚어 주기만 합니다.</p></div>
+    <div class="card"><i class="no">2</i><b>자리에 가서도 쓸 수 있게</b><p>참가자 <strong>본인 PC 에 설치 · 연결까지</strong> 마치도록 돕습니다. 오늘 이후 자리에 돌아가서도 바로 쓸 수 있어야 합니다.</p></div>
+    <div class="card"><i class="no">3</i><b>본 그대로 전달하기</b><p>대응표에 없는 문제는 <strong>화면 사진 + 화면 문구 그대로</strong> 진행 담당에게 넘깁니다.</p></div>
+  </div>
+  <div class="bar warn">실습에는 <b>고객 정보 · 개인정보 · 운영 소스</b>를 넣지 않습니다. 화면에 보이면 바로 멈추게 해 주세요.</div>
+  <div class="foot"><span>NEXTLAB STUDIO 설명회 · 스태프 브리핑 · 사내 전용</span><span class="pn"></span></div>
+</section>
+<section class="slide " id="roles" data-title="역할" data-notes="">
+  <div class="eyebrow">ROLES</div>
+  
+  <h2 class="t">누가 <em>무엇을</em> 하나요</h2>
+  <div class="roles2">
+    <div class="rl main"><small>발표 · 진행 · 화면</small><b>권대준</b><ul>
+      <li>설명회 발표와 전체 진행</li>
+      <li>발표 PC · 화면 — 덱 열기, <kbd>F</kbd> 전체 화면</li>
+      <li>다운로드 · 토큰 페이지 띄우기</li>
+      <li>시간 체크 · 최종 판단</li></ul></div>
+    <div class="rl crew"><small>실습 지원 7명 · 담당 구역 · 사전 준비</small>
+      <div class="zgrid"><div class="zc"><i class="zi zA">A</i><div><b>백승렬</b><small>1분단 · 10명</small><em class="pr">생수 · 멀티탭</em></div></div><div class="zc"><i class="zi zB">B</i><div><b>김준형</b><small>2분단 왼쪽 · 10명</small><em class="pr">생수 · 멀티탭</em></div></div><div class="zc"><i class="zi zC">C</i><div><b>유환규</b><small>2분단 오른쪽 · 10명</small><em class="pr">노트북 사전 설치</em></div></div><div class="zc"><i class="zi zD">D</i><div><b>김현기</b><small>3분단 왼쪽 · 10명</small><em class="pr">생수 · 멀티탭</em></div></div><div class="zc"><i class="zi zE">E</i><div><b>황인재</b><small>3분단 오른쪽 · 10명</small></div></div><div class="zc"><i class="zi zF">F</i><div><b>권오윤</b><small>4분단 · 10명</small><em class="pr">출석부 · 입구</em></div></div><div class="zc"><i class="zi zL">L</i><div><b>김정훈</b><small>노트북석 · B·C·D 앞줄 · 11대</small><em class="pr">노트북 사전 설치</em></div></div></div>
+      <ul class="crew-ul"><li>담당 구역을 돌며 <strong>설치 → 계정 연결 → 실습</strong>을 돕습니다</li><li>실습 중 안 되는 분은 <strong>손을 들고 있게</strong> 하고 직접 가서 지원합니다</li></ul></div>
+  </div>
+  <p class="note">구역 배분 기준: 입구 옆 4분단(F)은 출석부를 맡은 권오윤, 노트북석은 노트북을 설치한 김정훈 · 유환규가 가까이에서 지원합니다.</p>
+  <div class="foot"><span>NEXTLAB STUDIO 설명회 · 스태프 브리핑 · 사내 전용</span><span class="pn"></span></div>
+</section>
+<section class="slide " id="seats" data-title="좌석 · 담당 구역" data-notes="">
+  <div class="eyebrow">SEATS</div>
+  
+  <h2 class="t">좌석 · <em>담당 구역</em></h2>
+  <div class="seat">
+    <div class="map">
+      <div class="scr">스크린</div>
+      <div class="blks"><span class="rowno"><i>1<u>열</u></i><i>2<u>열</u></i><i>3<u>열</u></i><i>4<u>열</u></i><i>5<u>열</u></i><i>6<u>열</u></i></span><div class="blk" style="--c:4"><b>1분단</b><div class="grid"><i class="se"></i><i class="se"></i><i class="so zA">A</i><i class="so zA">A</i><i class="se"></i><i class="se"></i><i class="so zA">A</i><i class="so zA">A</i><i class="se"></i><i class="se"></i><i class="so zA">A</i><i class="so zA">A</i><i class="se"></i><i class="se"></i><i class="so zA">A</i><i class="so zA">A</i><i class="se"></i><i class="se"></i><i class="so zA">A</i><i class="so zA">A</i><i class="se"></i><i class="se"></i><i class="sv"></i><i class="sv"></i></div></div><div class="blk" style="--c:6"><b>2분단</b><div class="grid"><i class="so zB lp">B</i><i class="so zB lp">B</i><i class="se"></i><i class="se"></i><i class="so zC lp">C</i><i class="so zC lp">C</i><i class="so zB lp">B</i><i class="so zB lp">B</i><i class="se"></i><i class="se"></i><i class="so zC lp">C</i><i class="so zC lp">C</i><i class="so zB">B</i><i class="so zB">B</i><i class="se"></i><i class="se"></i><i class="so zC">C</i><i class="so zC">C</i><i class="so zB">B</i><i class="so zB">B</i><i class="se"></i><i class="se"></i><i class="so zC">C</i><i class="so zC">C</i><i class="so zB">B</i><i class="so zB">B</i><i class="se"></i><i class="se"></i><i class="so zC">C</i><i class="so zC">C</i><i class="sv"></i><i class="sv"></i><i class="se"></i><i class="se"></i><i class="sv"></i><i class="sv"></i></div></div><div class="blk" style="--c:6"><b>3분단</b><div class="grid"><i class="so zD lp">D</i><i class="so zD lp">D</i><i class="se"></i><i class="se"></i><i class="so zE">E</i><i class="so zE">E</i><i class="so zD lp">D</i><i class="so zD">D</i><i class="se"></i><i class="se"></i><i class="so zE">E</i><i class="so zE">E</i><i class="so zD">D</i><i class="so zD">D</i><i class="se"></i><i class="se"></i><i class="so zE">E</i><i class="so zE">E</i><i class="so zD">D</i><i class="so zD">D</i><i class="se"></i><i class="se"></i><i class="so zE">E</i><i class="so zE">E</i><i class="so zD">D</i><i class="so zD">D</i><i class="se"></i><i class="se"></i><i class="so zE">E</i><i class="so zE">E</i><i class="sv"></i><i class="sv"></i><i class="se"></i><i class="se"></i><i class="sv"></i><i class="sv"></i></div></div><div class="blk" style="--c:4"><b>4분단</b><div class="grid"><i class="so zF">F</i><i class="so zF">F</i><i class="se"></i><i class="se"></i><i class="so zF">F</i><i class="so zF">F</i><i class="se"></i><i class="se"></i><i class="so zF">F</i><i class="so zF">F</i><i class="se"></i><i class="se"></i><i class="so zF">F</i><i class="so zF">F</i><i class="se"></i><i class="se"></i><i class="so zF">F</i><i class="so zF">F</i><i class="se"></i><i class="se"></i><i class="sv"></i><i class="sv"></i><i class="se"></i><i class="se"></i></div></div></div>
+      <div class="lg"><span><i class="so zA"></i>착석 (1~5열)</span><span><i class="so zB lp"></i>노트북석 11대</span><span><i class="sv"></i>6열 예비석</span><span><i class="se"></i>비움 · 7~10열 미사용</span><span class="door">입구 · 출석부 · 생수 ↘</span></div>
+      <p class="lpnote">노트북 11대는 노트북 미지참자용 · <b>B · C · D 앞줄부터</b> 배치 (정확한 자리는 당일 배치 기준) <span class="tbd">확인 필요</span></p>
+    </div>
+    <div class="zones"><div class="zn"><i class="zi zA">A</i><div><b>백승렬</b><small>1분단 · 10명</small></div></div><div class="zn"><i class="zi zB">B</i><div><b>김준형</b><small>2분단 왼쪽 · 10명</small></div></div><div class="zn"><i class="zi zC">C</i><div><b>유환규</b><small>2분단 오른쪽 · 10명</small></div></div><div class="zn"><i class="zi zD">D</i><div><b>김현기</b><small>3분단 왼쪽 · 10명</small></div></div><div class="zn"><i class="zi zE">E</i><div><b>황인재</b><small>3분단 오른쪽 · 10명</small></div></div><div class="zn"><i class="zi zF">F</i><div><b>권오윤</b><small>4분단 · 10명</small></div></div><div class="zn"><i class="zi zL">L</i><div><b>김정훈</b><small>노트북석 · B·C·D 앞줄 · 11대</small></div></div></div>
+  </div>
+  <div class="foot"><span>NEXTLAB STUDIO 설명회 · 스태프 브리핑 · 사내 전용</span><span class="pn"></span></div>
+</section>
+<section class="slide " id="flow" data-title="실습 흐름" data-notes="">
+  <div class="eyebrow">FLOW</div>
+  
+  <h2 class="t">실습 흐름과 <em>스태프 포인트</em></h2>
+  <div class="g4 flow">
+    <div class="card"><i class="no">1</i><b>설치</b><ul>
+      <li>Edge 경고: <span class="q">···</span> › <span class="q">유지</span> › <span class="q">그래도 계속</span></li>
+      <li>파란 창: <span class="q">추가 정보</span> › <span class="q">실행</span></li>
+      <li>업데이트 창이 뜨면 <span class="q">나중에</span></li>
+      <li>노트북 미지참자는 <strong>노트북석</strong>으로 안내</li></ul></div>
+    <div class="card"><i class="no">2</i><b>계정 연결</b><ul>
+      <li>사번 먼저 입력 (사용량 집계용)</li>
+      <li>Claude 유료 계정 있음 → <span class="q">Claude로 로그인</span></li>
+      <li>없음 → <strong>교육용 계정</strong> (20개 · <strong>계정 하나를 3명이</strong> 함께 사용)</li>
+      <li>정상이면 계정 칸에 <strong>이메일 · 요금제</strong>가 보임</li></ul></div>
+    <div class="card"><i class="no">3</i><b>실습</b><ul>
+      <li>샘플 프로젝트 살펴보기 → 자유 주제</li>
+      <li>자유 주제는 <strong>주요 화면 4개 이내</strong></li>
+      <li>안 되는 분은 <strong>손을 들고 있게</strong> → 직접 가서 지원</li>
+      <li>디자인 4장은 보통 <strong>9분 안팎</strong> · 노트북 전원 연결 · 덮개 열기</li></ul></div>
+    <div class="card"><i class="no">4</i><b>마무리</b><ul>
+      <li>결과 공유 · 질문 정리</li>
+      <li>설문 QR 안내</li>
+      <li><strong>교육용 계정 회수</strong> (교육 후 폐기)</li></ul></div>
+  </div>
+  <div class="foot"><span>NEXTLAB STUDIO 설명회 · 스태프 브리핑 · 사내 전용</span><span class="pn"></span></div>
+</section>
+<section class="slide " id="top" data-title="자주 막히는 곳" data-notes="">
+  <div class="eyebrow">TROUBLESHOOT</div>
+  
+  <h2 class="t">자주 막히는 곳, <em>바로 할 일</em></h2>
+  <div class="tops"><div class="tp"><i class="ref">#2</i><b>Edge 가 설치 파일을 막음</b><span><span class="q">···</span> › <span class="q">유지</span> › <span class="q">그래도 계속</span></span></div><div class="tp"><i class="ref">#7</i><b>파란 ‘Windows의 PC 보호’ 창</b><span><span class="q">추가 정보</span> › <span class="q">실행</span></span></div><div class="tp"><i class="ref">#4</i><b>맥에서 앱이 안 열림 · Rosetta 요구</b><span>애플 메뉴 › 이 Mac에 관하여 › 칩에 맞는 파일 다시 받기</span></div><div class="tp"><i class="ref">#17</i><b>‘Pro 가 필요합니다’ (무료 계정)</b><span>구독 계정으로 다시 로그인, 없으면 교육용 계정</span></div><div class="tp"><i class="ref">#22·23·34</i><b>로그인 후 실패 · 연결 거부 · 인증서 오류</b><span><strong>현장 Wi-Fi · 핫스팟</strong>으로 바꾸고 다시</span></div><div class="tp"><i class="ref">#25</i><b>계정 칸에 이메일 없이 ‘계정 연결됨’</b><span>이대로 시작 금지 → 진행 담당 호출 (설정 파일 조치)</span></div><div class="tp"><i class="ref">#33</i><b>‘사용량을 모두 사용했습니다’</b><span>문구의 시각 이후 다시, 급하면 다른 계정으로</span></div><div class="tp"><i class="ref">#38</i><b>SIGKILL 오류 (메모리 부족)</b><span>Teams · 브라우저 탭 닫고 그 화면만 다시 디자인</span></div><div class="tp"><i class="ref">#41</i><b>진행 표시가 오래 멈춤</b><span>전원 연결 · 덮개 열기 → 카드의 다시 시도</span></div></div>
+  <p class="note">#번호는 오류 대응표 번호입니다. 전체 41개는 <b>모바일 버전 맨 아래</b>에서 검색할 수 있습니다.</p>
+  <div class="foot"><span>NEXTLAB STUDIO 설명회 · 스태프 브리핑 · 사내 전용</span><span class="pn"></span></div>
+</section>
+<section class="slide " id="check" data-title="준비물 · 체크리스트" data-notes="">
+  <div class="eyebrow">CHECKLIST</div>
+  
+  <h2 class="t">준비물 · <em>체크리스트</em></h2>
+  <div class="g3 cks"><div class="ck"><b>전날까지</b><label><input type="checkbox" id="c00"><span>출석부 사전 프린트 · 파일철 + 펜 준비 (출석부는 김정훈에게 받기)<span class="whos"><em class="who">권오윤</em></span></span></label><label><input type="checkbox" id="c01"><span>노트북 11대 Studio 사전 설치 (노트북 미지참자용)<span class="whos"><em class="who">김정훈</em><em class="who">유환규</em></span></span></label><label><input type="checkbox" id="c02"><span>교육용 계정 20개 · 3명씩 나눠 쓸 배부 방법 정리<span class="whos"><span class="tbd">확인 필요</span></span></span></label><label><input type="checkbox" id="c03"><span>발표 PC 에 덱 파일 받아 두기 (16:9 · 21:9)<span class="whos"><em class="who">권대준</em></span></span></label><label><input type="checkbox" id="c04"><span>현장 Wi-Fi 정보 · 휴대폰 핫스팟 준비<span class="whos"><span class="tbd">확인 필요</span></span></span></label><label><input type="checkbox" id="c05"><span>설문 QR 준비<span class="whos"><span class="tbd">확인 필요</span></span></span></label></div><div class="ck"><b>시작 전</b><label><input type="checkbox" id="c10"><span>생수 옮기기 · 멀티탭 설치<span class="whos"><em class="who">백승렬</em><em class="who">김준형</em><em class="who">김현기</em></span></span></label><label><input type="checkbox" id="c11"><span>노트북 11대 B · C · D 앞줄부터 배치 · 전원 연결<span class="whos"><em class="who">김정훈</em><em class="who">유환규</em></span></span></label><label><input type="checkbox" id="c12"><span>입구에 출석부 · 파일철 · 펜<span class="whos"><em class="who">권오윤</em></span></span></label><label><input type="checkbox" id="c13"><span>스크린 비율 확인 → 맞는 덱 열고 F 전체 화면<span class="whos"><em class="who">권대준</em></span></span></label><label><input type="checkbox" id="c14"><span>1~5열 착석 안내 · 6열 예비석 비워 두기<span class="whos"><em class="who">전원</em></span></span></label><label><input type="checkbox" id="c15"><span>담당 구역 위치 확인<span class="whos"><em class="who">전원</em></span></span></label></div><div class="ck"><b>끝난 뒤</b><label><input type="checkbox" id="c20"><span>교육용 계정 회수 (폐기)<span class="whos"><span class="tbd">확인 필요</span></span></span></label><label><input type="checkbox" id="c21"><span>노트북 11대 로그아웃 · 회수<span class="whos"><em class="who">김정훈</em><em class="who">유환규</em></span></span></label><label><input type="checkbox" id="c22"><span>생수 · 멀티탭 정리<span class="whos"><em class="who">백승렬</em><em class="who">김준형</em><em class="who">김현기</em></span></span></label><label><input type="checkbox" id="c23"><span>출석부 정리<span class="whos"><em class="who">권오윤</em></span></span></label><label><input type="checkbox" id="c24"><span>설문 응답 독려<span class="whos"><em class="who">전원</em></span></span></label><label><input type="checkbox" id="c25"><span>막혔던 문제 · 사진 모아 진행 담당에게<span class="whos"><em class="who">전원</em></span></span></label></div></div>
+  <p class="note">체크 표시는 이 화면에서만 쓰는 메모입니다. 새로 열면 지워질 수 있습니다.</p>
+  <div class="foot"><span>NEXTLAB STUDIO 설명회 · 스태프 브리핑 · 사내 전용</span><span class="pn"></span></div>
+</section>
+<section class="slide " id="contact" data-title="전달 방법" data-notes="">
+  <div class="eyebrow">ESCALATION</div>
+  
+  <h2 class="t">대응표에 없으면, <em>이렇게 전달</em></h2>
+  <div class="g4 steps4">
+    <div class="card"><i class="no">1</i><b>화면 사진 찍기</b><p>휴대폰으로 오류 창이 아니라 화면 전체가 나오게</p></div>
+    <div class="card"><i class="no">2</i><b>문구 그대로</b><p>화면에 나온 문구를 바꾸지 않고 그대로</p></div>
+    <div class="card"><i class="no">3</i><b>위치</b><p>구역 · 열 (예: C 구역 3열)</p></div>
+    <div class="card"><i class="no">4</i><b>진행 담당에게</b><p>담당 · 연락 방법 <span class="tbd">확인 필요</span></p></div>
+  </div>
+  <div class="bar">기다리는 동안 참가자는 <b>샘플 프로젝트 보기</b>로 먼저 진행하게 합니다.</div>
+  <div class="foot"><span>NEXTLAB STUDIO 설명회 · 스태프 브리핑 · 사내 전용</span><span class="pn"></span></div>
+</section>
+<section class="slide  m-only" id="errors" data-title="오류 대응표 전체" data-notes="">
+  <div class="eyebrow">REFERENCE</div>
+  
+  <h2 class="t">Studio 오류 대응표 <em>전체 41개</em></h2>
+  <div class="esearch"><input id="eq" type="search" inputmode="search" placeholder="검색 — 예: 로그인, 401, Edge, 25" aria-label="오류 대응표 검색"><span id="ecount"></span></div>
+  <p class="lead2">기준 판 0.9.1 · 2026-11-03 작성. <span class="q">옅은 면 글자</span>는 화면에 그대로 나오는 문구입니다.<br>
+  <span class="swap">현장 해결 어려움</span> 표시는 원문의 ‘준비된 PC로 옮김’ 항목입니다. <b>오늘은 PC 교체가 없으므로</b> 화면 사진을 찍어 진행 담당에게 전달합니다.</p>
+  <p class="enone" id="enone">검색 결과가 없습니다. 화면 사진과 문구를 진행 담당에게 전달해 주세요.</p>
+  <details class="eg" open><summary>내려받기 · 설치 <small>13개</small></summary><div class="er" data-n="1"><div class="er-h"><i>1</i><em>공통</em></div><b>설치 파일 내려받기가 오래 걸림</b><small>설치 파일이 맥 약 450MB, Windows 약 380MB입니다. 여러 명이 현장 Wi-Fi로 함께 받으면 느려집니다.</small><div class="fx">미리 받아 오도록 안내합니다. 현장에서는 USB 등으로 설치 파일을 나눠 줍니다.</div></div><div class="er" data-n="2"><div class="er-h"><i>2</i><em>Windows</em></div><b>브라우저가 내려받은 설치 파일을 막음 (Edge: 일반적으로 다운로드되지 않는 파일, Chrome: 안전하지 않을 수 있는 파일)</b><small>서명 전 배포판이고 받는 사람이 적은 파일이라 브라우저가 경고합니다.</small><div class="fx">다운로드 목록에서 해당 파일의 <span class="q">…</span> 메뉴 → <span class="q">유지</span> → <span class="q">그래도 유지</span>를 누릅니다.</div></div><div class="er" data-n="3"><div class="er-h"><i>3</i><em>공통</em></div><b>디스크 공간이 부족해 설치가 멈춤</b><small>설치하면 앱이 약 1.0~1.2GB를 차지하고, 프로젝트를 만들면 더 늘어납니다.</small><div class="fx">2GB 이상 비우고 다시 설치합니다.</div></div><div class="er" data-n="4"><div class="er-h"><i>4</i><em>맥</em></div><b>앱이 열리지 않음(이 Mac에서 지원되지 않는다는 안내) 또는 Rosetta를 설치하라는 창</b><small>맥 종류와 다른 설치 파일을 받았습니다. Intel 맥에는 Apple 칩용이 열리지 않고, Apple 칩 맥에서 Intel용을 열면 Rosetta를 요구합니다.</small><div class="fx">애플 메뉴 → 이 Mac에 관하여에서 칩을 보고 맞는 파일을 다시 받습니다. <span class="q">Apple M…</span>이면 Apple 칩용, <span class="q">Intel</span>이면 Intel용입니다.</div></div><div class="er" data-n="5"><div class="er-h"><i>5</i><em>맥</em></div><b>처음 열 때 인터넷에서 내려받은 앱인데 열겠느냐고 물음</b><small>맥이 처음 여는 앱마다 묻는 정상 확인입니다.</small><div class="fx"><span class="q">열기</span>를 누릅니다.</div></div><div class="er" data-n="6"><div class="er-h"><i>6</i><em>맥</em></div><b>응용 프로그램 폴더로 끌어 넣을 때 같은 이름의 항목이 있다는 창, 또는 사용 중이라 바꿀 수 없다는 안내</b><small>예전 판 Studio가 설치돼 있거나 켜져 있습니다.</small><div class="fx">예전 Studio를 종료(⌘Q)한 뒤 <span class="q">대치</span>를 누릅니다. dmg 안에서 바로 실행하지 말고 꼭 응용 프로그램 폴더로 옮긴 뒤 엽니다.</div></div><div class="er" data-n="7"><div class="er-h"><i>7</i><em>Windows</em></div><b><span class="q">Windows의 PC 보호</span> 창이 뜸</b><small>배포판이 아직 Windows 게시자 서명 전이라 나오는 안내입니다.</small><div class="fx"><span class="q">추가 정보</span> → <span class="q">실행</span>을 누릅니다.</div></div><div class="er" data-n="8"><div class="er-h"><i>8</i><em>Windows</em><span class="swap">현장 해결 어려움</span></div><b>스마트 앱 컨트롤이 앱을 막았다는 알림 (<span class="q">실행</span> 버튼 없음)</b><small>Windows 11의 스마트 앱 컨트롤이 켜져 있으면 서명 전 앱을 예외 없이 막습니다.</small><div class="fx">넘길 방법이 없습니다. 다시 켜기 어려운 설정이라 끄라고 하지 말고 준비된 PC로 옮깁니다.<span class="sub">확인: Windows 보안 → 앱 및 브라우저 컨트롤 → 스마트 앱 컨트롤 설정</span></div></div><div class="er" data-n="9"><div class="er-h"><i>9</i><em>Windows</em></div><b>설치 중 Studio가 실행 중이라 계속할 수 없다는 안내</b><small>예전 판 Studio가 아직 켜져 있습니다.</small><div class="fx">작업 관리자에서 NextLab Studio를 끝내고 설치를 다시 진행합니다.</div></div><div class="er" data-n="10"><div class="er-h"><i>10</i><em>Windows</em></div><b>설치할 때 관리자 권한을 요구함</b><small>설치 대상으로 모든 사용자를 골랐습니다.</small><div class="fx">설치 대상을 현재 사용자 전용으로 바꿔 다시 설치합니다. 관리자 권한이 필요 없습니다.</div></div><div class="er" data-n="11"><div class="er-h"><i>11</i><em>Windows</em><span class="swap">현장 해결 어려움</span></div><b>이 앱은 이 PC에서 실행할 수 없다는 안내</b><small>Studio는 64비트(x64) Windows 10 이상용입니다. 32비트 Windows나 Windows 10 ARM에서는 실행되지 않습니다.</small><div class="fx">준비된 PC로 옮깁니다.</div></div><div class="er" data-n="12"><div class="er-h"><i>12</i><em>공통</em><span class="swap">현장 해결 어려움</span></div><b>회사 보안 프로그램이 설치나 실행을 막았다는 알림</b><small>회사 PC 보안 정책입니다.</small><div class="fx">현장에서 풀 수 없습니다. 준비된 PC로 옮깁니다.</div></div><div class="er" data-n="13"><div class="er-h"><i>13</i><em>공통</em></div><b><span class="q">업데이트 있음</span> · <span class="q">새 버전 … 이 있습니다.</span> 창</b><small>예전 판을 설치해 둔 사람입니다. Windows는 받은 뒤 <span class="q">지금 재시작</span>을 누르면 진행 중인 생성이 끊깁니다.</small><div class="fx">시연 중에는 <span class="q">나중에</span>를 누릅니다. 시작 전이라면 최신 판을 새로 설치하고 시작합니다.</div></div></details><details class="eg" open><summary>첫 실행 · Claude 로그인 <small>16개</small></summary><div class="er" data-n="14"><div class="er-h"><i>14</i><em>공통</em></div><b><span class="q">Claude로 로그인</span>을 눌렀는데 브라우저가 안 열림</b><small>기본 브라우저가 앞으로 나오지 않았거나 열기에 실패했습니다.</small><div class="fx">Studio 창 아래 <span class="q">로그인 브라우저 다시 열기</span>를 누릅니다.</div></div><div class="er" data-n="15"><div class="er-h"><i>15</i><em>공통</em></div><b>로그인 브라우저 탭이 두 개 열림</b><small>같은 로그인 창이 두 번 열린 것입니다.</small><div class="fx">한 탭에서만 로그인하고 다른 탭은 닫습니다.</div></div><div class="er" data-n="16"><div class="er-h"><i>16</i><em>공통</em></div><b>연결은 됐는데 계정 칸의 이메일이 본인 것이 아님</b><small>브라우저에 다른 Claude 계정이 로그인돼 있어 그 계정으로 연결됐습니다.</small><div class="fx">계정 칸의 <span class="q">로그아웃</span>으로 끊고, 브라우저에서 claude.ai 계정을 바꾼 뒤 <span class="q">Claude로 로그인</span>을 다시 누릅니다.</div></div><div class="er" data-n="17"><div class="er-h"><i>17</i><em>공통</em><span class="swap">현장 해결 어려움</span></div><b>브라우저에 <span class="q">Claude Code에 연결하려면 Claude Max, Ultra 또는 Pro가 필요합니다</span></b><small>무료 계정으로 로그인했습니다.</small><div class="fx">브라우저에서 Pro · Max · Ultra 구독 계정으로 바꿔 로그인한 뒤 <span class="q">Claude로 로그인</span>을 다시 누릅니다. 구독 계정이 없으면 준비된 PC로 옮깁니다.</div></div><div class="er" data-n="18"><div class="er-h"><i>18</i><em>공통</em></div><b>코드를 붙여 넣었는데 <span class="q">확인 중…</span>에서 넘어가지 않음</b><small>코드 일부만 복사됐습니다. 코드는 # 뒤까지가 한 덩어리입니다.</small><div class="fx"><ol><li>브라우저의 복사 버튼으로 코드 전체를 다시 복사해 붙여 넣습니다.</li><li>그래도 그대로면 <span class="q">취소</span> 후 <span class="q">Claude로 로그인</span>을 다시 누릅니다.</li></ol></div></div><div class="er" data-n="19"><div class="er-h"><i>19</i><em>공통</em></div><b><span class="q">claude auth login 이 코드 1 로 종료됐습니다.</span></b><small>코드가 받아들여지지 않았습니다. 시간이 지났거나, 이미 쓴 코드거나, 이전 로그인 창의 코드입니다.</small><div class="fx">예전 탭을 닫고 <span class="q">Claude로 로그인</span>을 다시 눌러 새로 열린 창의 코드로 진행합니다.</div></div><div class="er" data-n="20"><div class="er-h"><i>20</i><em>공통</em></div><b><span class="q">로그인이 5분 안에 끝나지 않아 취소했습니다.</span></b><small>브라우저 로그인을 5분 넘게 마치지 않았습니다.</small><div class="fx"><span class="q">Claude로 로그인</span>을 다시 누릅니다.</div></div><div class="er" data-n="21"><div class="er-h"><i>21</i><em>공통</em></div><b><span class="q">이미 연결 중입니다. 완료하거나 취소한 뒤 다시 시도해주세요.</span></b><small>앞서 누른 연결이 아직 진행 중입니다.</small><div class="fx"><span class="q">취소</span>를 누른 뒤 다시 연결합니다.</div></div><div class="er" data-n="22"><div class="er-h"><i>22</i><em>공통</em></div><b><span class="q">설치 파일 응답이 올바르지 않습니다. 회사 네트워크의 접속 제한을 확인해주세요.</span> 또는 <span class="q">응답 시간이 초과됐습니다. 네트워크를 확인하고 다시 시도해주세요.</span></b><small>회사망이 Claude 배포 주소를 막고 있습니다.</small><div class="fx">현장 Wi-Fi나 휴대폰 핫스팟으로 바꾸고 다시 누릅니다.</div></div><div class="er" data-n="23"><div class="er-h"><i>23</i><em>공통</em></div><b>브라우저 로그인은 됐는데 코드 확인 뒤 실패함</b><small>회사 프록시입니다. 브라우저는 PC의 프록시 설정을 따르지만 Studio 안의 Claude 연결은 따르지 않습니다. 회사 Windows PC에서 자주 생깁니다.</small><div class="fx">현장 Wi-Fi나 핫스팟으로 바꾸고 <span class="q">Claude로 로그인</span>부터 다시 합니다.</div></div><div class="er" data-n="24"><div class="er-h"><i>24</i><em>공통</em><span class="swap">현장 해결 어려움</span></div><b><span class="q">앱에 든 Claude 를 실행할 수 없어 공식 Claude Code 를 설치합니다…</span></b><small>이 PC에서 앱에 든 Claude가 돌지 않습니다. 맥은 macOS 12(Monterey) 이하, Windows는 Pentium · Celeron 저가형이나 Snapdragon(ARM) Surface에서 나옵니다.</small><div class="fx">로그인까지 될 수는 있지만 화면 생성은 보장할 수 없습니다. 준비된 PC로 옮깁니다.<span class="sub">확인: 맥은 애플 메뉴 → 이 Mac에 관하여(macOS 13 Ventura 이상이어야 함), Windows는 설정 → 시스템 → 정보 → 프로세서</span></div></div><div class="er" data-n="25"><div class="er-h"><i>25</i><em>공통</em></div><b>계정 칸에 이메일 없이 <span class="q">계정 연결됨</span>만 보임</b><small>이 PC의 터미널 Claude Code가 회사 게이트웨이 · Bedrock 등 다른 연결로 설정돼 있습니다. 이대로 시작하면 디자인 단계에서 인증 실패로 멈춥니다. 정상 연결은 <span class="q">이메일 · MAX</span>처럼 이메일과 요금제가 함께 보입니다.</small><div class="fx"><ol><li>Studio를 완전히 종료합니다.</li><li>설정 파일 이름을 잠시 바꿉니다.<br>맥: <code>mv ~/.claude/settings.json ~/.claude/settings.json.bak</code><br>Windows: <code>%USERPROFILE%\.claude\settings.json</code> 이름 변경</li><li>Studio를 다시 켜고 <span class="q">Claude로 로그인</span>.</li><li>시연이 끝나면 파일 이름을 되돌립니다.</li></ol><span class="sub">Windows는 같은 설정이 환경 변수로 걸려 있을 수 있습니다. PowerShell에서 <code>Get-ChildItem Env: | Where-Object Name -Match 'ANTHROPIC|CLAUDE_CODE_USE'</code>에 결과가 나오면 시스템 속성 → 환경 변수에서 잠시 지워야 하므로, 본인이 원하지 않으면 준비된 PC로 옮깁니다.</span></div></div><div class="er" data-n="26"><div class="er-h"><i>26</i><em>공통</em><span class="swap">현장 해결 어려움</span></div><b>로그인 직후 첫 생성에서 <span class="q">Claude 인증에 실패했습니다 (401)</span></b><small>회사 Claude 계정(Team · Enterprise)에서 조직이 Claude Code를 허용하지 않았거나, 계정 확인 · 결제가 끝나지 않은 계정입니다.</small><div class="fx">개인 구독 계정으로 다시 로그인합니다. 회사 계정만 있으면 준비된 PC로 옮깁니다.</div></div><div class="er" data-n="27"><div class="er-h"><i>27</i><em>공통</em></div><b><span class="q">시작하기</span>가 눌리지 않음</b><small>사번이 비었거나 계정 연결이 끝나지 않았습니다.</small><div class="fx">버튼 아래 한 줄이 남은 일을 알려 줍니다. 그대로 사번을 넣거나 로그인을 마칩니다.</div></div><div class="er" data-n="28"><div class="er-h"><i>28</i><em>공통</em></div><b><span class="q">토큰 형식이 맞지 않습니다. sk-ant-oat01- 로 시작하는 토큰 전체를 복사해 다시 붙여 넣어 주세요.</span></b><small>토큰 방식으로 연결하면서 토큰 일부만 붙여 넣었습니다.</small><div class="fx">토큰 전체를 다시 붙여 넣습니다. 토큰이 없는 사람은 <span class="q">Claude로 로그인</span> 방식으로 연결합니다.</div></div><div class="er" data-n="29"><div class="er-h"><i>29</i><em>공통</em></div><b>다시 켰더니 <span class="q">AI 계정 연결이 끊어졌습니다. 다시 연결하면 바로 이어서 엽니다.</span></b><small>로그인이 만료됐거나 터미널 Claude Code에서 로그아웃했습니다. Studio와 터미널 Claude Code는 로그인을 함께 씁니다.</small><div class="fx"><span class="q">Claude로 로그인</span>을 다시 누르면 하던 작업으로 바로 이어집니다.</div></div></details><details class="eg" open><summary>기획 · 디자인 · 프로토타입 생성 중 <small>12개</small></summary><div class="er" data-n="30"><div class="er-h"><i>30</i><em>공통</em></div><b>앱을 켰는데 Studio가 아닌 엉뚱한 화면(파일 목록 등)이 뜸</b><small>Studio가 쓰는 포트를 다른 프로그램이나 강제 종료된 이전 Studio가 쥐고 있습니다.</small><div class="fx">Studio를 완전히 종료하고 다시 켭니다. 그대로면 PC를 재시작합니다.</div></div><div class="er" data-n="31"><div class="er-h"><i>31</i><em>공통</em></div><b>로딩 화면에 오류와 <span class="q">다시 시도</span>가 뜸</b><small>작업 공간 서버가 시작되지 못했습니다. 상세에 EADDRINUSE가 보이면 같은 포트를 다른 프로그램이 쓰는 중입니다.</small><div class="fx"><span class="q">다시 시도</span>를 누릅니다. 반복되면 Studio를 완전히 종료하고 다시 켜거나 PC를 재시작합니다.</div></div><div class="er" data-n="32"><div class="er-h"><i>32</i><em>공통</em></div><b><span class="q">Claude 인증에 실패했습니다 (401) — 로그인이 만료됐거나 계정 연결이 끊겨 AI 실행이 시작되지 못했습니다.</span></b><small>로그인이 만료됐거나 연결된 계정이 바뀌었습니다.</small><div class="fx">설정 → AI의 <span class="q">계정 연결 관리</span>에서 Claude에 다시 로그인합니다. 계정 칸이 이메일 없이 <span class="q">계정 연결됨</span>이면 25번, 로그인 직후부터 계속 나면 26번대로 합니다.</div></div><div class="er" data-n="33"><div class="er-h"><i>33</i><em>공통</em></div><b><span class="q">Claude 사용량을 모두 사용했습니다 — 5시간 한도에 도달해 AI 실행을 진행할 수 없습니다.</span> (주간 한도로 나올 수도 있음)</b><small>계정의 사용 한도를 다 썼습니다. Pro 계정은 화면 4장 기준으로 한 번 끝까지 돌리면 5시간 한도의 절반 아래를 쓰므로, 두 번째 실행이나 시연 전 다른 사용에서 걸릴 수 있습니다.</small><div class="fx">문구에 나온 시각 이후 다시 실행합니다. 남은 양은 설정 → 사용량에서 봅니다. 기다릴 수 없으면 다른 계정이나 준비된 PC로 옮깁니다.</div></div><div class="er" data-n="34"><div class="er-h"><i>34</i><em>공통</em></div><b><span class="q">API Error: Connection refused — a firewall or proxy may be blocking it</span> 또는 인증서 관련 영어 오류 (self signed certificate, unable to get local issuer certificate)</b><small>회사망 · 프록시가 Claude 접속을 막고 있습니다.</small><div class="fx">현장 Wi-Fi나 휴대폰 핫스팟으로 바꾸고 다시 실행합니다.</div></div><div class="er" data-n="35"><div class="er-h"><i>35</i><em>공통</em></div><b>알림 <span class="q">○○ 디자인 실패</span> 또는 <span class="q">N개 화면 미완료 · N개 다시 시도</span></b><small>화면 생성 중 오류가 났습니다. 상세 내용에 실제 원인 문장이 있습니다.</small><div class="fx">해당 화면 카드의 <span class="q">디자인</span>이나 <span class="q">다시 시도</span>를 누릅니다. 반복되면 상세 문장을 보고 32 · 33 · 34 · 38번으로 판단합니다.</div></div><div class="er" data-n="36"><div class="er-h"><i>36</i><em>공통</em></div><b><span class="q">완료된 화면은 저장돼 있어요. 서버가 기다렸다 이어서 그려요…</span></b><small>잠시 연결이 끊겨 기다리는 중입니다. 완료된 화면은 지워지지 않습니다.</small><div class="fx">기다리면 이어서 그립니다. 바로 다시 하려면 디자인 탭의 <span class="q">지금 다시 시도</span>를 누릅니다.</div></div><div class="er" data-n="37"><div class="er-h"><i>37</i><em>공통</em></div><b><span class="q">화면 정의서 준비 실패</span></b><small>디자인 전에 만드는 화면 정의서가 실패했습니다.</small><div class="fx">그 화면 카드의 <span class="q">디자인</span>을 다시 누릅니다.</div></div><div class="er" data-n="38"><div class="er-h"><i>38</i><em>공통</em></div><b><span class="q">에이전트 실행 오류: Claude Code process terminated by signal SIGKILL</span></b><small>PC 메모리가 모자라 운영체제가 생성 프로그램을 끝냈습니다. 메모리 8GB 이하 PC에서 다른 프로그램을 많이 켜 둔 경우입니다.</small><div class="fx">Teams, 브라우저 탭, 다른 개발 도구를 닫고 그 화면만 다시 디자인합니다.</div></div><div class="er" data-n="39"><div class="er-h"><i>39</i><em>공통</em></div><b><span class="q">Claude Opus is not available with the Claude Pro plan…</span></b><small>Pro 계정에서 Opus 사용이 막힌 경우입니다. 지금 정책에서는 나오지 않아야 하는 드문 오류입니다.</small><div class="fx">화면 아래 모델 선택(<span class="q">기본 (Opus)</span>)을 Sonnet으로 바꾸고 다시 실행합니다.</div></div><div class="er" data-n="40"><div class="er-h"><i>40</i><em>공통</em></div><b>기획 단계만 이상하게 실패하거나 오래 멈춤 (터미널 Claude Code를 많이 손본 사람)</b><small>기획 단계는 이 PC의 Claude Code 설정 파일을 함께 읽어서, 거기 넣어 둔 자동 실행 명령 등이 끼어들 수 있습니다.</small><div class="fx">25번처럼 설정 파일 이름을 잠시 바꾸고 Studio를 다시 켠 뒤 다시 실행합니다. 끝나면 이름을 되돌립니다.</div></div><div class="er" data-n="41"><div class="er-h"><i>41</i><em>공통</em></div><b>진행 표시가 오래 그대로 멈춰 있음</b><small>노트북이 절전에 들어갔거나 덮개를 닫았습니다. 디자인 4장은 보통 9분 안팎 걸립니다.</small><div class="fx">전원을 연결하고 덮개를 열어 둡니다. 멈춘 화면은 카드의 <span class="q">다시 시도</span>나 <span class="q">디자인</span>을 다시 누릅니다.</div></div></details>
+  <div class="faq"><b>자주 받을 질문</b><div><strong>이미 쓰는 Claude Code와 버전이 달라도 되나요?</strong><p>됩니다. Studio는 앱에 든 Claude를 쓰고, 로그인 정보는 버전과 상관없이 같은 자리에 저장돼 함께 씁니다. 2.1.202부터 2.1.314까지 같은 로그인을 그대로 읽는 것을 확인했습니다.</p></div><div><strong>Studio에서 로그아웃하면 어떻게 되나요?</strong><p>로그인을 함께 쓰므로 터미널 Claude Code도 같이 로그아웃됩니다. 시연이 끝난 뒤 따로 로그아웃할 필요는 없습니다.</p></div><div><strong>Pro 계정으로도 되나요?</strong><p>됩니다. 화면 4장 기준으로 기획부터 프로토타입까지 한 번 돌리면 5시간 한도의 절반 아래를 씁니다.</p></div></div>
+  <div class="foot"><span>NEXTLAB STUDIO 설명회 · 스태프 브리핑 · 사내 전용</span><span class="pn"></span></div>
+</section>
+</main>
+<div class="d-hint">← → 넘기기 · F 전체 화면 · 휴대폰에서는 세로 스크롤로 보입니다</div>
+<script>
+(() => {
+  document.documentElement.classList.add('js');
+  const qi = document.getElementById('eq'); if (!qi) return;
+  const rows = [...document.querySelectorAll('#errors .er')], groups = [...document.querySelectorAll('#errors .eg')];
+  const cnt = document.getElementById('ecount'), none = document.getElementById('enone');
+  rows.forEach(r => { r.dataset.t = (r.textContent || '').replace(/\s+/g, ' ').toLowerCase(); r.dataset.h = r.innerHTML; });
+  const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  function run() {
+    const raw = qi.value.trim().toLowerCase().replace(/^#/, '');
+    const terms = raw.split(/\s+/).filter(Boolean);
+    let shown = 0;
+    rows.forEach(r => {
+      r.innerHTML = r.dataset.h;
+      const numOnly = terms.length === 1 && /^\d{1,2}$/.test(terms[0]);
+      const ok = !terms.length || (numOnly ? r.dataset.n === terms[0] : terms.every(t => r.dataset.t.includes(t)));
+      r.classList.toggle('hide', !ok); if (ok) shown++;
+      if (ok && terms.length) {
+        const src = '(' + terms.map(esc).join('|') + ')'; const re = new RegExp(src, 'gi'), reT = new RegExp(src, 'i');
+        const walk = el => { [...el.childNodes].forEach(n => { if (n.nodeType === 3) { if (!numOnly && reT.test(n.nodeValue)) { const s = document.createElement('span'); s.innerHTML = n.nodeValue.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])).replace(re, '<mark>$1</mark>'); n.replaceWith(...s.childNodes); } } else if (n.nodeType === 1 && n.tagName !== 'CODE') walk(n); }); };
+        walk(r);
+      }
+    });
+    groups.forEach(g => { const any = g.querySelector('.er:not(.hide)'); g.classList.toggle('hide', !any); if (terms.length && any) g.open = true; });
+    cnt.textContent = terms.length ? `${shown}건` : `전체 ${rows.length}건`;
+    none.classList.toggle('on', terms.length > 0 && shown === 0);
+  }
+  qi.addEventListener('input', run); run();
+})();
+</script>
+<script>
+(() => {
+  const root = document.documentElement, stage = document.getElementById('stage');
+  const all = [...document.querySelectorAll('.slide')];
+  const deckSlides = () => all.filter(s => !s.classList.contains('m-only'));
+  const wantDeck = () => matchMedia('(min-width: 1100px) and (orientation: landscape)').matches;
+  let cur = 0;
+  function fit() { const s = Math.min(innerWidth / 1920, innerHeight / 1080); stage.style.transform = `translate(-50%, -50%) scale(${s})`; }
+  function number() { const d = deckSlides(); d.forEach((s, i) => { const pn = s.querySelector('.pn'); if (pn) pn.textContent = `${i + 1} / ${d.length}`; }); }
+  function show(i) {
+    const d = deckSlides(); cur = Math.max(0, Math.min(d.length - 1, i));
+    d.forEach((s, k) => s.classList.toggle('on', k === cur));
+    try { history.replaceState(null, '', '#' + d[cur].id); } catch (_) {}
+  }
+  function mode() {
+    if (wantDeck()) { root.classList.add('deck'); fit(); show(cur); }
+    else { root.classList.remove('deck'); stage.style.transform = ''; all.forEach(s => s.classList.remove('on')); }
+  }
+  const fs = () => { const d = document, el = d.documentElement; const on = d.fullscreenElement || d.webkitFullscreenElement;
+    const r = on ? (d.exitFullscreen || d.webkitExitFullscreen)?.call(d) : (el.requestFullscreen || el.webkitRequestFullscreen)?.call(el); if (r && r.catch) r.catch(() => {}); };
+  addEventListener('keydown', (e) => {
+    if (!root.classList.contains('deck') || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.target && e.target.tagName === 'INPUT') return;
+    const k = e.key, c = e.code;
+    if (['ArrowRight', 'PageDown', ' '].includes(k)) { e.preventDefault(); show(cur + 1); }
+    else if (['ArrowLeft', 'PageUp'].includes(k)) { e.preventDefault(); show(cur - 1); }
+    else if (k === 'Home') show(0);
+    else if (k === 'End') show(deckSlides().length - 1);
+    else if (c === 'KeyF' || k === 'f' || k === 'F') { e.preventDefault(); fs(); }
+  });
+  addEventListener('click', (e) => {
+    if (!root.classList.contains('deck')) return;
+    if (e.target.closest('label,input,a,button')) return;
+    if (e.clientX > innerWidth * 0.5) show(cur + 1); else show(cur - 1);
+  });
+  addEventListener('resize', mode);
+  number();
+  let h = ''; try { h = decodeURIComponent(location.hash.slice(1)); } catch (_) {}
+  const j = deckSlides().findIndex(s => s.id === h); if (j >= 0) cur = j;
+  mode();
+})();
+</script>
+</body>
+</html>

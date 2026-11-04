@@ -12,6 +12,13 @@
       "headers": [
         { "key": "Cache-Control", "value": "no-store, must-revalidate" }
       ]
+    },
+    {
+      "source": "/edu/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
+        { "key": "Cache-Control", "value": "no-cache, must-revalidate" }
+      ]
     }
   ]
 }
